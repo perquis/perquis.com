@@ -1,3 +1,5 @@
+@import '@styles/mixins';
+
 .visible {
   position: absolute;
   width: 100%;
@@ -16,27 +18,8 @@
     text-align: left;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
-    position: relative;
     border-radius: 0.3rem;
-    overflow: hidden;
 
-    &::before {
-      position: absolute;
-      content: '';
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 100%;
-      z-index: -1;
-      background: var(--locale-is-hover);
-      transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    &:is(:hover, :focus) {
-      &::before {
-        left: 0;
-        width: 100%;
-      }
-    }
+    @include hover-effect;
   }
 }

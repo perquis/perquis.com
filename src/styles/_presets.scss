@@ -2,12 +2,15 @@
   // Primary colors
   --gray-950: hsl(212, 32%, 8%);
   --gray-900: hsl(212, 33%, 10%);
+  --gray-820: hsl(212, 31%, 13%);
+  --gray-850: hsl(212, 31%, 15%);
   --gray-800: hsl(212, 31%, 20%);
   --gray-700: hsl(213, 31%, 30%);
   --gray-600: hsl(212, 31%, 40%);
   --gray-500: hsl(212, 31%, 50%);
   --gray-400: hsl(212, 31%, 60%);
   --gray-300: hsl(211, 31%, 70%);
+  --gray-250: hsl(212, 31%, 85%);
   --gray-200: hsl(212, 31%, 80%);
   --gray-100: hsl(212, 29%, 90%);
   --gray-50: hsl(210, 31%, 95%);
@@ -56,9 +59,11 @@
 
   --text-decoration-wavy-color: var(--logo-primary-color);
 
-  --locale-border-color: var(--gray-200);
-  --locale-background: var(--gray-100);
+  --locale-border-color: var(--gray-250);
+  --locale-background: var(--white);
   --locale-is-hover: hsl(212, 29%, 85%);
+
+  --hamburger-menu-color: var(--gray-900);
 
   // Sizes
   --small-radius: 0.6rem;
@@ -79,5 +84,7 @@
 
   --locale-border-color: var(--gray-800);
   --locale-background: var(--gray-900);
-  --locale-is-hover: hsl(212, 33%, 15%);
+  --locale-is-hover: var(--gray-850);
+
+  --hamburger-menu-color: var(--gray-50);
 }

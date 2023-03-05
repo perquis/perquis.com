@@ -1,28 +1,15 @@
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
-import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import type { FC, MutableRefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from './LocalesList.module.scss';
+import { vars } from '@animations/pop-up';
 
-const languages = ['pl', 'en'];
-const vars: Variants = {
-  initial: {
-    y: 40,
-    opacity: 0,
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-  },
-  exit: {
-    y: 40,
-    opacity: 0,
-  },
-};
+import { languages } from '@data/languages';
+
+import styles from './LocalesList.module.scss';
 
 interface ILocaleListProps {
   isActive: boolean;

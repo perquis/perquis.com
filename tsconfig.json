@@ -20,6 +20,7 @@
       "@/*": ["./src/*"]
 =======
       "@components/*": ["./src/components/*"],
+      "@animations/*": ["./src/animations/*"],
       "@providers/*": ["./src/providers/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@queries/*": ["./src/queries/*"],

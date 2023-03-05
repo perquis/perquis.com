@@ -53,6 +53,7 @@
         "importOrder": [
           "<THIRD_PARTY_MODULES>",
           "^@components/(.*)$",
+          "^@animations/(.*)$",
           "^@providers/(.*)$",
           "^@layouts/(.*)$",
           "^@queries/(.*)$",

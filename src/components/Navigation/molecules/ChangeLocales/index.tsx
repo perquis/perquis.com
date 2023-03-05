@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
 
-import { LocalesList } from '../LocalesList';
+import { LocalesList } from '@components/Navigation/atoms/LocalesList';
+
 import styles from './ChangeLocales.module.scss';
 
 export const ChangeLocales = () => {

@@ -1,0 +1,65 @@
+@import '@styles/mixins';
+@import '@styles/breakpoints';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+}
+
+.avatar {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--small-radius);
+  overflow: hidden;
+  border: 2px solid var(--locale-border-color);
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  padding: 0 0.8rem;
+  height: 35px;
+  border-radius: var(--small-radius);
+  gap: 1rem;
+  border: none;
+  background: none;
+
+  @include hover-effect;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.user-wrapper {
+  position: relative;
+}
+
+.log-out {
+  width: 100%;
+  top: 100%;
+  position: absolute;
+  translate: 0 6px;
+  padding: 0.8rem;
+  background: var(--locale-background);
+  box-shadow: inset 0 0 0 2px var(--locale-border-color);
+  border-radius: var(--small-radius);
+
+  button {
+    width: 100%;
+    text-align: left;
+    padding: 0.4rem 0.8rem;
+    background: none;
+    border: none;
+    border-radius: 0.3rem;
+
+    @include hover-effect;
+  }
+}
