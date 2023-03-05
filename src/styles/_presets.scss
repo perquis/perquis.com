@@ -26,8 +26,58 @@
   --white: hsl(0, 0%, 100%);
 
   // Colors
+  --primary: hsl(259, 100%, 50%);
   --yellow: hsl(58, 100%, 50%);
-  --blue: hsl(216, 100%, 50%);
   --cyan: hsl(176, 100%, 60%);
   --pink: hsl(324, 100%, 50%);
+
+  --logo-primary-color: hsl(279, 100%, 50%);
+  --logo-secondary-color: hsl(259, 100%, 50%);
+
+  // Global presets
+  --color: var(--gray-900);
+  --background: var(--gray-50);
+
+  --padding-desktop: 20rem;
+  --padding-xxl: 12rem;
+  --padding-xl: 10rem;
+  --padding-lg: 8rem;
+  --padding-md: 6rem;
+  --padding-sm: 2rem;
+
+  --outline-color: var(--logo-primary-color);
+  --selection-font-color: var(--white);
+  --selection-background-color: var(--primary);
+
+  // Components presets
+  --secondary-button-color: var(--neutral-900);
+  --secondary-button-color-hover: hsl(259, 100%, 40%);
+  --secondary-button-padding: 0.8rem 1.6rem;
+
+  --text-decoration-wavy-color: var(--logo-primary-color);
+
+  --locale-border-color: var(--gray-200);
+  --locale-background: var(--gray-100);
+  --locale-is-hover: hsl(212, 29%, 85%);
+
+  // Sizes
+  --small-radius: 0.6rem;
+  --height-menu: clamp(6rem, 5vw, 12rem);
+}
+
+[data-theme='dark'] {
+  // Global presets
+  --color: var(--gray-50);
+  --background: var(--gray-950);
+  --outline-color: var(--logo-secondary-color);
+
+  // Components presets
+  --secondary-button-color: var(--white);
+  --secondary-button-color-hover: hsl(259, 100%, 60%);
+
+  --text-decoration-wavy-color: hsl(259, 100%, 50%);
+
+  --locale-border-color: var(--gray-800);
+  --locale-background: var(--gray-900);
+  --locale-is-hover: hsl(212, 33%, 15%);
 }

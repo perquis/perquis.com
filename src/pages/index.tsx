@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+=======
+import Navigation from '@components/Navigation';
+
+const Home = () => {
+  return <Navigation />;
+};
+>>>>>>> 9f3cede (Introduced Navigation component to application.)
 
 const inter = Inter({ subsets: ['latin'] })
 

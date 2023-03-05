@@ -1,0 +1,18 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  span {
+    font-size: clamp(1.4rem, 5vw, 2.1rem);
+    font-weight: bold;
+  }
+
+  &:is(:hover, :focus) {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--text-decoration-wavy-color);
+
+    text-underline-offset: 3px;
+  }
+}

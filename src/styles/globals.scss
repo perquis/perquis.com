@@ -1,9 +1,24 @@
+@import './breakpoints';
 @import './presets';
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--outline-color);
+    outline-offset: 3px;
+  }
+
+  &::selection {
+    color: var(--selection-font-color);
+    background: var(--selection-background-color);
+  }
 }
 
 html {
@@ -12,13 +27,17 @@ html {
   font-size: 62.5%;
 }
 
-html,
-body {
-  overflow-x: hidden;
-}
-
 body {
   font-size: 1.6rem;
+  overflow-x: hidden;
+  color: var(--color);
+  background: var(--background);
+}
+
+button {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 a {

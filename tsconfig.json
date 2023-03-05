@@ -26,6 +26,7 @@
       "@helpers/*": ["./src/helpers/*"],
       "@styles/*": ["./src/styles/*"],
       "@fonts/*": ["./src/fonts/*"],
+      "@icons/*": ["./src/icons/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@data/*": ["./src/data/*"],

@@ -1,0 +1,11 @@
+@import '@styles/breakpoints';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media screen and (max-width: $lg) {
+    display: none;
+  }
+}

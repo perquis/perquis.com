@@ -1,0 +1,24 @@
+.button {
+  border: none;
+  color: var(--white);
+  background: var(--primary);
+  border-radius: var(--small-radius);
+  padding: var(--secondary-button-padding);
+  transition: 0.15s ease-in-out;
+}
+
+.secondary {
+  background: none;
+  color: var(--secondary-button-color);
+  transition: none;
+
+  &:is(:focus, :hover) {
+    text-decoration: underline;
+  }
+}
+
+.interactions {
+  &:is(:focus, :hover) {
+    background: var(--secondary-button-color-hover);
+  }
+}

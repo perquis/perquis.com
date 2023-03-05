@@ -1,0 +1,22 @@
+.locales {
+  position: relative;
+}
+
+.button {
+  text-transform: uppercase;
+  padding: var(--secondary-button-padding);
+  background: none;
+  border: none;
+  box-shadow: inset 0 0 0 2px var(--locale-border-color);
+  background: var(--locale-background);
+  border-radius: var(--small-radius);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.6rem;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+}

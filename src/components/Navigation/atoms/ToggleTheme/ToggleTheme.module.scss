@@ -1,0 +1,51 @@
+.theme-mode {
+  --size: 1.8rem;
+
+  background: none;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  outline-offset: 10px;
+  position: relative;
+  margin-right: 1rem;
+
+  width: var(--size);
+  height: var(--size);
+  box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+  border-radius: 999px;
+  color: var(--gray950);
+  border: 0;
+
+  transition: all 300ms;
+
+  &::before {
+    width: 30px;
+    height: 30px;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -15px;
+  }
+}
+
+.active {
+  --ray-size: calc(var(--size) * -0.42);
+  --offset-orthogonal: calc(var(--size) * 0.65);
+  --offset-diagonal: calc(var(--size) * 0.45);
+
+  transform: scale(0.75);
+  color: hsl(40, 100%, 50%);
+  box-shadow: inset 0 0 0 var(--size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size), var(--offset-orthogonal) 0 0 var(--ray-size),
+    0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size), 0 var(--offset-orthogonal) 0 var(--ray-size),
+    calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size), var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size),
+    calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size), var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+}
+
+.hidden-lg {
+  --size: 2rem;
+  padding: 1rem;
+  margin-right: 1.5rem;
+}

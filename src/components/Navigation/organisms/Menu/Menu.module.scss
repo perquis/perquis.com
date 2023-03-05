@@ -1,0 +1,30 @@
+@import '@styles/breakpoints';
+
+.menu {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6rem;
+  padding: 0 var(--padding-desktop);
+
+  @media screen and (min-width: calc($xl + 1px)) and (max-width: $xxl) {
+    padding: 0 var(--padding-xxl);
+  }
+
+  @media screen and (min-width: calc($lg + 1px)) and (max-width: $xl) {
+    padding: 0 var(--padding-xl);
+  }
+
+  @media screen and (min-width: calc($md + 1px)) and (max-width: $lg) {
+    padding: 0 var(--padding-lg);
+  }
+
+  @media screen and (min-width: calc($sm + 1px)) and (max-width: $md) {
+    padding: 0 var(--padding-md);
+  }
+
+  @media screen and (max-width: $sm) {
+    padding: 0 var(--padding-sm);
+  }
+}
