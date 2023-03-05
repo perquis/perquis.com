@@ -16,7 +16,21 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+<<<<<<< HEAD
       "@/*": ["./src/*"]
+=======
+      "@components/*": ["./src/components/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@queries/*": ["./src/queries/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@fonts/*": ["./src/fonts/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@data/*": ["./src/data/*"],
+      "@lib/*": ["./src/lib/*"]
+>>>>>>> c88880c (Introduced fixes to application.)
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

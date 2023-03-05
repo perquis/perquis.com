@@ -1,0 +1,25 @@
+{
+  "tabWidth": 2,
+  "printWidth": 180,
+  "endOfLine": "auto",
+  "singleQuote": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true,
+  "importOrderGroupNamespaceSpecifiers": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@components/(.*)$",
+    "^@providers/(.*)$",
+    "^@layouts/(.*)$",
+    "^@queries/(.*)$",
+    "^@helpers/(.*)$",
+    "^@styles/(.*)$",
+    "^@fonts/(.*)$",
+    "^@hooks/(.*)$",
+    "^@utils/(.*)$",
+    "^@data/(.*)$",
+    "^@lib/(.*)$",
+    "^[./]"
+  ]
+}

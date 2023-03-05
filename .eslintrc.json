@@ -1,3 +1,74 @@
 {
+<<<<<<< HEAD
   "extends": "next/core-web-vitals"
+=======
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "plugin:storybook/recommended", "next/core-web-vitals"],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "arrowFunctions": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "eqeqeq": "error",
+    "no-console": "warn",
+    "default-case": "error",
+    "no-loop-func": "error",
+    "max-depth": ["error", 4],
+    "block-scoped-var": "error",
+    "consistent-return": "error",
+    "func-name-matching": "error",
+    "no-unreachable-loop": "warn",
+    "no-duplicate-imports": "error",
+    "array-callback-return": "error",
+    "camelcase": ["warn", { "properties": "always" }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "destructuredArrayIgnorePattern": "^_" }],
+
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-require-imports": "off",
+    "@typescript-eslint/prefer-enum-initializers": "warn",
+    "@typescript-eslint/no-duplicate-enum-values": "warn",
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+    "@typescript-eslint/triple-slash-reference": ["error", { "path": "always", "types": "always", "lib": "always" }],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "destructuredArrayIgnorePattern": "^_" }],
+
+    "prettier/prettier": [
+      "error",
+      {
+        "tabWidth": 2,
+        "printWidth": 180,
+        "endOfLine": "auto",
+        "singleQuote": true,
+        "importOrderSeparation": true,
+        "importOrderSortSpecifiers": true,
+        "importOrderCaseInsensitive": true,
+        "importOrderGroupNamespaceSpecifiers": true,
+        "importOrder": [
+          "<THIRD_PARTY_MODULES>",
+          "^@components/(.*)$",
+          "^@providers/(.*)$",
+          "^@layouts/(.*)$",
+          "^@queries/(.*)$",
+          "^@helpers/(.*)$",
+          "^@styles/(.*)$",
+          "^@fonts/(.*)$",
+          "^@hooks/(.*)$",
+          "^@utils/(.*)$",
+          "^@data/(.*)$",
+          "^@lib/(.*)$",
+          "^[./]"
+        ]
+      }
+    ]
+  }
+>>>>>>> c88880c (Introduced fixes to application.)
 }
