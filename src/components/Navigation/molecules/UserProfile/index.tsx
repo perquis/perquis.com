@@ -1,16 +1,16 @@
-import useKey from '@rooks/use-key';
-import useOutsideClick from '@rooks/use-outside-click';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import type { FC, MutableRefObject } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
 
 import { Avatar } from '@components/Navigation/atoms/Avatar';
 import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
 
 import { vars } from '@animations/pop-up';
+
+import { useDropdownMenu } from '@hooks/useDropdownMenu';
 
 import styles from './UserProfile.module.scss';
 
@@ -20,16 +20,11 @@ interface IUserProfile {
 
 export const UserProfile: FC<IUserProfile> = ({ session }) => {
   const [isActive, setActive] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
 
   const toggleOptions = () => setActive(!isActive);
 
-  useKey('Escape', toggleOptions, { when: isActive });
-  useOutsideClick(ref, toggleOptions, isActive && !!mounted);
-
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  useDropdownMenu(toggleOptions, { ref, state: { isActive, setActive } });
 
   return (
     <div className={styles.wrapper}>

@@ -1,5 +1,4 @@
-@import '@styles/mixins';
-@import '@styles/breakpoints';
+@import './src/styles/_breakpoints.scss';
 
 .wrapper {
   position: relative;
@@ -48,34 +47,5 @@
   &::after {
     translate: 0 0px;
     rotate: -405deg;
-  }
-}
-
-.profile-user {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.dropdown-menu {
-  position: absolute;
-  width: 24rem;
-  top: 100%;
-  right: 0;
-  translate: 0 6px;
-  background: var(--locale-background);
-  padding: 0.8rem;
-  border: 2px solid var(--locale-border-color);
-  border-radius: calc(var(--small-radius) + 0.6rem);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-
-  button {
-    width: 100%;
-    text-align: left;
-
-    @include hover-effect;
   }
 }

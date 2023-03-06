@@ -1,11 +1,11 @@
-import useKey from '@rooks/use-key';
-import useOutsideClick from '@rooks/use-outside-click';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import type { FC, MutableRefObject } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { vars } from '@animations/pop-up';
+
+import { useDropdownMenu } from '@hooks/useDropdownMenu';
 
 import { languages } from '@data/languages';
 
@@ -17,15 +17,10 @@ interface ILocaleListProps {
 }
 
 export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales }) => {
-  const [mounted, setMounted] = useState(false);
   const { locale, asPath, push } = useRouter();
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
 
-  useKey('Escape', toggleLocales);
-  useOutsideClick(ref, toggleLocales, isActive && !!mounted);
-
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  useDropdownMenu(toggleLocales, { ref, state: { isActive } });
 
   return (
     <motion.div className={styles.visible} variants={vars} initial="initial" animate="animate" exit="exit" ref={ref}>
