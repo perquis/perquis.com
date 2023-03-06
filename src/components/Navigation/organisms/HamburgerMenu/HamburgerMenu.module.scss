@@ -2,6 +2,10 @@
 
 .wrapper {
   position: relative;
+
+  @media screen and (min-width: calc($md + 1px)) {
+    display: none;
+  }
 }
 
 .hamburger-menu {
@@ -13,10 +17,6 @@
   align-items: center;
   background: none;
   border: none;
-
-  @media screen and (min-width: calc($md + 1px)) {
-    display: none;
-  }
 
   &::before,
   &::after {

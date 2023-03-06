@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 type State = { isActive: boolean; setActive: Dispatch<SetStateAction<boolean>> };
 type Options = { ref: MutableRefObject<HTMLDivElement>; state: Partial<State> };
 
-type UseDropdownMenu = (cb: () => void, options: Options) => void;
+type UseDropdownMenu = (cb: () => void, options: Options) => void | null;
 
 export const useDropdownMenu: UseDropdownMenu = (cb, { ref, state: { isActive, setActive } }) => {
   const { innerWidth } = useWindowSize();

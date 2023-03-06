@@ -1,12 +1,11 @@
-import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+
+import { useToggleTheme } from '@hooks/useToggleTheme';
 
 import styles from './ToggleTheme.module.scss';
 
 export const ToggleTheme = () => {
-  const { theme, setTheme } = useTheme();
-  const isActive = theme === 'dark';
-  const toggleTheme = () => setTheme(isActive ? 'light' : 'dark');
+  const { isActive, toggleTheme } = useToggleTheme();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
