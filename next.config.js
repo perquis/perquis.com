@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+const nextConfig = () => {
+  const ESLintPlugin = require('eslint-webpack-plugin');
 
-<<<<<<< HEAD
-module.exports = nextConfig
-=======
   return {
     reactStrictMode: true,
     images: {
@@ -37,4 +33,3 @@ module.exports = nextConfig
 };
 
 module.exports = nextConfig();
->>>>>>> 921af30 (Introduced fixes to Navigation component.)

@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: 'code-journey'
+    ports:
+      - '3000:3000'
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
