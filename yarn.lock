@@ -3902,13 +3902,6 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react-wavify@^1.7.0":
-  "integrity" "sha512-NHGZ7s7ba4z+ytr730pEc+ZAdGA7WVg8UQwqwELtW1wXEq00hB6ogo2OvIUJZPFDKwYT0PoaSIvvl5hmzdS/UQ=="
-  "resolved" "https://registry.npmjs.org/react-wavify/-/react-wavify-1.7.0.tgz"
-  "version" "1.7.0"
-  dependencies:
-    "prop-types" "^15.8.1"
-
 "react-youtube@^10.1.0":
   "integrity" "sha512-ZfGtcVpk0SSZtWCSTYOQKhfx5/1cfyEW1JN/mugGNfAxT3rmVJeMbGpA9+e78yG21ls5nc/5uZJETE3cm3knBg=="
   "resolved" "https://registry.npmjs.org/react-youtube/-/react-youtube-10.1.0.tgz"
@@ -3918,7 +3911,7 @@
     "prop-types" "15.8.1"
     "youtube-player" "5.5.2"
 
-"react@*", "react@^0.13.0 || ^0.14.0 || >=15", "react@^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.14.1", "react@>=16", "react@>=16.8.0", "react@>=16.x <=18.x", "react@18.2.0":
+"react@*", "react@^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.14.1", "react@>=16", "react@>=16.8.0", "react@>=16.x <=18.x", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

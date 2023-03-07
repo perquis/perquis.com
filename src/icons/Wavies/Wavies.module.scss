@@ -1,0 +1,20 @@
+.wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  left: 0;
+  overflow: hidden;
+}
+
+.top {
+  top: 0;
+}
+
+.bottom {
+  bottom: 0;
+
+  svg {
+    rotate: 180deg;
+    translate: 0 8px;
+  }
+}
