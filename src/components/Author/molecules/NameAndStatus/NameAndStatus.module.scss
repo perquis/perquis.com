@@ -1,0 +1,25 @@
+@import './src/styles/_breakpoints.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  b {
+    font-size: clamp(1.7rem, 2vw, 1.8rem);
+
+    span {
+      @media screen and (max-width: $sm) {
+        display: none;
+      }
+    }
+  }
+
+  span {
+    font-size: 1.5rem;
+    color: var(--status-color);
+
+    @media screen and (max-width: $sm) {
+      display: none;
+    }
+  }
+}

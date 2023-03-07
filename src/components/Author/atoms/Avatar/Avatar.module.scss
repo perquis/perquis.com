@@ -1,0 +1,9 @@
+.avatar {
+  width: clamp(9.6rem, 10vw, 13.6rem);
+  height: clamp(9.6rem, 10vw, 13.6rem);
+  position: relative;
+  border-radius: var(--small-radius);
+  border: clamp(3px, 1vw, 5px) solid var(--background);
+  overflow: hidden;
+  flex-shrink: 0;
+}

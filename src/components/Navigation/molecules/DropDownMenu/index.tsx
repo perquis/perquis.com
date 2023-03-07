@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import { Button } from '@components/global/atoms/Button';
-import { Avatar } from '@components/Navigation/atoms/Avatar';
+import { SmallAvatar } from '@components/Navigation/atoms/SmallAvatar';
 
 import { vars } from '@animations/pop-up';
 
@@ -25,7 +25,7 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
         <motion.div className={styles['dropdown-menu']} variants={vars} initial="initial" animate="animate" exit="exit">
           {session ? (
             <div className={styles['profile-user']}>
-              <Avatar image={session.user?.image ?? ''} />
+              <SmallAvatar image={session.user?.image ?? ''} />
               <b>{session?.user?.name}</b>
             </div>
           ) : null}

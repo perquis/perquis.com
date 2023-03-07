@@ -65,6 +65,10 @@
 
   --hamburger-menu-color: var(--gray-900);
 
+  --social-color: var(--gray-800);
+
+  --status-color: var(--pink);
+
   // Sizes
   --small-radius: 0.6rem;
   --height-menu: clamp(6rem, 5vw, 12rem);
@@ -87,4 +91,8 @@
   --locale-is-hover: var(--gray-850);
 
   --hamburger-menu-color: var(--gray-50);
+
+  --social-color: var(--gray-200);
+
+  --status-color: var(--cyan);
 }

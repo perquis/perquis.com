@@ -32,6 +32,32 @@ body {
   overflow-x: hidden;
   color: var(--color);
   background: var(--background);
+
+  padding: 0 var(--padding-desktop);
+
+  @media screen and (min-width: calc($xl + 1px)) and (max-width: $xxl) {
+    padding: 0 var(--padding-xxl);
+  }
+
+  @media screen and (min-width: calc($lg + 1px)) and (max-width: $xl) {
+    padding: 0 var(--padding-xl);
+  }
+
+  @media screen and (min-width: calc($md + 1px)) and (max-width: $lg) {
+    padding: 0 var(--padding-lg);
+  }
+
+  @media screen and (min-width: calc($sm + 1px)) and (max-width: $md) {
+    padding: 0 var(--padding-md);
+  }
+
+  @media screen and (min-width: 401px) and (max-width: $sm) {
+    padding: 0 var(--padding-sm);
+  }
+
+  @media screen and (max-width: 400px) {
+    padding: 0;
+  }
 }
 
 button {

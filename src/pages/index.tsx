@@ -1,9 +1,11 @@
-import Navigation from '@components/Navigation';
+import { Author } from '@components/Author';
+import { WavyLines } from '@components/global/atoms/WavyLines';
 
 const Home = () => {
   return (
     <>
-      <Navigation />
+      <Author />
+      <WavyLines />
     </>
   );
 };

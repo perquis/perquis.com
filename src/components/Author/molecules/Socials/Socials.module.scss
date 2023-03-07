@@ -1,0 +1,28 @@
+@import './src/styles/_breakpoints.scss';
+
+.socials {
+  display: flex;
+  gap: 1rem;
+
+  @media screen and (max-width: $sm) {
+    display: none;
+  }
+
+  a {
+    width: 24px;
+    height: 24px;
+
+    svg {
+      path {
+        fill: var(--social-color);
+      }
+    }
+
+    opacity: 0.3;
+    transition: 0.3s ease-in-out;
+
+    &:is(:hover, :focus) {
+      opacity: 0.5;
+    }
+  }
+}

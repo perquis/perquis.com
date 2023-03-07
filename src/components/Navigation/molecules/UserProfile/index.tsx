@@ -5,7 +5,7 @@ import type { FC, MutableRefObject } from 'react';
 import { useRef, useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
 
-import { Avatar } from '@components/Navigation/atoms/Avatar';
+import { SmallAvatar } from '@components/Navigation/atoms/SmallAvatar';
 import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
 
 import { vars } from '@animations/pop-up';
@@ -29,7 +29,7 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
   return (
     <div className={styles.wrapper}>
       <ChangeLocales />
-      <Avatar image={session.user?.image ?? ''} />
+      <SmallAvatar image={session.user?.image ?? ''} />
       <div className={styles['user-wrapper']} ref={ref}>
         <button className={styles.options} onClick={toggleOptions}>
           <b>{session.user?.name}</b>
