@@ -1,9 +1,9 @@
 import { Title } from '@components/PostsList/atoms/SmallTitle';
 
-import { SearchBar } from '../SearchBar';
-import styles from './PostsList.module.scss';
+import styles from './styles/PostsList.module.scss';
+import { SearchBar } from './templates/SearchBar';
 
-export const PostsList = () => {
+const PostsList = () => {
   return (
     <div className={styles.posts}>
       <Title>My Articles</Title>
@@ -11,3 +11,5 @@ export const PostsList = () => {
     </div>
   );
 };
+
+export default PostsList;

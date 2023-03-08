@@ -21,3 +21,14 @@
     }
   }
 }
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--locale-is-hover);
+  }
+}

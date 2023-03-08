@@ -1,0 +1,36 @@
+@import './src/styles/_mixins.scss';
+
+.button {
+  background: none;
+  text-align: left;
+  color: inherit;
+  border: none;
+  font-size: 1.8rem;
+  padding: 0.6rem;
+  border-radius: var(--small-radius);
+  flex-shrink: 0;
+
+  @include hover-effect;
+
+  &:is(:hover, :focus) {
+    color: var(--status-color);
+
+    &::before {
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  &::before {
+    z-index: 0;
+  }
+}
+
+.span {
+  position: relative;
+
+  &::before {
+    content: '#';
+    color: var(--locale-border-color);
+  }
+}

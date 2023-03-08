@@ -41,7 +41,8 @@
     "rehype-slug": "^5.1.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",
-    "sass": "^1.58.3"
+    "sass": "^1.58.3",
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",

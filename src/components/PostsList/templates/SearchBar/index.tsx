@@ -1,5 +1,5 @@
 import { InputSearch } from '@components/PostsList/molecules/InputSearch';
-import { SelectTechnology } from '@components/PostsList/molecules/SelectTechnology';
+import { SelectTechnology } from '@components/PostsList/organisms/SelectTechnology';
 
 import styles from './SearchBar.module.scss';
 

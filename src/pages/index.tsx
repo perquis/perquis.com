@@ -1,6 +1,6 @@
 import Author from '@components/Author';
 import { WavyLines } from '@components/global/atoms/WavyLines';
-import { PostsList } from '@components/PostsList/templates/PostsList';
+import PostsList from '@components/PostsList';
 
 const Home = () => {
   return (
