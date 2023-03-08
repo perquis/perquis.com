@@ -72,6 +72,8 @@
   --placeholder-color: var(--gray-400);
   --input-color: var(--gray-600);
 
+  --blur-background: hsl(212, 29%, 90%, 50%);
+
   // Sizes
   --small-radius: 0.6rem;
   --height-menu: clamp(6rem, 5vw, 12rem);
@@ -100,4 +102,6 @@
   --status-color: var(--cyan);
 
   --input-color: var(--gray-300);
+
+  --blur-background: hsl(212, 33%, 10%, 75%);
 }

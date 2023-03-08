@@ -26,6 +26,7 @@
       "@styles/*": ["./src/styles/*"],
       "@fonts/*": ["./src/fonts/*"],
       "@icons/*": ["./src/icons/*"],
+      "@store/*": ["src/stores/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@data/*": ["./src/data/*"],

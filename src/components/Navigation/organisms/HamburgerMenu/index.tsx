@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import type { MutableRefObject } from 'react';
+import { useBlurStore } from 'src/stores/blur';
 
 import { DropDownMenu } from '@components/Navigation/molecules/DropDownMenu';
 
@@ -15,9 +16,17 @@ export const HamburgerMenu = () => {
 
   useDropdownMenu(toggleActive, { ref, state: { isActive, setActive } });
 
+  const [updateIsBlur] = useBlurStore((state) => [state.updateIsBlur]);
+
   return (
     <div className={styles.wrapper} ref={ref}>
-      <button className={`${styles['hamburger-menu']} ${isActive ? styles.active : ''}`} onClick={toggleActive} />
+      <button
+        className={`${styles['hamburger-menu']} ${isActive ? styles.active : ''}`}
+        onClick={() => {
+          updateIsBlur(true);
+          toggleActive();
+        }}
+      />
       <DropDownMenu isActive={isActive} />
     </div>
   );
