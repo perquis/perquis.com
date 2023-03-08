@@ -32,6 +32,8 @@ body {
   overflow-x: hidden;
   color: var(--color);
   background: var(--background);
+  min-height: 100vh;
+  position: relative;
 
   padding: 0 var(--padding-desktop);
 

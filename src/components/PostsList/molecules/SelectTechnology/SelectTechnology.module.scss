@@ -1,0 +1,107 @@
+@import './src/styles/_breakpoints.scss';
+@import './src/styles/_mixins.scss';
+
+.wrapper {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.pop-up {
+  position: absolute;
+  width: 100%;
+  background: var(--locale-background);
+  color: var(--placeholder-color);
+  padding: 1rem;
+  border: 2px solid var(--locale-border-color);
+  border-radius: 0.8rem;
+
+  display: flex;
+  flex-direction: column;
+
+  button {
+    background: none;
+    text-align: left;
+    color: inherit;
+    border: none;
+    font-size: 1.8rem;
+    padding: 0.6rem;
+    border-radius: var(--small-radius);
+
+    @include hover-effect;
+
+    &:is(:hover, :focus) {
+      color: var(--input-color);
+
+      &::before {
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    span {
+      position: relative;
+
+      &::before {
+        content: '#';
+        color: var(--locale-border-color);
+      }
+    }
+
+    &::before {
+      z-index: 0;
+    }
+  }
+}
+
+.select {
+  display: flex;
+  gap: 2rem;
+  padding-left: 1rem;
+  cursor: pointer;
+  padding: 0.6rem 1rem 0.6rem 2rem;
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: none;
+  border: none;
+  border-left: 2px solid var(--locale-border-color);
+  color: var(--placeholder-color);
+
+  @media screen and (max-width: $sm) {
+    padding: 0.6rem 1rem;
+    border: none;
+    opacity: 0.5;
+    scale: 1.25;
+    transition: 0.15s ease-in-out;
+
+    &:is(:hover, :focus) {
+      opacity: 1;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: calc($sm + 1px)) {
+    @include hover-effect;
+  }
+
+  span,
+  svg {
+    position: relative;
+  }
+
+  &::before {
+    z-index: 0;
+  }
+
+  svg {
+    path {
+      fill: var(--placeholder-color);
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}

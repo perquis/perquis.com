@@ -31,6 +31,10 @@
   background: none;
 
   @include hover-effect;
+
+  &::before {
+    background: var(--locale-background);
+  }
 }
 
 .icon {

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.20.1",
     "@rooks/use-key": "^4.11.2",
     "@rooks/use-outside-click": "^4.11.2",
     "@rooks/use-window-size": "^4.6.0",

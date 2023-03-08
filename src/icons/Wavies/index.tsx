@@ -12,7 +12,7 @@ export const Wavies: FC<IWavies> = ({ direction = 'top' }) => {
   const { theme } = useTheme();
   const isTop = direction === 'top';
   const isDarkTheme = theme === 'dark';
-  const topColor = isDarkTheme ? '#d633ff' : '#0500FF';
+  const topColor = isDarkTheme ? '#3347ff' : '#0500FF';
   const bottomColor = isDarkTheme ? '#A600FF' : '#D766FF';
 
   const [mounted, setMounted] = useState(false);

@@ -1,13 +1,16 @@
+import type { FC } from 'react';
+
+import type { IThumbnail } from '@components/Author/atoms/Thumbnail';
 import { Thumbnail } from '@components/Author/atoms/Thumbnail';
-import { AboutMe } from '@components/Author/molecules/AboutMe';
 import { LabeledUser } from '@components/Author/organisms/LabeledUser';
 
-export const HeroHeader = () => {
+import styles from './HeroHeader.module.scss';
+
+export const HeroHeader: FC<IThumbnail> = ({ src, alt }) => {
   return (
-    <div>
-      <Thumbnail />
+    <div className={styles.wrapper}>
+      <Thumbnail src={src} alt={alt} />
       <LabeledUser />
-      <AboutMe />
     </div>
   );
 };

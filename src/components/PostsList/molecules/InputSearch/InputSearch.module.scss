@@ -1,0 +1,25 @@
+.icon {
+  flex-shrink: 0;
+
+  path {
+    fill: var(--placeholder-color);
+  }
+}
+
+.search {
+  width: 100%;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  outline: none;
+
+  color: var(--input-color);
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  &::placeholder {
+    color: var(--placeholder-color);
+  }
+}

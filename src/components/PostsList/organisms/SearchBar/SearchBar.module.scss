@@ -1,0 +1,10 @@
+.wrapper {
+  padding: 0.65rem 0.65rem 0.65rem 1.2rem;
+  border: 2px solid var(--locale-border-color);
+  background: var(--locale-background);
+  border-radius: 1rem;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
