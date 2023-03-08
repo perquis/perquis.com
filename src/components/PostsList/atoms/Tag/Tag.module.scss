@@ -1,0 +1,7 @@
+.tag {
+  color: var(--status-color);
+
+  &::before {
+    content: '#';
+  }
+}

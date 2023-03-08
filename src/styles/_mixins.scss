@@ -32,3 +32,11 @@
     background: var(--locale-is-hover);
   }
 }
+
+@mixin word-line-clamp {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}

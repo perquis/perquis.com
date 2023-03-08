@@ -1,0 +1,11 @@
+.link {
+  color: inherit;
+
+  &:is(:hover, :focus) {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--status-color);
+
+    text-underline-offset: 3px;
+  }
+}

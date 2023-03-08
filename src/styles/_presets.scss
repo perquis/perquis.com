@@ -74,6 +74,8 @@
 
   --blur-background: hsl(212, 29%, 90%, 50%);
 
+  --paragraph: var(--gray-600);
+
   // Sizes
   --small-radius: 0.6rem;
   --height-menu: clamp(6rem, 5vw, 12rem);
@@ -104,4 +106,6 @@
   --input-color: var(--gray-300);
 
   --blur-background: hsl(212, 33%, 10%, 75%);
+
+  --paragraph: var(--gray-200);
 }
