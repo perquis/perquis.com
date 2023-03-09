@@ -12,6 +12,11 @@
 
   @include hover-effect;
 
+  span,
+  svg {
+    position: relative;
+  }
+
   &:is(:hover, :focus) {
     color: var(--status-color);
 
@@ -27,10 +32,14 @@
 }
 
 .span {
-  position: relative;
-
   &::before {
     content: '#';
     color: var(--locale-border-color);
   }
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

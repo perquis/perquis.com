@@ -1,0 +1,28 @@
+.delete {
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--small-radius);
+  display: flex;
+  gap: 0.6rem;
+  color: var(--white);
+  align-items: center;
+
+  svg {
+    display: none;
+  }
+
+  span {
+    &::before {
+      content: '#';
+    }
+  }
+
+  &:is(:focus, :hover) {
+    background: var(--secondary-button-color-hover);
+
+    svg {
+      display: block;
+    }
+  }
+}

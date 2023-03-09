@@ -1,15 +1,23 @@
-import Author from '@components/Author';
-import { WavyLines } from '@components/global/atoms/WavyLines';
-import PostsList from '@components/PostsList';
+import type { GetStaticProps } from 'next';
+import type { FC } from 'react';
 
-const Home = () => {
-  return (
-    <>
-      <Author />
-      <WavyLines />
-      <PostsList />
-    </>
-  );
+import { HomePage } from '@pages/HomePage';
+
+export interface IHomeProps {
+  technologies: string[];
+}
+
+const Home: FC<IHomeProps> = ({ technologies }) => {
+  return <HomePage technologies={technologies} />;
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await fetch(`${process.env.HOST}/api/technologies`);
+  const technologies = await data.json();
+
+  return {
+    props: { technologies },
+  };
 };
 
 export default Home;

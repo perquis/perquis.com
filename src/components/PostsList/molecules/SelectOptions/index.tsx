@@ -7,26 +7,27 @@ import { Technology } from '@components/PostsList/atoms/Technology';
 
 import { vars } from '@animations/pop-up';
 
-import { technologies } from '@data/technologies';
+import { useTechnologiesStore } from '@store/technologies';
 
 import styles from './SelectOptions.module.scss';
 
 interface ISelectOptions {
-  x: number | null;
   y: number | null;
   refs: ExtendedRefs<ReferenceType>;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
 }
 
-export const SelectOptions: FC<Record<'options', ISelectOptions>> = ({ options: { x, y, refs, getFloatingProps } }) => {
+export const SelectOptions: FC<Record<'options', ISelectOptions>> = ({ options: { y, refs, getFloatingProps } }) => {
+  const [compareTechnologies, technologies] = useTechnologiesStore((state) => [state.technologies, state.getAllTechnologiesList]);
   const top = y ?? 0;
-  const left = typeof x === 'number' ? x + 8 : 0;
 
   return (
     <FocusLock>
-      <motion.div ref={refs.setFloating} {...getFloatingProps()} style={{ top, left }} className={styles['pop-up']} variants={vars} initial="initial" animate="animate" exit="exit">
+      <motion.div ref={refs.setFloating} {...getFloatingProps()} style={{ top }} className={styles['pop-up']} variants={vars} initial="initial" animate="animate" exit="exit">
         {technologies.map((technology) => (
-          <Technology key={technology}>{technology}</Technology>
+          <Technology key={technology} isSelected={compareTechnologies.includes(technology)}>
+            {technology}
+          </Technology>
         ))}
       </motion.div>
     </FocusLock>

@@ -9,6 +9,7 @@
   "importOrderGroupNamespaceSpecifiers": true,
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
+    "^@pages/(.*)$",
     "^@components/(.*)$",
     "^@animations/(.*)$",
     "^@providers/(.*)$",
