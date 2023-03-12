@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useRef } from 'react';
 import type { MutableRefObject } from 'react';
 import { useBlurStore } from 'src/stores/blur';
 
@@ -10,24 +11,22 @@ import styles from './HamburgerMenu.module.scss';
 
 export const HamburgerMenu = () => {
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
-  const [isActive, setActive] = useState(false);
+  const [isBlur, updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);
 
-  const toggleActive = () => setActive(!isActive);
+  const toggleActive = () => updateIsBlur(!isBlur);
 
-  useDropdownMenu(toggleActive, { ref, state: { isActive, setActive } });
-
-  const [updateIsBlur] = useBlurStore((state) => [state.updateIsBlur]);
+  useDropdownMenu(toggleActive, { ref, state: { isActive: isBlur, setActive: updateIsBlur as Dispatch<SetStateAction<boolean>> } });
 
   return (
     <div className={styles.wrapper} ref={ref}>
       <button
-        className={`${styles['hamburger-menu']} ${isActive ? styles.active : ''}`}
+        className={`${styles['hamburger-menu']} ${isBlur ? styles.active : ''}`}
         onClick={() => {
           updateIsBlur(true);
           toggleActive();
         }}
       />
-      <DropDownMenu isActive={isActive} />
+      <DropDownMenu isActive={isBlur} />
     </div>
   );
 };

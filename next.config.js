@@ -1,8 +1,10 @@
+const nextTranslate = require('next-translate-plugin');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = () => {
   const ESLintPlugin = require('eslint-webpack-plugin');
 
-  return {
+  return nextTranslate({
     reactStrictMode: true,
     images: {
       domains: ['avatars.githubusercontent.com'],
@@ -29,7 +31,7 @@ const nextConfig = () => {
       config.plugins.push(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
       return config;
     },
-  };
+  });
 };
 
 module.exports = nextConfig();
