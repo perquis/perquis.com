@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import { SmallTitle } from '@components/PostsList/atoms/SmallTitle';
 
 import { useTechnologiesStore } from '@store/technologies';
@@ -10,12 +12,15 @@ import { SearchBar } from './templates/SearchBar';
 
 const PostsList = () => {
   const [technologies] = useTechnologiesStore((state) => [state.technologies]);
+  const { t } = useTranslation('home');
+  const title = t('posts-list.title'),
+    description = t('posts-list.description');
 
   return (
     <div className={styles.posts}>
       <div className={styles.heading}>
-        <SmallTitle>My Blog</SmallTitle>
-        <p>About frontend, backend and programming.</p>
+        <SmallTitle>{title}</SmallTitle>
+        <p>{description}</p>
       </div>
       <SearchBar />
       {technologies.length > 0 ? (

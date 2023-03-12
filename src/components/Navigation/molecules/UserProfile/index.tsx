@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
+import useTranslation from 'next-translate/useTranslation';
 import type { FC, MutableRefObject } from 'react';
 import { useRef, useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
@@ -26,6 +27,9 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
 
   useDropdownMenu(toggleOptions, { ref, state: { isActive, setActive } });
 
+  const { t } = useTranslation('home');
+  const text = t('user-profile.sign-out');
+
   return (
     <div className={styles.wrapper}>
       <ChangeLocales />
@@ -40,7 +44,7 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
         <AnimatePresence>
           {isActive && (
             <motion.div className={styles['log-out']} variants={vars} initial="initial" animate="animate" exit="exit">
-              <button onClick={() => signOut()}>Log out</button>
+              <button onClick={() => signOut()}>{text}</button>
             </motion.div>
           )}
         </AnimatePresence>

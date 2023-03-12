@@ -2,7 +2,7 @@
   "locales": ["en", "pl"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"],
+    "*": ["footer"],
     "/": ["home"]
   }
 }

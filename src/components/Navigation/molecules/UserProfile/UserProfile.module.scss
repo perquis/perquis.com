@@ -47,8 +47,9 @@
 }
 
 .log-out {
-  width: 100%;
+  width: calc(100% + 35px + 1rem);
   top: 100%;
+  right: 0;
   position: absolute;
   translate: 0 6px;
   padding: 0.8rem;

@@ -1,9 +1,10 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
-  return (
-    <footer className={styles.footer}>
-      © 2023-present Damian <b>“Perquis”</b> Werens. All Rights Reserved.
-    </footer>
-  );
+  const { t } = useTranslation('footer');
+  const __html = t('text');
+
+  return <footer className={styles.footer} dangerouslySetInnerHTML={{ __html }} />;
 };

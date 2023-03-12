@@ -2,7 +2,7 @@ import type { Variants } from 'framer-motion';
 
 export const vars: Variants = {
   initial: {
-    y: 40,
+    y: 60,
     opacity: 0,
   },
   animate: {
@@ -10,7 +10,11 @@ export const vars: Variants = {
     opacity: 1,
   },
   exit: {
-    y: 40,
+    y: 60,
+    opacity: 0,
+  },
+  mirror: {
+    y: -60,
     opacity: 0,
   },
 };

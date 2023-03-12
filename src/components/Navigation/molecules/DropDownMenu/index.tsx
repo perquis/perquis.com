@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import FocusLock from 'react-focus-lock';
 
@@ -20,6 +21,11 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
   const { asPath, push, locale } = useRouter();
   const { data: session } = useSession();
 
+  const { t } = useTranslation('home');
+  const signOutText = t('user-profile.sign-out'),
+    signInText = t('user-profile.sign-in'),
+    changeLocationText = t('user-profile.change-location');
+
   return (
     <AnimatePresence>
       {isActive && (
@@ -32,20 +38,20 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
               </div>
             ) : null}
             <Button isSecondary onClick={() => push(asPath, asPath, { locale: locale === 'en' ? 'pl' : 'en' })}>
-              Change Language to{' '}
+              {changeLocationText}{' '}
               {languages
                 .filter((lng) => lng !== locale)
                 .map((lng) => (
-                  <b key={lng}>{lng}</b>
+                  <b key={lng}>{lng === 'en' ? 'angielski' : 'polish'}</b>
                 ))}
             </Button>
             {session ? (
               <Button isSecondary onClick={() => signOut()}>
-                Log Out
+                {signOutText}
               </Button>
             ) : (
               <Button isSecondary onClick={() => signIn('github')}>
-                Sign In
+                {signInText}
               </Button>
             )}
           </FocusLock>

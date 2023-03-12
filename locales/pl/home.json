@@ -1,0 +1,19 @@
+{
+  "meta-title": "Programowanie z pasją - artykuły o frontendzie, backendzie i nie tylko",
+  "meta-description": "Szukasz wiarygodnego źródła informacji na temat programowania i web developmentu? Zapraszamy na naszą stronę, gdzie znajdziesz artykuły o frontendzie, backendzie i innych tematach programowania.",
+  "about-me": {
+    "title": "O mnie",
+    "description": "Nazywam się Damian i mam 23 lata. Kocham uczyć się nowych rzeczy. Jestem ciekawy poznawania nowe frameworki i biblioteki, które zostały stowrzone przez języki programowania. Mam nadzieję, że moje artykuły będą dla Ciebie pomocne i przydatne."
+  },
+  "posts-list": {
+    "title": "Mój Blog",
+    "description": "O frontendzie, backendzie i programowaniu.",
+    "search-placeholder": "Szukaj",
+    "technologies": "Technologie"
+  },
+  "user-profile": {
+    "sign-in": "Zaloguj się",
+    "sign-out": "Wyloguj się",
+    "change-location": "Zmień język na"
+  }
+}

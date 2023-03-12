@@ -1,13 +1,16 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './AboutMe.module.scss';
 
 export const AboutMe = () => {
+  const { t } = useTranslation('home');
+  const title = t('about-me.title'),
+    description = t('about-me.description');
+
   return (
     <div className={styles.wrapper}>
-      <b>About Me</b>
-      <p>
-        My name is <b>Damian</b> and I&apos;m 23. I love learning new things. I&apos;m curious <b>about all frameworks and libraries</b> created by languages of programming. I hope
-        my articles will be <b>helpful for you</b>.
-      </p>
+      <b>{title}</b>
+      <p>{description}</p>
     </div>
   );
 };

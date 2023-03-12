@@ -1,4 +1,5 @@
 import { signIn, useSession } from 'next-auth/react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { Button } from '@components/global/atoms/Button';
 import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
@@ -8,13 +9,15 @@ import styles from './AuthenticationScope.module.scss';
 
 export const AuthenticationScope = () => {
   const { data: session } = useSession();
+  const { t } = useTranslation('home');
+  const text = t('user-profile.sign-in');
 
   return session ? (
     <UserProfile session={session} />
   ) : (
     <div className={styles.wrapper}>
       <ChangeLocales />
-      <Button onClick={() => signIn('github')}>Log in</Button>
+      <Button onClick={() => signIn('github')}>{text}</Button>
     </div>
   );
 };
