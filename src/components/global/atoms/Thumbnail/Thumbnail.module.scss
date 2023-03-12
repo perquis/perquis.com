@@ -1,0 +1,13 @@
+@import './src/styles/_breakpoints.scss';
+
+.image-hero {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding-top: 56.25%;
+  border-radius: 0.8rem 0.8rem 0 0;
+
+  @media screen and (max-width: $sm) {
+    border-radius: 1.2rem;
+  }
+}

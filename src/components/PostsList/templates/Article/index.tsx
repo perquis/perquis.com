@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import type { FC, KeyboardEvent } from 'react';
 
-import { Thumbnail } from '@components/Author/atoms/Thumbnail';
 import { StyledLink } from '@components/global/atoms/StyledLink';
+import { Thumbnail } from '@components/global/atoms/Thumbnail';
 import { Details } from '@components/PostsList/organisms/Details';
 
 import styles from './Article.module.scss';
