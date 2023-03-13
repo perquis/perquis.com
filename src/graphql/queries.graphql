@@ -1,0 +1,27 @@
+query GetArticlesList {
+  articles: schemaArticles {
+    slug
+    title
+    tags
+    locale
+    introduction
+    content
+    createdAt
+    updatedAt
+    comments {
+      id
+      nickname
+      avatar
+      content
+      edges {
+        id
+        nickname
+        avatar
+        content
+      }
+    }
+    thumbnail {
+      url
+    }
+  }
+}

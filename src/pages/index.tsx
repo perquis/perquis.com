@@ -5,6 +5,8 @@ import type { FC } from 'react';
 
 import { HomePage } from '@pages/HomePage';
 
+import { fetchTechnologiesList } from '@graphql/queries/getTechnologiesListValues';
+
 export interface IHomeProps {
   technologies: string[];
 }
@@ -26,8 +28,8 @@ const Home: FC<IHomeProps> = ({ technologies }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetch(`${process.env.HOST}/api/technologies`);
-  const technologies = await data.json();
+  const technologiesList = await fetchTechnologiesList();
+  const technologies = technologiesList.map(({ name }) => name);
 
   return {
     props: { technologies },

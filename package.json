@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate": "graphql-codegen",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.10",
     "@floating-ui/react": "^0.20.1",
     "@rooks/use-key": "^4.11.2",
     "@rooks/use-outside-click": "^4.11.2",
@@ -20,7 +22,6 @@
     "eslint-config-next": "13.2.1",
     "framer-motion": "^10.0.0",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.2.0",
     "gray-matter": "^4.0.3",
     "next": "13.2.1",
     "next-auth": "^4.19.2",
@@ -43,9 +44,15 @@
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",
     "sass": "^1.58.3",
+    "sharp": "^0.31.3",
     "zustand": "^4.3.6"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.2",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
+    "@graphql-codegen/typescript": "^3.0.2",
+    "@graphql-codegen/typescript-operations": "^3.0.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",
@@ -56,6 +63,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-webpack-plugin": "^4.0.0",
+    "graphql-codegen-apollo-next-ssr": "^1.7.4",
     "next-translate-plugin": "^2.0.2",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5",
