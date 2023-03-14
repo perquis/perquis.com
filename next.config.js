@@ -7,7 +7,7 @@ const nextConfig = () => {
   return nextTranslate({
     reactStrictMode: true,
     images: {
-      domains: ['avatars.githubusercontent.com'],
+      domains: ['avatars.githubusercontent.com', 'media.graphassets.com'],
     },
     i18n: {
       locales: ['en', 'pl'],

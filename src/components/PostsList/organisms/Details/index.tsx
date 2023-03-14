@@ -1,20 +1,27 @@
+import { useRouter } from 'next/router';
+import type { FC } from 'react';
+
 import { Paragraph } from '@components/PostsList/atoms/Paragraph';
 import { Tag } from '@components/PostsList/atoms/Tag';
 import { DateAndTitle } from '@components/PostsList/molecules/DateAndTitle';
 import { TagsList } from '@components/PostsList/molecules/TagsLits';
 
+import type { PickedDetailsProps } from '@stories/articles';
+
+import { Locale } from '@graphql/databases/client';
+
+import { toLocaleDateString } from '@utils/toLocaleDateString';
+
 import styles from './Details.module.scss';
 
-const tags = ['javascript', 'tutorial'];
+export const Details: FC<Record<'details', PickedDetailsProps>> = ({ details: { slug, tags, title, published, introduction } }) => {
+  const { locale } = useRouter();
+  const isSetLocale = locale === 'en' ? Locale.En : Locale.Pl;
 
-export const Details = () => {
   return (
     <div className={styles.details}>
-      <DateAndTitle details={{ date: '14 March, 2022', title: 'What is JavaScript', href: '/' }} />
-      <Paragraph>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia possimus facilis culpa. Eum rerum, assumenda adipisci eligendi tempore impedit labore porro velit nemo
-        totam atque qui dolor in dolores saepe.
-      </Paragraph>
+      <DateAndTitle details={{ date: toLocaleDateString(published, isSetLocale), title, href: `/articles/${slug}` }} />
+      <Paragraph>{introduction}</Paragraph>
       <TagsList>
         {tags.map((tag) => (
           <Tag key={tag}>{tag}</Tag>

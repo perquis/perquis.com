@@ -1,11 +1,11 @@
-interface TechnologiesQuery {
+interface EnumQueryType {
   __type: Type;
 }
 
 interface Type {
-  enumValues: EnumValue[];
+  enumValues: EnumValues[];
 }
 
-interface EnumValue {
+interface EnumValues {
   name: string;
 }

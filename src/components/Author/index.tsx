@@ -1,5 +1,5 @@
-import { AboutMe } from './molecules/AboutMe';
-import { HeroHeader } from './templates/HeroHeader';
+import { AboutMe } from '@components/Author/molecules/AboutMe';
+import { HeroHeader } from '@components/Author/templates/HeroHeader';
 
 const Author = () => {
   return (

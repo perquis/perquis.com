@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.10",
     "@floating-ui/react": "^0.20.1",
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "@rooks/use-key": "^4.11.2",
     "@rooks/use-outside-click": "^4.11.2",
     "@rooks/use-window-size": "^4.6.0",
@@ -53,6 +54,7 @@
     "@graphql-codegen/typescript": "^3.0.2",
     "@graphql-codegen/typescript-operations": "^3.0.2",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@graphql-codegen/typescript-react-query": "^4.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",

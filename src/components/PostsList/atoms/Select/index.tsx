@@ -2,8 +2,7 @@ import type { ExtendedRefs, ReferenceType } from '@floating-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import type { FC, HTMLProps } from 'react';
 import { TiFilter } from 'react-icons/ti';
-
-import { useTechnologiesStore } from '@store/technologies';
+import { useTechnologiesStore } from 'src/stories/technologies';
 
 import styles from './Select.module.scss';
 

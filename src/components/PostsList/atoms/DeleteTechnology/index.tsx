@@ -1,7 +1,6 @@
 import type { Children, FC } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-
-import { useTechnologiesStore } from '@store/technologies';
+import { useTechnologiesStore } from 'src/stories/technologies';
 
 import styles from './DeleteTechnology.module.scss';
 

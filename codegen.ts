@@ -5,25 +5,29 @@ loadEnvConfig(process.cwd());
 
 const config: CodegenConfig = {
   schema: process.env.SCHEMA_PATH,
-  documents: ['src/graphql/*.graphql'],
+  documents: ['src/graphql/schemas/*.graphql'],
   generates: {
-    './src/graphql/lib/next.tsx': {
+    './src/graphql/databases/server.tsx': {
       plugins: ['graphql-codegen-apollo-next-ssr'],
       presetConfig: {
-        typesPath: './graphql',
+        typesPath: './client',
       },
       config: {
         reactApolloVersion: 3,
         documentMode: 'external',
-        importDocumentNodeExternallyFrom: './graphql',
-        apolloClientInstanceImport: '../apolloClient',
+        importDocumentNodeExternallyFrom: './client',
       },
     },
-    './src/graphql/lib/index.tsx': {
+    './src/graphql/databases/client.tsx': {
       plugins: ['@graphql-codegen/typescript', '@graphql-codegen/typescript-operations', '@graphql-codegen/typescript-react-apollo'],
       config: {
         immutableTypes: true,
         useTypeImports: true,
+        scalars: {
+          Date: 'Date',
+          DateTime: 'Date',
+          Json: '{ [key: string]: any }',
+        },
       },
     },
   },

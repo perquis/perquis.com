@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { useRef } from 'react';
 import type { MutableRefObject } from 'react';
-import { useBlurStore } from 'src/stores/blur';
+import { useBlurStore } from 'src/stories/blur';
 
 import { DropDownMenu } from '@components/Navigation/molecules/DropDownMenu';
 

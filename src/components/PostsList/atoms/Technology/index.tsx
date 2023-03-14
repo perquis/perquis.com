@@ -1,7 +1,6 @@
 import type { Children, FC } from 'react';
 import { IoMdCheckmark } from 'react-icons/io';
-
-import { useTechnologiesStore } from '@store/technologies';
+import { useTechnologiesStore } from 'src/stories/technologies';
 
 import styles from './Technology.module.scss';
 

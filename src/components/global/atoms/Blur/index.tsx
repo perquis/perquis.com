@@ -1,5 +1,5 @@
 import useKey from '@rooks/use-key';
-import { useBlurStore } from 'src/stores/blur';
+import { useBlurStore } from 'src/stories/blur';
 
 import styles from './Blur.module.scss';
 

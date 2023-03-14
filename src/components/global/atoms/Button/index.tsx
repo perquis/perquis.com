@@ -12,7 +12,6 @@ type ButtonProps = Children & Props & Omit<ComponentAttributes, 'className'>;
 
 export const Button: FC<ButtonProps> = (props) => {
   const { children, isSecondary, ...rest } = props;
-
   const className = isSecondary ? `${styles.button} ${styles.secondary}` : `${styles.button} ${styles.interactions}`;
 
   return (

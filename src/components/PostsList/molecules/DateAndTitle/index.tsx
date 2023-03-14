@@ -2,11 +2,13 @@ import type { FC } from 'react';
 
 import { StyledLink } from '@components/global/atoms/StyledLink';
 
+import type { Maybe } from '@graphql/databases/client';
+
 import styles from './DateAndTitle.module.scss';
 
 interface IDateAndTitle {
   date: string;
-  title: string;
+  title: Maybe<string>;
   href: string;
 }
 

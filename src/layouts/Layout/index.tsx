@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import type { Children, FC } from 'react';
-import { useBlurStore } from 'src/stores/blur';
+import { useBlurStore } from 'src/stories/blur';
 
 import { Blur } from '@components/global/atoms/Blur';
 import { Footer } from '@components/global/atoms/Footer';

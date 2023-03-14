@@ -2,12 +2,11 @@ import type { ExtendedRefs, ReferenceType } from '@floating-ui/react';
 import { motion } from 'framer-motion';
 import type { FC, HTMLProps } from 'react';
 import FocusLock from 'react-focus-lock';
+import { useTechnologiesStore } from 'src/stories/technologies';
 
 import { Technology } from '@components/PostsList/atoms/Technology';
 
 import { vars } from '@animations/pop-up';
-
-import { useTechnologiesStore } from '@store/technologies';
 
 import styles from './SelectOptions.module.scss';
 

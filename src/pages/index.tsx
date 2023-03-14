@@ -1,3 +1,6 @@
+// @ts-ignore
+import type { IHomePageProps } from '@types/pages';
+
 import type { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -5,13 +8,22 @@ import type { FC } from 'react';
 
 import { HomePage } from '@pages/HomePage';
 
-import { fetchTechnologiesList } from '@graphql/queries/getTechnologiesListValues';
+import { Locale } from '@graphql/databases/client';
+import { fetchArticlesListWithPages } from '@graphql/libraries/getArticlesListWithPages';
+import { fetchTechnologiesList } from '@graphql/libraries/getTechnologiesListValues';
 
-export interface IHomeProps {
-  technologies: string[];
-}
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const isEnglish = locale === 'en' ? [Locale.En] : [Locale.Pl];
 
-const Home: FC<IHomeProps> = ({ technologies }) => {
+  const technologies = await fetchTechnologiesList();
+  const articles = await fetchArticlesListWithPages({ isEnglish });
+
+  return {
+    props: { technologies, articles },
+  };
+};
+
+const Home: FC<IHomePageProps> = (stories) => {
   const { t } = useTranslation('home');
   const title = t('meta-title'),
     description = t('meta-description');
@@ -22,18 +34,9 @@ const Home: FC<IHomeProps> = ({ technologies }) => {
         <title>{title + ` | PerQuis&apos;s Blog`}</title>
         <meta name="description" content={description} />
       </Head>
-      <HomePage technologies={technologies} />
+      <HomePage stories={stories} />
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const technologiesList = await fetchTechnologiesList();
-  const technologies = technologiesList.map(({ name }) => name);
-
-  return {
-    props: { technologies },
-  };
 };
 
 export default Home;

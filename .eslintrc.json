@@ -28,6 +28,7 @@
     "camelcase": ["warn", { "properties": "always" }],
     "import/no-anonymous-default-export": "off",
 
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-require-imports": "off",
     "@typescript-eslint/prefer-enum-initializers": "warn",
@@ -47,11 +48,14 @@
         "importOrderCaseInsensitive": true,
         "importOrderGroupNamespaceSpecifiers": true,
         "importOrder": [
+          "^@types/(.*)$",
           "<THIRD_PARTY_MODULES>",
           "^@pages/(.*)$",
           "^@components/(.*)$",
           "^@animations/(.*)$",
+          "^@libraries/(.*)$",
           "^@providers/(.*)$",
+          "^@stories/(.*)$",
           "^@graphql/(.*)$",
           "^@layouts/(.*)$",
           "^@queries/(.*)$",
@@ -59,11 +63,9 @@
           "^@styles/(.*)$",
           "^@fonts/(.*)$",
           "^@icons/(.*)$",
-          "^@store/(.*)$",
           "^@hooks/(.*)$",
           "^@utils/(.*)$",
           "^@data/(.*)$",
-          "^@lib/(.*)$",
           "^[./]"
         ]
       }
