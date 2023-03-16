@@ -1,0 +1,9 @@
+@import './src/styles/_breakpoints.scss';
+
+.loader {
+  padding: 2rem;
+
+  @media screen and (max-width: $sm) {
+    padding: 2rem 0 0 0;
+  }
+}

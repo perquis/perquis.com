@@ -1,44 +1,29 @@
-import useTranslation from 'next-translate/useTranslation';
-import { useTechnologiesStore } from 'src/stories/technologies';
-
-import { SmallTitle } from '@components/PostsList/atoms/SmallTitle';
+import { InfiniteScroll } from '@components/PostsList/atoms/InfiniteScroll';
+import { Heading } from '@components/PostsList/molecules/Heading';
+import { ChosenTags } from '@components/PostsList/organisms/ChosenTags';
+import { IsLoading } from '@components/PostsList/organisms/IsLoading';
+import styles from '@components/PostsList/styles/PostsList.module.scss';
+import { Article } from '@components/PostsList/templates/Article';
+import { SearchBar } from '@components/PostsList/templates/SearchBar';
 
 import { useArticlesStore } from '@stories/articles';
 
-import { DeleteTechnology } from './atoms/DeleteTechnology';
-import { InfiniteScroll } from './atoms/InfiniteScroll';
-import { TagsList } from './molecules/TagsLits';
-import styles from './styles/PostsList.module.scss';
-import { Article } from './templates/Article';
-import { SearchBar } from './templates/SearchBar';
+import { isNotFourteenDaysAgo } from '@utils/isNotFourteenDaysAgo';
 
 const PostsList = () => {
-  const { t } = useTranslation('home');
-  const title = t('posts-list.title'),
-    description = t('posts-list.description');
-
   const [articles] = useArticlesStore((state) => [state.articles]);
-  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
 
   return (
     <div className={styles.posts}>
-      <div className={styles.heading}>
-        <SmallTitle>{title}</SmallTitle>
-        <p>{description}</p>
-      </div>
+      <Heading />
       <SearchBar />
-      {technologies.length > 0 ? (
-        <TagsList>
-          {technologies.map((tchnlg) => (
-            <DeleteTechnology key={tchnlg}>{tchnlg}</DeleteTechnology>
-          ))}
-        </TagsList>
-      ) : null}
+      <ChosenTags />
       <InfiniteScroll>
         {articles.map((article, i) => (
-          <Article key={i} article={article} />
+          <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.published)} />
         ))}
       </InfiniteScroll>
+      <IsLoading />
     </div>
   );
 };

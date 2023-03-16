@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import type { FC, KeyboardEvent } from 'react';
 
-import { StyledLink } from '@components/global/atoms/StyledLink';
-import { Thumbnail } from '@components/global/atoms/Thumbnail';
-import { Details } from '@components/PostsList/organisms/Details';
+import { Loader } from '@components/PostsList/molecules/Loader';
+import { ArticleContent } from '@components/PostsList/organisms/ArticleContent';
 
 import type { PickedArticleProps } from '@stories/articles';
 
@@ -11,19 +10,20 @@ import styles from './Article.module.scss';
 
 type IArticleProps = {
   isNewArticle?: boolean;
+  isLoadingAnimation?: boolean;
 } & Record<'article', PickedArticleProps>;
 
-export const Article: FC<IArticleProps> = ({ article, isNewArticle }) => {
+export const Article: FC<IArticleProps> = ({ article, isNewArticle, isLoadingAnimation }) => {
   const { push } = useRouter();
-  const { slug, thumbnail } = article;
-  const comeInArticle = (e: KeyboardEvent<HTMLElement>) => e.key === 'Enter' && push(`/articles/${article.slug}`);
+  const changeRoute = () => push(`/articles/${article.slug}`);
+  const handlePushingArticlesSlug = (e: KeyboardEvent<HTMLElement>) => e.key === 'Enter' && changeRoute();
+
+  const isNewArticleCondition = isNewArticle ? styles['new-article'] : '';
+  const className = `${styles.article} ${isNewArticleCondition}`;
 
   return (
-    <article className={`${styles.article} ${isNewArticle ? styles['new-article'] : ''}`} tabIndex={0} role="button" onKeyDown={comeInArticle}>
-      <StyledLink href={`/articles/${slug}`}>
-        <Thumbnail src={thumbnail?.url ?? ''} alt={slug ?? ''} />
-      </StyledLink>
-      <Details details={{ ...article }} />
+    <article className={className} onKeyDown={handlePushingArticlesSlug} onTouchEnd={changeRoute} role="button" tabIndex={0}>
+      {isLoadingAnimation ? <Loader /> : <ArticleContent article={article} />}
     </article>
   );
 };
