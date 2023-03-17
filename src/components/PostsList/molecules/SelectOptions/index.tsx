@@ -17,21 +17,21 @@ interface ISelectOptions {
 }
 
 export const SelectOptions: FC<Record<'options', ISelectOptions>> = ({ options: { y, refs, getFloatingProps } }) => {
-  const [compareTechnologies, technologies] = useTechnologiesStore((state) => [state.technologies, state.getAllTechnologiesList]);
   const top = y ?? 0;
   const positionCond = top > 0;
+  const [compareTechnologies, technologies] = useTechnologiesStore((state) => [state.technologies, state.getAllTechnologiesList]);
 
   return (
     <FocusLock>
       <motion.div
+        style={{ top }}
+        variants={vars}
+        animate="animate"
         ref={refs.setFloating}
         {...getFloatingProps()}
-        style={{ top }}
         className={styles['pop-up']}
-        variants={vars}
-        initial={positionCond ? 'initial' : 'mirror'}
-        animate="animate"
         exit={positionCond ? 'exit' : 'mirror'}
+        initial={positionCond ? 'initial' : 'mirror'}
       >
         {technologies.map((technology) => (
           <Technology key={technology} isSelected={compareTechnologies.includes(technology)}>

@@ -9,7 +9,7 @@ interface Props {
   skip?: number;
 }
 
-export const fetchArticlesListWithPages = async ({ isEnglish, first = 4, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
+export const fetchArticlesListWithPages = async ({ isEnglish, first = 3, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
   const {
     props: {
       data: {

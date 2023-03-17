@@ -7,11 +7,21 @@ import { Article } from '@components/PostsList/templates/Article';
 import { SearchBar } from '@components/PostsList/templates/SearchBar';
 
 import { useArticlesStore } from '@stories/articles';
+import { useTechnologiesStore } from '@stories/technologies';
 
 import { isNotFourteenDaysAgo } from '@utils/isNotFourteenDaysAgo';
 
 const PostsList = () => {
-  const [articles] = useArticlesStore((state) => [state.articles]);
+  const [articles, searchedForArticlesList] = useArticlesStore((state) => [state.articles, state.searchedForArticlesList]);
+  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
+  const filteredArticles =
+    searchedForArticlesList.length > 0 ? (
+      <>
+        {searchedForArticlesList.map((article, i) => (
+          <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.createdAt)} />
+        ))}
+      </>
+    ) : null;
 
   return (
     <div className={styles.posts}>
@@ -19,9 +29,7 @@ const PostsList = () => {
       <SearchBar />
       <ChosenTags />
       <InfiniteScroll>
-        {articles.map((article, i) => (
-          <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.createdAt)} />
-        ))}
+        {technologies.length > 0 ? filteredArticles : articles.map((article, i) => <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.createdAt)} />)}
       </InfiniteScroll>
       <IsLoading />
     </div>
