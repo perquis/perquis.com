@@ -10,6 +10,6 @@ export const isNotFourteenDaysAgo = (dateString: Maybe<Date> | Date | string): b
   // Calculate the number of days based on the time difference
   const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
 
-  // Return true if not more than 30 days have passed, false otherwise
-  return daysDiff < 30;
+  // Return true if not more than 14 days have passed, false otherwise
+  return daysDiff <= 14;
 };

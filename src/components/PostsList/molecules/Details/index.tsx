@@ -14,13 +14,13 @@ import { toLocaleDateString } from '@utils/toLocaleDateString';
 
 import styles from './Details.module.scss';
 
-export const Details: FC<Record<'details', PickedDetailsProps>> = ({ details: { slug, tags, title, published, introduction } }) => {
+export const Details: FC<Record<'details', PickedDetailsProps>> = ({ details: { slug, tags, title, createdAt, introduction } }) => {
   const { locale } = useRouter();
   const isSetLocale = locale === 'en' ? Locale.En : Locale.Pl;
 
   return (
     <div className={styles.details}>
-      <DateAndTitle details={{ date: toLocaleDateString(published, isSetLocale), title, href: `/articles/${slug}` }} />
+      <DateAndTitle details={{ date: toLocaleDateString(createdAt, isSetLocale), title, href: `/articles/${slug}` }} />
       <Paragraph>{introduction}</Paragraph>
       <TagsList>
         {tags.map((tag) => (

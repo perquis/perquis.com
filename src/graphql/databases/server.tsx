@@ -8,11 +8,11 @@ import type React from 'react';
 
 import * as Operations from './client';
 
-export async function getServerPageArticlesList(
-  options: Omit<Apollo.QueryOptions<Operations.ArticlesListQueryVariables>, 'query'>,
+export async function getServerPageSearchForArticlesList(
+  options: Omit<Apollo.QueryOptions<Operations.SearchForArticlesListQueryVariables>, 'query'>,
   apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
 ) {
-  const data = await apolloClient.query<Operations.ArticlesListQuery>({ ...options, query: Operations.ArticlesListDocument });
+  const data = await apolloClient.query<Operations.SearchForArticlesListQuery>({ ...options, query: Operations.SearchForArticlesListDocument });
 
   const apolloState = apolloClient.cache.extract();
 
@@ -24,19 +24,79 @@ export async function getServerPageArticlesList(
     },
   };
 }
-export type PageArticlesListComp = React.FC<{ data?: Operations.ArticlesListQuery; error?: Apollo.ApolloError }>;
-export const withPageArticlesList =
-  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.ArticlesListQuery, Operations.ArticlesListQueryVariables>) =>
-  (WrappedComponent: PageArticlesListComp): NextPage =>
+export type PageSearchForArticlesListComp = React.FC<{ data?: Operations.SearchForArticlesListQuery; error?: Apollo.ApolloError }>;
+export const withPageSearchForArticlesList =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.SearchForArticlesListQuery, Operations.SearchForArticlesListQueryVariables>) =>
+  (WrappedComponent: PageSearchForArticlesListComp): NextPage =>
   (props) => {
     const router = useRouter();
     const options = optionsFunc ? optionsFunc(router) : {};
-    const { data, error } = useQuery(Operations.ArticlesListDocument, options);
+    const { data, error } = useQuery(Operations.SearchForArticlesListDocument, options);
     return <WrappedComponent {...props} data={data} error={error} />;
   };
-export const ssrArticlesList = {
-  getServerPage: getServerPageArticlesList,
-  withPage: withPageArticlesList,
+export const ssrSearchForArticlesList = {
+  getServerPage: getServerPageSearchForArticlesList,
+  withPage: withPageSearchForArticlesList,
+};
+export async function getServerPageSearchForArticlesListByTags(
+  options: Omit<Apollo.QueryOptions<Operations.SearchForArticlesListByTagsQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.SearchForArticlesListByTagsQuery>({ ...options, query: Operations.SearchForArticlesListByTagsDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageSearchForArticlesListByTagsComp = React.FC<{ data?: Operations.SearchForArticlesListByTagsQuery; error?: Apollo.ApolloError }>;
+export const withPageSearchForArticlesListByTags =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.SearchForArticlesListByTagsQuery, Operations.SearchForArticlesListByTagsQueryVariables>) =>
+  (WrappedComponent: PageSearchForArticlesListByTagsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.SearchForArticlesListByTagsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrSearchForArticlesListByTags = {
+  getServerPage: getServerPageSearchForArticlesListByTags,
+  withPage: withPageSearchForArticlesListByTags,
+};
+export async function getServerPageSearchForArticlesListWithTags(
+  options: Omit<Apollo.QueryOptions<Operations.SearchForArticlesListWithTagsQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.SearchForArticlesListWithTagsQuery>({ ...options, query: Operations.SearchForArticlesListWithTagsDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageSearchForArticlesListWithTagsComp = React.FC<{ data?: Operations.SearchForArticlesListWithTagsQuery; error?: Apollo.ApolloError }>;
+export const withPageSearchForArticlesListWithTags =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.SearchForArticlesListWithTagsQuery, Operations.SearchForArticlesListWithTagsQueryVariables>) =>
+  (WrappedComponent: PageSearchForArticlesListWithTagsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.SearchForArticlesListWithTagsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrSearchForArticlesListWithTags = {
+  getServerPage: getServerPageSearchForArticlesListWithTags,
+  withPage: withPageSearchForArticlesListWithTags,
 };
 export async function getServerPageArticlesListWiths(
   options: Omit<Apollo.QueryOptions<Operations.ArticlesListWithPagesQueryVariables>, 'query'>,
@@ -67,4 +127,34 @@ export const withPageArticlesListWiths =
 export const ssrArticlesListWiths = {
   getServerPage: getServerPageArticlesListWiths,
   withPage: withPageArticlesListWiths,
+};
+export async function getServerPageArticlesList(
+  options: Omit<Apollo.QueryOptions<Operations.ArticlesListQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.ArticlesListQuery>({ ...options, query: Operations.ArticlesListDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageArticlesListComp = React.FC<{ data?: Operations.ArticlesListQuery; error?: Apollo.ApolloError }>;
+export const withPageArticlesList =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.ArticlesListQuery, Operations.ArticlesListQueryVariables>) =>
+  (WrappedComponent: PageArticlesListComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.ArticlesListDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrArticlesList = {
+  getServerPage: getServerPageArticlesList,
+  withPage: withPageArticlesList,
 };

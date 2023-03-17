@@ -7,7 +7,9 @@ import { useArticlesStore } from '@stories/articles';
 
 export const InfiniteScroll: FC<Children> = ({ children }) => {
   const { locale } = useRouter();
-  const [isLoading, hasNextPage, updateHasNextPage, addArticlesToList, updateIsLoading] = useArticlesStore((state) => [
+  const [page, setPage] = useState(1);
+  const [pageSize, isLoading, hasNextPage, updateHasNextPage, addArticlesToList, updateIsLoading] = useArticlesStore((state) => [
+    state.pageSize,
     state.isLoading,
     state.hasNextPage,
     state.updateHasNextPage,
@@ -26,25 +28,30 @@ export const InfiniteScroll: FC<Children> = ({ children }) => {
   });
 
   // The hasNextPage value is reset to its initial state when changing the locale.
-  useEffect(() => updateHasNextPage(true), [locale, updateHasNextPage]);
+  useEffect(() => {
+    setPage(1);
+    updateHasNextPage(true);
+  }, [locale, updateHasNextPage]);
 
   useEffect(() => {
     if (wasScrolledToDeterminedPosition && hasNextPage && !isLoading) {
       // set isLoading to true while fetching data
       updateIsLoading(true);
 
-      fetch(`/api/articles?locale=${locale}&skip=2`)
+      fetch(`/api/articles?locale=${locale}&first=${pageSize}&skip=${pageSize * page}`)
         .then((res) => res.json())
         .then((res) => {
           // When the data from the API is fetched, the isLoading value changes to false.
           updateIsLoading(false);
+
+          setPage(page + 1);
 
           // When there are no more data to fetch from the API, the hasNextPage value changes to false.
           if (!res.hasNextPage) updateHasNextPage(false);
           addArticlesToList(res.articles);
         });
     }
-  }, [locale, isLoading, hasNextPage, wasScrolledToDeterminedPosition, addArticlesToList, updateHasNextPage, updateIsLoading]);
+  }, [locale, page, pageSize, isLoading, hasNextPage, wasScrolledToDeterminedPosition, addArticlesToList, updateHasNextPage, updateIsLoading]);
 
   return <>{children}</>;
 };

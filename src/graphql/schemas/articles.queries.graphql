@@ -1,3 +1,68 @@
+query SearchForArticlesList($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput) {
+  schemaArticles(where: { _search: $search }, locales: $locales, orderBy: $orderBy) {
+    id
+    slug
+    tags
+    title
+    createdAt
+    introduction
+    thumbnail {
+      url
+    }
+  }
+}
+
+query SearchForArticlesListByTags($locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
+  schemaArticles(where: { tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
+    id
+    slug
+    tags
+    title
+    createdAt
+    introduction
+    thumbnail {
+      url
+    }
+  }
+}
+
+query SearchForArticlesListWithTags($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
+  schemaArticles(where: { _search: $search, tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
+    id
+    slug
+    tags
+    title
+    createdAt
+    introduction
+    thumbnail {
+      url
+    }
+  }
+}
+
+query ArticlesListWithPages($locales: [Locale!]!, $first: Int, $skip: Int, $orderBy: ArticlesOrderByInput) {
+  page: schemaArticlesConnection(locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
+    edges {
+      node {
+        id
+        slug
+        tags
+        title
+        createdAt
+        introduction
+        thumbnail {
+          url
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
+  }
+}
+
 query ArticlesList($locales: [Locale!]!, $lng: Languages) {
   page: schemaArticlesConnection(locales: $locales) {
     edges {
@@ -11,10 +76,8 @@ query ArticlesList($locales: [Locale!]!, $lng: Languages) {
         introduction
         tags
         id
-        published
         slug
         title
-        updatedAt
         content
         comments(where: { languages: $lng }) {
           id
@@ -34,29 +97,6 @@ query ArticlesList($locales: [Locale!]!, $lng: Languages) {
           link
         }
       }
-    }
-  }
-}
-
-query ArticlesListWithPages($locales: [Locale!]!, $first: Int, $skip: Int, $orderBy: ArticlesOrderByInput) {
-  page: schemaArticlesConnection(locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
-    edges {
-      node {
-        id
-        slug
-        tags
-        title
-        published
-        introduction
-        thumbnail {
-          url
-        }
-      }
-    }
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      pageSize
     }
   }
 }

@@ -20,7 +20,7 @@ const PostsList = () => {
       <ChosenTags />
       <InfiniteScroll>
         {articles.map((article, i) => (
-          <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.published)} />
+          <Article key={i} article={article} isNewArticle={isNotFourteenDaysAgo(article.createdAt)} />
         ))}
       </InfiniteScroll>
       <IsLoading />

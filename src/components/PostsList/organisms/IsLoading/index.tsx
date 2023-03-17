@@ -3,11 +3,11 @@ import { Article } from '@components/PostsList/templates/Article';
 import { useArticlesStore } from '@stories/articles';
 import type { PickedArticleProps } from '@stories/articles';
 
-const loaders = new Array(6).fill(null).map((_, i) => i);
-
 export const IsLoading = () => {
-  const [isLoading] = useArticlesStore((state) => [state.isLoading]);
+  const [pageSize, isLoading] = useArticlesStore((state) => [state.pageSize, state.isLoading]);
   if (!isLoading) return null;
+
+  const loaders = new Array(pageSize).fill(null).map((_, i) => i);
 
   return (
     <>

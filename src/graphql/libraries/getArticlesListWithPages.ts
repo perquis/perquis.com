@@ -9,13 +9,13 @@ interface Props {
   skip?: number;
 }
 
-export const fetchArticlesListWithPages = async ({ isEnglish, first = 2, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
+export const fetchArticlesListWithPages = async ({ isEnglish, first = 4, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
   const {
     props: {
       data: {
         page: { edges, pageInfo },
       },
     },
-  } = await getServerPageArticlesListWiths({ variables: { locales: isEnglish, first, skip, orderBy: ArticlesOrderByInput.PublishedDesc } }, client);
+  } = await getServerPageArticlesListWiths({ variables: { locales: isEnglish, first, skip, orderBy: ArticlesOrderByInput.CreatedAtDesc } }, client);
   return { edges: edges.map(({ node }) => ({ ...node })) as Articles[], pageInfo };
 };
