@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 
+import { Thumbnail } from '@GlobalComponents/atoms/Thumbnail';
+import type { IThumbnail } from '@GlobalComponents/atoms/Thumbnail';
+
 import { LabeledUser } from '@components/Author/organisms/LabeledUser';
-import type { IThumbnail } from '@components/global/atoms/Thumbnail';
-import { Thumbnail } from '@components/global/atoms/Thumbnail';
 
 import styles from './HeroHeader.module.scss';
 

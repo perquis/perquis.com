@@ -1,7 +1,8 @@
 import { signIn, useSession } from 'next-auth/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { Button } from '@components/global/atoms/Button';
+import { Button } from '@GlobalComponents/atoms/Button';
+
 import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
 import { UserProfile } from '@components/Navigation/molecules/UserProfile';
 

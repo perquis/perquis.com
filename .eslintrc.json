@@ -51,6 +51,7 @@
           "^@types/(.*)$",
           "<THIRD_PARTY_MODULES>",
           "^@pages/(.*)$",
+          "^@GlobalComponents/(.*)$",
           "^@components/(.*)$",
           "^@animations/(.*)$",
           "^@libraries/(.*)$",

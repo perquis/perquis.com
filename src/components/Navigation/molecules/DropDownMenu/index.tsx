@@ -4,7 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import FocusLock from 'react-focus-lock';
 
-import { Button } from '@components/global/atoms/Button';
+import { Button } from '@GlobalComponents/atoms/Button';
+
 import { SmallAvatar } from '@components/Navigation/atoms/SmallAvatar';
 
 import { vars } from '@animations/pop-up';

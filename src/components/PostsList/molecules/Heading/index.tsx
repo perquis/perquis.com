@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import { SmallTitle } from '@components/PostsList/atoms/SmallTitle';
+import { SmallTitle } from '@GlobalComponents/atoms/SmallTitle';
 
 import styles from './Heading.module.scss';
 

@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import type { FC } from 'react';
 
-import { HomePage } from '@pages/HomePage';
+import { HomePage } from '@GlobalComponents/pages/HomePage';
 
 import { Locale } from '@graphql/databases/client';
 import { fetchArticlesListWithPages } from '@graphql/libraries/getArticlesListWithPages';

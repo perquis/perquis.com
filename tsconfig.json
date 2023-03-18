@@ -18,6 +18,7 @@
     "typeRoots": ["./node_modules/@types", "./@types"],
     "paths": {
       "@pages/*": ["./src/components/global/pages/*"],
+      "@GlobalComponents/*": ["./src/components/GlobalComponents/*"],
       "@components/*": ["./src/components/*"],
       "@animations/*": ["./src/animations/*"],
       "@providers/*": ["./src/providers/*"],
