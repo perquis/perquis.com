@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@graphql/apollo/apolloClient';
@@ -20,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
       } = await getServerPageSearchForArticlesList({ variables: { search: search as string, locales: isEnglish, orderBy: ArticlesOrderByInput.CreatedAtDesc } }, client);
 
-      return res.send(schemaArticles);
+      return search!.length > 3 ? res.send(schemaArticles) : res.send([]);
     }
 
     if (type === 'tags' && typeof tags === 'string') {

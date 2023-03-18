@@ -15,5 +15,9 @@
     "sign-in": "Zaloguj się",
     "sign-out": "Wyloguj się",
     "change-location": "Zmień język na"
+  },
+  "not-found": {
+    "title": "Brak wyników wyszukiwania dla podanych słów kluczowych",
+    "description": "Proszę spróbować innych słów kluczowych lub kryteriów wyszukiwania."
   }
 }
