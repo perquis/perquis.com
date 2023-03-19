@@ -6,10 +6,9 @@ import type { Children, FC } from 'react';
 
 import { client } from '@graphql/apollo/apolloClient';
 
+import { GlobalLayout } from '@layouts/GlobalLayout';
 import { Layout } from '@layouts/Layout';
 import { WaviesLayout } from '@layouts/WaviesLayout';
-
-import { GlobalLayout } from '@fonts/GlobalLayout';
 
 export const Provider: FC<Children & { session: any }> = ({ children, session }) => {
   return (

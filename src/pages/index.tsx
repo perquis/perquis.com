@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-const Home: FC<IHomePageProps> = (stories) => {
+const Home: FC<IHomePageProps> = ({ ...props }) => {
   const { t } = useTranslation('home');
   const title = t('meta-title'),
     description = t('meta-description');
@@ -34,7 +34,7 @@ const Home: FC<IHomePageProps> = (stories) => {
         <title>{title + ` | PerQuis&apos;s Blog`}</title>
         <meta name="description" content={description} />
       </Head>
-      <HomePage stories={stories} />
+      <HomePage stories={props} />
     </>
   );
 };
