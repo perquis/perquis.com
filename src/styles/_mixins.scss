@@ -1,3 +1,28 @@
+@mixin user-select {
+  user-select: none; /* Standard syntax */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  -webkit-user-select: none; /* Safari */
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--locale-is-hover);
+  }
+}
+
+@mixin word-line-clamp {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
 @mixin hover-effect {
   position: relative;
   overflow: hidden;
@@ -20,23 +45,4 @@
       width: 100%;
     }
   }
-}
-
-@mixin scrollbar {
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background: var(--locale-is-hover);
-  }
-}
-
-@mixin word-line-clamp {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
 }

@@ -62,6 +62,7 @@
           "^@queries/(.*)$",
           "^@helpers/(.*)$",
           "^@styles/(.*)$",
+          "^@themes/(.*)$",
           "^@fonts/(.*)$",
           "^@icons/(.*)$",
           "^@hooks/(.*)$",

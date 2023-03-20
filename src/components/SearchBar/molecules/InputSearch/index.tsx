@@ -13,7 +13,7 @@ export const InputSearch = () => {
   return (
     <>
       <IoIosSearch size={24} className={styles.icon} />
-      <input type="search" placeholder={placeholder} className={styles.search} onChange={(e) => updateKeywords(e.target.value)} />
+      <input type="search" placeholder={placeholder} className={styles.search} onChange={(e) => setTimeout(() => updateKeywords(e.target.value), 500)} />
     </>
   );
 };

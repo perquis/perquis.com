@@ -29,6 +29,7 @@
       "@stories/*": ["./src/stories/*"],
       "@libraries/*": ["./src/lib/*"],
       "@styles/*": ["./src/styles/*"],
+      "@themes/*": ["./src/themes/*"],
       "@fonts/*": ["./src/fonts/*"],
       "@icons/*": ["./src/icons/*"],
       "@hooks/*": ["./src/hooks/*"],

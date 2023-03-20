@@ -1,19 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any*/
-import { readFileSync } from 'fs';
+/* eslint-disable */
 import type { Options } from 'rehype-pretty-code';
+import type { IThemeRegistration, Theme } from 'shiki';
 import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 
-const theme = JSON.parse(readFileSync(require.resolve('./moonlight.json'), 'utf-8'));
+import theme from './moonlight.json';
 
 export const options: Options = {
   keepBackground: false,
-  theme,
+  theme: theme as unknown as Theme,
   tokensMap: {
     fn: 'entity.name.function',
   },
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ''),
   getHighlighter: () =>
     getHighlighter({
+      theme: theme as unknown as IThemeRegistration,
       langs: [...BUNDLED_LANGUAGES],
     }),
   onVisitLine(node) {
