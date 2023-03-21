@@ -22,3 +22,12 @@
     background: var(--secondary-button-color-hover);
   }
 }
+
+.tertiary {
+  color: var(--tertiary-button-color);
+  background: var(--tertiary-button-bg);
+
+  &:is(:focus, :hover) {
+    background: var(--tertiary-button-color-hover);
+  }
+}

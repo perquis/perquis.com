@@ -7,12 +7,20 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
+import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
+import { WavyLines } from '@GlobalComponents/atoms/WavyLines';
 import { DetailsWrapper } from '@GlobalComponents/wrappers/DetailsWrapper';
+import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 import { FullWidthContainer } from '@GlobalComponents/wrappers/FullWidthContainer';
+import { StickersList } from '@GlobalComponents/wrappers/StickersList';
 
 import { Details } from '@components/Article/molecules/Details';
 import { Author } from '@components/Author';
+import { CommentForm } from '@components/CommentForm/organisms/CommentForm';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
+import { Resource } from '@components/Resource';
+import { Newsletter } from '@components/Sticker';
+import { JoinOurCommunity } from '@components/Sticker/organisms/JoinOurCommunity';
 
 import type { PickedDetailsProps } from '@stories/articles';
 
@@ -89,9 +97,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 const BlogPage: FC<BlogPageProps> = ({ edges, source }) => {
   const [
     {
-      node: { slug, thumbnail, createdAt, tags, title, introduction },
+      node: { slug, thumbnail, createdAt, tags, title, introduction, resources },
     },
   ] = edges;
+
+  const resourcesList = resources.map(({ link, name }, i) => (
+    <Resource link={String(link)} key={i}>
+      {name}
+    </Resource>
+  ));
 
   return (
     <>
@@ -101,6 +115,27 @@ const BlogPage: FC<BlogPageProps> = ({ edges, source }) => {
       </DetailsWrapper>
       <FullWidthContainer>
         <MarkdownToHTML {...source} />
+        <DirectionColumn isTop>
+          <h2>Resources:</h2>
+          {resourcesList}
+          <div style={{ marginTop: 8 }}>
+            <WavyLines />
+          </div>
+        </DirectionColumn>
+        <StickersList>
+          <Newsletter />
+          <JoinOurCommunity />
+        </StickersList>
+        <DirectionColumn isTop>
+          <div style={{ marginBottom: 8 }}>
+            <WavyLines />
+          </div>
+          <div>
+            <h2>Comments:</h2>
+            <Paragraph>You will sign in or sign up if you want to comment this article!</Paragraph>
+          </div>
+          <CommentForm />
+        </DirectionColumn>
       </FullWidthContainer>
     </>
   );

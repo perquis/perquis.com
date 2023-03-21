@@ -1,10 +1,7 @@
-import { Poppins, Roboto } from 'next/font/google';
 import type { Children, FC } from 'react';
 
 import { firaCode } from '@fonts/FiraCode';
-
-const poppins = Poppins({ weight: ['400', '500', '600', '700'], subsets: ['latin'], style: ['normal', 'italic'] });
-const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'], style: ['normal', 'italic'] });
+import { poppins, roboto } from '@fonts/index';
 
 export const GlobalLayout: FC<Children> = ({ children }) => {
   return (

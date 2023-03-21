@@ -4,12 +4,12 @@ import React from 'react';
 
 import styles from './StyledLink.module.scss';
 
-type IStyledLink = { href: string } & Children;
+type IStyledLink = { href: string; isIndexed?: boolean } & Children;
 
-export const StyledLink: FC<IStyledLink> = ({ href, children }) => {
+export const StyledLink: FC<IStyledLink> = ({ children, href, isIndexed }) => {
   return (
     <Link href={href} legacyBehavior passHref>
-      <a className={styles.link} tabIndex={-1}>
+      <a className={styles.link} tabIndex={isIndexed ? 0 : -1}>
         {children}
       </a>
     </Link>

@@ -57,6 +57,10 @@
   --secondary-button-color-hover: hsl(259, 100%, 40%);
   --secondary-button-padding: 0.8rem 1.6rem;
 
+  --tertiary-button-bg: var(--gray-50);
+  --tertiary-button-color: var(--gray-500);
+  --tertiary-button-color-hover: var(--gray-100);
+
   --text-decoration-wavy-color: var(--logo-primary-color);
 
   --locale-border-color: var(--gray-250);
@@ -70,13 +74,26 @@
   --status-color: var(--pink);
 
   --placeholder-color: var(--gray-400);
-  --input-color: var(--gray-600);
 
   --blur-background: hsl(212, 29%, 90%, 50%);
 
   --paragraph: var(--gray-700);
 
   --heading: var(--primary);
+
+  --input-color: var(--gray-600);
+  --input-bg: var(--gray-100);
+
+  --sticker-button-bg: var(--primary);
+  --sticker-button-color: var(--white);
+
+  --wavy-lines: hsl(212, 31%, 80%);
+  --wavies-top-color: hsl(241, 100%, 50%);
+  --wavies-bottom-color: hsl(284, 100%, 70%);
+
+  --email-input-bg: var(--gray-50);
+  --newsletter-bg: var(--white);
+  --join-our-community-bg: var(--gray-100);
 
   // Sizes
   --small-radius: 0.6rem;
@@ -93,6 +110,10 @@
   --secondary-button-color: var(--white);
   --secondary-button-color-hover: hsl(259, 100%, 60%);
 
+  --tertiary-button-bg: var(--gray-850);
+  --tertiary-button-color: var(--gray-300);
+  --tertiary-button-color-hover: var(--gray-800);
+
   --text-decoration-wavy-color: hsl(259, 100%, 50%);
 
   --locale-border-color: var(--gray-800);
@@ -105,11 +126,23 @@
 
   --status-color: var(--cyan);
 
-  --input-color: var(--gray-100);
-
   --blur-background: hsl(212, 33%, 10%, 75%);
 
   --paragraph: var(--gray-200);
 
   --heading: hsl(53deg, 100%, 50%);
+
+  --input-color: var(--gray-100);
+  --input-bg: var(--gray-900);
+
+  --sticker-button-bg: var(--white);
+  --sticker-button-color: var(--gray-900);
+
+  --wavy-lines: hsl(212, 31%, 20%);
+  --wavies-top-color: hsl(234, 100%, 60%);
+  --wavies-bottom-color: hsl(279, 100%, 50%);
+
+  --email-input-bg: var(--gray-820);
+  --newsletter-bg: var(--gray-900);
+  --join-our-community-bg: hsl(213, 32%, 15%);
 }
