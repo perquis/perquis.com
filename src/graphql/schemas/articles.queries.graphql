@@ -63,6 +63,32 @@ query ArticlesListWithPages($locales: [Locale!]!, $first: Int, $skip: Int, $orde
   }
 }
 
+query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
+  page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
+    edges {
+      node {
+        id
+        updatedAt
+        createdAt
+        thumbnail {
+          url
+        }
+        introduction
+        tags
+        id
+        slug
+        title
+        content
+        resources {
+          id
+          name
+          link
+        }
+      }
+    }
+  }
+}
+
 query ArticlesList($locales: [Locale!]!, $lng: Languages) {
   page: schemaArticlesConnection(locales: $locales) {
     edges {

@@ -5,7 +5,7 @@
   flex-direction: column;
 
   b {
-    font-size: clamp(1.7rem, 2vw, 1.8rem);
+    font-size: clamp(1.5rem, 2vw, 1.8rem);
 
     span {
       @media screen and (max-width: $sm) {

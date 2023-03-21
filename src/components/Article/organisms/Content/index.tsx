@@ -7,6 +7,8 @@ import { Details } from '@components/Article/molecules/Details';
 
 import type { PickedArticleProps } from '@stories/articles';
 
+import { articleRoute } from '@data/routes';
+
 type IContentProps = Record<'article', PickedArticleProps>;
 
 export const Content: FC<IContentProps> = ({ article }) => {
@@ -14,10 +16,10 @@ export const Content: FC<IContentProps> = ({ article }) => {
 
   return (
     <>
-      <StyledLink href={`/articles/${slug}`}>
+      <StyledLink href={`/${articleRoute}/${slug}`}>
         <Thumbnail src={thumbnail?.url ?? ''} alt={slug ?? ''} />
       </StyledLink>
-      <Details details={{ ...article }} />
+      <Details details={{ ...article }} isLink />
     </>
   );
 };

@@ -7101,6 +7101,11 @@ export enum _FilterKind {
   RelationalSome = 'relational_some',
   Search = 'search',
   StartsWith = 'starts_with',
+  UnionEmpty = 'union_empty',
+  UnionEvery = 'union_every',
+  UnionNone = 'union_none',
+  UnionSingle = 'union_single',
+  UnionSome = 'union_some',
 }
 
 export enum _MutationInputFieldKind {
@@ -7240,6 +7245,34 @@ export type ArticlesListWithPagesQuery = {
       };
     }>;
     readonly pageInfo: { readonly __typename?: 'PageInfo'; readonly hasNextPage: boolean; readonly hasPreviousPage: boolean; readonly pageSize?: number | null };
+  };
+};
+
+export type GetStaticAriclePageQueryVariables = Exact<{
+  locales: ReadonlyArray<Locale> | Locale;
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+export type GetStaticAriclePageQuery = {
+  readonly __typename?: 'Query';
+  readonly page: {
+    readonly __typename?: 'ArticlesConnection';
+    readonly edges: ReadonlyArray<{
+      readonly __typename?: 'ArticlesEdge';
+      readonly node: {
+        readonly __typename?: 'Articles';
+        readonly id: string;
+        readonly updatedAt: Date;
+        readonly createdAt: Date;
+        readonly introduction?: string | null;
+        readonly tags: ReadonlyArray<Tags>;
+        readonly slug?: string | null;
+        readonly title?: string | null;
+        readonly content?: string | null;
+        readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
+        readonly resources: ReadonlyArray<{ readonly __typename?: 'Links'; readonly id: string; readonly name?: string | null; readonly link?: string | null }>;
+      };
+    }>;
   };
 };
 
@@ -7472,6 +7505,62 @@ export function useArticlesListWithPagesLazyQuery(baseOptions?: Apollo.LazyQuery
 export type ArticlesListWithPagesQueryHookResult = ReturnType<typeof useArticlesListWithPagesQuery>;
 export type ArticlesListWithPagesLazyQueryHookResult = ReturnType<typeof useArticlesListWithPagesLazyQuery>;
 export type ArticlesListWithPagesQueryResult = Apollo.QueryResult<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>;
+export const GetStaticAriclePageDocument = gql`
+  query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
+    page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
+      edges {
+        node {
+          id
+          updatedAt
+          createdAt
+          thumbnail {
+            url
+          }
+          introduction
+          tags
+          id
+          slug
+          title
+          content
+          resources {
+            id
+            name
+            link
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetStaticAriclePageQuery__
+ *
+ * To run a query within a React component, call `useGetStaticAriclePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetStaticAriclePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetStaticAriclePageQuery({
+ *   variables: {
+ *      locales: // value for 'locales'
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetStaticAriclePageQuery(baseOptions: Apollo.QueryHookOptions<GetStaticAriclePageQuery, GetStaticAriclePageQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetStaticAriclePageQuery, GetStaticAriclePageQueryVariables>(GetStaticAriclePageDocument, options);
+}
+export function useGetStaticAriclePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetStaticAriclePageQuery, GetStaticAriclePageQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetStaticAriclePageQuery, GetStaticAriclePageQueryVariables>(GetStaticAriclePageDocument, options);
+}
+export type GetStaticAriclePageQueryHookResult = ReturnType<typeof useGetStaticAriclePageQuery>;
+export type GetStaticAriclePageLazyQueryHookResult = ReturnType<typeof useGetStaticAriclePageLazyQuery>;
+export type GetStaticAriclePageQueryResult = Apollo.QueryResult<GetStaticAriclePageQuery, GetStaticAriclePageQueryVariables>;
 export const ArticlesListDocument = gql`
   query ArticlesList($locales: [Locale!]!, $lng: Languages) {
     page: schemaArticlesConnection(locales: $locales) {

@@ -6,19 +6,23 @@ import type { Maybe } from '@graphql/databases/client';
 
 import styles from './DateAndTitle.module.scss';
 
-interface IDateAndTitle {
+interface Details {
   date: string;
   title: Maybe<string>;
-  href: string;
+  href?: string;
 }
 
-export const DateAndTitle: FC<Record<'details', IDateAndTitle>> = ({ details: { date, title, href } }) => {
+export interface IDateAndTitle {
+  isLink?: boolean;
+}
+
+export const DateAndTitle: FC<Record<'details', Details> & IDateAndTitle> = ({ details: { date, title, href }, isLink }) => {
+  const isHref = href ? <StyledLink href={href}>{title}</StyledLink> : null;
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.span}>{date}</span>
-      <h2 className={styles.title}>
-        <StyledLink href={href}>{title}</StyledLink>
-      </h2>
+      <h2 className={styles.title}>{isLink ? isHref : <>{title}</>}</h2>
     </div>
   );
 };

@@ -1,0 +1,10 @@
+@import './src/styles/_breakpoints.scss';
+
+.ctn {
+  width: 100%;
+  padding: 0 2.4rem;
+
+  @media screen and (max-width: $sm) {
+    padding: 0;
+  }
+}

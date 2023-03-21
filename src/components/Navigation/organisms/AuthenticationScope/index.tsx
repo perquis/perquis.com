@@ -10,7 +10,7 @@ import styles from './AuthenticationScope.module.scss';
 
 export const AuthenticationScope = () => {
   const { data: session } = useSession();
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('global');
   const text = t('user-profile.sign-in');
 
   return session ? (

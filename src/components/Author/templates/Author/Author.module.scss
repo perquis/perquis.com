@@ -1,0 +1,11 @@
+.wrapper {
+  width: 100%;
+
+  @media screen and (max-width: 400px) {
+    > div {
+      &:has(img) {
+        border-radius: 0;
+      }
+    }
+  }
+}

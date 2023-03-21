@@ -7,6 +7,8 @@ import { Loader } from '@components/Loader/molecules/Loader';
 
 import type { PickedArticleProps } from '@stories/articles';
 
+import { articleRoute } from '@data/routes';
+
 import styles from './Article.module.scss';
 
 type IArticleProps = {
@@ -19,7 +21,7 @@ const articleInitialState = { slug: '', tags: [''], createdAt: '', introduction:
 
 export const Article: FC<IArticleProps> = ({ article = articleInitialState, isNewArticle, isNotFoundArticle, isLoadingAnimation }) => {
   const { push } = useRouter();
-  const changeRoute = () => push(`/articles/${article.slug}`);
+  const changeRoute = () => push(`/${articleRoute}/${article.slug}`);
   const handlePushingArticlesSlug = (e: KeyboardEvent<HTMLElement>) => e.key === 'Enter' && changeRoute();
 
   const isNewArticleCondition = isNewArticle ? styles['new-article'] : '';

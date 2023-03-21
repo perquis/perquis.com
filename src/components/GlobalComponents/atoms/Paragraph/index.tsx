@@ -1,7 +1,11 @@
-import type { Children, FC } from 'react';
+import type { Children, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 
 import styles from './Paragraph.module.scss';
 
-export const Paragraph: FC<Children> = ({ children }) => {
-  return <p className={styles.paragraph}>{children}</p>;
+export const Paragraph: FC<Children & DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>> = ({ children, ...props }) => {
+  return (
+    <p className={styles.paragraph} {...props}>
+      {children}
+    </p>
+  );
 };

@@ -1,4 +1,4 @@
-import { DirectionColumn } from '@GlobalComponents/atoms/DirectionColumn';
+import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
 import { InfiniteScroll } from '@components/InfiniteScroll';
 import { LoadingArticlesList } from '@components/Loader/organisms/LoadingArticlesList';

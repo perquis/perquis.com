@@ -128,6 +128,36 @@ export const ssrArticlesListWiths = {
   getServerPage: getServerPageArticlesListWiths,
   withPage: withPageArticlesListWiths,
 };
+export async function getServerPageGetStaticAricle(
+  options: Omit<Apollo.QueryOptions<Operations.GetStaticAriclePageQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.GetStaticAriclePageQuery>({ ...options, query: Operations.GetStaticAriclePageDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageGetStaticAricleComp = React.FC<{ data?: Operations.GetStaticAriclePageQuery; error?: Apollo.ApolloError }>;
+export const withPageGetStaticAricle =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.GetStaticAriclePageQuery, Operations.GetStaticAriclePageQueryVariables>) =>
+  (WrappedComponent: PageGetStaticAricleComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetStaticAriclePageDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetStaticAricle = {
+  getServerPage: getServerPageGetStaticAricle,
+  withPage: withPageGetStaticAricle,
+};
 export async function getServerPageArticlesList(
   options: Omit<Apollo.QueryOptions<Operations.ArticlesListQueryVariables>, 'query'>,
   apolloClient: Apollo.ApolloClient<NormalizedCacheObject>

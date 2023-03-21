@@ -27,7 +27,7 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
 
   useDropdownMenu(toggleOptions, { ref, state: { isActive, setActive } });
 
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('global');
   const text = t('user-profile.sign-out');
 
   return (

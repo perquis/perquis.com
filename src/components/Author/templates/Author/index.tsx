@@ -1,11 +1,17 @@
-import { AboutMe } from '@components/Author/molecules/AboutMe';
-import { HeroHeader } from '@components/Author/templates/HeroHeader';
+import type { FC } from 'react';
 
-export const Author = () => {
+import { Thumbnail } from '@GlobalComponents/atoms/Thumbnail';
+import type { IThumbnail } from '@GlobalComponents/atoms/Thumbnail';
+
+import { LabeledUser } from '@components/Author/organisms/LabeledUser';
+
+import styles from './Author.module.scss';
+
+export const Author: FC<IThumbnail> = ({ src, alt }) => {
   return (
-    <>
-      <HeroHeader src="/images/thumbnail.gif" alt="Thumbnail" />
-      <AboutMe />
-    </>
+    <div className={styles.wrapper}>
+      <Thumbnail src={src} alt={alt} />
+      <LabeledUser />
+    </div>
   );
 };

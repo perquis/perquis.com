@@ -5,7 +5,7 @@ import { client } from '@graphql/apollo/apolloClient';
 import { ArticlesOrderByInput, Locale } from '@graphql/databases/client';
 import { getServerPageSearchForArticlesList, getServerPageSearchForArticlesListByTags, getServerPageSearchForArticlesListWithTags } from '@graphql/databases/server';
 
-import { splittedTags } from './../../../../utils/splittedTags';
+import { splittedTags } from '@utils/splittedTags';
 
 // const getTagValue = (tagName: keyof typeof Tags) => Tags[tagName];
 

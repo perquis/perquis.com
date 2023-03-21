@@ -11,11 +11,6 @@
     "search-placeholder": "Search",
     "technologies": "All Technologies"
   },
-  "user-profile": {
-    "sign-in": "Sign in",
-    "sign-out": "Log out",
-    "change-location": "Change Language to"
-  },
   "not-found": {
     "title": "No articles found matching the given keywords",
     "description": "When no articles match your search keywords, try using different keywords or criteria to broaden results."

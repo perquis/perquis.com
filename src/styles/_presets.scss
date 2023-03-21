@@ -74,7 +74,9 @@
 
   --blur-background: hsl(212, 29%, 90%, 50%);
 
-  --paragraph: var(--gray-600);
+  --paragraph: var(--gray-700);
+
+  --heading: var(--primary);
 
   // Sizes
   --small-radius: 0.6rem;
@@ -108,4 +110,6 @@
   --blur-background: hsl(212, 33%, 10%, 75%);
 
   --paragraph: var(--gray-200);
+
+  --heading: hsl(53deg, 100%, 50%);
 }

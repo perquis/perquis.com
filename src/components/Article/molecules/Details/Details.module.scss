@@ -9,7 +9,9 @@
   @media screen and (max-width: $sm) {
     padding: 1.6rem 0 0 0;
   }
+}
 
+.is-not-link {
   @media screen and (max-width: $sm) {
     p {
       display: none;

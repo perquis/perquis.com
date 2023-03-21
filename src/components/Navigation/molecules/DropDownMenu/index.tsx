@@ -22,7 +22,7 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
   const { asPath, push, locale } = useRouter();
   const { data: session } = useSession();
 
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('global');
   const signOutText = t('user-profile.sign-out'),
     signInText = t('user-profile.sign-in'),
     changeLocationText = t('user-profile.change-location');

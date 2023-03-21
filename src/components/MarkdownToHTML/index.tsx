@@ -1,7 +1,7 @@
 import type { MDXRemoteProps } from 'next-mdx-remote';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { DirectionColumn } from '@GlobalComponents/atoms/DirectionColumn';
+import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
 import { components } from './components';
 
