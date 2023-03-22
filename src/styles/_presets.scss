@@ -95,7 +95,10 @@
   --newsletter-bg: var(--white);
   --join-our-community-bg: var(--gray-100);
 
+  --dots: var(--gray-250);
+
   // Sizes
+  --radius: 1.2rem;
   --small-radius: 0.6rem;
   --height-menu: clamp(6rem, 5vw, 12rem);
 }
@@ -145,4 +148,6 @@
   --email-input-bg: var(--gray-820);
   --newsletter-bg: var(--gray-900);
   --join-our-community-bg: hsl(213, 32%, 15%);
+
+  --dots: var(--gray-700);
 }

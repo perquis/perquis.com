@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 import FocusLock from 'react-focus-lock';
 
 import { Button } from '@GlobalComponents/atoms/Button';
-
-import { SmallAvatar } from '@components/Navigation/atoms/SmallAvatar';
+import { SmallAvatar } from '@GlobalComponents/atoms/SmallAvatar';
 
 import { vars } from '@animations/pop-up';
 

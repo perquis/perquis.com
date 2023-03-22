@@ -17,7 +17,7 @@ export const Newsletter = () => {
       <DirectionColumn>
         <div>
           <h3 dangerouslySetInnerHTML={{ __html: title }} />
-          <Paragraph>{description}</Paragraph>
+          <Paragraph style={{ marginTop: 6 }}>{description}</Paragraph>
         </div>
         <Form />
       </DirectionColumn>

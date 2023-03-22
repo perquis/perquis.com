@@ -11,12 +11,15 @@ import { StickersList } from '@GlobalComponents/wrappers/StickersList';
 
 import { Details } from '@components/Article';
 import { Author } from '@components/Author';
-import { CommentForm } from '@components/CommentForm/organisms/CommentForm';
+import { Comment } from '@components/Comment/templates/Comment';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
 import { Resource } from '@components/Resource';
-import { JoinOurCommunity, Newsletter } from '@components/Sticker';
+import { Newsletter } from '@components/Sticker';
+import { WriteToSomething } from '@components/WriteToSomething/organisms/WriteToSomething';
 
 import type { PickedDetailsProps } from '@stories/articles';
+
+import { Dashed } from '@icons/Dashed';
 
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edges, source } }) => {
   const [
@@ -47,23 +50,24 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edge
         <DirectionColumn isTop>
           <h2>{resourcesTitle}</h2>
           {resourcesList}
-          <div style={{ marginTop: 8 }}>
-            <WavyLines />
-          </div>
         </DirectionColumn>
         <StickersList>
+          <WavyLines />
           <Newsletter />
-          <JoinOurCommunity />
+          <WavyLines />
         </StickersList>
         <DirectionColumn isTop>
-          <div style={{ marginBottom: 8 }}>
-            <WavyLines />
-          </div>
           <div>
             <h2>{commentTitle}</h2>
-            <Paragraph>{commentDescription}</Paragraph>
+            <Paragraph style={{ marginTop: 6 }}>{commentDescription}</Paragraph>
           </div>
-          <CommentForm />
+          <WriteToSomething />
+          <Dashed />
+          <Comment
+            avatar="/images/avatar.jpg"
+            content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis quibusdam sed dolore nostrum officiis repudiandae rem vel nemo vero quidem praesentium iure dolores itaque ipsum ea, nobis molestias laboriosam corrupti?"
+            nickname="PerQuis!"
+          />
         </DirectionColumn>
       </FullWidthContainer>
     </>

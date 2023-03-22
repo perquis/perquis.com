@@ -19,7 +19,7 @@ export const JoinOurCommunity = () => {
       <div className={styles['join-our-community']}>
         <div>
           <h3>{title}</h3>
-          <Paragraph>{description}</Paragraph>
+          <Paragraph style={{ marginTop: 6 }}>{description}</Paragraph>
         </div>
         <StickerButton>
           <BsDiscord size={21} /> {button}

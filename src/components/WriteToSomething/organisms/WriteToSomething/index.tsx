@@ -1,16 +1,16 @@
 import { useSession } from 'next-auth/react';
 
-import { Counter } from '@components/CommentForm/atoms/Counter';
-import { TextArea } from '@components/CommentForm/atoms/TextArea';
-import { Actions } from '@components/CommentForm/molecules/Actions';
+import { Counter } from '@components/WriteToSomething/atoms/Counter';
+import { TextArea } from '@components/WriteToSomething/atoms/TextArea';
+import { Actions } from '@components/WriteToSomething/molecules/Actions';
 
 import { useFormStore } from '@stories/forms';
 
 import { isExistsUser } from '@utils/isExistsUser';
 
-import styles from './CommentForm.module.scss';
+import styles from './WriteToSomething.module.scss';
 
-export const CommentForm = () => {
+export const WriteToSomething = () => {
   const { data } = useSession();
   const isUser = !isExistsUser(data?.user);
 

@@ -6,7 +6,8 @@ import type { FC, MutableRefObject } from 'react';
 import { useRef, useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
 
-import { SmallAvatar } from '@components/Navigation/atoms/SmallAvatar';
+import { SmallAvatar } from '@GlobalComponents/atoms/SmallAvatar';
+
 import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
 
 import { vars } from '@animations/pop-up';

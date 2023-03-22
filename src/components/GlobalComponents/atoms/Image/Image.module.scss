@@ -1,0 +1,12 @@
+@import './src/styles/_breakpoints.scss';
+@import './src/styles/_mixins.scss';
+
+.image {
+  @include wrapper;
+  overflow: hidden;
+  border-radius: var(--radius);
+
+  @media screen and (max-width: $sm) {
+    border-radius: 0;
+  }
+}
