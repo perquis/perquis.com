@@ -1,8 +1,29 @@
 {
   "footer": "© 2023-present Damian <b>“Perquis”</b> Werens. All Rights Reserved.",
+  "resources": "Resources:",
   "user-profile": {
     "sign-in": "Sign in",
     "sign-out": "Log out",
     "change-location": "Change Language to"
+  },
+  "newsletter": {
+    "title": "Subscribe <span>to the newsletter</span>",
+    "description": "Don't miss out on the news!",
+    "placeholder": "Enter your Email",
+    "button": "Subscribe"
+  },
+  "join-our-community": {
+    "title": "Join my community!",
+    "description": "We can build great society together.",
+    "button": "Join us!"
+  },
+  "comment": {
+    "title": "Comments:",
+    "description": "You will sign in or sign up if you want to comment this article!",
+    "form": {
+      "placeholder": "Write to something...",
+      "reset": "Reset",
+      "publish": "Publish"
+    }
   }
 }

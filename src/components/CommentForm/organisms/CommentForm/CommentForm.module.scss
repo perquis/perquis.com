@@ -19,13 +19,15 @@
     top: -20px;
     background: url(/assets/headphone-dynamic-color.png) no-repeat center / cover;
   }
-
-  opacity: 0.75;
-  cursor: no-drop;
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.disabled {
+  opacity: 0.75;
+  cursor: no-drop;
 }

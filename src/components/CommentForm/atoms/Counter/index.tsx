@@ -1,5 +1,15 @@
+import { useFormStore } from '@stories/forms';
+
+import { textAreaMaxLength } from '@data/validations';
+
 import styles from './Counter.module.scss';
 
 export const Counter = () => {
-  return <span className={styles.counter}>0/512</span>;
+  const [commentKeywords] = useFormStore((state) => [state.commentKeywords]);
+
+  return (
+    <span className={styles.counter}>
+      {commentKeywords.length}/{textAreaMaxLength}
+    </span>
+  );
 };

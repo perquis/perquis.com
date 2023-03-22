@@ -16,7 +16,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const className = isSecondary ? `${styles.button} ${styles.secondary}` : isTertiary ? `${styles.tertiary} ${styles.button}` : `${styles.button} ${styles.interactions}`;
 
   return (
-    <button {...rest} className={className}>
+    <button {...rest} className={className} type={isTertiary ? 'reset' : undefined}>
       {children}
     </button>
   );

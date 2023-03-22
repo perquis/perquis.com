@@ -1,8 +1,29 @@
 {
   "footer": "© 2023-teraz Damian <b>“Perquis”</b> Werens. Wszystkie prawa zastrzeżone.",
+  "resources": "Źródła:",
   "user-profile": {
     "sign-in": "Zaloguj się",
     "sign-out": "Wyloguj się",
     "change-location": "Zmień język na"
+  },
+  "newsletter": {
+    "title": "Zapisz się <span>do newslettera</span>",
+    "description": "Bądź na bieżąco z nowymi artykułami!",
+    "placeholder": "Wpisz swojego emaila",
+    "button": "Zapisz się"
+  },
+  "join-our-community": {
+    "title": "Dołącz do mojej społeczności!",
+    "description": "Razem zbudujemy lepszą społeczność.",
+    "button": "Dołącz!"
+  },
+  "comment": {
+    "title": "Komentarze:",
+    "description": "Zaloguj się albo zarejestruj jeśli chcesz skomentować ten artykuł!",
+    "form": {
+      "placeholder": "Napisz coś...",
+      "reset": "Zresetuj",
+      "publish": "Opublikuj"
+    }
   }
 }

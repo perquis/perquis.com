@@ -1,3 +1,4 @@
+@import './src/styles/_breakpoints.scss';
 @import './src/styles/_mixins.scss';
 
 .join-our-community {
@@ -5,8 +6,7 @@
   border-radius: 1.2rem;
   background: var(--join-our-community-bg);
   position: relative;
-  // border: 5px dotted var(--gray-800);
-  height: 186px;
+  min-height: 186px;
 
   display: flex;
   justify-content: space-between;
@@ -15,6 +15,12 @@
   flex-wrap: wrap;
 
   @include wrapper;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  button {
+    margin-left: 0;
+  }
 
   &::after {
     content: '';
@@ -24,5 +30,9 @@
     right: -16px;
     top: -30px;
     background: url(/assets/tea-cup-dynamic-color.png) no-repeat center / cover;
+
+    @media screen and (max-width: $sm) {
+      display: none;
+    }
   }
 }
