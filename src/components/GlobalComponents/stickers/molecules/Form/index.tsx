@@ -1,7 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import { EmailInput } from '@components/Sticker/atoms/EmailInput';
-import { StickerButton } from '@components/Sticker/atoms/StickerButton';
+import { EmailInput } from '@GlobalComponents/atoms/EmailInput';
+
+import { StickerButton } from '@stickers/index';
 
 import { useFormStore } from '@stories/forms';
 

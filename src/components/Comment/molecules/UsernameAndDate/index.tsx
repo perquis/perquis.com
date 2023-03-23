@@ -6,7 +6,7 @@ import styles from './UsernameAndDate.module.scss';
 
 export const UsernameAndDate = ({ avatar, nickname }: Pick<Comments, 'avatar' | 'nickname'>) => (
   <div className={styles.wrapper}>
-    <SmallAvatar image={avatar} />
+    <SmallAvatar image={avatar} isBig />
     <b>{nickname}</b>
   </div>
 );

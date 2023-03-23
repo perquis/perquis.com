@@ -1,0 +1,10 @@
+.ctn {
+  h1 {
+    font-size: clamp(3rem, 5vw, 4.2rem);
+    line-height: clamp(3rem, 5vw, 4.2rem);
+
+    span {
+      color: var(--heading);
+    }
+  }
+}

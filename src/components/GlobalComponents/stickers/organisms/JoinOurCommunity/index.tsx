@@ -4,7 +4,7 @@ import { BsDiscord } from 'react-icons/bs';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { StickerButton } from '@components/Sticker/atoms/StickerButton';
+import { StickerButton } from '@stickers/index';
 
 import styles from './JoinOurCommunity.module.scss';
 

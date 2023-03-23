@@ -5,11 +5,12 @@ import styles from './SmallAvatar.module.scss';
 
 interface ISmallAvatar {
   image: string;
+  isBig?: boolean;
 }
 
-export const SmallAvatar: FC<ISmallAvatar> = ({ image }) => {
+export const SmallAvatar: FC<ISmallAvatar> = ({ image, isBig }) => {
   return (
-    <div className={styles.avatar}>
+    <div className={`${styles.avatar} ${isBig ? styles.big : styles.default}`}>
       <Image layout="fill" src={image} alt="avatar" />
     </div>
   );

@@ -78,6 +78,7 @@
   --blur-background: hsl(212, 29%, 90%, 50%);
 
   --paragraph: var(--gray-700);
+  --span: var(--gray-500);
 
   --heading: var(--primary);
 
@@ -96,6 +97,7 @@
   --join-our-community-bg: var(--gray-100);
 
   --dots: var(--gray-250);
+  --code-number-color: var(--gray-300);
 
   // Sizes
   --radius: 1.2rem;
@@ -132,6 +134,7 @@
   --blur-background: hsl(212, 33%, 10%, 75%);
 
   --paragraph: var(--gray-200);
+  --span: var(--gray-400);
 
   --heading: hsl(53deg, 100%, 50%);
 
@@ -150,4 +153,5 @@
   --join-our-community-bg: hsl(213, 32%, 15%);
 
   --dots: var(--gray-700);
+  --code-number-color: var(--gray-600);
 }

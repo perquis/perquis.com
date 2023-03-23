@@ -63,6 +63,10 @@ body {
   @media screen and (max-width: 400px) {
     padding: 0;
   }
+
+  &[data-scroll='block'] {
+    overflow-y: hidden;
+  }
 }
 
 h1 {

@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { Form } from '@components/Sticker/molecules/Form';
+import { Form } from '@stickers/molecules/Form';
 
 import styles from './Newsletter.module.scss';
 

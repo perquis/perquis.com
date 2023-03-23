@@ -7,6 +7,7 @@ const Document = () => {
       <body>
         <Main />
         <NextScript />
+        <div id="newsletter" />
       </body>
     </Html>
   );

@@ -1,0 +1,12 @@
+.saly {
+  position: relative;
+  background: var(--email-input-bg);
+  height: 48rem;
+  border-radius: var(--small-radius);
+
+  img {
+    left: -13.2rem;
+    bottom: 0;
+    position: absolute;
+  }
+}
