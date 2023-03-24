@@ -4,8 +4,8 @@
 .iframe-container {
   @include wrapper;
   position: relative;
-  border-radius: var(--radius);
-  padding-top: calc(56.25% + 2.4rem);
+  // border-radius: var(--radius);
+  padding-top: calc(56.25% + 2.625rem);
   overflow: hidden;
 
   iframe {

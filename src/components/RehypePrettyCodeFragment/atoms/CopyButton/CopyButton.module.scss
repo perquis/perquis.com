@@ -3,8 +3,12 @@
   border: none;
   background: none;
   color: inherit;
+
+  &:is(:hover, :focus) {
+    color: var(--gray-400);
+  }
 }
 
 .copied {
-  color: aqua;
+  color: var(--heading) !important;
 }

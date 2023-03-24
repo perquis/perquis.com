@@ -3,16 +3,20 @@ import type { Options } from 'rehype-pretty-code';
 import type { IThemeRegistration, Theme } from 'shiki';
 import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 
-import theme from './moonlight.json';
+import beaderThemeClassicsLight from './beader-theme.json';
+import moonlight from './moonlight.json';
 
 export const options: Options = {
   keepBackground: false,
-  theme: theme as unknown as Theme,
+  theme: {
+    dark: moonlight as unknown as Theme,
+    light: beaderThemeClassicsLight as unknown as Theme,
+  },
   tokensMap: {
     fn: 'entity.name.function',
   },
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ''),
-  getHighlighter: () =>
+  getHighlighter: ({ theme }) =>
     getHighlighter({
       theme: theme as unknown as IThemeRegistration,
       langs: [...BUNDLED_LANGUAGES],

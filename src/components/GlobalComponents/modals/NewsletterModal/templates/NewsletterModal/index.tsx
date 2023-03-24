@@ -19,7 +19,7 @@ export const NewsletterModal = () => {
 
   useEffect(() => {
     return () => {
-      document.cookie = `newsletter-modal=true;max-age=2592000;`;
+      document.cookie = `newsletter-modal=true;max-age=2592000;path=/;`;
     };
   }, []);
 

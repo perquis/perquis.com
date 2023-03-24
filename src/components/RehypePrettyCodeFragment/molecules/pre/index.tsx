@@ -12,11 +12,13 @@ const arr = [0, 1, 2];
 export const RehypePrettyCodeFragment: FC<Children & DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>> = ({ children, ...props }) => {
   // @ts-ignore
   const lang = props['data-language'] || 'shell';
+  // @ts-ignore
+  const theme = props['data-theme'] || 'default';
   const ref = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <div className={'code-header'}>
+      <div className={`code-header ${theme}`}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           {arr.map((_, i) => (
             <Dot key={i} isBig />

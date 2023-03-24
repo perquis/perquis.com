@@ -1,3 +1,19 @@
+[lang='pl'] {
+  .toc {
+    &::before {
+      content: 'Spis treści:';
+    }
+  }
+}
+
+[lang='en'] {
+  .toc {
+    &::before {
+      content: 'Table of Contents:';
+    }
+  }
+}
+
 .toc {
   margin-top: 4.8rem;
   font-size: 1.8rem;
@@ -8,7 +24,6 @@
   }
 
   &::before {
-    content: 'Table of Contents:';
     font-weight: 700;
     font-size: clamp(2rem, 5vw, 2.4rem);
     line-height: clamp(2rem, 5vw, 2.4rem);
