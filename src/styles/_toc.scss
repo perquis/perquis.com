@@ -1,0 +1,42 @@
+.toc {
+  margin-top: 4.8rem;
+  font-size: 1.8rem;
+
+  ol,
+  ul {
+    list-style-type: disc;
+  }
+
+  &::before {
+    content: 'Table of Contents:';
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 2.4rem);
+    line-height: clamp(2rem, 5vw, 2.4rem);
+  }
+
+  .toc-level-1 {
+    margin-top: 1rem;
+  }
+
+  > &-level {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+  }
+
+  &-link {
+    color: var(--paragraph);
+    overflow-wrap: break-word;
+    text-decoration: none;
+    display: inline-block;
+
+    &:is(:hover, :focus) {
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-decoration-color: var(--status-color);
+
+      text-underline-offset: 3px;
+    }
+  }
+}

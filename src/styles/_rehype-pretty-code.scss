@@ -18,6 +18,7 @@
 span[data-rehype-pretty-code-fragment] {
   padding: 0.2rem 0.6rem !important;
   margin: 0 !important;
+  border-radius: var(--radius);
 }
 
 [data-rehype-pretty-code-fragment] {
@@ -26,6 +27,7 @@ span[data-rehype-pretty-code-fragment] {
   overflow-y: hidden;
   overflow-x: auto;
   min-width: 0;
+  position: relative;
 
   @include wrapper;
 
@@ -33,17 +35,43 @@ span[data-rehype-pretty-code-fragment] {
     border-radius: 0;
   }
 
-  &:has([data-rehype-pretty-code-title]) {
-    padding: 0 2.4rem 2.4rem 2.4rem !important;
+  // &:has([data-rehype-pretty-code-title]) {
+  //   padding: 0 2.4rem 2.4rem 2.4rem !important;
 
-    [data-rehype-pretty-code-title] {
-      padding: 2.4rem 0 1.2rem 2.4rem;
-      color: var(--code-number-color);
+  //   [data-rehype-pretty-code-title] {
+  //     padding: 2.4rem 0 1.2rem 2.4rem;
+  //     color: var(--code-number-color);
+  //   }
+  // }
+
+  .code {
+    margin-top: 2.4rem;
+    display: inline-block;
+
+    &-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      background: var(--gray-820);
+      color: var(--dots);
     }
   }
 
-  &:has(:not([data-rehype-pretty-code-title])) {
+  &:has(:not([data-rehype-pretty-code-title]), :not([data-line-numbers])) {
     padding: 2.4rem;
+    padding-top: 0;
+
+    .code-header {
+      padding: 1rem 2.4rem;
+      margin: 0 -2.4rem;
+      border-radius: var(--radius) var(--radius) 0 0;
+
+      @media screen and (max-width: $sm) {
+        border-radius: 0;
+      }
+    }
   }
 
   &:has(> code) {
@@ -51,7 +79,12 @@ span[data-rehype-pretty-code-fragment] {
   }
 
   &:has([data-line-numbers]) {
-    padding: 0 0 2.4rem 0 !important;
+    padding: 0 0 2.4rem !important;
+
+    .code-header {
+      padding: 1rem 2.4rem;
+      margin: 0 !important;
+    }
 
     .line {
       display: inline-block;

@@ -11,7 +11,11 @@ import { useBlurStore } from '@stories/blur';
 
 import styles from './Modal.module.scss';
 
-export const Modal: FC<Children & { id: `#${string}` } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & MotionProps> = ({ children, id, ...props }) => {
+export const Modal: FC<Children & { id: `#${string}` } & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> & MotionProps> = ({
+  children,
+  id,
+  ...props
+}) => {
   const [mounted, setMounted] = useState(false);
   const ref = useRef<Element | null>(null);
   const [_isBlur, _updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);

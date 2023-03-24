@@ -1,19 +1,18 @@
-import { AnimatePresence } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
 
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
+import { NewsletterObserver } from '@GlobalComponents/observers/NewsletterObserver';
 import { DetailsWrapper } from '@GlobalComponents/wrappers/DetailsWrapper';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 import { FullWidthContainer } from '@GlobalComponents/wrappers/FullWidthContainer';
 
 import { Stickers } from '@stickers/index';
 
-import { NewsletterModal } from '@modals/NewsletterModal';
-
 import { Details } from '@components/Article';
+import { ReadingTime } from '@components/Article/atoms/ReadingTime';
 import { Author } from '@components/Author';
 import { Comment } from '@components/Comment';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
@@ -21,11 +20,8 @@ import { Resource } from '@components/Resource';
 import { WriteToSomething } from '@components/WriteToSomething';
 
 import type { PickedDetailsProps } from '@stories/articles';
-import { useModalStore } from '@stories/modals';
 
 import { Dashed } from '@icons/Dashed';
-
-import { useProgressYScroll } from '@hooks/useProgressYScroll';
 
 import { hasCookie } from '@utils/hasCookie';
 
@@ -34,7 +30,7 @@ import { newsletterModalPattern } from '@data/regexes';
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edges, source } }) => {
   const [
     {
-      node: { slug, thumbnail, createdAt, tags, title, resources, introduction },
+      node: { slug, thumbnail, createdAt, tags, title, resources, introduction, content },
     },
   ] = edges;
 
@@ -49,19 +45,17 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edge
     commentTitle = t('comment.title'),
     commentDescription = t('comment.description');
 
-  const { progressYScroll } = useProgressYScroll();
-  const [isNewsletterModalOpen, updateNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen, state.updateNewsletterModalOpen]);
-
   useEffect(() => {
-    if (progressYScroll > 50 && !hasCookie(newsletterModalPattern)) updateNewsletterModalOpen(true);
-  }, [progressYScroll, updateNewsletterModalOpen]);
+    if (hasCookie(newsletterModalPattern)) document.cookie = `newsletter-modal=true;max-age=2592000;`;
+  }, []);
 
   return (
     <>
-      <AnimatePresence>{isNewsletterModalOpen && <NewsletterModal />}</AnimatePresence>
+      <NewsletterObserver />
       <Author src={String(thumbnail?.url)} alt={String(slug)} />
       <DetailsWrapper>
         <Details details={{ createdAt, slug, tags, title, introduction } as PickedDetailsProps} />
+        <ReadingTime content={content} />
       </DetailsWrapper>
       <FullWidthContainer>
         <MarkdownToHTML {...source} />

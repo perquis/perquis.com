@@ -1,3 +1,5 @@
+@import './src/styles/_breakpoints.scss';
+
 .modal {
   width: 100%;
   min-width: 80rem;
@@ -16,6 +18,10 @@
   > div {
     flex-grow: 1;
     flex-basis: 100%;
+  }
+
+  @media screen and (max-width: $lg) {
+    display: none;
   }
 }
 
