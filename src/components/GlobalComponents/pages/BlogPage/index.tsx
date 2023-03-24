@@ -20,6 +20,7 @@ import { Resource } from '@components/Resource';
 import { WriteToSomething } from '@components/WriteToSomething';
 
 import type { PickedDetailsProps } from '@stories/articles';
+import { useChangeLocalesOnArticlePage } from '@stories/changeLocalesOnArticlePage';
 
 import { Dashed } from '@icons/Dashed';
 
@@ -27,7 +28,9 @@ import { hasCookie } from '@utils/hasCookie';
 
 import { newsletterModalPattern } from '@data/regexes';
 
-export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edges, source } }) => {
+export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edges, source, negativeSlug } }) => {
+  const [updateNegativeSlug] = useChangeLocalesOnArticlePage((state) => [state.updateNegativeSlug]);
+
   const [
     {
       node: { slug, thumbnail, createdAt, tags, title, resources, introduction, content },
@@ -48,6 +51,8 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edge
   useEffect(() => {
     if (hasCookie(newsletterModalPattern)) document.cookie = `newsletter-modal=true;max-age=2592000;`;
   }, []);
+
+  useEffect(() => updateNegativeSlug(negativeSlug ?? ''), [negativeSlug, updateNegativeSlug]);
 
   return (
     <>

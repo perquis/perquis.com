@@ -8,11 +8,11 @@ import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 import { client } from '@graphql/apollo/apolloClient';
 import type { Articles, GetStaticAriclePageQuery } from '@graphql/databases/client';
 import { Languages, Locale } from '@graphql/databases/client';
-import { getServerPageArticlesList, getServerPageGetStaticAricle } from '@graphql/databases/server';
+import { getServerPageArticlesList, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
 
 import { serializedContent } from '@utils/serializedContent';
 
-export type BlogPageProps = Record<'edges', GetStaticAriclePageQuery['page']['edges']> & { source: MDXRemoteSerializeResult };
+export type BlogPageProps = Record<'edges', GetStaticAriclePageQuery['page']['edges']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
 type TypeArticles = Articles & { locale: string };
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -47,6 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { slug } = params as Params;
   const locales = locale === 'en' ? [Locale.En] : [Locale.Pl];
+  const negativeLocales = locale !== 'en' ? [Locale.En] : [Locale.Pl];
   const {
     props: {
       data: {
@@ -57,16 +58,31 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   const [
     {
-      node: { content },
+      node: { content, id },
     },
   ] = edges;
 
   const source = await serializedContent(content);
 
+  const {
+    props: {
+      data: {
+        page: { edges: negativeEdges },
+      },
+    },
+  } = await getServerPageGetSlugFromNegativeLocale({ variables: { id, locales: negativeLocales } }, client);
+
+  const [
+    {
+      node: { slug: negativeSlug },
+    },
+  ] = negativeEdges;
+
   return {
     props: {
       edges,
       source,
+      negativeSlug,
     },
   };
 };

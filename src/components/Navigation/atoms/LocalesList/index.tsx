@@ -13,11 +13,12 @@ import styles from './LocalesList.module.scss';
 
 interface ILocaleListProps {
   isActive: boolean;
+  pushOnBlogPage: string;
   toggleLocales: () => void;
 }
 
-export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales }) => {
-  const { locale, asPath, push } = useRouter();
+export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales, pushOnBlogPage }) => {
+  const { locale, push } = useRouter();
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
 
   useDropdownMenu(toggleLocales, { ref, state: { isActive } });
@@ -31,7 +32,7 @@ export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales }) =
             key={lng}
             onClick={() => {
               if (isActive) toggleLocales();
-              push(asPath, asPath, { locale: lng });
+              push(pushOnBlogPage, pushOnBlogPage, { locale: lng });
             }}
           >
             {lng}

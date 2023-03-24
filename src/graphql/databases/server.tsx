@@ -188,3 +188,33 @@ export const ssrArticlesList = {
   getServerPage: getServerPageArticlesList,
   withPage: withPageArticlesList,
 };
+export async function getServerPageGetSlugFromNegativeLocale(
+  options: Omit<Apollo.QueryOptions<Operations.GetSlugFromNegativeLocaleQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.GetSlugFromNegativeLocaleQuery>({ ...options, query: Operations.GetSlugFromNegativeLocaleDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageGetSlugFromNegativeLocaleComp = React.FC<{ data?: Operations.GetSlugFromNegativeLocaleQuery; error?: Apollo.ApolloError }>;
+export const withPageGetSlugFromNegativeLocale =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.GetSlugFromNegativeLocaleQuery, Operations.GetSlugFromNegativeLocaleQueryVariables>) =>
+  (WrappedComponent: PageGetSlugFromNegativeLocaleComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetSlugFromNegativeLocaleDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetSlugFromNegativeLocale = {
+  getServerPage: getServerPageGetSlugFromNegativeLocale,
+  withPage: withPageGetSlugFromNegativeLocale,
+};

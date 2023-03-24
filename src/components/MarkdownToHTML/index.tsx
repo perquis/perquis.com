@@ -27,8 +27,6 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
 
   useEffect(() => updateTocOpen(inView), [inView, updateTocOpen]);
 
-  console.log(inView);
-
   return (
     <DirectionColumn ref={ref}>
       <MDXRemote {...props} components={components} />
