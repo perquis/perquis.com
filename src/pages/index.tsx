@@ -31,7 +31,7 @@ const Home: FC<IHomePageProps> = ({ articles, technologies }) => {
   return (
     <>
       <Head>
-        <title>{title + ` | PerQuis&apos;s Blog`}</title>
+        <title>{title + ` | PerQuis's Blog`}</title>
         <meta name="description" content={description} />
       </Head>
       <HomePage stories={{ articles, technologies }} />

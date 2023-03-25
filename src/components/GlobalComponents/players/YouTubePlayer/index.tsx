@@ -1,10 +1,10 @@
 import type { YouTubeProps } from 'react-youtube';
 import YouTube from 'react-youtube';
 
-import { IframeContainer } from '@GlobalComponents/atoms/IframeContainer';
+import styles from '@GlobalComponents/atoms/IframeContainer/IframeContainer.module.scss';
 
-export const YouTubePlayer = ({ id, ...props }: Omit<YouTubeProps, 'videoId'>) => (
-  <IframeContainer>
-    <YouTube id={id} videoId={id} {...props} />
-  </IframeContainer>
+export const YouTubePlayer = ({ id, isDefault, ...props }: Omit<YouTubeProps, 'videoId'> & { isDefault?: boolean }) => (
+  <div tabIndex={-1}>
+    <YouTube id={id} videoId={id} {...props} className={isDefault ? styles['default-iframe-container'] : styles['iframe-container']} />
+  </div>
 );

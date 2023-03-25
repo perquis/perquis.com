@@ -4,7 +4,9 @@ import { Image } from '@GlobalComponents/atoms/Image';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
 
+import { BadPractice, GoodPractice, Information } from '@components/Notes';
 import { RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
+import { Sandpack } from '@components/Sandpack';
 
 import styles from './components.module.scss';
 
@@ -19,6 +21,10 @@ export const components: MDXRemoteProps['components'] = {
   pre: (props) => <RehypePrettyCodeFragment {...props} />,
   img: ({ src, alt }) => <Image src={src ?? ''} alt={alt ?? ''} />,
 
+  Sandpack,
+  Information,
+  BadPractice,
+  GoodPractice,
   CodepenPlayer,
   YouTubePlayer,
 };

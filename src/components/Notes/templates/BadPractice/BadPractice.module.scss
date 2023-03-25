@@ -1,0 +1,32 @@
+@import './src/styles/_mixins.scss';
+
+.note {
+  background: var(--note-bad-practice-color);
+  border-left: 3px solid var(--note-bad-practice-color-border);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    a {
+      &:is(:hover, :focus) {
+        text-decoration-color: var(--note-bad-practice-color-border);
+      }
+    }
+  }
+
+  &::after {
+    left: -24px;
+    top: -8px;
+    rotate: -30deg;
+    background: url(/assets/thumb-down-dynamic-color.png) no-repeat center / cover;
+  }
+}
+
+.hero-pattern {
+  &::before {
+    background: url(/assets/hero-pattern-bad-practice.png);
+  }
+}

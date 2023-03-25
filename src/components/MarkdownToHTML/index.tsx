@@ -8,7 +8,7 @@ import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 import type { Slug } from '@stories/toc';
 import { useTOCStore } from '@stories/toc';
 
-import { components } from './components';
+import { components } from './components/components';
 
 export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const ref = useRef<HTMLDivElement>(null);

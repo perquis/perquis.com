@@ -1,0 +1,29 @@
+@import './src/styles/_mixins.scss';
+
+.note {
+  background: var(--note-information-color);
+  border-left: 3px solid var(--note-information-color-border);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    a {
+      &:is(:hover, :focus) {
+        text-decoration-color: var(--note-information-color-border);
+      }
+    }
+  }
+
+  &::after {
+    background: url(/assets/notebook-dynamic-color.png) no-repeat center / cover;
+  }
+}
+
+.hero-pattern {
+  &::before {
+    background: url(/assets/hero-pattern.png);
+  }
+}

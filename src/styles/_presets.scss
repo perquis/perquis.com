@@ -106,6 +106,15 @@
   --code-scrollbar: hsl(210, 31%, 94%);
   --code-line-numbers: var(--gray-300);
 
+  --note-information-color: hsl(259, 100%, 50%, 0.1);
+  --note-information-color-border: hsl(259, 100%, 50%, 1);
+
+  --note-good-practice-color: hsla(115, 100%, 35%, 0.1);
+  --note-good-practice-color-border: hsl(115, 100%, 35%);
+
+  --note-bad-practice-color: hsla(335, 100%, 50%, 0.1);
+  --note-bad-practice-color-border: hsl(335, 100%, 50%);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;

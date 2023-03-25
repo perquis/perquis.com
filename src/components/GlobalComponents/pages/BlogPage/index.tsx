@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
+import Head from 'next/head';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
@@ -56,6 +57,10 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edge
 
   return (
     <>
+      <Head>
+        <title>{title + ` | PerQuis's Blog`}</title>
+        <meta name="description" content={introduction ?? ''} />
+      </Head>
       <NewsletterObserver />
       <Author src={String(thumbnail?.url)} alt={String(slug)} />
       <DetailsWrapper>

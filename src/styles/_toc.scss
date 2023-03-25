@@ -21,6 +21,12 @@
   ol,
   ul {
     list-style-type: disc;
+
+    li {
+      a {
+        color: var(--color);
+      }
+    }
   }
 
   &::before {

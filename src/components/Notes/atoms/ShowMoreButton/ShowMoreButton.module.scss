@@ -1,0 +1,16 @@
+.button {
+  border: none;
+  background: none;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+  font-weight: 500;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

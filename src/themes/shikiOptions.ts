@@ -6,7 +6,7 @@ import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 import beaderThemeClassicsLight from './beader-theme.json';
 import moonlight from './moonlight.json';
 
-export const options: Options = {
+export const shikiOptions: Options = {
   keepBackground: false,
   theme: {
     dark: moonlight as unknown as Theme,
@@ -14,6 +14,7 @@ export const options: Options = {
   },
   tokensMap: {
     fn: 'entity.name.function',
+    class: 'entity.other.attribute-name.class',
   },
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ''),
   getHighlighter: ({ theme }) =>
