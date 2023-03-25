@@ -5,6 +5,7 @@ import type { FC } from 'react';
 
 import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 
+// import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 import { client } from '@graphql/apollo/apolloClient';
 import type { Articles, GetStaticAriclePageQuery } from '@graphql/databases/client';
 import { Locale } from '@graphql/databases/client';
@@ -62,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     },
   ] = edges;
 
-  const source = await serializedContent(content);
+  const source = await serializedContent(content?.text.replace(/\\n/g, '\n'));
 
   const {
     props: {

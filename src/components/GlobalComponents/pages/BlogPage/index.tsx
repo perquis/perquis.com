@@ -58,7 +58,7 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { edge
       <Author src={String(thumbnail?.url)} alt={String(slug)} />
       <DetailsWrapper>
         <Details details={{ createdAt, slug, tags, title, introduction } as PickedDetailsProps} />
-        <ReadingTime content={content} />
+        <ReadingTime content={content?.text ?? ''} />
       </DetailsWrapper>
       <FullWidthContainer>
         <MarkdownToHTML {...source} />

@@ -34,7 +34,7 @@ export type Aggregate = {
 export type Articles = Node & {
   readonly __typename?: 'Articles';
   readonly comments: ReadonlyArray<CommentsSchema>;
-  readonly content?: Maybe<Scalars['String']>;
+  readonly content?: Maybe<RichText>;
   /** The time the document was created */
   readonly createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -185,7 +185,7 @@ export type ArticlesConnection = {
 export type ArticlesCreateInput = {
   readonly comments?: InputMaybe<CommentsSchemaCreateManyInlineInput>;
   /** content input for default locale (en) */
-  readonly content?: InputMaybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** introduction input for default locale (en) */
   readonly introduction?: InputMaybe<Scalars['String']>;
@@ -202,7 +202,7 @@ export type ArticlesCreateInput = {
 };
 
 export type ArticlesCreateLocalizationDataInput = {
-  readonly content?: InputMaybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
   readonly slug?: InputMaybe<Scalars['String']>;
@@ -347,8 +347,6 @@ export type ArticlesManyWhereInput = {
 };
 
 export enum ArticlesOrderByInput {
-  ContentAsc = 'content_ASC',
-  ContentDesc = 'content_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   IdAsc = 'id_ASC',
@@ -370,7 +368,7 @@ export enum ArticlesOrderByInput {
 export type ArticlesUpdateInput = {
   readonly comments?: InputMaybe<CommentsSchemaUpdateManyInlineInput>;
   /** content input for default locale (en) */
-  readonly content?: InputMaybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   /** introduction input for default locale (en) */
   readonly introduction?: InputMaybe<Scalars['String']>;
   /** Manage document localizations */
@@ -385,7 +383,7 @@ export type ArticlesUpdateInput = {
 };
 
 export type ArticlesUpdateLocalizationDataInput = {
-  readonly content?: InputMaybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
   readonly slug?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
@@ -424,6 +422,8 @@ export type ArticlesUpdateManyInlineInput = {
 };
 
 export type ArticlesUpdateManyInput = {
+  /** content input for default locale (en) */
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   /** introduction input for default locale (en) */
   readonly introduction?: InputMaybe<Scalars['String']>;
   /** Optional updates to localizations */
@@ -432,6 +432,7 @@ export type ArticlesUpdateManyInput = {
 };
 
 export type ArticlesUpdateManyLocalizationDataInput = {
+  readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
 };
 
@@ -513,25 +514,6 @@ export type ArticlesWhereInput = {
   readonly comments_every?: InputMaybe<CommentsSchemaWhereInput>;
   readonly comments_none?: InputMaybe<CommentsSchemaWhereInput>;
   readonly comments_some?: InputMaybe<CommentsSchemaWhereInput>;
-  readonly content?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  readonly content_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  readonly content_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  readonly content_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  readonly content_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  readonly content_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  readonly content_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  readonly content_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
-  /** All values not starting with the given string. */
-  readonly content_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  readonly content_starts_with?: InputMaybe<Scalars['String']>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -7268,8 +7250,8 @@ export type GetStaticAriclePageQuery = {
         readonly tags: ReadonlyArray<Tags>;
         readonly slug?: string | null;
         readonly title?: string | null;
-        readonly content?: string | null;
         readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
+        readonly content?: { readonly __typename?: 'RichText'; readonly text: string } | null;
         readonly resources: ReadonlyArray<{ readonly __typename?: 'Links'; readonly id: string; readonly name?: string | null; readonly link?: string | null }>;
       };
     }>;
@@ -7296,8 +7278,8 @@ export type ArticlesListQuery = {
         readonly tags: ReadonlyArray<Tags>;
         readonly slug?: string | null;
         readonly title?: string | null;
-        readonly content?: string | null;
         readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
+        readonly content?: { readonly __typename?: 'RichText'; readonly text: string } | null;
         readonly comments: ReadonlyArray<{
           readonly __typename?: 'CommentsSchema';
           readonly id: string;
@@ -7549,7 +7531,9 @@ export const GetStaticAriclePageDocument = gql`
           id
           slug
           title
-          content
+          content {
+            text
+          }
           resources {
             id
             name
@@ -7605,7 +7589,9 @@ export const ArticlesListDocument = gql`
           id
           slug
           title
-          content
+          content {
+            text
+          }
           comments(where: { languages: $lng }) {
             id
             nickname

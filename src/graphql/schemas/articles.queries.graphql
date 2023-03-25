@@ -78,7 +78,9 @@ query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
         id
         slug
         title
-        content
+        content {
+          text
+        }
         resources {
           id
           name
@@ -104,7 +106,9 @@ query ArticlesList($locales: [Locale!]!, $lng: Languages) {
         id
         slug
         title
-        content
+        content {
+          text
+        }
         comments(where: { languages: $lng }) {
           id
           nickname
