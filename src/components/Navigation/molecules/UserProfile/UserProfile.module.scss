@@ -6,7 +6,7 @@
   align-items: center;
   gap: 1rem;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     display: none;
   }
 }

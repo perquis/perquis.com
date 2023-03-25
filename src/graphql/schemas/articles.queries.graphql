@@ -137,3 +137,13 @@ query GetSlugFromNegativeLocale($locales: [Locale!]!, $id: ID!) {
     }
   }
 }
+
+query GetArticleSlugs($locales: [Locale!]!) {
+  page: schemaArticlesConnection(locales: $locales) {
+    edges {
+      node {
+        slug
+      }
+    }
+  }
+}

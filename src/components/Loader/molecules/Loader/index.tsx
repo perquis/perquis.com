@@ -1,13 +1,14 @@
-import { useTheme } from 'next-themes';
 import ContentLoader from 'react-content-loader';
 
 import { LoaderWrapper } from '@components/Loader/atoms/LoaderWrapper';
 
-export const Loader = () => {
-  const { theme } = useTheme();
+import { useThemeCondition } from '@hooks/useThemeCondition';
 
-  const backgroundColor = theme === 'dark' ? '#233243' : '#dee5ed';
-  const foregroundColor = theme === 'dark' ? '#1a2532' : '#cdd8e5';
+export const Loader = () => {
+  const condition = useThemeCondition();
+
+  const backgroundColor = condition ? '#233243' : '#dee5ed';
+  const foregroundColor = condition ? '#1a2532' : '#cdd8e5';
 
   return (
     <>

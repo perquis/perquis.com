@@ -3,7 +3,7 @@
 .wrapper {
   position: relative;
 
-  @media screen and (min-width: calc($md + 1px)) {
+  @media screen and (min-width: calc($lg + 1px)) {
     display: none;
   }
 }

@@ -7328,6 +7328,18 @@ export type GetSlugFromNegativeLocaleQuery = {
   };
 };
 
+export type GetArticleSlugsQueryVariables = Exact<{
+  locales: ReadonlyArray<Locale> | Locale;
+}>;
+
+export type GetArticleSlugsQuery = {
+  readonly __typename?: 'Query';
+  readonly page: {
+    readonly __typename?: 'ArticlesConnection';
+    readonly edges: ReadonlyArray<{ readonly __typename?: 'ArticlesEdge'; readonly node: { readonly __typename?: 'Articles'; readonly slug?: string | null } }>;
+  };
+};
+
 export const SearchForArticlesListDocument = gql`
   query SearchForArticlesList($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput) {
     schemaArticles(where: { _search: $search }, locales: $locales, orderBy: $orderBy) {
@@ -7686,3 +7698,42 @@ export function useGetSlugFromNegativeLocaleLazyQuery(baseOptions?: Apollo.LazyQ
 export type GetSlugFromNegativeLocaleQueryHookResult = ReturnType<typeof useGetSlugFromNegativeLocaleQuery>;
 export type GetSlugFromNegativeLocaleLazyQueryHookResult = ReturnType<typeof useGetSlugFromNegativeLocaleLazyQuery>;
 export type GetSlugFromNegativeLocaleQueryResult = Apollo.QueryResult<GetSlugFromNegativeLocaleQuery, GetSlugFromNegativeLocaleQueryVariables>;
+export const GetArticleSlugsDocument = gql`
+  query GetArticleSlugs($locales: [Locale!]!) {
+    page: schemaArticlesConnection(locales: $locales) {
+      edges {
+        node {
+          slug
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetArticleSlugsQuery__
+ *
+ * To run a query within a React component, call `useGetArticleSlugsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetArticleSlugsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetArticleSlugsQuery({
+ *   variables: {
+ *      locales: // value for 'locales'
+ *   },
+ * });
+ */
+export function useGetArticleSlugsQuery(baseOptions: Apollo.QueryHookOptions<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>(GetArticleSlugsDocument, options);
+}
+export function useGetArticleSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>(GetArticleSlugsDocument, options);
+}
+export type GetArticleSlugsQueryHookResult = ReturnType<typeof useGetArticleSlugsQuery>;
+export type GetArticleSlugsLazyQueryHookResult = ReturnType<typeof useGetArticleSlugsLazyQuery>;
+export type GetArticleSlugsQueryResult = Apollo.QueryResult<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>;

@@ -1,17 +1,18 @@
-import { useTheme } from 'next-themes';
 import useTranslation from 'next-translate/useTranslation';
 import ContentLoader from 'react-content-loader';
 
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { Tag } from '@GlobalComponents/atoms/Tag';
 
+import { useThemeCondition } from '@hooks/useThemeCondition';
+
 import styles from './NotFoundContent.module.scss';
 
 export const NotFoundContent = () => {
-  const { theme } = useTheme();
+  const condition = useThemeCondition();
 
-  const backgroundColor = theme === 'dark' ? '#233243' : '#dee5ed';
-  const foregroundColor = theme === 'dark' ? '#1a2532' : '#cdd8e5';
+  const backgroundColor = condition ? '#233243' : '#dee5ed';
+  const foregroundColor = condition ? '#1a2532' : '#cdd8e5';
 
   const { t } = useTranslation('home');
 

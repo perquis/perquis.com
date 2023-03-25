@@ -7,8 +7,8 @@ import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 
 import { client } from '@graphql/apollo/apolloClient';
 import type { Articles, GetStaticAriclePageQuery } from '@graphql/databases/client';
-import { Languages, Locale } from '@graphql/databases/client';
-import { getServerPageArticlesList, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
+import { Locale } from '@graphql/databases/client';
+import { getServerPageGetArticleSlugs, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
 
 import { serializedContent } from '@utils/serializedContent';
 
@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         page: { edges: polishEdges },
       },
     },
-  } = await getServerPageArticlesList({ variables: { locales: [Locale.Pl], lng: Languages.Pl } }, client);
+  } = await getServerPageGetArticleSlugs({ variables: { locales: [Locale.Pl] } }, client);
 
   const {
     props: {
@@ -33,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         page: { edges: englishEdges },
       },
     },
-  } = await getServerPageArticlesList({ variables: { locales: [Locale.En], lng: Languages.En } }, client);
+  } = await getServerPageGetArticleSlugs({ variables: { locales: [Locale.En] } }, client);
 
   const articles = [...polishEdges.map(({ node }) => ({ locale: 'pl', ...node })), ...englishEdges.map(({ node }) => ({ locale: 'en', ...node }))] as TypeArticles[];
   const paths = articles.map(({ slug, locale }) => ({ params: { slug: String(slug) }, locale: String(locale) }));

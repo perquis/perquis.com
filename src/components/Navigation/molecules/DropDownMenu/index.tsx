@@ -9,6 +9,8 @@ import { SmallAvatar } from '@GlobalComponents/atoms/SmallAvatar';
 
 import { vars } from '@animations/pop-up';
 
+import { useChangeLocalesOnArticlePage } from '@stories/changeLocalesOnArticlePage';
+
 import { languages } from '@data/languages';
 
 import styles from './DropDownMenu.module.scss';
@@ -18,13 +20,16 @@ interface IDropDownMenu {
 }
 
 export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
-  const { asPath, push, locale } = useRouter();
+  const { pathname, push, locale } = useRouter();
   const { data: session } = useSession();
+  const [negativeSlug] = useChangeLocalesOnArticlePage((state) => [state.negativeSlug]);
 
   const { t } = useTranslation('global');
   const signOutText = t('user-profile.sign-out'),
     signInText = t('user-profile.sign-in'),
     changeLocationText = t('user-profile.change-location');
+
+  const pushOnBlogPage = pathname !== '/' ? `${pathname.replace('[slug]', '')}${negativeSlug}` : '/';
 
   return (
     <AnimatePresence>
@@ -37,7 +42,7 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
                 <b>{session?.user?.name}</b>
               </div>
             ) : null}
-            <Button isSecondary onClick={() => push(asPath, asPath, { locale: locale === 'en' ? 'pl' : 'en' })}>
+            <Button isSecondary onClick={() => push(pushOnBlogPage, pushOnBlogPage, { locale: locale === 'en' ? 'pl' : 'en' })}>
               {changeLocationText}{' '}
               {languages
                 .filter((lng) => lng !== locale)
