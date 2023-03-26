@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { vars } from '@animations/pop-up';
 
 import { useDropdownMenu } from '@hooks/useDropdownMenu';
+import { useChangeLocalesOnBlogPage } from '@hooks/usePushOnBlogPage';
 
 import { languages } from '@data/languages';
 
@@ -13,14 +14,14 @@ import styles from './LocalesList.module.scss';
 
 interface ILocaleListProps {
   isActive: boolean;
-  pushOnBlogPage: string;
   toggleLocales: () => void;
 }
 
-export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales, pushOnBlogPage }) => {
-  const { locale, push } = useRouter();
+export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales }) => {
+  const { locale } = useRouter();
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
 
+  const { handleChangeLocalesOnBlogPage } = useChangeLocalesOnBlogPage();
   useDropdownMenu(toggleLocales, { ref, state: { isActive } });
 
   return (
@@ -32,7 +33,7 @@ export const LocalesList: FC<ILocaleListProps> = ({ isActive, toggleLocales, pus
             key={lng}
             onClick={() => {
               if (isActive) toggleLocales();
-              push(pushOnBlogPage, pushOnBlogPage, { locale: lng });
+              handleChangeLocalesOnBlogPage();
             }}
           >
             {lng}

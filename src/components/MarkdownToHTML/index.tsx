@@ -1,5 +1,6 @@
 import type { MDXRemoteProps } from 'next-mdx-remote';
 import { MDXRemote } from 'next-mdx-remote';
+import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -13,6 +14,7 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [updateSlugs, updateTocOpen] = useTOCStore((state) => [state.updateSlugs, state.updateTocOpen]);
   const [reference, inView] = useInView({ threshold: 0 });
+  const { locale } = useRouter();
 
   useEffect(() => {
     const toc = ref.current?.querySelector('.toc');
@@ -20,7 +22,7 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
 
     updateSlugs(slugs);
     reference(ref.current?.querySelector('.toc'));
-  }, [updateSlugs, reference]);
+  }, [updateSlugs, reference, locale]);
 
   useEffect(() => updateTocOpen(inView), [inView, updateTocOpen]);
 

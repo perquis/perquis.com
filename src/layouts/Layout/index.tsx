@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import type { Children, FC } from 'react';
 import { useBlurStore } from 'src/stories/blur';
 
@@ -20,6 +21,7 @@ export const Layout: FC<Children> = ({ children }) => {
   const condition = isBlur || isNewsletterModalOpen;
 
   const [isTocOpen] = useTOCStore((state) => [state.isTocOpen]);
+  const { pathname } = useRouter();
 
   return (
     <>
@@ -32,7 +34,7 @@ export const Layout: FC<Children> = ({ children }) => {
         <div className={styles.column}></div>
         <div className={styles['center-column']}>{children}</div>
         <div className={styles.column}>
-          <AnimatePresence>{!isTocOpen && <TableOfContents />}</AnimatePresence>
+          <AnimatePresence>{!isTocOpen && pathname !== '/' && <TableOfContents />}</AnimatePresence>
         </div>
       </div>
       <Footer />

@@ -5,15 +5,14 @@ import type { FC } from 'react';
 
 import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 
-// import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 import { client } from '@graphql/apollo/apolloClient';
-import type { Articles, GetStaticAriclePageQuery } from '@graphql/databases/client';
+import type { Articles, ArticlesEdge } from '@graphql/databases/client';
 import { Locale } from '@graphql/databases/client';
 import { getServerPageGetArticleSlugs, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
 
 import { serializedContent } from '@utils/serializedContent';
 
-export type BlogPageProps = Record<'edges', GetStaticAriclePageQuery['page']['edges']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
+export type BlogPageProps = Record<'node', ArticlesEdge['node']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
 type TypeArticles = Articles & { locale: string };
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -81,7 +80,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      edges,
+      node: edges[0].node,
       source,
       negativeSlug,
     },
