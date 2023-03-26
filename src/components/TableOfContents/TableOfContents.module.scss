@@ -1,0 +1,19 @@
+.toc {
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: sticky;
+  top: 3.6rem;
+  width: 400px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    color: var(--paragraph);
+  }
+}

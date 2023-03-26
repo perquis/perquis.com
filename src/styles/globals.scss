@@ -111,3 +111,13 @@ img {
   user-select: none;
   pointer-events: none;
 }
+
+ol,
+ul {
+  list-style-type: none;
+  padding-left: 2.4rem;
+
+  &:first-child {
+    padding-left: 0;
+  }
+}

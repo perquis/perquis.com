@@ -3,6 +3,7 @@
 .ctn {
   width: 100%;
   padding: 0 2.4rem;
+  position: relative;
 
   @media screen and (max-width: $sm) {
     padding: 0;

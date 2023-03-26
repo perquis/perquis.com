@@ -1,12 +1,7 @@
 import { create } from 'zustand';
 
-export interface Slug {
-  hash: string;
-  textContent: string;
-}
-
 interface State {
-  slugs: Slug[];
+  slugs: string;
   isTocOpen: boolean;
 }
 
@@ -16,7 +11,7 @@ interface Action {
 }
 
 export const useTOCStore = create<State & Action>((set) => ({
-  slugs: [],
+  slugs: '',
   isTocOpen: false,
   updateSlugs: (slugs) => set(() => ({ slugs })),
   updateTocOpen: (isTocOpen) => set(() => ({ isTocOpen })),

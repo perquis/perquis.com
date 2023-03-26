@@ -5,7 +5,6 @@ import { useInView } from 'react-intersection-observer';
 
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import type { Slug } from '@stories/toc';
 import { useTOCStore } from '@stories/toc';
 
 import { components } from './components/components';
@@ -16,10 +15,8 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const [reference, inView] = useInView({ threshold: 0 });
 
   useEffect(() => {
-    const links = ref.current?.querySelector('.toc')?.querySelectorAll('a');
-    const slugs: Slug[] = [];
-
-    links?.forEach(({ hash, textContent }) => slugs.push({ hash, textContent: textContent ?? '' }));
+    const toc = ref.current?.querySelector('.toc');
+    const slugs: string = toc?.innerHTML ?? '';
 
     updateSlugs(slugs);
     reference(ref.current?.querySelector('.toc'));
