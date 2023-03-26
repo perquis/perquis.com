@@ -12,7 +12,6 @@ import styles from './HamburgerMenu.module.scss';
 export const HamburgerMenu = () => {
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
   const [isBlur, updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);
-
   const toggleActive = () => updateIsBlur(!isBlur);
 
   useDropdownMenu(toggleActive, { ref, state: { isActive: isBlur, setActive: updateIsBlur as Dispatch<SetStateAction<boolean>> } });

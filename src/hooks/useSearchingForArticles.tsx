@@ -1,4 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -10,8 +9,6 @@ export const useSearchingForArticles = () => {
   const [updateIsLoading, updateSearchedForArticlesList] = useArticlesStore((state) => [state.updateIsLoading, state.updateSearchedForArticlesList]);
   const [technologies] = useTechnologiesStore((state) => [state.technologies]);
   const isTechnologies = technologies.length > 0;
-  const { t } = useTranslation('home');
-  const span = t('posts-list.technologies');
   const { locale } = useRouter();
 
   const [status, keywords] = useSearchBarStore((state) => [state.status, state.keywords]);
@@ -35,5 +32,5 @@ export const useSearchingForArticles = () => {
     }
   }, [isSearchingArticles, status, locale, keywords, technologies, updateIsLoading, updateSearchedForArticlesList]);
 
-  return { isTechnologies, span };
+  return { isTechnologies };
 };

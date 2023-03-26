@@ -1,17 +1,14 @@
-import type { FC } from 'react';
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './AboutMe.module.scss';
 
-interface IAboutMe {
-  title: string;
-  description: string;
-}
+export const AboutMe = () => {
+  const { aboutMeTitle, aboutMeDescription } = useInternationalizedRouting('home');
 
-export const AboutMe: FC<IAboutMe> = ({ title, description }) => {
   return (
     <div className={styles.wrapper}>
-      <b>{title}</b>
-      <p>{description}</p>
+      <b>{aboutMeTitle}</b>
+      <p>{aboutMeDescription}</p>
     </div>
   );
 };

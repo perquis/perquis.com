@@ -1,7 +1,6 @@
 // @ts-ignore
 import type { IHomePageProps } from '@types/pages';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';
 import type { FC } from 'react';
 
@@ -18,10 +17,6 @@ export const HomePage: FC<Record<'stories', IHomePageProps>> = ({ stories: { art
   const [updateArticlesList, updateHasNextPage] = useArticlesStore((state) => [state.updateArticlesList, state.updateHasNextPage]);
   const [updateTechnologiesList] = useTechnologiesStore((state) => [state.updateTechnologiesList]);
 
-  const { t } = useTranslation('home');
-  const title = t('about-me.title'),
-    description = t('about-me.description');
-
   useEffect(() => {
     updateTechnologiesList(technologies);
     updateHasNextPage(articles.pageInfo.hasNextPage);
@@ -31,7 +26,7 @@ export const HomePage: FC<Record<'stories', IHomePageProps>> = ({ stories: { art
   return (
     <>
       <Author src="/images/thumbnail.gif" alt="Thumbnail" />
-      <AboutMe title={title} description={description} />
+      <AboutMe />
       <WavyLines />
       <PostsList />
     </>

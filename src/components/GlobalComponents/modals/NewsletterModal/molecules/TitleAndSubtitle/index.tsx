@@ -1,18 +1,16 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
+
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './TitleAndSubtitle.module.scss';
 
 export const TitleAndSubtitle = () => {
-  const { t } = useTranslation('global');
-  const __html = t('newsletter.title'),
-    description = t('newsletter.description');
+  const { newsletterTitle, newsletterDescription } = useInternationalizedRouting('global');
 
   return (
     <div className={styles.ctn}>
-      <h1 dangerouslySetInnerHTML={{ __html }} />
-      <Paragraph>{description}</Paragraph>
+      <h1 dangerouslySetInnerHTML={{ __html: newsletterTitle ?? '' }} />
+      <Paragraph>{newsletterDescription}</Paragraph>
     </div>
   );
 };

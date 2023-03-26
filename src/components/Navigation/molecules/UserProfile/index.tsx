@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import useTranslation from 'next-translate/useTranslation';
 import type { FC, MutableRefObject } from 'react';
 import { useRef, useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
@@ -13,6 +12,7 @@ import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
 import { vars } from '@animations/pop-up';
 
 import { useDropdownMenu } from '@hooks/useDropdownMenu';
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './UserProfile.module.scss';
 
@@ -21,15 +21,11 @@ interface IUserProfile {
 }
 
 export const UserProfile: FC<IUserProfile> = ({ session }) => {
-  const [isActive, setActive] = useState(false);
+  const { userProfileSignOut } = useInternationalizedRouting('global');
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
-
+  const [isActive, setActive] = useState(false);
   const toggleOptions = () => setActive(!isActive);
-
   useDropdownMenu(toggleOptions, { ref, state: { isActive, setActive } });
-
-  const { t } = useTranslation('global');
-  const text = t('user-profile.sign-out');
 
   return (
     <div className={styles.wrapper}>
@@ -45,7 +41,7 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
         <AnimatePresence>
           {isActive && (
             <motion.div className={styles['log-out']} variants={vars} initial="initial" animate="animate" exit="exit">
-              <button onClick={() => signOut()}>{text}</button>
+              <button onClick={() => signOut()}>{userProfileSignOut}</button>
             </motion.div>
           )}
         </AnimatePresence>

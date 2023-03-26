@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import FocusLock from 'react-focus-lock';
 
@@ -9,6 +8,7 @@ import { SmallAvatar } from '@GlobalComponents/atoms/SmallAvatar';
 
 import { vars } from '@animations/pop-up';
 
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 import { useChangeLocalesOnBlogPage } from '@hooks/usePushOnBlogPage';
 
 import { languages } from '@data/languages';
@@ -20,14 +20,10 @@ interface IDropDownMenu {
 }
 
 export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
-  const { locale } = useRouter();
-  const { data: session } = useSession();
+  const { userProfileSignIn, userProfileSignOut, userProfileChangeLocation } = useInternationalizedRouting('global');
   const { handleChangeLocalesOnBlogPage } = useChangeLocalesOnBlogPage();
-
-  const { t } = useTranslation('global');
-  const signOutText = t('user-profile.sign-out'),
-    signInText = t('user-profile.sign-in'),
-    changeLocationText = t('user-profile.change-location');
+  const { data: session } = useSession();
+  const { locale } = useRouter();
 
   return (
     <AnimatePresence>
@@ -41,7 +37,7 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
               </div>
             ) : null}
             <Button isSecondary onClick={handleChangeLocalesOnBlogPage}>
-              {changeLocationText}{' '}
+              {userProfileChangeLocation}{' '}
               {languages
                 .filter((lng) => lng !== locale)
                 .map((lng) => (
@@ -50,11 +46,11 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
             </Button>
             {session ? (
               <Button isSecondary onClick={() => signOut()}>
-                {signOutText}
+                {userProfileSignOut}
               </Button>
             ) : (
               <Button isSecondary onClick={() => signIn('github')}>
-                {signInText}
+                {userProfileSignIn}
               </Button>
             )}
           </FocusLock>

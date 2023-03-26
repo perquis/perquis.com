@@ -1,11 +1,17 @@
 .toc {
-  font-size: 1.8rem;
-  display: flex;
-  flex-direction: column;
   gap: 1.2rem;
-  position: sticky;
   top: 3.6rem;
   width: 400px;
+  display: flex;
+  position: sticky;
+  font-size: 1.8rem;
+  flex-direction: column;
+  margin-left: calc(100% + 2.4rem + 3.6rem);
+  height: 0;
+
+  @media screen and (max-width: 1599px) {
+    display: none;
+  }
 
   ul {
     padding: 0;

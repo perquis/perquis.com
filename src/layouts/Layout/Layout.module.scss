@@ -1,23 +1,7 @@
 .container {
   display: flex;
   padding-top: 2rem;
-  justify-content: center;
-  gap: 4.8rem;
-}
-
-.center-column {
-  width: 100%;
-  max-width: 660px;
-
-  display: flex;
-  align-items: center;
   flex-direction: column;
-}
-
-.column {
-  min-width: 400px;
-
-  @media screen and (max-width: 1600px) {
-    display: none;
-  }
+  max-width: 660px;
+  margin: 0 auto;
 }

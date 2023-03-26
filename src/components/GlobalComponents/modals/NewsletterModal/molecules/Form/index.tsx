@@ -1,5 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import { EmailInput } from '@GlobalComponents/atoms/EmailInput';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
@@ -7,19 +5,19 @@ import { StickerButton } from '@stickers/index';
 
 import { useFormStore } from '@stories/forms';
 
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
+
 import styles from './Form.module.scss';
 
 export const Form = () => {
+  const { newsletterButton, newsletterPlaceholder } = useInternationalizedRouting('global');
   const [updateEmailKeywords] = useFormStore((state) => [state.updateEmailKeywords]);
-  const { t } = useTranslation('global');
-  const placeholder = t('newsletter.placeholder'),
-    button = t('newsletter.button');
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
       <DirectionColumn>
-        <EmailInput placeholder={placeholder} isFullWidth onChange={(e) => updateEmailKeywords(e.currentTarget.value)} />
-        <StickerButton>{button}</StickerButton>
+        <EmailInput placeholder={newsletterPlaceholder} isFullWidth onChange={(e) => updateEmailKeywords(e.currentTarget.value)} />
+        <StickerButton>{newsletterButton}</StickerButton>
       </DirectionColumn>
     </form>
   );
