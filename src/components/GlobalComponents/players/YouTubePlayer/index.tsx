@@ -5,6 +5,6 @@ import styles from '@GlobalComponents/atoms/IframeContainer/IframeContainer.modu
 
 export const YouTubePlayer = ({ id, isDefault, ...props }: Omit<YouTubeProps, 'videoId'> & { isDefault?: boolean }) => (
   <div tabIndex={-1}>
-    <YouTube id={id} videoId={id} {...props} className={isDefault ? styles['default-iframe-container'] : styles['iframe-container']} />
+    <YouTube id={id} videoId={id} className={isDefault ? styles['default-iframe-container'] : styles['iframe-container']} {...props} />
   </div>
 );

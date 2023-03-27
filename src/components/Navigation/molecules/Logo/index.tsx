@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useNavigationStore } from '@stories/navigation';
 
-import { LogoIcon } from '@icons/LogoIcon';
+import { LogoIcon } from '@icons/index';
 
 import styles from './Logo.module.scss';
 

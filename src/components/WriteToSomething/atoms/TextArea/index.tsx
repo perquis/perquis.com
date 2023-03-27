@@ -9,7 +9,9 @@ interface ITextArea {
   disabled?: boolean;
 }
 
-export const TextArea: FC<ITextArea & DetailedHTMLProps<HTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>> = ({ disabled, ...props }) => {
+type ITextAreaProps = FC<ITextArea & DetailedHTMLProps<HTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>>;
+
+export const TextArea: ITextAreaProps = ({ disabled, ...props }) => {
   const { t } = useTranslation('global');
   const placeholder = t('comment.form.placeholder');
 

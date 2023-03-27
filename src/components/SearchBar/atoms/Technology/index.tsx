@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { Children, FC } from 'react';
 import { IoMdCheckmark } from 'react-icons/io';
 import { useTechnologiesStore } from 'src/stories/technologies';
@@ -17,7 +18,7 @@ export const Technology: FC<Children & ITechnology> = ({ children, isSelected })
 
   return (
     <button
-      className={`${styles.button} ${isSelected ? styles.selected : ''}`}
+      className={clsx(styles.button, isSelected && styles.selected)}
       onClick={() => {
         updateIsLoading(true);
         handleUpdatingTechnologies(children as string);

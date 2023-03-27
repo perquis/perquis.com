@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import { useToggleTheme } from '@hooks/useToggleTheme';
@@ -11,5 +12,5 @@ export const ToggleTheme = () => {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  return <button className={`${styles['theme-mode']} ${isActive ? styles.active : ''}`} onClick={toggleTheme} aria-label="Toggle theme" />;
+  return <button className={clsx(styles['theme-mode'], isActive && styles.active)} onClick={toggleTheme} aria-label="Toggle theme" />;
 };

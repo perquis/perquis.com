@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Children, Fragment, useRef, useState } from 'react';
 import type { Children as ChildrenProps, FC } from 'react';
 
@@ -15,7 +16,7 @@ export const NoteTemplate: FC<ChildrenProps & { noteClassName?: string; heroPatt
   const count = Children.count(children);
 
   return (
-    <div className={`${styles.note} ${noteClassName}`}>
+    <div className={clsx(styles.note, noteClassName)}>
       <div className={`${styles['hero-pattern']} ${heroPatternClassName}`}>
         <DirectionColumn ref={ref} className={styles['not-padding']}>
           {isOpen ? <>{children}</> : elements.map((child, i) => <Fragment key={i}>{child}</Fragment>)}

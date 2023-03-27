@@ -6,7 +6,7 @@ import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 import { Comment } from '@components/Comment';
 import { WriteToSomething } from '@components/WriteToSomething';
 
-import { Dashed } from '@icons/Dashed';
+import { Dashed } from '@icons/index';
 
 export const ComentsList = () => {
   const { t } = useTranslation('global');

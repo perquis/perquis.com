@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
@@ -22,7 +23,7 @@ export const Details: FC<Record<'details', PickedDetailsProps> & IDateAndTitle> 
   const isSetLocale = locale === 'en' ? Locale.En : Locale.Pl;
 
   return (
-    <div className={`${styles.details} ${isLink ? styles['is-not-link'] : ''}`}>
+    <div className={clsx(styles.details, isLink && styles['is-not-link'])}>
       <DateAndTitle details={{ date: toLocaleDateString(createdAt, isSetLocale), title, href: `/${articleRoute}/${slug}` }} isLink={isLink ? true : false} />
       <Paragraph>{introduction}</Paragraph>
       <TagsList>

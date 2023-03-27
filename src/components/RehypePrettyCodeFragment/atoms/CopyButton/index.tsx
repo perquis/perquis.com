@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { BsClipboard, BsClipboardCheck } from 'react-icons/bs';
@@ -18,7 +19,7 @@ export const CopyButton: FC<{ text: string }> = ({ text }) => {
   };
 
   return (
-    <button disabled={isCopied} onClick={copy} className={`${styles['copy-button']} ${isCopied ? styles.copied : ''}`} tabIndex={0}>
+    <button disabled={isCopied} onClick={copy} className={clsx(styles['copy-button'], isCopied && styles.copied)} tabIndex={0}>
       {isCopied ? <BsClipboardCheck size={size} /> : <BsClipboard size={size} />}
     </button>
   );

@@ -8,7 +8,9 @@ import type { GetStaticAriclePageQuery } from '@graphql/databases/client';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
-export const ResourcesList: FC<Record<'resources', GetStaticAriclePageQuery['page']['edges'][0]['node']['resources']>> = ({ resources }) => {
+type ResourcesListProps = FC<Record<'resources', GetStaticAriclePageQuery['page']['edges'][0]['node']['resources']>>;
+
+export const ResourcesList: ResourcesListProps = ({ resources }) => {
   const { resourcesListsTitle } = useInternationalizedRouting('global');
 
   return (

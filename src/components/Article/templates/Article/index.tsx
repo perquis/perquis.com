@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC, KeyboardEvent } from 'react';
 
@@ -24,11 +25,8 @@ export const Article: FC<IArticleProps> = ({ article = articleInitialState, isNe
   const changeRoute = () => push(`/${articleRoute}/${article.slug}`);
   const handlePushingArticlesSlug = (e: KeyboardEvent<HTMLElement>) => e.key === 'Enter' && changeRoute();
 
-  const isNewArticleCondition = isNewArticle ? styles['new-article'] : '';
-  const className = `${styles.article} ${isNewArticleCondition}`;
-
   return (
-    <article className={className} onKeyDown={handlePushingArticlesSlug} role="button" tabIndex={0}>
+    <article className={clsx(styles.article, isNewArticle && styles['new-article'])} onKeyDown={handlePushingArticlesSlug} role="button" tabIndex={0}>
       {isLoadingAnimation ? <Loader /> : isNotFoundArticle ? <NotFoundContent /> : <Content article={article} />}
     </article>
   );

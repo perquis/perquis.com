@@ -35,6 +35,9 @@ export const useInternationalizedRouting = (status: Status) => {
       joinOurCommunityDescription = global('join-our-community.description'),
       joinOurCommunityButton = global('join-our-community.button');
 
+    const commentFormReset = global('comment.form.reset'),
+      commentFormPublish = global('comment.form.publish');
+
     return {
       userProfileSignIn,
       userProfileSignOut,
@@ -48,6 +51,8 @@ export const useInternationalizedRouting = (status: Status) => {
       joinOurCommunityTitle,
       joinOurCommunityDescription,
       joinOurCommunityButton,
+      commentFormPublish,
+      commentFormReset,
     };
   }
 

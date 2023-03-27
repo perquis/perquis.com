@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import type { FC } from 'react';
 
@@ -10,7 +11,7 @@ interface ISmallAvatar {
 
 export const SmallAvatar: FC<ISmallAvatar> = ({ image, isBig }) => {
   return (
-    <div className={`${styles.avatar} ${isBig ? styles.big : styles.default}`}>
+    <div className={clsx(styles.avatar, isBig ? styles.big : styles.default)}>
       <Image layout="fill" src={image} alt="avatar" />
     </div>
   );
