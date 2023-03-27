@@ -31,6 +31,10 @@ export const useInternationalizedRouting = (status: Status) => {
       newsletterPlaceholder = global('newsletter.placeholder'),
       newsletterButton = global('newsletter.button');
 
+    const joinOurCommunityTitle = global('join-our-community.title'),
+      joinOurCommunityDescription = global('join-our-community.description'),
+      joinOurCommunityButton = global('join-our-community.button');
+
     return {
       userProfileSignIn,
       userProfileSignOut,
@@ -41,6 +45,9 @@ export const useInternationalizedRouting = (status: Status) => {
       newsletterDescription,
       newsletterPlaceholder,
       newsletterButton,
+      joinOurCommunityTitle,
+      joinOurCommunityDescription,
+      joinOurCommunityButton,
     };
   }
 
