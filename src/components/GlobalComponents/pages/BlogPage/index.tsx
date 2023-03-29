@@ -20,6 +20,7 @@ import { useTOCStore } from '@stories/toc';
 
 import { useBlogPageObserver } from '@hooks/useBlogPageObserver';
 
+import { CommentsList } from './templates/CommentsList';
 import { ResourcesList } from './templates/ResourcesList';
 
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node, source, negativeSlug } }) => {
@@ -44,6 +45,7 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
         <MarkdownToHTML {...source} />
         <ResourcesList resources={resources} />
         <Stickers />
+        <CommentsList />
       </FullWidthContainer>
     </>
   );

@@ -1,4 +1,4 @@
-import type { Children, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import type { FC, ReactHTMLElementProps } from 'react';
 import { useRef } from 'react';
 
 import { Dot } from '@GlobalComponents/atoms/Dot';
@@ -9,7 +9,7 @@ import styles from './pre.module.scss';
 
 const arr = [0, 1, 2];
 
-export const RehypePrettyCodeFragment: FC<Children & DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>> = ({ children, ...props }) => {
+export const RehypePrettyCodeFragment: FC<ReactHTMLElementProps<HTMLPreElement>> = ({ children, ...props }) => {
   // @ts-ignore
   const lang = props['data-language'] || 'shell';
   // @ts-ignore

@@ -8,7 +8,7 @@ import { WriteToSomething } from '@components/WriteToSomething';
 
 import { Dashed } from '@icons/index';
 
-export const ComentsList = () => {
+export const CommentsList = () => {
   const { t } = useTranslation('global');
   const commentTitle = t('comment.title'),
     commentDescription = t('comment.description');

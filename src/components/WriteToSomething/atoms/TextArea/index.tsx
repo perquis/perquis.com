@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import type { FC, ReactHTMLElementProps } from 'react';
 
 import { textAreaMaxLength } from '@data/validations';
 
@@ -9,7 +9,7 @@ interface ITextArea {
   disabled?: boolean;
 }
 
-type ITextAreaProps = FC<ITextArea & DetailedHTMLProps<HTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>>;
+type ITextAreaProps = FC<ITextArea & Omit<ReactHTMLElementProps<HTMLTextAreaElement>, 'children'>>;
 
 export const TextArea: ITextAreaProps = ({ disabled, ...props }) => {
   const { t } = useTranslation('global');

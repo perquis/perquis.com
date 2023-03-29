@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { Children, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import type { FC, ReactHTMLElementProps } from 'react';
 
 import styles from './Button.module.scss';
 
@@ -8,9 +8,7 @@ interface Props {
   isTertiary?: boolean;
 }
 
-type ComponentAttributes = DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-
-type ButtonProps = Children & Props & Omit<ComponentAttributes, 'className'>;
+type ButtonProps = Props & Omit<ReactHTMLElementProps<HTMLButtonElement>, 'className'>;
 
 export const Button: FC<ButtonProps> = ({ children, isSecondary, isTertiary, ...rest }) => {
   const className = clsx(styles.button, isSecondary && styles.secondary, isTertiary && styles.tertiary, !isSecondary && !isTertiary && styles.interactions);

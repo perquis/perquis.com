@@ -1,8 +1,8 @@
-import type { Children, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import type { FC, ReactHTMLElementProps } from 'react';
 
 import styles from './Paragraph.module.scss';
 
-type ParagraphType = FC<Children & DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>>;
+type ParagraphType = FC<ReactHTMLElementProps<HTMLParagraphElement>>;
 
 export const Paragraph: ParagraphType = ({ children, ...props }) => {
   return (

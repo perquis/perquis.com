@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion';
-import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
+
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './ShowMoreButton.module.scss';
 
 export const ShowMoreButton = (props: DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
   const [isFocus, setFocus] = useState(false);
-  const { t } = useTranslation('global');
-  const button = t('gotcha-button');
+  const { gotchaButton } = useInternationalizedRouting('global');
 
   const handleSetFocusOnTrue = () => setFocus(true);
   const handleSetFocusOnFalse = () => setFocus(false);
@@ -23,7 +23,7 @@ export const ShowMoreButton = (props: DetailedHTMLProps<HTMLAttributes<HTMLButto
       onBlur={handleSetFocusOnFalse}
       {...props}
     >
-      {button}{' '}
+      {gotchaButton}{' '}
       <motion.div className={styles.icon} animate={isFocus ? { x: -6 } : { x: 0 }}>
         <IoIosArrowBack size={18} />
       </motion.div>

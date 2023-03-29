@@ -38,6 +38,8 @@ export const useInternationalizedRouting = (status: Status) => {
     const commentFormReset = global('comment.form.reset'),
       commentFormPublish = global('comment.form.publish');
 
+    const gotchaButton = global('gotcha-button');
+
     return {
       userProfileSignIn,
       userProfileSignOut,
@@ -53,6 +55,7 @@ export const useInternationalizedRouting = (status: Status) => {
       joinOurCommunityButton,
       commentFormPublish,
       commentFormReset,
+      gotchaButton,
     };
   }
 

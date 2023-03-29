@@ -13,7 +13,7 @@ export const TableOfContents = () => {
   const [__html] = useTOCStore((state) => [state.slugs]);
 
   return (
-    <motion.div className={styles.toc} variants={vars} initial="initial" animate="animate" exit="exit">
+    <motion.div className={styles.toc} variants={vars} initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <h3>{tableOfContentsHeading}</h3>
       <nav dangerouslySetInnerHTML={{ __html }} />
     </motion.div>

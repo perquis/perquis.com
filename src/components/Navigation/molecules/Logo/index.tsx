@@ -13,7 +13,7 @@ export const Logo = () => {
   return (
     <Link href="/" className={styles.logo} onClick={handleToggleHomePage}>
       <LogoIcon />
-      <span>PerQuis&apos;s Blog</span>
+      <span>perquis.com</span>
     </Link>
   );
 };
