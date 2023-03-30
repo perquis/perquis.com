@@ -12,7 +12,7 @@ interface ISmallAvatar {
 export const SmallAvatar: FC<ISmallAvatar> = ({ image, isBig }) => {
   return (
     <div className={clsx(styles.avatar, isBig ? styles.big : styles.default)}>
-      <Image layout="fill" src={image} alt="avatar" />
+      <Image src={image} alt="avatar" width={isBig ? 56 : 31} height={isBig ? 56 : 31} />
     </div>
   );
 };

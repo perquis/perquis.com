@@ -1,7 +1,8 @@
 import useKey from '@rooks/use-key';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
-import { useBlurStore } from 'src/stories/blur';
+
+import { useBlurStore } from '@stories/blur';
 
 import styles from './Blur.module.scss';
 

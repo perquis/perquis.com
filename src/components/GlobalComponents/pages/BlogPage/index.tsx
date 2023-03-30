@@ -1,5 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import type { FC } from 'react';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
 
@@ -13,17 +15,27 @@ import { MarkdownToHTML } from '@components/MarkdownToHTML';
 import { TableOfContents } from '@components/TableOfContents';
 
 import type { PickedDetailsProps } from '@stories/articles';
+import { usePostsListStore } from '@stories/posts';
 import { useTOCStore } from '@stories/toc';
 
-import { useBlogPageObserver } from '@hooks/useBlogPageObserver';
+import { useObserver } from '@hooks/useObserver';
 
 import { CommentsList } from './templates/CommentsList';
 import { ResourcesList } from './templates/ResourcesList';
 
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node, source, negativeSlug } }) => {
   const { slug, thumbnail, createdAt, tags, title, resources, introduction, content } = node;
-  useBlogPageObserver({ negativeSlug });
   const [isTocOpen] = useTOCStore((state) => [state.isTocOpen]);
+  const [updatePostId] = usePostsListStore((state) => [state.updatePostId]);
+  const { query } = useRouter();
+
+  useObserver({ negativeSlug });
+
+  useEffect(() => {
+    fetch(`/api/posts/${query.slug}`)
+      .then((res) => res.json())
+      .then((res) => updatePostId(res.id));
+  }, [updatePostId, query.slug]);
 
   return (
     <>

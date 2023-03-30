@@ -1,17 +1,14 @@
 /* eslint-disable */
 import type { Options } from 'rehype-pretty-code';
-import type { IThemeRegistration, Theme } from 'shiki';
 import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 
-import beaderThemeClassicsLight from './beader-theme.json';
-import moonlight from './moonlight.json';
+import light from './beader-theme.json';
+import dark from './moonlight.json';
 
 export const shikiOptions: Options = {
   keepBackground: false,
-  theme: {
-    dark: moonlight as unknown as Theme,
-    light: beaderThemeClassicsLight as unknown as Theme,
-  },
+  // @ts-ignore
+  theme: { light, dark },
   tokensMap: {
     fn: 'entity.name.function',
     class: 'entity.other.attribute-name.class',
@@ -19,7 +16,8 @@ export const shikiOptions: Options = {
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ''),
   getHighlighter: ({ theme }) =>
     getHighlighter({
-      theme: theme as unknown as IThemeRegistration,
+      // @ts-ignore
+      theme,
       langs: [...BUNDLED_LANGUAGES],
     }),
   onVisitLine(node) {
