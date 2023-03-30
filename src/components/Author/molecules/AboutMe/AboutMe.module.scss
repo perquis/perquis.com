@@ -5,12 +5,6 @@
     font-size: clamp(1.8rem, 2vw, 2.1rem);
   }
 
-  p {
-    color: var(--social-color);
-    font-size: clamp(1.5rem, 2vw, 1.6rem);
-    line-height: 175%;
-  }
-
   @media screen and (max-width: 400px) {
     margin: 2rem 2rem 3.2rem;
   }

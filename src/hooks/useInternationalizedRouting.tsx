@@ -7,15 +7,14 @@ export const useInternationalizedRouting = (status: Status) => {
   const { t: home } = useTranslation('home');
 
   if (status === 'home') {
-    const aboutMeTitle = home('about-me.title'),
-      aboutMeDescription = home('about-me.description');
+    const aboutMeTitle = home('about-me.title');
 
     const postsListTitle = home('posts-list.title'),
       postsListDescription = home('posts-list.description'),
       postsListPlaceholder = home('posts-list.search-placeholder'),
       postsListTechnologies = home('posts-list.technologies');
 
-    return { aboutMeTitle, aboutMeDescription, postsListTitle, postsListDescription, postsListPlaceholder, postsListTechnologies };
+    return { aboutMeTitle, postsListTitle, postsListDescription, postsListPlaceholder, postsListTechnologies };
   }
   if (status === 'global') {
     const userProfileSignIn = global('user-profile.sign-in'),

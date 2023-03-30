@@ -2,8 +2,7 @@
   "meta-title": "Programming with passion - articles about frontend, backend and more",
   "meta-description": "Are you looking for a reliable source of information about programming and web development? Visit our website where you can find articles about frontend, backend, and other programming topics.",
   "about-me": {
-    "title": "About me",
-    "description": "My name is Damian and I'm 23. I love learning new things. I'm curious about all frameworks and libraries created by languages of programming. I hope my articles will be helpful for you."
+    "title": "About me"
   },
   "posts-list": {
     "title": "My Blog",
