@@ -1,5 +1,9 @@
-import useTranslation from 'next-translate/useTranslation';
+import useKey from '@rooks/use-key';
 import type { FC, ReactHTMLElementProps } from 'react';
+
+import { useFormStore } from '@stories/forms';
+
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import { textAreaMaxLength } from '@data/validations';
 
@@ -12,8 +16,12 @@ interface ITextArea {
 type ITextAreaProps = FC<ITextArea & Omit<ReactHTMLElementProps<HTMLTextAreaElement>, 'children'>>;
 
 export const TextArea: ITextAreaProps = ({ disabled, ...props }) => {
-  const { t } = useTranslation('global');
-  const placeholder = t('comment.form.placeholder');
+  const [commentKeywords, updateCommentKeywords] = useFormStore((state) => [state.commentKeywords, state.updateCommentKeywords]);
+  const { commentFormPlaceholder } = useInternationalizedRouting('global');
 
-  return <textarea className={styles.textarea} placeholder={placeholder} minLength={5} maxLength={textAreaMaxLength} disabled={disabled} {...props} />;
+  useKey('Escape', () => updateCommentKeywords(''));
+
+  return (
+    <textarea className={styles.textarea} placeholder={commentFormPlaceholder} minLength={5} maxLength={textAreaMaxLength} disabled={disabled} {...props} value={commentKeywords} />
+  );
 };

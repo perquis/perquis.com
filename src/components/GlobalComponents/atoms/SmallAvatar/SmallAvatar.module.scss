@@ -3,6 +3,10 @@
   border-radius: var(--small-radius);
   overflow: hidden;
   border: 2px solid var(--locale-border-color);
+
+  > img {
+    object-fit: cover;
+  }
 }
 
 .default {
@@ -11,6 +15,7 @@
 }
 
 .big {
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 5.6rem;
+  height: 5.6rem;
+  border: 2px solid var(--locale-border-color);
 }

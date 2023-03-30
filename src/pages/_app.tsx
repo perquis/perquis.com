@@ -6,7 +6,7 @@ import '@styles/globals.scss';
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
-    <Provider session={session}>
+    <Provider session={session} pageProps={pageProps}>
       <Component {...pageProps} />
     </Provider>
   );

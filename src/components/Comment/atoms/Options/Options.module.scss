@@ -2,16 +2,13 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  min-height: 100%;
-  padding: 0 1rem;
+  padding: 1.6rem 1rem;
   border: none;
   background: none;
   border-radius: var(--small-radius);
   transition: 0.15s ease-in-out;
 
   &:is(:focus, :hover) {
-    background: var(--tertiary-button-bg);
-
     > div {
       background: var(--tertiary-button-color);
     }

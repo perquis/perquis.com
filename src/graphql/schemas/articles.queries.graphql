@@ -151,3 +151,27 @@ query GetArticleSlugs($locales: [Locale!]!) {
     }
   }
 }
+
+query GetAllCommentsList($locales: [Locale!]!, $slug: String, $languages: Languages) {
+  page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
+    edges {
+      node {
+        comments(where: { languages: $languages }) {
+          id
+          createdAt
+          languages
+          avatar
+          nickname
+          content
+          edges {
+            id
+            nickname
+            avatar
+            content
+            createdCommentAt
+          }
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@
     "^@layouts/(.*)$",
     "^@queries/(.*)$",
     "^@helpers/(.*)$",
+    "^@prisma/(.*)$",
     "^@styles/(.*)$",
     "^@themes/(.*)$",
     "^@fonts/(.*)$",

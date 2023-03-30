@@ -5,10 +5,10 @@ import type { Comments } from '@graphql/databases/client';
 
 import styles from './UserAction.module.scss';
 
-export const UserAction = ({ avatar, nickname }: Pick<Comments, 'avatar' | 'nickname'>) => {
+export const UserAction = ({ avatar, nickname, date }: Pick<Comments, 'avatar' | 'nickname'> & { date: Date }) => {
   return (
     <div className={styles.wrapper}>
-      <UsernameAndDate avatar={avatar} nickname={nickname} />
+      <UsernameAndDate avatar={avatar} nickname={nickname} date={date} />
       <Options />
     </div>
   );

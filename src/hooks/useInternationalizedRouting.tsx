@@ -35,9 +35,11 @@ export const useInternationalizedRouting = (status: Status) => {
       joinOurCommunityButton = global('join-our-community.button');
 
     const commentFormTitle = global('comment.title'),
-      commentFormDescription = global('comment.description'),
+      commentFormAuthenticatedDescription = global('comment.authenticated-description'),
+      commentFormUnauthenticatedDescription = global('comment.unauthenticated-description'),
       commentFormReset = global('comment.form.reset'),
-      commentFormPublish = global('comment.form.publish');
+      commentFormPublish = global('comment.form.publish'),
+      commentFormPlaceholder = global('comment.form.placeholder');
 
     const gotchaButton = global('gotcha-button');
 
@@ -55,9 +57,11 @@ export const useInternationalizedRouting = (status: Status) => {
       joinOurCommunityDescription,
       joinOurCommunityButton,
       commentFormTitle,
-      commentFormDescription,
-      commentFormPublish,
       commentFormReset,
+      commentFormPublish,
+      commentFormPlaceholder,
+      commentFormAuthenticatedDescription,
+      commentFormUnauthenticatedDescription,
       gotchaButton,
     };
   }

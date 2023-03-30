@@ -22,7 +22,8 @@
   },
   "comment": {
     "title": "Comments:",
-    "description": "You will sign in or sign up if you want to comment this article!",
+    "authenticated-description": "You will sign in or sign up if you want to comment this article!",
+    "unauthenticated-description": "You can write comment now 😎.",
     "form": {
       "placeholder": "Write to something...",
       "reset": "Reset",

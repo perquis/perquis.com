@@ -248,3 +248,34 @@ export const ssrGetArticleSlugs = {
   getServerPage: getServerPageGetArticleSlugs,
   withPage: withPageGetArticleSlugs,
 };
+
+export async function getServerPageGetAllCommentsList(
+  options: Omit<Apollo.QueryOptions<Operations.GetAllCommentsListQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<Operations.GetAllCommentsListQuery>({ ...options, query: Operations.GetAllCommentsListDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageGetAllCommentsListComp = React.FC<{ data?: Operations.GetAllCommentsListQuery; error?: Apollo.ApolloError }>;
+export const withPageGetAllCommentsList =
+  (optionsFunc?: (router: NextRouter) => QueryHookOptions<Operations.GetAllCommentsListQuery, Operations.GetAllCommentsListQueryVariables>) =>
+  (WrappedComponent: PageGetAllCommentsListComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(Operations.GetAllCommentsListDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetAllCommentsList = {
+  getServerPage: getServerPageGetAllCommentsList,
+  withPage: withPageGetAllCommentsList,
+};

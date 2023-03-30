@@ -1,31 +1,27 @@
+import { useSession } from 'next-auth/react';
+
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { Comment } from '@components/Comment';
+// import { Comment } from '@components/Comment';
 import { WriteToSomething } from '@components/WriteToSomething';
 
-import { Dashed } from '@icons/index';
-
+// import { Dashed } from '@icons/index';
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
-import { useUser } from '@hooks/useUser';
 
 export const CommentsList = () => {
-  const { isUser } = useUser();
-  const { commentFormTitle, commentFormDescription } = useInternationalizedRouting('global');
+  const { status } = useSession();
+  const { commentFormTitle, commentFormAuthenticatedDescription, commentFormUnauthenticatedDescription } = useInternationalizedRouting('global');
 
   return (
     <DirectionColumn isTop>
       <div>
         <h2>{commentFormTitle}</h2>
-        {isUser ? <Paragraph style={{ marginTop: 6 }}>{commentFormDescription}</Paragraph> : null}
+        <Paragraph style={{ marginTop: 6 }}>{status !== 'authenticated' ? commentFormAuthenticatedDescription : commentFormUnauthenticatedDescription}</Paragraph>
       </div>
       <WriteToSomething />
-      <Dashed />
-      <Comment
-        avatar="/images/avatar.jpg"
-        content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis quibusdam sed dolore nostrum officiis repudiandae rem vel nemo vero quidem praesentium iure dolores itaque ipsum ea, nobis molestias laboriosam corrupti?"
-        nickname="PerQuis!"
-      />
+      {/* {areComments ? <Dashed /> : null} */}
+      {/* comments?.map(({ avatar, content, nickname, createdAt }, key) => <Comment key={key} avatar={avatar} content={content} nickname={nickname} date={createdAt} />) */}
     </DirectionColumn>
   );
 };

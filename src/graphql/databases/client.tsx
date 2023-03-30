@@ -1393,6 +1393,7 @@ export type Comments = {
   readonly __typename?: 'Comments';
   readonly avatar: Scalars['String'];
   readonly content: Scalars['String'];
+  readonly createdCommentAt: Scalars['DateTime'];
   /** The unique identifier */
   readonly id: Scalars['ID'];
   readonly languages: Languages;
@@ -1421,6 +1422,7 @@ export type CommentsConnection = {
 export type CommentsCreateInput = {
   readonly avatar: Scalars['String'];
   readonly content: Scalars['String'];
+  readonly createdCommentAt: Scalars['DateTime'];
   readonly languages: Languages;
   readonly nickname: Scalars['String'];
 };
@@ -1499,6 +1501,21 @@ export type CommentsManyWhereInput = {
   readonly content_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly content_starts_with?: InputMaybe<Scalars['String']>;
+  readonly createdCommentAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdCommentAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdCommentAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdCommentAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  readonly createdCommentAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdCommentAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  readonly createdCommentAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly createdCommentAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
@@ -1551,6 +1568,8 @@ export enum CommentsOrderByInput {
   AvatarDesc = 'avatar_DESC',
   ContentAsc = 'content_ASC',
   ContentDesc = 'content_DESC',
+  CreatedCommentAtAsc = 'createdCommentAt_ASC',
+  CreatedCommentAtDesc = 'createdCommentAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   LanguagesAsc = 'languages_ASC',
@@ -2205,6 +2224,7 @@ export type CommentsSchemaWhereUniqueInput = {
 export type CommentsUpdateInput = {
   readonly avatar?: InputMaybe<Scalars['String']>;
   readonly content?: InputMaybe<Scalars['String']>;
+  readonly createdCommentAt?: InputMaybe<Scalars['DateTime']>;
   readonly languages?: InputMaybe<Languages>;
   readonly nickname?: InputMaybe<Scalars['String']>;
 };
@@ -2223,6 +2243,7 @@ export type CommentsUpdateManyInlineInput = {
 export type CommentsUpdateManyInput = {
   readonly avatar?: InputMaybe<Scalars['String']>;
   readonly content?: InputMaybe<Scalars['String']>;
+  readonly createdCommentAt?: InputMaybe<Scalars['DateTime']>;
   readonly languages?: InputMaybe<Languages>;
   readonly nickname?: InputMaybe<Scalars['String']>;
 };
@@ -2332,6 +2353,21 @@ export type CommentsWhereInput = {
   readonly content_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly content_starts_with?: InputMaybe<Scalars['String']>;
+  readonly createdCommentAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdCommentAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdCommentAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdCommentAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  readonly createdCommentAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdCommentAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  readonly createdCommentAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly createdCommentAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
@@ -7322,6 +7358,42 @@ export type GetArticleSlugsQuery = {
   };
 };
 
+export type GetAllCommentsListQueryVariables = Exact<{
+  locales: ReadonlyArray<Locale> | Locale;
+  slug?: InputMaybe<Scalars['String']>;
+  languages?: InputMaybe<Languages>;
+}>;
+
+export type GetAllCommentsListQuery = {
+  readonly __typename?: 'Query';
+  readonly page: {
+    readonly __typename?: 'ArticlesConnection';
+    readonly edges: ReadonlyArray<{
+      readonly __typename?: 'ArticlesEdge';
+      readonly node: {
+        readonly __typename?: 'Articles';
+        readonly comments: ReadonlyArray<{
+          readonly __typename?: 'CommentsSchema';
+          readonly id: string;
+          readonly createdAt: Date;
+          readonly languages: Languages;
+          readonly avatar: string;
+          readonly nickname: string;
+          readonly content: string;
+          readonly edges: ReadonlyArray<{
+            readonly __typename?: 'Comments';
+            readonly id: string;
+            readonly nickname: string;
+            readonly avatar: string;
+            readonly content: string;
+            readonly createdCommentAt: Date;
+          }>;
+        }>;
+      };
+    }>;
+  };
+};
+
 export const SearchForArticlesListDocument = gql`
   query SearchForArticlesList($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput) {
     schemaArticles(where: { _search: $search }, locales: $locales, orderBy: $orderBy) {
@@ -7723,3 +7795,58 @@ export function useGetArticleSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetArticleSlugsQueryHookResult = ReturnType<typeof useGetArticleSlugsQuery>;
 export type GetArticleSlugsLazyQueryHookResult = ReturnType<typeof useGetArticleSlugsLazyQuery>;
 export type GetArticleSlugsQueryResult = Apollo.QueryResult<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>;
+export const GetAllCommentsListDocument = gql`
+  query GetAllCommentsList($locales: [Locale!]!, $slug: String, $languages: Languages) {
+    page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
+      edges {
+        node {
+          comments(where: { languages: $languages }) {
+            id
+            createdAt
+            languages
+            avatar
+            nickname
+            content
+            edges {
+              id
+              nickname
+              avatar
+              content
+              createdCommentAt
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetAllCommentsListQuery__
+ *
+ * To run a query within a React component, call `useGetAllCommentsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCommentsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllCommentsListQuery({
+ *   variables: {
+ *      locales: // value for 'locales'
+ *      slug: // value for 'slug'
+ *      languages: // value for 'languages'
+ *   },
+ * });
+ */
+export function useGetAllCommentsListQuery(baseOptions: Apollo.QueryHookOptions<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>(GetAllCommentsListDocument, options);
+}
+export function useGetAllCommentsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>(GetAllCommentsListDocument, options);
+}
+export type GetAllCommentsListQueryHookResult = ReturnType<typeof useGetAllCommentsListQuery>;
+export type GetAllCommentsListLazyQueryHookResult = ReturnType<typeof useGetAllCommentsListLazyQuery>;
+export type GetAllCommentsListQueryResult = Apollo.QueryResult<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>;

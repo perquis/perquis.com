@@ -1,9 +1,19 @@
 .wrapper {
   display: flex;
-  gap: 1rem;
+  gap: 1.6rem;
   align-items: center;
 
   b {
     font-weight: 500;
   }
+
+  span {
+    color: var(--heading);
+    text-transform: capitalize;
+  }
+}
+
+.direction-column {
+  display: flex;
+  flex-direction: column;
 }
