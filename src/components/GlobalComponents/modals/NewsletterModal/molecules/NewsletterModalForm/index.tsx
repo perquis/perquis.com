@@ -7,9 +7,9 @@ import { useFormStore } from '@stories/forms';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
-import styles from './Form.module.scss';
+import styles from './NewsletterModalForm.module.scss';
 
-export const Form = () => {
+export const NewsletterModalForm = () => {
   const { newsletterButton, newsletterPlaceholder } = useInternationalizedRouting('global');
   const [updateEmailKeywords] = useFormStore((state) => [state.updateEmailKeywords]);
 

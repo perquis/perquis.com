@@ -6,9 +6,9 @@ import { StickerButton } from '@stickers/index';
 
 import { useFormStore } from '@stories/forms';
 
-import styles from './Form.module.scss';
+import styles from './NewsletterForm.module.scss';
 
-export const Form = () => {
+export const NewsletterForm = () => {
   const [updateEmailKeywords] = useFormStore((state) => [state.updateEmailKeywords]);
   const { t } = useTranslation('global');
   const placeholder = t('newsletter.placeholder'),

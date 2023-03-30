@@ -1,7 +1,7 @@
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { Form } from '@stickers/molecules/Form';
+import { NewsletterForm } from '@stickers/molecules/NewsletterForm';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
@@ -17,7 +17,7 @@ export const Newsletter = () => {
           <h3 dangerouslySetInnerHTML={{ __html: newsletterTitle ?? '' }} />
           <Paragraph style={{ marginTop: 6 }}>{newsletterDescription}</Paragraph>
         </div>
-        <Form />
+        <NewsletterForm />
       </DirectionColumn>
     </div>
   );

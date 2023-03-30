@@ -1,5 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
@@ -8,16 +6,18 @@ import { WriteToSomething } from '@components/WriteToSomething';
 
 import { Dashed } from '@icons/index';
 
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
+import { useUser } from '@hooks/useUser';
+
 export const CommentsList = () => {
-  const { t } = useTranslation('global');
-  const commentTitle = t('comment.title'),
-    commentDescription = t('comment.description');
+  const { isUser } = useUser();
+  const { commentFormTitle, commentFormDescription } = useInternationalizedRouting('global');
 
   return (
     <DirectionColumn isTop>
       <div>
-        <h2>{commentTitle}</h2>
-        <Paragraph style={{ marginTop: 6 }}>{commentDescription}</Paragraph>
+        <h2>{commentFormTitle}</h2>
+        {isUser ? <Paragraph style={{ marginTop: 6 }}>{commentFormDescription}</Paragraph> : null}
       </div>
       <WriteToSomething />
       <Dashed />

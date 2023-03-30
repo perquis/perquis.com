@@ -1,14 +1,12 @@
 /* eslint-disable */
-import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import type { ReactHTMLElementProps } from 'react';
 import { forwardRef } from 'react';
 
 import styles from './DirectionColumn.module.scss';
 
-interface DirectionColumnProps {
-  children?: ReactNode;
+interface DirectionColumnProps extends ReactHTMLElementProps<HTMLDivElement> {
   isTop?: boolean;
   className?: string;
-  props?: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 }
 
 export const DirectionColumn = forwardRef<HTMLDivElement, DirectionColumnProps>(({ children, isTop, className = '', ...props }, ref) => {

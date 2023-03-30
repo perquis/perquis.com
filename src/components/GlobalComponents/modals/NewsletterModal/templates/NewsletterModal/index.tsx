@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import FocusLock from 'react-focus-lock';
 
 import { SalyImage } from '@modals/NewsletterModal/atoms/SalyImage';
-import { Form } from '@modals/NewsletterModal/molecules/Form';
+import { NewsletterModalForm } from '@modals/NewsletterModal/molecules/NewsletterModalForm';
 import { TitleAndSubtitle } from '@modals/NewsletterModal/molecules/TitleAndSubtitle';
 
 import { Modal } from '@components/Modal';
@@ -38,7 +38,7 @@ export const NewsletterModal = () => {
           </div>
           <div className={styles.gap}>
             <TitleAndSubtitle />
-            <Form />
+            <NewsletterModalForm />
           </div>
         </div>
       </FocusLock>

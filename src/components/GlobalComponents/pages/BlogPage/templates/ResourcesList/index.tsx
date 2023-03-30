@@ -14,7 +14,7 @@ export const ResourcesList: ResourcesListProps = ({ resources }) => {
   const { resourcesListsTitle } = useInternationalizedRouting('global');
 
   return (
-    <DirectionColumn isTop>
+    <DirectionColumn isTop style={{ marginBottom: 48 }}>
       <h2>{resourcesListsTitle}</h2>
       {resources.map(({ link, name }, i) => (
         <Resource link={String(link)} key={i}>
