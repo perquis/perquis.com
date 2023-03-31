@@ -23,6 +23,10 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
+    async session({ session }) {
+      session.user.isAdmin = session.user.email === process.env.EMAIL;
+      return session;
+    },
   },
   session: {
     maxAge: 30 * 24 * 60 * 60,

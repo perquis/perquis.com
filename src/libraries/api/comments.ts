@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prismaClient } from 'prisma/prismaClient';
 
 import { isValidatedUri } from '@data/regexes';
+import { textAreaMaxLength } from '@data/validations';
 
 export const getAllCommentsList = async (req: NextApiRequest, res: NextApiResponse, slug: string) => {
   try {
@@ -20,6 +21,7 @@ export const createComment = async (req: NextApiRequest, res: NextApiResponse) =
   const { email, content, postId } = req.body;
   if (!content && !email && !postId) return res.status(400).send({ message: 'Bad request.' });
   if (isValidatedUri(content.trim())) return res.status(400).send({ message: 'Bad request.' });
+  if (content.length > textAreaMaxLength) return res.status(400).send({ message: 'Bad request.' });
 
   try {
     const user = await prismaClient.user.findFirst({ where: { email } });

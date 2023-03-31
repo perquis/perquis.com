@@ -25,7 +25,7 @@ html[data-theme='light'] {
     border: 1px solid var(--gray-100);
 
     &:has(pre[data-theme='light'], code[data-theme='light']) {
-      .code-header.light,
+      .code-header.dark,
       pre[data-theme='dark'],
       code[data-theme='dark'] {
         display: none;

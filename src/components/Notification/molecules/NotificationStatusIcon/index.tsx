@@ -7,18 +7,22 @@ import { WiStormWarning } from 'react-icons/wi';
 import type { IMessage } from '@components/Notification/atoms/Message';
 import { isValidatedNotificationColorStatus } from '@components/Notification/atoms/Message';
 
+import { useNotificationState } from '@hooks/useNotificationState';
+
 import styles from './NotificationStatusIcon.module.scss';
 
-export const NotificationStatusIcon: FC<IMessage> = ({ type = 'info' }) => {
+export const NotificationStatusIcon: FC<IMessage> = () => {
+  const { isValidatedStatus, colorStatus } = useNotificationState();
+
   return (
-    <div className={clsx(styles.default, isValidatedNotificationColorStatus(type, styles))}>
-      {type === 'info' ? (
+    <div className={clsx(styles.default, isValidatedNotificationColorStatus(colorStatus, styles))}>
+      {isValidatedStatus('info') ? (
         <IoInformation size={42} />
-      ) : type === 'success' ? (
+      ) : isValidatedStatus('success') ? (
         <BiCheck size={42} />
-      ) : type === 'error' ? (
+      ) : isValidatedStatus('error') ? (
         <IoCloseSharp size={42} />
-      ) : type === 'warn' ? (
+      ) : isValidatedStatus('warn') ? (
         <WiStormWarning size={42} />
       ) : null}
     </div>

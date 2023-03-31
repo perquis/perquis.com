@@ -18,7 +18,7 @@ export const Layout: FC<Children> = ({ children }) => {
   const [isBlur] = useBlurStore((state) => [state.isBlur]);
   const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
   const condition = isBlur || isNewsletterModalOpen;
-  const [notification] = useNotificationStore((state) => [state.notification]);
+  const [isOpen] = useNotificationStore((state) => [state.isOpen]);
 
   return (
     <>
@@ -26,7 +26,7 @@ export const Layout: FC<Children> = ({ children }) => {
         <link rel="shortcut icon" href="/images/Logo.svg" />
       </Head>
       <AnimatePresence>{condition && <Blur />}</AnimatePresence>
-      <AnimatePresence>{typeof notification !== 'undefined' && <Notification />}</AnimatePresence>
+      <AnimatePresence>{isOpen && <Notification />}</AnimatePresence>
       <Navigation />
       <div className={styles.container}>{children}</div>
       <Footer />

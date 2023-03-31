@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
@@ -15,25 +14,16 @@ import { useNotificationStore } from '@stories/notifications';
 import styles from './Notification.module.scss';
 
 export const Notification = () => {
-  const [notification, updateNotification] = useNotificationStore((state) => [state.notification, state.updateNotification]);
-
-  useEffect(() => {
-    setTimeout(() => updateNotification(undefined), 5000);
-  }, [updateNotification]);
+  const [notification] = useNotificationStore((state) => [state.notification, state.updateNotification]);
+  // @ts-ignore
+  const className = clsx(styles.default, isValidatedNotificationColorStatus(notification?.status?.toLowerCase(), styles));
 
   return (
-    <motion.div
-      // @ts-ignore
-      className={clsx(styles.default, isValidatedNotificationColorStatus(String(notification?.status?.toLowerCase()), styles))}
-      variants={vars}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <NotificationStatusIcon type={notification?.status.toLowerCase() as unknown as undefined} />
+    <motion.div className={className} variants={vars} initial="initial" animate="animate" exit={{ opacity: 0 }}>
+      <NotificationStatusIcon />
       <DirectionColumn style={{ gap: 6 }}>
-        <FeaturedWarning>{notification?.status.toString()}</FeaturedWarning>
-        <Message type={notification?.status.toLowerCase() as unknown as undefined}>{notification?.msg}</Message>
+        <FeaturedWarning>{notification?.status.toLowerCase()}</FeaturedWarning>
+        <Message>{notification?.msg}</Message>
       </DirectionColumn>
     </motion.div>
   );
