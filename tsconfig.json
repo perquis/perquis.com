@@ -36,7 +36,6 @@
       "@icons/*": ["./src/icons/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
-      "@prisma/*": ["./prisma/*"],
       "@data/*": ["./src/data/*"]
     },
     "importsNotUsedAsValues": "error",

@@ -6,6 +6,7 @@ import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
 import { Comment } from '@components/Comment';
+import { LoadComment } from '@components/Comment/templates/LoadComment';
 import { WriteToSomething } from '@components/WriteToSomething';
 
 import { fetchAllCommentsList } from '@libraries/fetchers/fetchAllCommentsList';
@@ -18,8 +19,10 @@ export const CommentsList = () => {
   const { query } = useRouter();
   const { status } = useSession();
   const { commentFormTitle, commentFormAuthenticatedDescription, commentFormUnauthenticatedDescription } = useInternationalizedRouting('global');
-  const { data: comments } = useQuery({ queryKey: ['comments', query.slug], queryFn: () => fetchAllCommentsList(String(query.slug)) });
+  const { data: comments, isLoading } = useQuery({ queryKey: ['comments', query.slug], queryFn: () => fetchAllCommentsList(String(query.slug)) });
   const areComments = Array.isArray(comments) && comments.length > 0;
+
+  const loaders = new Array(3).fill(null).map((_, i) => i);
 
   return (
     <DirectionColumn isTop>
@@ -28,9 +31,10 @@ export const CommentsList = () => {
         <Paragraph style={{ marginTop: 6 }}>{status !== 'authenticated' ? commentFormAuthenticatedDescription : commentFormUnauthenticatedDescription}</Paragraph>
       </div>
       <WriteToSomething />
-      {areComments ? <Dashed /> : null}
+      {isLoading || areComments ? <Dashed /> : null}
       {areComments &&
         comments?.map(({ avatar, content, nickname, createdAt }, key) => <Comment key={key} avatar={avatar} content={content} nickname={nickname} date={createdAt} />)}
+      {isLoading ? loaders.map((_, i) => <LoadComment key={i} />) : null}
     </DirectionColumn>
   );
 };

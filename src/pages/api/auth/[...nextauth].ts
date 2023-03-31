@@ -3,7 +3,7 @@ import type { AuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 
-import { mongoClient } from '@libraries/client/mongoClient';
+import { mongoClient } from '@libraries/clients/mongoClient';
 
 const secret = process.env.NEXTAUTH_SECRET;
 

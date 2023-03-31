@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { prismaClient } from '@prisma/prismaClient';
+import { prismaClient } from 'prisma/prismaClient';
 
 export const getAllPosts = async (req: NextApiRequest, res: NextApiResponse, slug: string) => {
   try {

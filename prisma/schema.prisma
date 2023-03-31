@@ -22,5 +22,17 @@ model Comment {
   avatar    String
   content   String
   post      Post?    @relation(fields: [postId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
   postId    String   @db.ObjectId
+  userId    String   @db.ObjectId
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?  @unique
+  image         String?
+  comments      Comment[]
+
+  @@map(name: "users")
 }

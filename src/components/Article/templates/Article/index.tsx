@@ -4,7 +4,7 @@ import type { FC, KeyboardEvent } from 'react';
 
 import { Content } from '@components/Article/organisms/Content';
 import { NotFoundContent } from '@components/Article/organisms/NotFoundContent';
-import { Loader } from '@components/Loader/molecules/Loader';
+import { PostLoader } from '@components/Loader/molecules/PostLoader';
 
 import type { PickedArticleProps } from '@stories/articles';
 
@@ -27,7 +27,7 @@ export const Article: FC<IArticleProps> = ({ article = articleInitialState, isNe
 
   return (
     <article className={clsx(styles.article, isNewArticle && styles['new-article'])} onKeyDown={handlePushingArticlesSlug} role="button" tabIndex={0}>
-      {isLoadingAnimation ? <Loader /> : isNotFoundArticle ? <NotFoundContent /> : <Content article={article} />}
+      {isLoadingAnimation ? <PostLoader /> : isNotFoundArticle ? <NotFoundContent /> : <Content article={article} />}
     </article>
   );
 };

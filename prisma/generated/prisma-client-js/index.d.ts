@@ -33,6 +33,18 @@ export type Comment = {
   avatar: string
   content: string
   postId: string
+  userId: string
+}
+
+/**
+ * Model User
+ * 
+ */
+export type User = {
+  id: string
+  name: string | null
+  email: string | null
+  image: string | null
 }
 
 
@@ -141,6 +153,16 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<GlobalReject>;
+
+  /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -611,7 +633,8 @@ export namespace Prisma {
 
   export const ModelName: {
     Post: 'Post',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    User: 'User'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -811,6 +834,49 @@ export namespace Prisma {
      * Select specific fields to fetch from the PostCountOutputType
      */
     select?: PostCountOutputTypeSelect | null
+  }
+
+
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+
+  export type UserCountOutputType = {
+    comments: number
+  }
+
+  export type UserCountOutputTypeSelect = {
+    comments?: boolean
+  }
+
+  export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? UserCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (UserCountOutputTypeArgs)
+    ? UserCountOutputType 
+    : S extends { select: any } & (UserCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof UserCountOutputType ? UserCountOutputType[P] : never
+  } 
+      : UserCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect | null
   }
 
 
@@ -1826,6 +1892,7 @@ export namespace Prisma {
     avatar: string | null
     content: string | null
     postId: string | null
+    userId: string | null
   }
 
   export type CommentMaxAggregateOutputType = {
@@ -1836,6 +1903,7 @@ export namespace Prisma {
     avatar: string | null
     content: string | null
     postId: string | null
+    userId: string | null
   }
 
   export type CommentCountAggregateOutputType = {
@@ -1846,6 +1914,7 @@ export namespace Prisma {
     avatar: number
     content: number
     postId: number
+    userId: number
     _all: number
   }
 
@@ -1858,6 +1927,7 @@ export namespace Prisma {
     avatar?: true
     content?: true
     postId?: true
+    userId?: true
   }
 
   export type CommentMaxAggregateInputType = {
@@ -1868,6 +1938,7 @@ export namespace Prisma {
     avatar?: true
     content?: true
     postId?: true
+    userId?: true
   }
 
   export type CommentCountAggregateInputType = {
@@ -1878,6 +1949,7 @@ export namespace Prisma {
     avatar?: true
     content?: true
     postId?: true
+    userId?: true
     _all?: true
   }
 
@@ -1962,6 +2034,7 @@ export namespace Prisma {
     avatar: string
     content: string
     postId: string
+    userId: string
     _count: CommentCountAggregateOutputType | null
     _min: CommentMinAggregateOutputType | null
     _max: CommentMaxAggregateOutputType | null
@@ -1989,12 +2062,15 @@ export namespace Prisma {
     avatar?: boolean
     content?: boolean
     postId?: boolean
+    userId?: boolean
     post?: boolean | PostArgs
+    user?: boolean | UserArgs
   }
 
 
   export type CommentInclude = {
     post?: boolean | PostArgs
+    user?: boolean | UserArgs
   }
 
   export type CommentGetPayload<S extends boolean | null | undefined | CommentArgs> =
@@ -2004,12 +2080,14 @@ export namespace Prisma {
     S extends { include: any } & (CommentArgs | CommentFindManyArgs)
     ? Comment  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'post' ? PostGetPayload<S['include'][P]> | null :  never
+        P extends 'post' ? PostGetPayload<S['include'][P]> | null :
+        P extends 'user' ? UserGetPayload<S['include'][P]> | null :  never
   } 
     : S extends { select: any } & (CommentArgs | CommentFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'post' ? PostGetPayload<S['select'][P]> | null :  P extends keyof Comment ? Comment[P] : never
+        P extends 'post' ? PostGetPayload<S['select'][P]> | null :
+        P extends 'user' ? UserGetPayload<S['select'][P]> | null :  P extends keyof Comment ? Comment[P] : never
   } 
       : Comment
 
@@ -2409,6 +2487,8 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
     post<T extends PostArgs= {}>(args?: Subset<T, PostArgs>): Prisma__PostClient<PostGetPayload<T> | Null>;
+
+    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -2811,6 +2891,1010 @@ export namespace Prisma {
 
 
   /**
+   * Model User
+   */
+
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    image: number
+    _all: number
+  }
+
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs = {
+    where?: UserWhereInput
+    orderBy?: Enumerable<UserOrderByWithAggregationInput>
+    by: UserScalarFieldEnum[]
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+
+  export type UserGroupByOutputType = {
+    id: string
+    name: string | null
+    email: string | null
+    image: string | null
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickArray<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+    comments?: boolean | User$commentsArgs
+    _count?: boolean | UserCountOutputTypeArgs
+  }
+
+
+  export type UserInclude = {
+    comments?: boolean | User$commentsArgs
+    _count?: boolean | UserCountOutputTypeArgs
+  }
+
+  export type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? User :
+    S extends undefined ? never :
+    S extends { include: any } & (UserArgs | UserFindManyArgs)
+    ? User  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'comments' ? Array < CommentGetPayload<S['include'][P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (UserArgs | UserFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'comments' ? Array < CommentGetPayload<S['select'][P]>>  :
+        P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
+  } 
+      : User
+
+
+  type UserCountArgs = 
+    Omit<UserFindManyArgs, 'select' | 'include'> & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends UserFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, UserFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+
+    /**
+     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends UserFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, UserFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends UserFindManyArgs>(
+      args?: SelectSubset<T, UserFindManyArgs>
+    ): Prisma.PrismaPromise<Array<UserGetPayload<T>>>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+    **/
+    create<T extends UserCreateArgs>(
+      args: SelectSubset<T, UserCreateArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Create many Users.
+     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
+     *     @example
+     *     // Create many Users
+     *     const user = await prisma.user.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends UserCreateManyArgs>(
+      args?: SelectSubset<T, UserCreateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends UserDeleteArgs>(
+      args: SelectSubset<T, UserDeleteArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends UserUpdateArgs>(
+      args: SelectSubset<T, UserUpdateArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends UserDeleteManyArgs>(
+      args?: SelectSubset<T, UserDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends UserUpdateManyArgs>(
+      args: SelectSubset<T, UserUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends UserUpsertArgs>(
+      args: SelectSubset<T, UserUpsertArgs>
+    ): Prisma__UserClient<UserGetPayload<T>>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * @param {UserFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const user = await prisma.user.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: UserFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a User.
+     * @param {UserAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const user = await prisma.user.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: UserAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__UserClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+
+    comments<T extends User$commentsArgs= {}>(args?: Subset<T, User$commentsArgs>): Prisma.PrismaPromise<Array<CommentGetPayload<T>>| Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * User base type for findUnique actions
+   */
+  export type UserFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUnique
+   */
+  export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User base type for findFirst actions
+   */
+  export type UserFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: Enumerable<UserScalarFieldEnum>
+  }
+
+  /**
+   * User findFirst
+   */
+  export interface UserFindFirstArgs extends UserFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: Enumerable<UserScalarFieldEnum>
+  }
+
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: Enumerable<UserScalarFieldEnum>
+  }
+
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs = {
+    /**
+     * The data used to create many Users.
+     */
+    data: Enumerable<UserCreateManyInput>
+  }
+
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+  }
+
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+  }
+
+
+  /**
+   * User findRaw
+   */
+  export type UserFindRawArgs = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * User aggregateRaw
+   */
+  export type UserAggregateRawArgs = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * User.comments
+   */
+  export type User$commentsArgs = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CommentInclude | null
+    where?: CommentWhereInput
+    orderBy?: Enumerable<CommentOrderByWithRelationInput>
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<CommentScalarFieldEnum>
+  }
+
+
+  /**
+   * User without action
+   */
+  export type UserArgs = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -2824,7 +3908,8 @@ export namespace Prisma {
     nickname: 'nickname',
     avatar: 'avatar',
     content: 'content',
-    postId: 'postId'
+    postId: 'postId',
+    userId: 'userId'
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -2852,6 +3937,16 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    image: 'image'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   /**
@@ -2905,7 +4000,9 @@ export namespace Prisma {
     avatar?: StringFilter | string
     content?: StringFilter | string
     postId?: StringFilter | string
+    userId?: StringFilter | string
     post?: XOR<PostRelationFilter, PostWhereInput> | null
+    user?: XOR<UserRelationFilter, UserWhereInput> | null
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -2916,7 +4013,9 @@ export namespace Prisma {
     avatar?: SortOrder
     content?: SortOrder
     postId?: SortOrder
+    userId?: SortOrder
     post?: PostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type CommentWhereUniqueInput = {
@@ -2931,6 +4030,7 @@ export namespace Prisma {
     avatar?: SortOrder
     content?: SortOrder
     postId?: SortOrder
+    userId?: SortOrder
     _count?: CommentCountOrderByAggregateInput
     _max?: CommentMaxOrderByAggregateInput
     _min?: CommentMinOrderByAggregateInput
@@ -2947,6 +4047,51 @@ export namespace Prisma {
     avatar?: StringWithAggregatesFilter | string
     content?: StringWithAggregatesFilter | string
     postId?: StringWithAggregatesFilter | string
+    userId?: StringWithAggregatesFilter | string
+  }
+
+  export type UserWhereInput = {
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
+    id?: StringFilter | string
+    name?: StringNullableFilter | string | null
+    email?: StringNullableFilter | string | null
+    image?: StringNullableFilter | string | null
+    comments?: CommentListRelationFilter
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    comments?: CommentOrderByRelationAggregateInput
+  }
+
+  export type UserWhereUniqueInput = {
+    id?: string
+    email?: string
+  }
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<UserScalarWhereWithAggregatesInput>
+    OR?: Enumerable<UserScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
+    id?: StringWithAggregatesFilter | string
+    name?: StringNullableWithAggregatesFilter | string | null
+    email?: StringNullableWithAggregatesFilter | string | null
+    image?: StringNullableWithAggregatesFilter | string | null
   }
 
   export type PostCreateInput = {
@@ -2992,6 +4137,7 @@ export namespace Prisma {
     avatar: string
     content: string
     post?: PostCreateNestedOneWithoutCommentsInput
+    user?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -3002,6 +4148,7 @@ export namespace Prisma {
     avatar: string
     content: string
     postId: string
+    userId: string
   }
 
   export type CommentUpdateInput = {
@@ -3011,6 +4158,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     post?: PostUpdateOneWithoutCommentsNestedInput
+    user?: UserUpdateOneWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -3020,6 +4168,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateManyInput = {
@@ -3030,6 +4179,7 @@ export namespace Prisma {
     avatar: string
     content: string
     postId: string
+    userId: string
   }
 
   export type CommentUpdateManyMutationInput = {
@@ -3047,6 +4197,56 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserCreateInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+  }
+
+  export type UserUpdateManyMutationInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter = {
@@ -3123,6 +4323,11 @@ export namespace Prisma {
     isNot?: PostWhereInput | null
   }
 
+  export type UserRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -3131,6 +4336,7 @@ export namespace Prisma {
     avatar?: SortOrder
     content?: SortOrder
     postId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CommentMaxOrderByAggregateInput = {
@@ -3141,6 +4347,7 @@ export namespace Prisma {
     avatar?: SortOrder
     content?: SortOrder
     postId?: SortOrder
+    userId?: SortOrder
   }
 
   export type CommentMinOrderByAggregateInput = {
@@ -3151,6 +4358,7 @@ export namespace Prisma {
     avatar?: SortOrder
     content?: SortOrder
     postId?: SortOrder
+    userId?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter = {
@@ -3165,6 +4373,62 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
+  }
+
+  export type StringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableFilter | string | null
+    isSet?: boolean
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
+    isSet?: boolean
   }
 
   export type CommentCreateNestedManyWithoutPostInput = {
@@ -3219,6 +4483,12 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -3231,6 +4501,63 @@ export namespace Prisma {
     delete?: boolean
     connect?: PostWhereUniqueInput
     update?: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserUpdateOneWithoutCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    upsert?: UserUpsertWithoutCommentsInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<CommentCreateWithoutUserInput>, Enumerable<CommentUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutUserInput>
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: Enumerable<CommentWhereUniqueInput>
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<CommentCreateWithoutUserInput>, Enumerable<CommentUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutUserInput>
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: Enumerable<CommentWhereUniqueInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+    unset?: boolean
+  }
+
+  export type CommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<CommentCreateWithoutUserInput>, Enumerable<CommentUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<CommentUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: Enumerable<CommentWhereUniqueInput>
+    disconnect?: Enumerable<CommentWhereUniqueInput>
+    delete?: Enumerable<CommentWhereUniqueInput>
+    connect?: Enumerable<CommentWhereUniqueInput>
+    update?: Enumerable<CommentUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<CommentUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<CommentScalarWhereInput>
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<CommentCreateWithoutUserInput>, Enumerable<CommentUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<CommentUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: Enumerable<CommentWhereUniqueInput>
+    disconnect?: Enumerable<CommentWhereUniqueInput>
+    delete?: Enumerable<CommentWhereUniqueInput>
+    connect?: Enumerable<CommentWhereUniqueInput>
+    update?: Enumerable<CommentUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<CommentUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<CommentScalarWhereInput>
   }
 
   export type NestedStringFilter = {
@@ -3300,6 +4627,51 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter
   }
 
+  export type NestedStringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
+    isSet?: boolean
+  }
+
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | null
+    notIn?: Enumerable<number> | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntNullableFilter | number | null
+    isSet?: boolean
+  }
+
   export type CommentCreateWithoutPostInput = {
     id?: string
     createdAt?: Date | string
@@ -3307,6 +4679,7 @@ export namespace Prisma {
     nickname: string
     avatar: string
     content: string
+    user?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutPostInput = {
@@ -3316,6 +4689,7 @@ export namespace Prisma {
     nickname: string
     avatar: string
     content: string
+    userId: string
   }
 
   export type CommentCreateOrConnectWithoutPostInput = {
@@ -3354,6 +4728,7 @@ export namespace Prisma {
     avatar?: StringFilter | string
     content?: StringFilter | string
     postId?: StringFilter | string
+    userId?: StringFilter | string
   }
 
   export type PostCreateWithoutCommentsInput = {
@@ -3371,6 +4746,25 @@ export namespace Prisma {
     create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
   }
 
+  export type UserCreateWithoutCommentsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+  }
+
+  export type UserUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+  }
+
+  export type UserCreateOrConnectWithoutCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
   export type PostUpsertWithoutCommentsInput = {
     update: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
     create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
@@ -3384,6 +4778,68 @@ export namespace Prisma {
     articleId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UserUpsertWithoutCommentsInput = {
+    update: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type UserUpdateWithoutCommentsInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUncheckedUpdateWithoutCommentsInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CommentCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nickname: string
+    avatar: string
+    content: string
+    post?: PostCreateNestedOneWithoutCommentsInput
+  }
+
+  export type CommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nickname: string
+    avatar: string
+    content: string
+    postId: string
+  }
+
+  export type CommentCreateOrConnectWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentCreateManyUserInputEnvelope = {
+    data: Enumerable<CommentCreateManyUserInput>
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutUserInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutCommentsInput>
+  }
+
   export type CommentCreateManyPostInput = {
     id?: string
     createdAt?: Date | string
@@ -3391,6 +4847,7 @@ export namespace Prisma {
     nickname: string
     avatar: string
     content: string
+    userId: string
   }
 
   export type CommentUpdateWithoutPostInput = {
@@ -3399,6 +4856,7 @@ export namespace Prisma {
     nickname?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutPostInput = {
@@ -3407,6 +4865,7 @@ export namespace Prisma {
     nickname?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentUncheckedUpdateManyWithoutCommentsInput = {
@@ -3415,6 +4874,35 @@ export namespace Prisma {
     nickname?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommentCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    nickname: string
+    avatar: string
+    content: string
+    postId: string
+  }
+
+  export type CommentUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    post?: PostUpdateOneWithoutCommentsNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nickname?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
   }
 
 
