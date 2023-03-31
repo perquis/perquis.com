@@ -1,16 +1,16 @@
+import type { Comment as CommentProps, User } from '@prisma/client';
+
 import { Button } from '@GlobalComponents/atoms/Button';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 
 import { UserAction } from '@components/Comment/organisms/UserAction';
 
-import type { Comments } from '@graphql/databases/client';
-
 import styles from './Comment.module.scss';
 
-export const Comment = ({ avatar, nickname, content, date }: Pick<Comments, 'avatar' | 'nickname' | 'content'> & { date: Date }) => {
+export const Comment = ({ props: { content, createdAt, image, name } }: Record<'props', CommentProps & User>) => {
   return (
     <div className={styles.comment}>
-      <UserAction avatar={avatar} nickname={nickname} date={date} />
+      <UserAction avatar={image ?? ''} nickname={name ?? ''} date={createdAt} />
       <Paragraph>{content}</Paragraph>
       <Button isTertiary>Reply</Button>
     </div>

@@ -1,0 +1,19 @@
+.default {
+  font-size: clamp(1.4rem, 5vw, 1.6rem);
+}
+
+.success {
+  color: var(--success);
+}
+
+.error {
+  color: var(--error);
+}
+
+.warn {
+  color: var(--warn);
+}
+
+.info {
+  color: var(--info);
+}

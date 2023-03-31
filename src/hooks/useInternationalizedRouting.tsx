@@ -43,6 +43,10 @@ export const useInternationalizedRouting = (status: Status) => {
 
     const gotchaButton = global('gotcha-button');
 
+    const notificationSuccess = global('notificaion.success'),
+      notificaionError = global('notificaion.error'),
+      notificaionInfo = global('notificaion.info');
+
     return {
       userProfileSignIn,
       userProfileSignOut,
@@ -63,6 +67,9 @@ export const useInternationalizedRouting = (status: Status) => {
       commentFormAuthenticatedDescription,
       commentFormUnauthenticatedDescription,
       gotchaButton,
+      notificaionInfo,
+      notificaionError,
+      notificationSuccess,
     };
   }
 

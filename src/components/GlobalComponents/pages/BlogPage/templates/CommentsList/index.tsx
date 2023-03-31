@@ -32,8 +32,7 @@ export const CommentsList = () => {
       </div>
       <WriteToSomething />
       {isLoading || areComments ? <Dashed /> : null}
-      {areComments &&
-        comments?.map(({ avatar, content, nickname, createdAt }, key) => <Comment key={key} avatar={avatar} content={content} nickname={nickname} date={createdAt} />)}
+      {areComments && comments?.map(({ user, ...rest }, key) => <Comment key={key} props={{ ...user, ...rest }} />)}
       {isLoading ? loaders.map((_, i) => <LoadComment key={i} />) : null}
     </DirectionColumn>
   );

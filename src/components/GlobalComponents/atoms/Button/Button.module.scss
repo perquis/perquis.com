@@ -5,6 +5,10 @@
   border-radius: var(--small-radius);
   padding: var(--secondary-button-padding);
   transition: 0.15s ease-in-out;
+
+  &:disabled {
+    cursor: no-drop;
+  }
 }
 
 .secondary {
@@ -12,13 +16,13 @@
   color: var(--secondary-button-color);
   transition: none;
 
-  &:is(:focus, :hover) {
+  &:not(:disabled):is(:focus, :hover) {
     text-decoration: underline;
   }
 }
 
 .interactions {
-  &:is(:focus, :hover) {
+  &:not(:disabled):is(:focus, :hover) {
     background: var(--secondary-button-color-hover);
   }
 }
@@ -27,7 +31,7 @@
   color: var(--tertiary-button-color);
   background: var(--tertiary-button-bg);
 
-  &:is(:focus, :hover) {
+  &:not(:disabled):is(:focus, :hover) {
     background: var(--tertiary-button-color-hover);
   }
 }

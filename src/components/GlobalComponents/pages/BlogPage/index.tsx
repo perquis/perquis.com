@@ -1,3 +1,5 @@
+import type { Post } from '@prisma/client';
+import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -32,9 +34,7 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
   useObserver({ negativeSlug });
 
   useEffect(() => {
-    fetch(`/api/posts/${query.slug}`)
-      .then((res) => res.json())
-      .then((res) => updatePostId(res.id));
+    axios.get<Post>(`/api/posts/${query.slug}`).then(({ data }) => updatePostId(data.id));
   }, [updatePostId, query.slug]);
 
   return (

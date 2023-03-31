@@ -29,5 +29,10 @@
       "reset": "Reset",
       "publish": "Publish"
     }
+  },
+  "notificaion": {
+    "success": "Thank you so much for comment!",
+    "error": "Whoops! Something went wrong. Try once again later.",
+    "info": "If you want to type comment, you will have to sign in."
   }
 }

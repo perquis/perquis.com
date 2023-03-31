@@ -29,5 +29,10 @@
       "reset": "Zresetuj",
       "publish": "Opublikuj"
     }
+  },
+  "notificaion": {
+    "success": "Dziękuję za komentarz!",
+    "error": "Ojej! Coś poszło nie tak, spróbuj ponownie później 😅.",
+    "info": "Jeśli chcesz napisać komentarz to musisz być zalogowany."
   }
 }

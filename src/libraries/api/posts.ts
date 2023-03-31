@@ -8,9 +8,9 @@ export const getAllPosts = async (req: NextApiRequest, res: NextApiResponse, slu
     if (posts.length === 0) return res.status(404).send({ message: 'Not Found.' });
 
     const [post] = posts;
-    res.send(post);
+    return res.send(post);
   } catch (err) {
-    res.status(500).send({ message: 'Internal Server Error' });
+    return res.status(500).send({ message: 'Internal Server Error' });
   }
 };
 
@@ -21,9 +21,9 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, slug
     const posts = await prismaClient.post.findMany({ where: { articleId: slug } });
     if (posts.length === 0) {
       await prismaClient.post.create({ data: { articleId: slug } });
-      res.status(201).end();
+      return res.status(201).end();
     } else res.status(200).end();
   } catch (err) {
-    res.status(500).send({ message: 'Internal Server Error' });
+    return res.status(500).send({ message: 'Internal Server Error' });
   }
 };

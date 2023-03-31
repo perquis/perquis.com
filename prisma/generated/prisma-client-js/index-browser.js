@@ -93,8 +93,6 @@ exports.Prisma.CommentScalarFieldEnum = makeEnum({
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  nickname: 'nickname',
-  avatar: 'avatar',
   content: 'content',
   postId: 'postId',
   userId: 'userId'

@@ -1,0 +1,27 @@
+.default {
+  padding: 0.6rem;
+  width: min-content;
+  border-radius: 50%;
+  height: calc(42px + (0.6rem * 2));
+
+  svg {
+    fill: white;
+    stroke: white;
+  }
+}
+
+.success {
+  background: var(--success);
+}
+
+.error {
+  background: var(--error);
+}
+
+.warn {
+  background: var(--warn);
+}
+
+.info {
+  background: var(--info);
+}
