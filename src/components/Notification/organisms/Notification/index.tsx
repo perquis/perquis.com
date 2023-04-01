@@ -22,7 +22,7 @@ export const Notification = () => {
     <motion.div className={className} variants={vars} initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <NotificationStatusIcon />
       <DirectionColumn style={{ gap: 6 }}>
-        <FeaturedWarning>{notification?.status.toLowerCase()}</FeaturedWarning>
+        <FeaturedWarning>{notification?.title}</FeaturedWarning>
         <Message>{notification?.msg}</Message>
       </DirectionColumn>
     </motion.div>

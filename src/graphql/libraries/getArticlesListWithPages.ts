@@ -3,13 +3,15 @@ import { ArticlesOrderByInput } from '@graphql/databases/client';
 import type { Articles, Locale, PageInfo } from '@graphql/databases/client';
 import { getServerPageArticlesListWiths } from '@graphql/databases/server';
 
+import { pageSize } from '@data/presets';
+
 interface Props {
   isEnglish: Locale[];
   first?: number;
   skip?: number;
 }
 
-export const fetchArticlesListWithPages = async ({ isEnglish, first = 3, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
+export const fetchArticlesListWithPages = async ({ isEnglish, first = pageSize, skip = 0 }: Props): Promise<{ edges: Articles[]; pageInfo: PageInfo }> => {
   const {
     props: {
       data: {

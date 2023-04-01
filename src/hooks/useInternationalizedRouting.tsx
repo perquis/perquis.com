@@ -45,11 +45,19 @@ export const useInternationalizedRouting = (status: Status) => {
 
     const gotchaButton = global('gotcha-button');
 
+    const loadingMessage = global('loading');
+
     const notificationSuccess = global('notificaion.success'),
+      notificationSuccessDeleteComment = global('notificaion.success-delete-comment'),
       notificaionError = global('notificaion.error'),
-      notificaionInfo = global('notificaion.info');
+      notificaionInfo = global('notificaion.info'),
+      notificaionTextSuccess = global('notificaion.status.success'),
+      notificaionTextError = global('notificaion.status.error'),
+      notificaionTextWarn = global('notificaion.status.warn'),
+      notificaionTextInfo = global('notificaion.status.info');
 
     return {
+      loadingMessage,
       userProfileSignIn,
       userProfileSignOut,
       userProfileChangeLocation,
@@ -74,6 +82,11 @@ export const useInternationalizedRouting = (status: Status) => {
       notificaionInfo,
       notificaionError,
       notificationSuccess,
+      notificationSuccessDeleteComment,
+      notificaionTextSuccess,
+      notificaionTextError,
+      notificaionTextWarn,
+      notificaionTextInfo,
     };
   }
 

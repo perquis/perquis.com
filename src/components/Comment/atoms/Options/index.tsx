@@ -1,10 +1,5 @@
-import useKey from '@rooks/use-key';
-import useOutsideClick from '@rooks/use-outside-click';
-import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useSession } from 'next-auth/react';
-import type { FC, MutableRefObject } from 'react';
-import { useRef, useState } from 'react';
+import type { FC } from 'react';
 import FocusLock from 'react-focus-lock';
 
 import { Dot } from '@GlobalComponents/atoms/Dot';
@@ -13,26 +8,16 @@ import type { CommentProps } from '@components/Comment/templates/Comment';
 
 import { vars } from '@animations/pop-up';
 
-import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
+import { useCommentOptions } from '@hooks/useCommentOptions';
+
+import { pageSize } from '@data/presets';
 
 import styles from './Options.module.scss';
 
-const dots = new Array(3).fill(null);
+const dots = new Array(pageSize).fill(null);
 
-export const Options: FC<Record<'user', Omit<CommentProps, 'email' | 'content'>>> = ({ user: { id } }) => {
-  const { data: session } = useSession();
-  const ref = useRef<HTMLDivElement>(null);
-  const [isOpen, toggleOpen] = useState(false);
-  const { commentOptionsEdit, commentOptionsDelete } = useInternationalizedRouting('global');
-  const options = [
-    { text: commentOptionsEdit, handler: () => null },
-    { text: commentOptionsDelete, handler: () => axios.delete('/api/comments', { data: { id, userId: session?.user.id } }) },
-  ];
-
-  const handleCloseOptions = () => toggleOpen(false);
-
-  useKey('Escape', handleCloseOptions, { when: isOpen });
-  useOutsideClick(ref as MutableRefObject<HTMLElement>, handleCloseOptions, isOpen);
+export const Options: FC<Record<'user', Omit<CommentProps, 'email' | 'content'>>> = ({ user: { id, userId } }) => {
+  const { ref, isOpen, options, toggleOpen } = useCommentOptions({ id, userId });
 
   return (
     <div className={styles.wrapper} ref={ref}>
@@ -45,9 +30,9 @@ export const Options: FC<Record<'user', Omit<CommentProps, 'email' | 'content'>>
         {isOpen && (
           <FocusLock>
             <motion.div className={styles['options-list']} variants={vars} initial="initial" animate="animate" exit="exit">
-              {options.map(({ text, handler }, i) => (
+              {options.map(({ text, handler, Icon }, i) => (
                 <button className={styles.button} onClick={handler} key={i}>
-                  <span>{text}</span>
+                  <Icon /> <span>{text}</span>
                 </button>
               ))}
             </motion.div>

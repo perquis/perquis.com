@@ -43,10 +43,13 @@
   padding: 1rem;
   overflow: hidden;
   border-radius: 0.4rem;
+  display: flex;
+  gap: 1rem;
 
   @include hover-effect;
 
-  span {
+  span,
+  svg {
     position: relative;
     z-index: 3;
   }

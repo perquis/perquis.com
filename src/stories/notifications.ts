@@ -9,6 +9,7 @@ export enum EnumNotificationStatus {
 
 interface Notification {
   msg: string;
+  title: string;
   status: EnumNotificationStatus;
 }
 

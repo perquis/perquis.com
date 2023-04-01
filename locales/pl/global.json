@@ -36,7 +36,15 @@
   },
   "notificaion": {
     "success": "Dziękuję za komentarz!",
+    "success-delete-comment": "Komentarz został pomyślnie usunięty.",
     "error": "Ojej! Coś poszło nie tak, spróbuj ponownie później 😅.",
-    "info": "Jeśli chcesz napisać komentarz to musisz być zalogowany."
-  }
+    "info": "Jeśli chcesz napisać komentarz to musisz być zalogowany.",
+    "status": {
+      "success": "Sukces!",
+      "error": "Błąd!",
+      "warn": "Ostrzeżenie!",
+      "info": "Informacja!"
+    }
+  },
+  "loading": "Ładowanie..."
 }

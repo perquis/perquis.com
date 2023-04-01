@@ -11,18 +11,23 @@ import { WriteToSomething } from '@components/WriteToSomething';
 
 import { fetchAllCommentsList } from '@libraries/fetchers/fetchAllCommentsList';
 
+import { useRefetchStore } from '@stories/refetch';
+
 import { Dashed } from '@icons/index';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
+import { pageSize } from '@data/presets';
+
+const loaders = new Array(pageSize).fill(null).map((_, i) => i);
+
 export const CommentsList = () => {
   const { query } = useRouter();
   const { status } = useSession();
+  const [isRefetch] = useRefetchStore((state) => [state.isRefetch]);
   const { commentFormTitle, commentFormAuthenticatedDescription, commentFormUnauthenticatedDescription } = useInternationalizedRouting('global');
-  const { data: comments, isLoading } = useQuery({ queryKey: ['comments', query.slug], queryFn: () => fetchAllCommentsList(String(query.slug)) });
+  const { data: comments, isLoading } = useQuery({ queryKey: ['comments', query.slug, isRefetch], queryFn: () => fetchAllCommentsList(String(query.slug)) });
   const areComments = Array.isArray(comments) && comments.length > 0;
-
-  const loaders = new Array(3).fill(null).map((_, i) => i);
 
   return (
     <DirectionColumn isTop>

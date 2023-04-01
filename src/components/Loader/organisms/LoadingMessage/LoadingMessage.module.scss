@@ -1,0 +1,36 @@
+@import './src/styles/_breakpoints.scss';
+
+.wrapper {
+  position: fixed;
+  background: var(--locale-background);
+  border: 2px solid var(--locale-border-color);
+  box-shadow: 0px 3px 22px 10px hsla(210, 30%, 4%, 0.1);
+  left: var(--padding-desktop);
+  bottom: 4.8rem;
+  padding: 1.2rem 2.4rem 1.2rem 1.2rem;
+  border-radius: 2.4rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  @media screen and (min-width: calc($xl + 1px)) and (max-width: $xxl) {
+    left: var(--padding-xxl);
+  }
+
+  @media screen and (min-width: calc($lg + 1px)) and (max-width: $xl) {
+    left: var(--padding-xl);
+  }
+
+  @media screen and (min-width: calc($md + 1px)) and (max-width: $lg) {
+    left: var(--padding-lg);
+  }
+
+  @media screen and (min-width: calc($sm + 1px)) and (max-width: $md) {
+    left: var(--padding-md);
+  }
+
+  @media screen and (max-width: $sm) {
+    left: var(--padding-sm);
+  }
+}

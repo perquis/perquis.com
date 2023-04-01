@@ -36,7 +36,15 @@
   },
   "notificaion": {
     "success": "Thank you so much for comment!",
+    "success-delete-comment": "This comment was deleted successfuly.",
     "error": "Whoops! Something went wrong. Try once again later.",
-    "info": "If you want to type comment, you will have to sign in."
-  }
+    "info": "If you want to type comment, you will have to sign in.",
+    "status": {
+      "success": "Success!",
+      "error": "Error!",
+      "warn": "Warning!",
+      "info": "Info!"
+    }
+  },
+  "loading": "Loading..."
 }

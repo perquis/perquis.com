@@ -7,9 +7,9 @@ import type { CommentProps } from '@components/Comment/templates/Comment';
 
 import styles from './UserAction.module.scss';
 
-export const UserAction = ({ user: { email, ...rest } }: Record<'user', Omit<CommentProps, 'content'>>) => {
+export const UserAction = ({ user: { ...rest } }: Record<'user', Omit<CommentProps, 'content'>>) => {
   const { data: session } = useSession();
-  const areEqualEmails = email === session?.user.email;
+  const areEqualEmails = rest.userId === session?.user.id;
   const isAdmin = session?.user.isAdmin;
   const condition = areEqualEmails || isAdmin;
 

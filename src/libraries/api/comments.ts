@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prismaClient } from 'prisma/prismaClient';
@@ -11,7 +12,19 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
     if (posts.length === 0) return res.status(404).send({ message: 'Not Found.' });
 
     const [post] = posts;
-    return res.send(post.comments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+    return res.send(
+      post.comments
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .map(({ user, ...rest }) => {
+          if (user) {
+            const { id, image, name } = user;
+
+            return { ...rest, user: { id, image, name } };
+          }
+
+          return { ...rest };
+        })
+    );
   } catch (err) {
     return res.status(500).send({ message: 'Internal Server Error' });
   }
@@ -43,8 +56,10 @@ export const deleteComment = async (req: NextApiRequest, res: NextApiResponse) =
 
   try {
     const comment = await prismaClient.comment.findFirst({ where: { id } });
-    const user = await prismaClient.user.findFirst({ where: { id } });
+    const user = await prismaClient.user.findFirst({ where: { id: userId } });
     const isAdmin = user?.email === process.env.EMAIL;
+
+    console.log(user);
 
     if (comment) {
       if (isAdmin || comment.userId !== userId) {
