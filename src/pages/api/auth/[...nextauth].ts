@@ -1,14 +1,14 @@
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import type { AuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 
-import { mongoClient } from '@libraries/clients/mongoClient';
+import { prismaClient } from 'prisma/prismaClient';
 
 const secret = process.env.NEXTAUTH_SECRET;
 
 export const authOptions: AuthOptions = {
-  adapter: MongoDBAdapter(mongoClient),
+  adapter: PrismaAdapter(prismaClient),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID ?? '',
@@ -16,13 +16,6 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user?.email) {
-        token.isAdmin = user.email === process.env.EMAIL;
-      }
-
-      return token;
-    },
     async session({ session }) {
       session.user.isAdmin = session.user.email === process.env.EMAIL;
       return session;

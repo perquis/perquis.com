@@ -78,6 +78,7 @@
   --blur-background: hsl(212, 29%, 90%, 50%);
 
   --paragraph: var(--gray-700);
+  --toc-item: var(--gray-700);
   --span: var(--gray-500);
 
   --heading: var(--primary);
@@ -116,11 +117,11 @@
   --note-bad-practice-color-border: hsl(335, 100%, 50%);
 
   --success: hsl(165, 77%, 40%);
-  --error: hsl(0, 79%, 43%);
+  --error: hsl(335, 100%, 43%);
   --warn: hsl(45, 86%, 42%);
   --info: hsl(215, 91%, 45%);
   --success-bg: hsl(177, 41%, 89%);
-  --error-bg: hsl(340, 26%, 91%);
+  --error-bg: hsl(312, 26%, 89%);
   --warn-bg: hsl(54, 23%, 91%);
   --info-bg: hsl(215, 57%, 92%);
 
@@ -159,9 +160,10 @@
   --blur-background: hsl(212, 33%, 10%, 75%);
 
   --paragraph: var(--gray-200);
+  --toc-item: var(--gray-200);
   --span: var(--gray-400);
 
-  --heading: gold;
+  --heading: var(--cyan);
 
   --input-color: var(--gray-100);
   --input-bg: var(--gray-900);
@@ -192,11 +194,11 @@
   --note-bad-practice-color: hsl(311, 37%, 11%);
 
   --success: hsl(165, 77%, 48%);
-  --error: hsl(0, 79%, 63%);
+  --error: hsl(335, 100%, 50%);
   --warn: hsl(45, 86%, 62%);
   --info: hsl(215, 91%, 65%);
   --success-bg: hsl(182, 44%, 11%);
-  --error-bg: hsl(324, 16%, 13%);
+  --error-bg: hsl(311, 37%, 11%);
   --warn-bg: hsl(69, 10%, 14%);
   --info-bg: hsl(214, 40%, 14%);
 }

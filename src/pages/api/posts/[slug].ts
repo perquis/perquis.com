@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { createPost, getAllPosts } from '@libraries/api/posts';
+import { getAllPosts } from '@libraries/api/posts';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
@@ -9,8 +9,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
       return getAllPosts(req, res, String(slug));
-    case 'POST':
-      return createPost(req, res, String(slug));
     default:
       return res.status(400).json({ message: 'Invalid method.' });
   }

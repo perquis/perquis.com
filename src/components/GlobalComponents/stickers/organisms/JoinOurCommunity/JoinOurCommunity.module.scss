@@ -22,6 +22,10 @@
     margin-left: 0;
   }
 
+  span {
+    color: var(--heading);
+  }
+
   &::after {
     content: '';
     position: absolute;

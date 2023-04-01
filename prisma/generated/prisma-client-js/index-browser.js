@@ -89,6 +89,21 @@ Prisma.NullTypes = {
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
 
+exports.Prisma.AccountScalarFieldEnum = makeEnum({
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+});
+
 exports.Prisma.CommentScalarFieldEnum = makeEnum({
   id: 'id',
   createdAt: 'createdAt',
@@ -108,6 +123,13 @@ exports.Prisma.QueryMode = makeEnum({
   insensitive: 'insensitive'
 });
 
+exports.Prisma.SessionScalarFieldEnum = makeEnum({
+  id: 'id',
+  sessionToken: 'sessionToken',
+  userId: 'userId',
+  expires: 'expires'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -117,14 +139,25 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
   email: 'email',
-  image: 'image'
+  image: 'image',
+  emailVerified: 'emailVerified'
+});
+
+exports.Prisma.VerificationTokenScalarFieldEnum = makeEnum({
+  id: 'id',
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
 });
 
 
 exports.Prisma.ModelName = makeEnum({
   Post: 'Post',
   Comment: 'Comment',
-  User: 'User'
+  User: 'User',
+  Session: 'Session',
+  VerificationToken: 'VerificationToken',
+  Account: 'Account'
 });
 
 /**

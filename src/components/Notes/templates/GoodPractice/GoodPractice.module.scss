@@ -1,8 +1,8 @@
 @import './src/styles/_mixins.scss';
 
 .note {
-  background: var(--note-good-practice-color);
-  border-left: 3px solid var(--note-good-practice-color-border);
+  background: var(--success-bg);
+  border-left: 3px solid var(--success);
 
   h1,
   h2,
@@ -12,7 +12,7 @@
   h6 {
     a {
       &:is(:hover, :focus) {
-        text-decoration-color: var(--note-good-practice-color-border);
+        text-decoration-color: var(--success);
       }
     }
   }

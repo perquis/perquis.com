@@ -16,7 +16,7 @@
     "button": "Subscribe"
   },
   "join-our-community": {
-    "title": "Join my community!",
+    "title": "Join my <span>community</span>!",
     "description": "We can build great society together.",
     "button": "Join us!"
   },

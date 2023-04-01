@@ -16,7 +16,7 @@ export const JoinOurCommunity = () => {
     <DirectionColumn>
       <div className={styles['join-our-community']}>
         <div>
-          <h3>{joinOurCommunityTitle}</h3>
+          <h3 dangerouslySetInnerHTML={{ __html: joinOurCommunityTitle ?? '' }} />
           <Paragraph style={{ marginTop: 6 }}>{joinOurCommunityDescription}</Paragraph>
         </div>
         <StickerButton>
