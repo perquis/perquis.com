@@ -27,7 +27,7 @@
   }
 
   @media screen and (max-width: $sm) {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -43,7 +43,7 @@
 
 .button {
   position: absolute;
-  background: var(--primary);
+  background: var(--aside-button);
   border: none;
   top: 4.8rem;
   left: -2.7rem;

@@ -1,3 +1,9 @@
+@import './src/styles/_mixins.scss';
+
+.wrapper {
+  position: relative;
+}
+
 .options {
   display: flex;
   align-items: center;
@@ -12,5 +18,40 @@
     > div {
       background: var(--tertiary-button-color);
     }
+  }
+}
+
+.options-list {
+  background: var(--locale-background);
+  border: 2px solid var(--locale-border-color);
+  border-radius: 1.2rem;
+  padding: 1rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0px 3px 22px 10px hsla(210, 30%, 4%, 0.1);
+}
+
+.button {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 0.4rem;
+
+  @include hover-effect;
+
+  span {
+    position: relative;
+    z-index: 3;
+  }
+
+  &::before {
+    z-index: 2;
   }
 }

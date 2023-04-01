@@ -7,7 +7,7 @@ import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting'
 import styles from './Actions.module.scss';
 
 export const Actions = () => {
-  const [updateCommentKeywords, isDisabled] = useFormStore((state) => [state.updateCommentKeywords, state.isDisabled]);
+  const [commentKeywords, updateCommentKeywords, isDisabled] = useFormStore((state) => [state.commentKeywords, state.updateCommentKeywords, state.isDisabled]);
   const { commentFormReset, commentFormPublish } = useInternationalizedRouting('global');
 
   return (
@@ -15,7 +15,7 @@ export const Actions = () => {
       <Button isTertiary onClick={() => updateCommentKeywords('')} disabled={isDisabled}>
         {commentFormReset}
       </Button>
-      <Button disabled={isDisabled}>{commentFormPublish}</Button>
+      <Button disabled={commentKeywords.length < 5 || isDisabled}>{commentFormPublish}</Button>
     </div>
   );
 };

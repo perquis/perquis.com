@@ -125,6 +125,8 @@
   --warn-bg: hsl(54, 23%, 91%);
   --info-bg: hsl(215, 57%, 92%);
 
+  --aside-button: var(--pink);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;
@@ -201,4 +203,6 @@
   --error-bg: hsl(311, 37%, 11%);
   --warn-bg: hsl(69, 10%, 14%);
   --info-bg: hsl(214, 40%, 14%);
+
+  --aside-button: var(--primary);
 }

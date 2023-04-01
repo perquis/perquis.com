@@ -39,7 +39,9 @@ export const useInternationalizedRouting = (status: Status) => {
       commentFormUnauthenticatedDescription = global('comment.unauthenticated-description'),
       commentFormReset = global('comment.form.reset'),
       commentFormPublish = global('comment.form.publish'),
-      commentFormPlaceholder = global('comment.form.placeholder');
+      commentFormPlaceholder = global('comment.form.placeholder'),
+      commentOptionsEdit = global('comment.options.edit'),
+      commentOptionsDelete = global('comment.options.delete');
 
     const gotchaButton = global('gotcha-button');
 
@@ -66,6 +68,8 @@ export const useInternationalizedRouting = (status: Status) => {
       commentFormPlaceholder,
       commentFormAuthenticatedDescription,
       commentFormUnauthenticatedDescription,
+      commentOptionsEdit,
+      commentOptionsDelete,
       gotchaButton,
       notificaionInfo,
       notificaionError,

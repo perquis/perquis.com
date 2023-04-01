@@ -16,7 +16,7 @@ export const UserAction = ({ user: { email, ...rest } }: Record<'user', Omit<Com
   return (
     <div className={clsx(styles.wrapper, !condition && styles['flex-start'])}>
       <UsernameAndDate user={rest} />
-      {condition && <Options />}
+      {condition && <Options user={rest} />}
     </div>
   );
 };

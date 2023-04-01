@@ -28,6 +28,10 @@
       "placeholder": "Write to something...",
       "reset": "Reset",
       "publish": "Publish"
+    },
+    "options": {
+      "edit": "Edit",
+      "delete": "Delete"
     }
   },
   "notificaion": {

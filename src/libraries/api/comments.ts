@@ -36,3 +36,25 @@ export const createComment = async (req: NextApiRequest, res: NextApiResponse) =
     return res.status(500).send({ message: 'Internal Server Error' });
   }
 };
+
+export const deleteComment = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id, userId } = req.body;
+  if (!id && !userId) return res.status(400).send({ message: 'Bad request.' });
+
+  try {
+    const comment = await prismaClient.comment.findFirst({ where: { id } });
+    const user = await prismaClient.user.findFirst({ where: { id } });
+    const isAdmin = user?.email === process.env.EMAIL;
+
+    if (comment) {
+      if (isAdmin || comment.userId !== userId) {
+        await prismaClient.comment.delete({ where: { id } });
+        return res.status(200).end();
+      }
+
+      return res.status(400).send({ message: 'Bad request.' });
+    } else return res.status(404).send({ message: 'Not Found.' });
+  } catch (err) {
+    return res.status(500).send({ message: 'Internal Server Error' });
+  }
+};

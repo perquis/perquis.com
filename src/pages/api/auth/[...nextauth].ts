@@ -18,6 +18,9 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async session({ session }) {
       session.user.isAdmin = session.user.email === process.env.EMAIL;
+      const user = await prismaClient.user.findFirst({ where: { email: session.user.email } });
+      session.user.id = user?.id ?? null;
+
       return session;
     },
   },
