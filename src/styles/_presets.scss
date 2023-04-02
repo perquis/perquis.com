@@ -116,6 +116,7 @@
   --note-bad-practice-color: hsl(321, 43%, 90%);
   --note-bad-practice-color-border: hsl(335, 100%, 50%);
 
+  --success-opacity: hsl(165, 77%, 40%, 50%);
   --success: hsl(165, 77%, 40%);
   --error: hsl(335, 100%, 43%);
   --warn: hsl(45, 86%, 42%);
@@ -126,6 +127,11 @@
   --info-bg: hsl(215, 57%, 92%);
 
   --aside-button: var(--pink);
+
+  --toc-item-link-hidden: var(--paragraph);
+  --toc-item-link-visible: var(--heading);
+  --toc-item-link-read: var(--success);
+  --toc-item-link-read-text: var(--success-opacity);
 
   // Sizes
   --radius: 1.2rem;
@@ -195,6 +201,7 @@
   --note-good-practice-color: hsl(147, 44%, 10%);
   --note-bad-practice-color: hsl(311, 37%, 11%);
 
+  --success-opacity: hsl(165, 77%, 48%, 50%);
   --success: hsl(165, 77%, 48%);
   --error: hsl(335, 100%, 50%);
   --warn: hsl(45, 86%, 62%);

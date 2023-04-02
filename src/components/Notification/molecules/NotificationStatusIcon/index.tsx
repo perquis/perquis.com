@@ -1,17 +1,15 @@
 import clsx from 'clsx';
-import type { FC } from 'react';
 import { BiCheck } from 'react-icons/bi';
 import { IoCloseSharp, IoInformation } from 'react-icons/io5';
 import { WiStormWarning } from 'react-icons/wi';
 
-import type { IMessage } from '@components/Notification/atoms/Message';
 import { isValidatedNotificationColorStatus } from '@components/Notification/atoms/Message';
 
 import { useNotificationState } from '@hooks/useNotificationState';
 
 import styles from './NotificationStatusIcon.module.scss';
 
-export const NotificationStatusIcon: FC<IMessage> = () => {
+export const NotificationStatusIcon = () => {
   const { isValidatedStatus, colorStatus } = useNotificationState();
 
   return (

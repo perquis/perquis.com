@@ -59,8 +59,6 @@ export const deleteComment = async (req: NextApiRequest, res: NextApiResponse) =
     const user = await prismaClient.user.findFirst({ where: { id: userId } });
     const isAdmin = user?.email === process.env.EMAIL;
 
-    console.log(user);
-
     if (comment) {
       if (isAdmin || comment.userId !== userId) {
         await prismaClient.comment.delete({ where: { id } });

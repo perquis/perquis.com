@@ -1,0 +1,36 @@
+.number-of-chapter {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    position: absolute;
+    border-radius: 50%;
+    transition: 0.15s ease-in-out;
+  }
+}
+
+.number-of-chapter-hidden {
+  &::before {
+    border: 3px solid var(--toc-item-link-hidden) !important;
+  }
+}
+
+.number-of-chapter-visible {
+  &::before {
+    border: 3px solid var(--toc-item-link-visible) !important;
+  }
+}
+
+.number-of-chapter-read {
+  &::before {
+    border: 3px solid var(--toc-item-link-read) !important;
+  }
+}

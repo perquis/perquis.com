@@ -22,10 +22,9 @@ export const Layout: FC<Children> = ({ children }) => {
   const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
   const [isOpen] = useNotificationStore((state) => [state.isOpen]);
   const [isVisible] = useTOCStore((state) => [state.isVisible]);
-  const [toggleToc] = useTOCStore((state) => [state.toggleToc]);
   const [isBlur] = useBlurStore((state) => [state.isBlur]);
   const [isLoadingWhileSendingRequest] = useLoadingStore((state) => [state.isLoadingWhileSendingRequest]);
-  const condition = isBlur || isNewsletterModalOpen || toggleToc;
+  const condition = isBlur || isNewsletterModalOpen;
 
   return (
     <>

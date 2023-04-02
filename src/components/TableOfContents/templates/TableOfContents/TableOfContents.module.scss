@@ -5,7 +5,7 @@
   top: 15%;
   right: 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 560px;
   position: fixed;
   font-size: 1.8rem;
   background: var(--locale-background);
@@ -107,4 +107,8 @@
     rotate: -45deg;
     translate: 0 0;
   }
+}
+
+.navigation {
+  padding-right: 2.4rem;
 }

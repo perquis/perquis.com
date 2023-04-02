@@ -6,10 +6,12 @@ import { useInView } from 'react-intersection-observer';
 
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
+import type { Slug } from '@stories/toc';
 import { useTOCStore } from '@stories/toc';
 
 import { components } from './components/components';
 
+// trzy stany, hidden, visible, read
 export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [updateSlugs, updateTocOpen] = useTOCStore((state) => [state.updateSlugs, state.updateTocOpen]);
@@ -18,7 +20,9 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
 
   useEffect(() => {
     const toc = ref.current?.querySelector('.toc');
-    const slugs: string = toc?.innerHTML ?? '';
+    const slugs: Slug[] = [];
+
+    toc?.querySelectorAll<HTMLAnchorElement>('a').forEach(({ hash, textContent }) => slugs.push({ href: decodeURI(hash), status: 'hidden', textContent: textContent ?? '' }));
 
     updateSlugs(slugs);
     reference(ref.current?.querySelector('.toc'));

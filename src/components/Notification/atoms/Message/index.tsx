@@ -13,7 +13,7 @@ export type NotificationColorsStatus = {
 
 export const isValidatedNotificationColorStatus = (type: EnumNotificationStatus | NotificationColorsStatus, styles: object) => {
   // @ts-ignore
-  return type.toUpperCase() === EnumNotificationStatus[type.toUpperCase()] && styles[type.toLowerCase()];
+  return type?.toUpperCase() === EnumNotificationStatus[type?.toUpperCase()] && styles[type?.toLowerCase()];
 };
 
 export const Message: FC<ReactHTMLElementProps<HTMLSpanElement>> = ({ children, className = '', ...props }) => {
