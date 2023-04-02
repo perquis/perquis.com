@@ -2,6 +2,8 @@ import { create } from 'zustand';
 
 export interface Slug {
   href: string;
+  position: number;
+  nextChapterPosition?: number;
   textContent: string;
   status: 'hidden' | 'visible' | 'read';
 }
@@ -33,8 +35,10 @@ export const useTOCStore = create<State & Action>((set) => ({
   updateSlugsByHref: (hash, overrideStatus) =>
     set((state) => ({
       ...state,
-      slugs: state.slugs.map(({ href, status, textContent }) =>
-        href === `#${hash.toLowerCase().split(' ').join('-')}` ? { href, status: overrideStatus, textContent } : { href, status, textContent }
+      slugs: state.slugs.map(({ href, status, textContent, position, nextChapterPosition }) =>
+        href === `#${hash.toLowerCase().split(' ').join('-')}`
+          ? { href, status: overrideStatus, textContent, position, nextChapterPosition }
+          : { href, status, textContent, position, nextChapterPosition }
       ),
     })),
 }));

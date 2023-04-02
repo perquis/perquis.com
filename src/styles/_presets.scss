@@ -65,7 +65,7 @@
 
   --locale-border-color: var(--gray-250);
   --locale-background: var(--white);
-  --locale-is-hover: var(--gray-50);
+  --locale-is-hover: hsl(210, 31%, 97%);
 
   --hamburger-menu-color: var(--gray-900);
 
@@ -129,7 +129,7 @@
   --aside-button: var(--pink);
 
   --toc-item-link-hidden: var(--paragraph);
-  --toc-item-link-visible: var(--heading);
+  --toc-item-link-visible: var(--gray-700);
   --toc-item-link-read: var(--success);
   --toc-item-link-read-text: var(--success-opacity);
 
@@ -212,4 +212,6 @@
   --info-bg: hsl(214, 40%, 14%);
 
   --aside-button: var(--primary);
+
+  --toc-item-link-visible: var(--gray-100);
 }

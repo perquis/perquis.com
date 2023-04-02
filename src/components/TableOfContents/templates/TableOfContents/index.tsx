@@ -19,13 +19,20 @@ export const TableOfContents = () => {
   const { tableOfContentsHeading } = useInternationalizedRouting('global');
   const [slugs, toggleToc, updateToggleToc] = useTOCStore((state) => [state.slugs, state.toggleToc, state.updateToggleToc]);
 
-  useKey('Escape', () => updateToggleToc(false), { when: toggleToc });
-  useOutsideClick(ref as unknown as MutableRefObject<HTMLElement>, () => updateToggleToc(false), toggleToc);
+  useKey('Escape', () => updateToggleToc(true), { when: !toggleToc });
+  useOutsideClick(ref as unknown as MutableRefObject<HTMLElement>, () => updateToggleToc(true), !toggleToc);
 
   return (
-    <motion.aside className={styles.toc} initial={{ x: '110%' }} animate={!toggleToc ? { x: 560 } : { x: 24 }} exit={{ x: '110%' }} transition={{ ease: 'easeInOut' }} ref={ref}>
-      <FocusLock disabled={!toggleToc}>
-        <button className={clsx(styles.button, toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
+    <motion.aside
+      className={styles.toc}
+      initial={{ x: 'calc(100% - 2.4rem)' }}
+      animate={!toggleToc ? { x: -536 } : { x: 24 }}
+      exit={{ x: 'calc(100% - 2.4rem)' }}
+      transition={{ ease: 'easeInOut' }}
+      ref={ref}
+    >
+      <FocusLock disabled={toggleToc}>
+        <button className={clsx(styles.button, !toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
         <div className={styles['toc-list']}>
           <h3>{tableOfContentsHeading}</h3>
           <nav className={styles.navigation}>
