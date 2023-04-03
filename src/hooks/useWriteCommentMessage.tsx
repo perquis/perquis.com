@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import type { FormEvent } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useFormStore } from '@stories/forms';
 import { useLoadingStore } from '@stories/loading';
-import { EnumNotificationStatus, useNotificationStore } from '@stories/notifications';
+import { useNotificationStore } from '@stories/notifications';
 import { usePostsListStore } from '@stories/posts';
 import { useRefetchStore } from '@stories/refetch';
 
@@ -20,7 +21,7 @@ export const useWriteCommentMessage = () => {
     state.isDisabled,
     state.updateDisabledState,
   ]);
-  const [updateNotification, updateIsOpen] = useNotificationStore((state) => [state.updateNotification, state.updateIsOpen]);
+  const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
 
   const [isRefetch, updateIsRefetch] = useRefetchStore((state) => [state.isRefetch, state.updateIsRefetch]);
 
@@ -35,31 +36,25 @@ export const useWriteCommentMessage = () => {
     updateIsLoadingWhileSendingRequest(true);
 
     if (data?.user?.email) {
+      const id = uuidv4();
       const { email } = data.user;
+
       axios
         .post('/api/comments', { email, postId, content })
         .then(() => {
-          updateIsOpen(true);
+          updateDisabledState(false);
           updateIsRefetch(!isRefetch);
           updateIsLoadingWhileSendingRequest(false);
-          updateNotification({ status: EnumNotificationStatus.SUCCESS, title: notificaionTextSuccess ?? '', msg: notificationSuccess ?? '' });
+          updateNotification({ id, status: 'success', title: notificaionTextSuccess ?? '', msg: notificationSuccess ?? '' });
 
-          setTimeout(() => updateIsOpen(false), 5000);
-          setTimeout(() => {
-            updateDisabledState(false);
-            updateNotification(undefined);
-          }, 6000);
+          setTimeout(() => deleteNotification(id), 6000);
         })
         .catch(() => {
-          updateIsOpen(true);
+          updateDisabledState(false);
           updateIsLoadingWhileSendingRequest(false);
-          updateNotification({ status: EnumNotificationStatus.ERROR, title: notificaionTextError ?? '', msg: notificaionError ?? '' });
+          updateNotification({ id, status: 'error', title: notificaionTextError ?? '', msg: notificaionError ?? '' });
 
-          setTimeout(() => updateIsOpen(false), 5000);
-          setTimeout(() => {
-            updateDisabledState(false);
-            updateNotification(undefined);
-          }, 6000);
+          setTimeout(() => deleteNotification(id), 6000);
         });
     }
 

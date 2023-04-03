@@ -1,9 +1,7 @@
 import clsx from 'clsx';
 import type { FC, ReactHTMLElementProps } from 'react';
 
-import { EnumNotificationStatus } from '@stories/notifications';
-
-import { useNotificationState } from '@hooks/useNotificationState';
+import type { Notification } from '@stories/notifications';
 
 import styles from './Message.module.scss';
 
@@ -11,16 +9,9 @@ export type NotificationColorsStatus = {
   [K in keyof typeof styles]: K;
 }[keyof typeof styles];
 
-export const isValidatedNotificationColorStatus = (type: EnumNotificationStatus | NotificationColorsStatus, styles: object) => {
-  // @ts-ignore
-  return type?.toUpperCase() === EnumNotificationStatus[type?.toUpperCase()] && styles[type?.toLowerCase()];
-};
-
-export const Message: FC<ReactHTMLElementProps<HTMLSpanElement>> = ({ children, className = '', ...props }) => {
-  const { colorStatus } = useNotificationState();
-
+export const Message: FC<ReactHTMLElementProps<HTMLSpanElement> & { status: Notification['status'] }> = ({ children, status, className = '', ...props }) => {
   return (
-    <span className={clsx(styles.default, isValidatedNotificationColorStatus(colorStatus, styles), className)} {...props}>
+    <span className={clsx(styles.default, styles[status], className)} {...props}>
       {children}
     </span>
   );

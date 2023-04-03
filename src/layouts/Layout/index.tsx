@@ -5,22 +5,20 @@ import { useBlurStore } from 'src/stories/blur';
 
 import { Blur } from '@GlobalComponents/atoms/Blur';
 import { Footer } from '@GlobalComponents/atoms/Footer';
+import { NotificationsList } from '@GlobalComponents/atoms/NotificationsList';
 
 import { LoadingMessage } from '@components/Loader/organisms/LoadingMessage';
 import { Navigation } from '@components/Navigation';
-import { Notification } from '@components/Notification/organisms/Notification';
 
 import { useLoadingStore } from '@stories/loading';
 import { useModalStore } from '@stories/modals';
-import { useNotificationStore } from '@stories/notifications';
 
 import styles from './Layout.module.scss';
 
 export const Layout: FC<Children> = ({ children }) => {
-  const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
-  const [isOpen] = useNotificationStore((state) => [state.isOpen]);
-  const [isBlur] = useBlurStore((state) => [state.isBlur]);
   const [isLoadingWhileSendingRequest] = useLoadingStore((state) => [state.isLoadingWhileSendingRequest]);
+  const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
+  const [isBlur] = useBlurStore((state) => [state.isBlur]);
   const condition = isBlur || isNewsletterModalOpen;
 
   return (
@@ -30,7 +28,7 @@ export const Layout: FC<Children> = ({ children }) => {
       </Head>
       <AnimatePresence>{isLoadingWhileSendingRequest && <LoadingMessage />}</AnimatePresence>
       <AnimatePresence>{condition && <Blur />}</AnimatePresence>
-      <AnimatePresence>{isOpen && <Notification />}</AnimatePresence>
+      <NotificationsList />
       <Navigation />
       <div className={styles.container}>{children}</div>
       <Footer />

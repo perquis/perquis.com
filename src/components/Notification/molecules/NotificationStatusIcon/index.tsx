@@ -1,19 +1,18 @@
 import clsx from 'clsx';
+import type { FC } from 'react';
 import { BiCheck } from 'react-icons/bi';
 import { IoCloseSharp, IoInformation } from 'react-icons/io5';
 import { WiStormWarning } from 'react-icons/wi';
 
-import { isValidatedNotificationColorStatus } from '@components/Notification/atoms/Message';
-
-import { useNotificationState } from '@hooks/useNotificationState';
+import type { Notification } from '@stories/notifications';
 
 import styles from './NotificationStatusIcon.module.scss';
 
-export const NotificationStatusIcon = () => {
-  const { isValidatedStatus, colorStatus } = useNotificationState();
+export const NotificationStatusIcon: FC<{ status: Notification['status'] }> = ({ status }) => {
+  const isValidatedStatus = (compareStatus: Notification['status']) => status === compareStatus;
 
   return (
-    <div className={clsx(styles.default, isValidatedNotificationColorStatus(colorStatus, styles))}>
+    <div className={clsx(styles.default, styles[status])}>
       {isValidatedStatus('info') ? (
         <IoInformation size={42} />
       ) : isValidatedStatus('success') ? (

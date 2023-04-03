@@ -1,30 +1,23 @@
 import { create } from 'zustand';
 
-export enum EnumNotificationStatus {
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-  WARN = 'WARN',
-  INFO = 'INFO',
-}
-
-interface Notification {
+export interface Notification {
+  id: string;
   msg: string;
   title: string;
-  status: EnumNotificationStatus;
+  status: 'success' | 'error' | 'warn' | 'info';
 }
 
 interface State {
-  isOpen: boolean;
-  notification?: Notification;
+  notifications: Notification[];
 }
 
 interface Action {
-  updateIsOpen: (isOpen: State['isOpen']) => void;
-  updateNotification: (notification: State['notification']) => void;
+  deleteNotification: (id: Notification['id']) => void;
+  updateNotification: (notification: Notification) => void;
 }
 
 export const useNotificationStore = create<State & Action>((set) => ({
-  isOpen: false,
-  updateIsOpen: (isOpen) => set((state) => ({ ...state, isOpen })),
-  updateNotification: (notification) => set((state) => ({ ...state, notification })),
+  notifications: [],
+  deleteNotification: (id) => set((state) => ({ notifications: state.notifications.filter((_) => _.id !== id) })),
+  updateNotification: (notification) => set((state) => ({ ...state, notifications: [...state.notifications, notification] })),
 }));
