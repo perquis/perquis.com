@@ -9,19 +9,16 @@ import { Footer } from '@GlobalComponents/atoms/Footer';
 import { LoadingMessage } from '@components/Loader/organisms/LoadingMessage';
 import { Navigation } from '@components/Navigation';
 import { Notification } from '@components/Notification/organisms/Notification';
-import { TableOfContents } from '@components/TableOfContents';
 
 import { useLoadingStore } from '@stories/loading';
 import { useModalStore } from '@stories/modals';
 import { useNotificationStore } from '@stories/notifications';
-import { useTOCStore } from '@stories/toc';
 
 import styles from './Layout.module.scss';
 
 export const Layout: FC<Children> = ({ children }) => {
   const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
   const [isOpen] = useNotificationStore((state) => [state.isOpen]);
-  const [isVisible] = useTOCStore((state) => [state.isVisible]);
   const [isBlur] = useBlurStore((state) => [state.isBlur]);
   const [isLoadingWhileSendingRequest] = useLoadingStore((state) => [state.isLoadingWhileSendingRequest]);
   const condition = isBlur || isNewsletterModalOpen;
@@ -34,7 +31,6 @@ export const Layout: FC<Children> = ({ children }) => {
       <AnimatePresence>{isLoadingWhileSendingRequest && <LoadingMessage />}</AnimatePresence>
       <AnimatePresence>{condition && <Blur />}</AnimatePresence>
       <AnimatePresence>{isOpen && <Notification />}</AnimatePresence>
-      <AnimatePresence>{isVisible && <TableOfContents />}</AnimatePresence>
       <Navigation />
       <div className={styles.container}>{children}</div>
       <Footer />

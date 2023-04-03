@@ -3,9 +3,8 @@ import { create } from 'zustand';
 export interface Slug {
   href: string;
   position: number;
-  nextChapterPosition?: number;
+  nextChapterPosition: number;
   textContent: string;
-  status: 'hidden' | 'visible' | 'read';
 }
 
 interface State {
@@ -16,7 +15,6 @@ interface State {
 }
 
 interface Action {
-  updateSlugsByHref: (href: string, status: Slug['status']) => void;
   updateSlugs: (slugs: State['slugs']) => void;
   updateTocOpen: (isOpen: State['isTocOpen']) => void;
   updateToggleToc: (slugs: State['toggleToc']) => void;
@@ -32,13 +30,4 @@ export const useTOCStore = create<State & Action>((set) => ({
   updateTocOpen: (isTocOpen) => set((state) => ({ ...state, isTocOpen })),
   updateIsVisible: (isVisible) => set((state) => ({ ...state, isVisible })),
   updateToggleToc: (toggleToc) => set((state) => ({ ...state, toggleToc })),
-  updateSlugsByHref: (hash, overrideStatus) =>
-    set((state) => ({
-      ...state,
-      slugs: state.slugs.map(({ href, status, textContent, position, nextChapterPosition }) =>
-        href === `#${hash.toLowerCase().split(' ').join('-')}`
-          ? { href, status: overrideStatus, textContent, position, nextChapterPosition }
-          : { href, status, textContent, position, nextChapterPosition }
-      ),
-    })),
 }));

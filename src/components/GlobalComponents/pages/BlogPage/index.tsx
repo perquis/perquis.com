@@ -2,8 +2,9 @@ import type { Post } from '@prisma/client';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { useInView } from 'react-intersection-observer';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
 
 import { NewsletterObserver } from '@GlobalComponents/observers/NewsletterObserver';
@@ -16,9 +17,11 @@ import { Details } from '@components/Article';
 import { ReadingTime } from '@components/Article/atoms/ReadingTime';
 import { Author } from '@components/Author';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
+import { TableOfContents } from '@components/TableOfContents';
 
 import type { PickedDetailsProps } from '@stories/articles';
 import { usePostsListStore } from '@stories/posts';
+import { useTOCStore } from '@stories/toc';
 
 import { useObserver } from '@hooks/useObserver';
 
@@ -37,6 +40,15 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
     axios.get<Post>(`/api/posts/${query.slug}`).then(({ data }) => updatePostId(data.id));
   }, [updatePostId, query.slug]);
 
+  const markdownContainerRef = useRef<HTMLDivElement>(null);
+  const { ref, inView } = useInView();
+  const [updateTocOpen] = useTOCStore((state) => [state.updateTocOpen]);
+
+  useEffect(() => {
+    ref(markdownContainerRef?.current?.querySelector('.toc'));
+    updateTocOpen(inView);
+  }, [inView, updateTocOpen, markdownContainerRef, ref]);
+
   return (
     <>
       <Head>
@@ -50,7 +62,10 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
         <ReadingTime content={content?.text ?? ''} />
       </DetailsWrapper>
       <FullWidthContainer>
-        <MarkdownToHTML {...source} />
+        <TableOfContents />
+        <div ref={markdownContainerRef}>
+          <MarkdownToHTML {...source} />
+        </div>
         <ResourcesList resources={resources} />
         <Stickers />
         <CommentsList />

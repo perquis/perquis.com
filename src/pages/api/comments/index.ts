@@ -1,9 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
 
 import { createComment, deleteComment } from '@libraries/api/comments';
 
+import { authOptions } from '../auth/[...nextauth]';
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (!req.cookies['next-auth.session-token']) return res.status(403).json({ message: 'Forbidden.' });
+  const session = await getServerSession(req, res, authOptions);
+  if (!session?.user) return res.status(403).json({ message: 'Forbidden.' });
 
   switch (req.method) {
     case 'POST':

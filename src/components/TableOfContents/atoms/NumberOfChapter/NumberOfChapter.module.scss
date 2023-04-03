@@ -30,6 +30,8 @@
 }
 
 .number-of-chapter-read {
+  color: var(--toc-item-link-read);
+
   &::before {
     border: 3px solid var(--toc-item-link-read) !important;
   }

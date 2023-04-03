@@ -13,10 +13,10 @@
   border-left: 3px solid var(--locale-border-color);
   border-bottom: 3px solid var(--locale-border-color);
   border-radius: 2.4rem 0 0 2.4rem;
-  padding: 1.6rem 2.4rem;
-  z-index: 3;
+  padding: 2.4rem 2.4rem 1.6rem 2.4rem;
   translate: calc(100% - 2.4rem) 0;
-  box-shadow: 0px 3px 10px 2px hsla(210, 30%, 4%, 0.1);
+  transition: 0.15s ease-in-out;
+  z-index: 1;
 
   ul {
     padding: 0;
@@ -31,6 +31,10 @@
   @media screen and (max-width: $sm) {
     display: none !important;
   }
+}
+
+.toc-active {
+  box-shadow: 0px 3px 10px 2px hsla(210, 30%, 4%, 0.1);
 }
 
 .toc-list {
@@ -109,8 +113,4 @@
     rotate: -45deg;
     translate: 0 0;
   }
-}
-
-.navigation {
-  padding-right: 2.4rem;
 }

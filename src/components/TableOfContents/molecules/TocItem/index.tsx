@@ -5,11 +5,11 @@ import { BiCheck } from 'react-icons/bi';
 
 import { NumberOfChapter } from '@components/TableOfContents/atoms/NumberOfChapter';
 
-import type { Slug } from '@stories/toc';
-
 import styles from './TocItem.module.scss';
 
-export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: string; status: Slug['status']; index: number }> = ({ children, href, index, status, ...props }) => {
+type Status = 'hidden' | 'visible' | 'read';
+
+export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: string; status: Status; index: number }> = ({ children, href, index, status, ...props }) => {
   return (
     <li>
       <Link href={href} legacyBehavior passHref>
