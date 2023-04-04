@@ -43,9 +43,9 @@ export const useInternationalizedRouting = (status: Status) => {
       commentOptionsEdit = global('comment.options.edit'),
       commentOptionsDelete = global('comment.options.delete');
 
-    const gotchaButton = global('gotcha-button');
-
-    const loadingMessage = global('loading');
+    const gotchaButton = global('gotcha-button'),
+      loadingMessage = global('loading'),
+      modalUpdateComment = global('modal.update-comment');
 
     const notificationSuccess = global('notificaion.success'),
       notificationSuccessDeleteComment = global('notificaion.success-delete-comment'),
@@ -54,10 +54,12 @@ export const useInternationalizedRouting = (status: Status) => {
       notificaionTextSuccess = global('notificaion.status.success'),
       notificaionTextError = global('notificaion.status.error'),
       notificaionTextWarn = global('notificaion.status.warn'),
-      notificaionTextInfo = global('notificaion.status.info');
+      notificaionTextInfo = global('notificaion.status.info'),
+      notificaionInfoCopyToClipboard = global('notificaion.info-copy-to-clipboard');
 
     return {
       loadingMessage,
+      modalUpdateComment,
       userProfileSignIn,
       userProfileSignOut,
       userProfileChangeLocation,
@@ -87,6 +89,7 @@ export const useInternationalizedRouting = (status: Status) => {
       notificaionTextError,
       notificaionTextWarn,
       notificaionTextInfo,
+      notificaionInfoCopyToClipboard,
     };
   }
 

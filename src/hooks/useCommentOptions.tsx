@@ -8,13 +8,16 @@ import { FiEdit2 } from 'react-icons/fi';
 import { TfiTrash } from 'react-icons/tfi';
 import { v4 as uuidv4 } from 'uuid';
 
+import type { CommentProps } from '@components/Comment';
+
+import { useCommentStore } from '@stories/comment';
 import { useLoadingStore } from '@stories/loading';
 import { useNotificationStore } from '@stories/notifications';
 import { useRefetchStore } from '@stories/refetch';
 
 import { useInternationalizedRouting } from './useInternationalizedRouting';
 
-export const useCommentOptions = ({ commentId, userId }: { commentId: string; userId: string }) => {
+export const useCommentOptions = ({ commentId, userId, ...rest }: CommentProps & { commentId: string }) => {
   const { data: session } = useSession();
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, toggleOpen] = useState(false);
@@ -25,7 +28,11 @@ export const useCommentOptions = ({ commentId, userId }: { commentId: string; us
 
   const [updateIsLoadingWhileSendingRequest] = useLoadingStore((state) => [state.updateIsLoadingWhileSendingRequest]);
 
-  const deleteComment = () => {
+  const [updateComment] = useCommentStore((state) => [state.updateComment]);
+
+  const handleUpdateComment = () => updateComment({ ...rest, userId }, true);
+
+  const handleDeleteComment = () => {
     const id = uuidv4();
     updateIsLoadingWhileSendingRequest(true);
 
@@ -47,8 +54,8 @@ export const useCommentOptions = ({ commentId, userId }: { commentId: string; us
   };
 
   const options = [
-    { Icon: FiEdit2, text: commentOptionsEdit, handler: () => null, type: 'edit' as const },
-    { Icon: TfiTrash, text: commentOptionsDelete, handler: () => deleteComment(), type: 'delete' as const },
+    { Icon: FiEdit2, text: commentOptionsEdit, handler: () => handleUpdateComment(), type: 'edit' as const },
+    { Icon: TfiTrash, text: commentOptionsDelete, handler: () => handleDeleteComment(), type: 'delete' as const },
   ].filter(({ type }) => (session?.user.id === userId ? true : session?.user.isAdmin && type !== 'edit'));
 
   const handleCloseOptions = () => toggleOpen(false);

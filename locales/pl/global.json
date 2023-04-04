@@ -34,11 +34,15 @@
       "delete": "Usuń"
     }
   },
+  "modal": {
+    "update-comment": "Zmodyfikuj swój komentarz."
+  },
   "notificaion": {
     "success": "Dziękuję za komentarz!",
     "success-delete-comment": "Komentarz został pomyślnie usunięty.",
     "error": "Ojej! Coś poszło nie tak, spróbuj ponownie później 😅.",
     "info": "Jeśli chcesz napisać komentarz to musisz być zalogowany.",
+    "info-copy-to-clipboard": "Skopiowałeś kod do schowka.",
     "status": {
       "success": "Sukces!",
       "error": "Błąd!",

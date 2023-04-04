@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { createComment, deleteComment } from '@libraries/api/comments';
+import { createComment, deleteComment, updateComment } from '@libraries/api/comments';
 
 import { authOptions } from '../auth/[...nextauth]';
 
@@ -12,6 +12,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       return createComment(req, res);
+    case 'UPDATE':
+      return updateComment(req, res);
     case 'DELETE':
       return deleteComment(req, res);
     default:

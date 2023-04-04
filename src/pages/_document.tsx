@@ -8,6 +8,7 @@ const Document = () => {
         <Main />
         <NextScript />
         <div id="newsletter" />
+        <div id="update-comment-modal" />
       </body>
     </Html>
   );

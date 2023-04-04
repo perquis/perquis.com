@@ -133,6 +133,8 @@
   --toc-item-link-read: var(--success);
   --toc-item-link-read-text: var(--success-opacity);
 
+  --delete-bg: hsl(335, 100%, 95%);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;
@@ -214,4 +216,6 @@
   --aside-button: var(--primary);
 
   --toc-item-link-visible: var(--gray-100);
+
+  --delete-bg: hsl(335, 100%, 50%);
 }

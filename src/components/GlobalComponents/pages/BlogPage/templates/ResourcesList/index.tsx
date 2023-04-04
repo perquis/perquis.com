@@ -15,7 +15,7 @@ export const ResourcesList: ResourcesListProps = ({ resources }) => {
 
   return (
     <DirectionColumn isTop style={{ marginBottom: 48 }}>
-      <h2>{resourcesListsTitle}</h2>
+      <h2 id="resources">{resourcesListsTitle}</h2>
       {resources.map(({ link, name }, i) => (
         <Resource link={String(link)} key={i}>
           {name}

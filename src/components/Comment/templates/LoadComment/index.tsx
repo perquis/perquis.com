@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import styles from '@components/Comment/templates/Comment/Comment.module.scss';
@@ -10,7 +11,7 @@ export const LoadComment = () => {
   if (!mounted) return null;
 
   return (
-    <div className={styles.comment} style={{ alignItems: 'flex-start' }}>
+    <div className={clsx(styles.comment, styles['comment-is-not-in-modal'])} style={{ alignItems: 'flex-start' }}>
       <CommentLoader />
     </div>
   );

@@ -34,11 +34,15 @@
       "delete": "Delete"
     }
   },
+  "modal": {
+    "update-comment": "Edit your comment."
+  },
   "notificaion": {
     "success": "Thank you so much for comment!",
     "success-delete-comment": "This comment was deleted successfuly.",
     "error": "Whoops! Something went wrong. Try once again later.",
     "info": "If you want to type comment, you will have to sign in.",
+    "info-copy-to-clipboard": "You've just copied code to clipboard.",
     "status": {
       "success": "Success!",
       "error": "Error!",

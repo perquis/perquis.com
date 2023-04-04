@@ -2,20 +2,32 @@ import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { BsClipboard, BsClipboardCheck } from 'react-icons/bs';
+import { v4 as uuidv4 } from 'uuid';
+
+import { useNotificationStore } from '@stories/notifications';
+
+import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './CopyButton.module.scss';
 
 export const CopyButton: FC<{ text: string }> = ({ text }) => {
+  const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
+  const { notificaionInfoCopyToClipboard, notificaionTextInfo } = useInternationalizedRouting('global');
   const [isCopied, setIsCopied] = useState(false);
   const size = 18;
 
   const copy = async () => {
-    await navigator.clipboard.writeText(text);
+    const id = uuidv4();
+
     setIsCopied(true);
+    updateNotification({ id, status: 'info', msg: notificaionInfoCopyToClipboard ?? '', title: notificaionTextInfo ?? '' });
 
     setTimeout(() => {
       setIsCopied(false);
+      deleteNotification(id);
     }, 10000);
+
+    await navigator.clipboard.writeText(text);
   };
 
   return (

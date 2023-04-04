@@ -16,8 +16,8 @@ import styles from './Options.module.scss';
 
 const dots = new Array(pageSize).fill(null);
 
-export const Options: FC<Record<'user', Omit<CommentProps, 'email' | 'content'>>> = ({ user: { id: commentId, userId } }) => {
-  const { ref, isOpen, options, toggleOpen } = useCommentOptions({ commentId, userId });
+export const Options: FC<Record<'comment', CommentProps>> = ({ comment: { ...rest } }) => {
+  const { ref, isOpen, options, toggleOpen } = useCommentOptions({ commentId: rest.id, ...rest });
 
   return (
     <div className={styles.wrapper} ref={ref}>

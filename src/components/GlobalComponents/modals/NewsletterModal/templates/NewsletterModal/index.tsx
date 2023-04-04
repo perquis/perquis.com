@@ -2,7 +2,6 @@ import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
 import type { MutableRefObject } from 'react';
 import { useEffect, useRef } from 'react';
-import FocusLock from 'react-focus-lock';
 
 import { SalyImage } from '@modals/NewsletterModal/atoms/SalyImage';
 import { NewsletterModalForm } from '@modals/NewsletterModal/molecules/NewsletterModalForm';
@@ -31,17 +30,15 @@ export const NewsletterModal = () => {
 
   return (
     <Modal id="#newsletter">
-      <FocusLock>
-        <div className={styles.modal} ref={ref}>
-          <div>
-            <SalyImage />
-          </div>
-          <div className={styles.gap}>
-            <TitleAndSubtitle />
-            <NewsletterModalForm />
-          </div>
+      <div className={styles.modal} ref={ref}>
+        <div>
+          <SalyImage />
         </div>
-      </FocusLock>
+        <div className={styles.gap}>
+          <TitleAndSubtitle />
+          <NewsletterModalForm />
+        </div>
+      </div>
     </Modal>
   );
 };

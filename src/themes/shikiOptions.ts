@@ -2,8 +2,8 @@
 import type { Options } from 'rehype-pretty-code';
 import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 
-import light from './beader-theme.json';
-import dark from './moonlight.json';
+import dark from './dark.json';
+import light from './light.json';
 
 export const shikiOptions: Options = {
   keepBackground: false,

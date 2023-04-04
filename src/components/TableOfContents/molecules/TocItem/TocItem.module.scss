@@ -42,13 +42,13 @@
     left: 0;
     border-radius: 2px;
     transform: translate(0, -50%) scaleX(0);
-    transition: 1s ease-in-out;
+    background: var(--toc-item-link-read);
   }
 }
 
 .is-read {
   &::before {
+    transition: 1s ease-in-out;
     transform: translate(0, -50%) scaleX(1);
-    background: var(--toc-item-link-read);
   }
 }

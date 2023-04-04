@@ -57,4 +57,10 @@
   &::before {
     z-index: 2;
   }
+
+  &:last-child {
+    &::before {
+      background: var(--delete-bg);
+    }
+  }
 }

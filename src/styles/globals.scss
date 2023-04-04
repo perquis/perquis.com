@@ -41,6 +41,7 @@ body {
   background: var(--background);
   min-height: 100vh;
   position: relative;
+  hyphens: auto;
 
   padding: 0 var(--padding-desktop);
 

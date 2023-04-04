@@ -30,7 +30,8 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
 
       const position = getScrollToTopValue(i);
       const calcPosition = getScrollToTopValue(i + 1);
-      const nextChapterPosition = !isNaN(calcPosition) ? calcPosition : position + 400;
+      const nextChapterPosition =
+        (!isNaN(calcPosition) ? calcPosition : typeof document !== 'undefined' ? document.getElementById('resources')?.getBoundingClientRect().top : 0) ?? 0;
 
       slugs.push({ href: decodeURI(hash), textContent: textContent ?? '', position, nextChapterPosition });
     });
