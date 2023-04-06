@@ -11,19 +11,7 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
     if (posts.length === 0) return res.status(404).send({ message: 'Not Found.' });
 
     const [post] = posts;
-    return res.send(
-      post.comments
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .map(({ user, ...rest }) => {
-          if (user) {
-            const { id, image, name } = user;
-
-            return { ...rest, user: { id, image, name } };
-          }
-
-          return { ...rest };
-        })
-    );
+    return res.send(post.comments);
   } catch (err) {
     return res.status(500).send({ message: 'Internal Server Error' });
   }
