@@ -1,4 +1,3 @@
-import type { Comment } from '@prisma/client';
 import useKey from '@rooks/use-key';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
@@ -11,6 +10,8 @@ import { useLoadingStore } from '@stories/loading';
 import { useNotificationStore } from '@stories/notifications';
 import { usePostsListStore } from '@stories/posts';
 import { useRefetchStore } from '@stories/refetch';
+
+import type { Comment } from 'prisma/generated/prisma-client-js';
 
 import { useInternationalizedRouting } from './useInternationalizedRouting';
 

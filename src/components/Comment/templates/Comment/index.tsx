@@ -1,4 +1,3 @@
-import type { Comment as CommentType, User } from '@prisma/client';
 import clsx from 'clsx';
 import type { FC } from 'react';
 
@@ -6,6 +5,8 @@ import type { FC } from 'react';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 
 import { UserAction } from '@components/Comment/organisms/UserAction';
+
+import type { Comment as CommentType, User } from 'prisma/generated/prisma-client-js';
 
 import styles from './Comment.module.scss';
 

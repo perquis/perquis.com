@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prismaClient } from 'prisma/prismaClient';
 
-import { isValidatedUri } from '@data/regexes';
 import { textAreaMaxLength } from '@data/validations';
 
 export const getAllCommentsList = async (req: NextApiRequest, res: NextApiResponse, slug: string) => {

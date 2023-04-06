@@ -1,4 +1,3 @@
-import type { Post } from '@prisma/client';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -23,6 +22,8 @@ import { usePostsListStore } from '@stories/posts';
 import { useTOCStore } from '@stories/toc';
 
 import type { Articles } from '@graphql/databases/client';
+
+import type { Post } from 'prisma/generated/prisma-client-js';
 
 import { useObserver } from '@hooks/useObserver';
 
