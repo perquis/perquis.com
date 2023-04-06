@@ -21,7 +21,7 @@ export const AboutMe = () => {
         </Paragraph>
       ) : (
         <Paragraph>
-          Damian, to młody człowiek w wieku 23 lat, który <b>kocha uczyć się nowych rzeczy</b>. Jest bardzo ciekawy i pasjonuje go <b>poznawanie nowych frameworków i bibliotek</b>
+          Damian, to młody człowiek w wieku 23 lat, który <b>kocha uczyć się nowych rzeczy</b>. Jest bardzo ciekawy i pasjonuje go <b>poznawanie nowych frameworków i bibliotek</b>{' '}
           stworzonych przez różne języki programowania. Z pewnością jego zainteresowania w dziedzinie informatyki sprawiają, że{' '}
           <b>jest na bieżąco z nowymi technologiami i rozwiązaniami w tej dziedzinie</b>.
         </Paragraph>

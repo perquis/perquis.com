@@ -6,13 +6,19 @@ import { useArticlesStore } from '@stories/articles';
 import { useSearchBarStore } from '@stories/searchbar';
 import { useTechnologiesStore } from '@stories/technologies';
 
+import { useFilteringArticlesByDetails } from '@hooks/useFilteringArticlesByDetails';
+
 export const PullingArticlesList = () => {
-  const [keywords] = useSearchBarStore((state) => [state.keywords]);
-  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
   const [isLoading, searchedForArticlesList] = useArticlesStore((state) => [state.isLoading, state.searchedForArticlesList]);
+  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
+  const [keywords] = useSearchBarStore((state) => [state.keywords]);
+  const { articles } = useFilteringArticlesByDetails();
 
   const isFoundArticles = technologies.length > 0 || keywords.length > 0;
   const isNotFoundArticles = isFoundArticles && !isLoading && searchedForArticlesList.length === 0;
 
-  return isNotFoundArticles ? <Article isNotFoundArticle /> : isFoundArticles ? <SearchedForArticlesList /> : <ArticlesList />;
+  if (isNotFoundArticles) return <Article isNotFoundArticle />;
+  if (isFoundArticles) return <SearchedForArticlesList />;
+
+  return <ArticlesList articles={articles} />;
 };

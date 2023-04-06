@@ -5,11 +5,11 @@ import { Thumbnail } from '@GlobalComponents/atoms/Thumbnail';
 
 import { Details } from '@components/Article/molecules/Details';
 
-import type { PickedArticleProps } from '@stories/articles';
+import type { Articles } from '@graphql/databases/client';
 
 import { articleRoute } from '@data/routes';
 
-type IContentProps = Record<'article', PickedArticleProps>;
+type IContentProps = Record<'article', Articles>;
 
 export const Content: FC<IContentProps> = ({ article }) => {
   const { slug, thumbnail } = article;

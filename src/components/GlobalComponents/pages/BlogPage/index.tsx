@@ -19,9 +19,10 @@ import { Author } from '@components/Author';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
 import { TableOfContents } from '@components/TableOfContents';
 
-import type { PickedDetailsProps } from '@stories/articles';
 import { usePostsListStore } from '@stories/posts';
 import { useTOCStore } from '@stories/toc';
+
+import type { Articles } from '@graphql/databases/client';
 
 import { useObserver } from '@hooks/useObserver';
 
@@ -58,7 +59,7 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
       <NewsletterObserver />
       <Author src={String(thumbnail?.url)} alt={String(slug)} />
       <DetailsWrapper>
-        <Details details={{ createdAt, slug, tags, title, introduction } as PickedDetailsProps} />
+        <Details details={{ createdAt, slug, tags, title, introduction } as Articles} />
         <ReadingTime content={content?.text ?? ''} />
       </DetailsWrapper>
       <FullWidthContainer>

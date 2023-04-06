@@ -1,6 +1,7 @@
 // @ts-ignore
 import type { IHomePageProps } from '@types/pages';
 
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import type { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -14,12 +15,15 @@ import { fetchTechnologiesList } from '@graphql/libraries/getTechnologiesListVal
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const isEnglish = locale === 'en' ? [Locale.En] : [Locale.Pl];
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({ queryKey: ['articles', locale], queryFn: () => fetchArticlesListWithPages({ isEnglish }) });
 
   const technologies = await fetchTechnologiesList();
   const articles = await fetchArticlesListWithPages({ isEnglish });
 
   return {
-    props: { technologies, articles },
+    props: { technologies, dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))), articles },
   };
 };
 

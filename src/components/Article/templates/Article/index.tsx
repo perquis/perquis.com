@@ -6,7 +6,7 @@ import { Content } from '@components/Article/organisms/Content';
 import { NotFoundContent } from '@components/Article/organisms/NotFoundContent';
 import { PostLoader } from '@components/Loader/molecules/PostLoader';
 
-import type { PickedArticleProps } from '@stories/articles';
+import type { Articles } from '@graphql/databases/client';
 
 import { articleRoute } from '@data/routes';
 
@@ -16,9 +16,9 @@ type IArticleProps = {
   isNewArticle?: boolean;
   isNotFoundArticle?: boolean;
   isLoadingAnimation?: boolean;
-} & Partial<Record<'article', PickedArticleProps>>;
+} & Partial<Record<'article', Articles>>;
 
-const articleInitialState = { slug: '', tags: [''], createdAt: '', introduction: '', title: '', thumbnail: { url: '' } } as unknown as PickedArticleProps;
+const articleInitialState = { slug: '', tags: [''], createdAt: '', introduction: '', title: '', thumbnail: { url: '' } } as unknown as Articles;
 
 export const Article: FC<IArticleProps> = ({ article = articleInitialState, isNewArticle, isNotFoundArticle, isLoadingAnimation }) => {
   const { push } = useRouter();

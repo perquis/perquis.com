@@ -7,8 +7,6 @@ import { IoMdArrowDropleft } from 'react-icons/io';
 
 import { SmallAvatar } from '@GlobalComponents/atoms/SmallAvatar';
 
-import { ChangeLocales } from '@components/Navigation/molecules/ChangeLocales';
-
 import { vars } from '@animations/pop-up';
 
 import { useDropdownMenu } from '@hooks/useDropdownMenu';
@@ -29,7 +27,6 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
 
   return (
     <div className={styles.wrapper}>
-      <ChangeLocales />
       <SmallAvatar image={session.user?.image ?? ''} />
       <div className={styles['user-wrapper']} ref={ref}>
         <button className={styles.options} onClick={toggleOptions}>

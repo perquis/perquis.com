@@ -1,6 +1,5 @@
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { InfiniteScroll } from '@components/InfiniteScroll';
 import { LoadingArticlesList } from '@components/Loader/organisms/LoadingArticlesList';
 import { ChosenTags } from '@components/PostsList/molecules/ChosenTags';
 import { Heading } from '@components/PostsList/molecules/Heading';
@@ -13,10 +12,8 @@ export const PostsList = () => {
       <Heading />
       <SearchBar />
       <ChosenTags />
-      <InfiniteScroll>
-        <PullingArticlesList />
-        <LoadingArticlesList />
-      </InfiniteScroll>
+      <PullingArticlesList />
+      <LoadingArticlesList />
     </DirectionColumn>
   );
 };

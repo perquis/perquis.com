@@ -1,5 +1,11 @@
+@import './src/styles/_breakpoints.scss';
+
 .locales {
   position: relative;
+
+  @media screen and (max-width: $lg) {
+    display: none;
+  }
 }
 
 .button {

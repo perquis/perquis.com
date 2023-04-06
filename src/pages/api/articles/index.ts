@@ -4,26 +4,26 @@ import { client } from '@graphql/apollo/apolloClient';
 import { ArticlesOrderByInput, Locale } from '@graphql/databases/client';
 import { getServerPageArticlesListWiths } from '@graphql/databases/server';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    const { first, skip, locale } = req.query;
+import { pageSize } from '@data/presets';
 
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const { skip, locale } = req.query;
+  if (!skip && !locale) return res.status(400).send({ message: 'Bad request.' });
+
+  try {
     const {
       props: {
         data: {
-          page: {
-            edges,
-            pageInfo: { hasNextPage },
-          },
+          page: { edges, pageInfo },
         },
       },
     } = await getServerPageArticlesListWiths(
-      { variables: { locales: locale === 'en' ? [Locale.En] : [Locale.Pl], orderBy: ArticlesOrderByInput.CreatedAtDesc, first: Number(first), skip: Number(skip) } },
+      { variables: { locales: locale === 'en' ? [Locale.En] : [Locale.Pl], orderBy: ArticlesOrderByInput.CreatedAtDesc, first: pageSize, skip: Number(skip) } },
       client
     );
 
-    res.json({ articles: edges.map(({ node }) => node), hasNextPage });
+    return res.json({ edges: edges.map(({ node }) => node), pageInfo });
   } catch (err) {
-    res.send(err);
+    return res.status(500).send(err);
   }
 };

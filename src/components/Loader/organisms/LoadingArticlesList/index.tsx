@@ -1,7 +1,8 @@
 import { Article } from '@components/Article';
 
 import { useArticlesStore } from '@stories/articles';
-import type { PickedArticleProps } from '@stories/articles';
+
+import type { Articles } from '@graphql/databases/client';
 
 export const LoadingArticlesList = () => {
   const [pageSize, isLoading] = useArticlesStore((state) => [state.pageSize, state.isLoading]);
@@ -12,7 +13,7 @@ export const LoadingArticlesList = () => {
   return (
     <>
       {loaders.map((_, i) => (
-        <Article key={i} article={{} as unknown as PickedArticleProps} isLoadingAnimation />
+        <Article key={i} article={{} as unknown as Articles} isLoadingAnimation />
       ))}
     </>
   );

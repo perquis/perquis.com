@@ -2,7 +2,7 @@
   // Primary colors
   --gray-950: hsl(212, 32%, 8%);
   --gray-900: hsl(212, 33%, 10%);
-  --gray-820: hsl(212, 31%, 13%);
+  --gray-870: hsl(212, 31%, 13%);
   --gray-850: hsl(212, 31%, 15%);
   --gray-800: hsl(212, 31%, 20%);
   --gray-700: hsl(213, 31%, 30%);
@@ -159,7 +159,7 @@
 
   --locale-border-color: var(--gray-800);
   --locale-background: var(--gray-900);
-  --locale-is-hover: var(--gray-820);
+  --locale-is-hover: var(--gray-870);
 
   --hamburger-menu-color: var(--gray-50);
 
@@ -185,7 +185,7 @@
   --wavies-top-color: hsl(234, 100%, 60%);
   --wavies-bottom-color: hsl(279, 100%, 50%);
 
-  --email-input-bg: var(--gray-820);
+  --email-input-bg: var(--gray-870);
   --newsletter-bg: var(--gray-900);
   --join-our-community-bg: hsl(213, 32%, 15%);
 
@@ -193,7 +193,7 @@
   --code-number-color: var(--gray-600);
   --code-dots: var(--gray-800);
   --code-bg: var(--gray-900);
-  --code-heading-bg: var(--gray-820);
+  --code-heading-bg: var(--gray-870);
   --code-highlighted: var(--gray-850);
   --code-highlighted-hover: hsl(212, 31%, 13%);
   --code-scrollbar: var(--gray-800);
@@ -218,4 +218,6 @@
   --toc-item-link-visible: var(--gray-100);
 
   --delete-bg: hsl(335, 100%, 50%);
+
+  --form-modal: hsl(212, 31%, 12%);
 }

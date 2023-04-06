@@ -14,6 +14,8 @@ import { prismaClient } from 'prisma/prismaClient';
 
 import { serializedContent } from '@utils/serializedContent';
 
+import { revalidate } from '@data/presets';
+
 export type BlogPageProps = Record<'node', ArticlesEdge['node']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
 type TypeArticles = Articles & { locale: string };
 interface Params extends ParsedUrlQuery {
@@ -90,6 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       source,
       negativeSlug,
     },
+    revalidate,
   };
 };
 
