@@ -6,7 +6,7 @@
   background: none;
   color: var(--input-color);
   width: 100%;
-  outline: none;
+  outline: none !important;
 
   &::placeholder {
     color: var(--placeholder-color);

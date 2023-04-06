@@ -1,11 +1,15 @@
 @import './src/styles/_mixins.scss';
 
 .comment-form-wrapper {
+  width: 100%;
   padding: 1.6rem 2.4rem;
   background: var(--locale-background);
   border: 3px solid var(--locale-border-color);
-  position: relative;
   border-radius: 0.8rem;
+}
+
+.is-not-modal {
+  position: relative;
 
   @include wrapper;
   margin-bottom: 0;

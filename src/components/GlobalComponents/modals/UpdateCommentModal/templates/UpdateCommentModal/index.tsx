@@ -3,15 +3,15 @@ import useOutsideClick from '@rooks/use-outside-click';
 import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
 
-import { UpdateCommentForm } from '@modals/UpdateCommentModal/organisms/UpdateCommentForm';
-
 import { Comment } from '@components/Comment';
 import { Modal } from '@components/Modal';
+import { WriteToSomething } from '@components/WriteToSomething';
 
 import { useCommentStore } from '@stories/comment';
 
 import { Dashed } from '@icons/Dashed';
 
+import { useForm } from '@hooks/useForm';
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import styles from './UpdateCommentModal.module.scss';
@@ -24,6 +24,8 @@ export const UpdateCommentModal = () => {
   useKey('Escape', () => updateComment(undefined, false));
   useOutsideClick(ref as MutableRefObject<HTMLDivElement>, () => updateComment(undefined, false));
 
+  const form = useForm('update-comment', comment);
+
   if (!comment) return null;
 
   return (
@@ -32,7 +34,7 @@ export const UpdateCommentModal = () => {
         <h3>{modalUpdateComment}</h3>
         <Comment isModal props={comment} />
         <Dashed />
-        <UpdateCommentForm />
+        <WriteToSomething form={form} isModal />
       </div>
     </Modal>
   );

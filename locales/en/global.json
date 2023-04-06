@@ -39,6 +39,7 @@
   },
   "notificaion": {
     "success": "Thank you so much for comment!",
+    "success-update-comment": "This comment was updated successfuly.",
     "success-delete-comment": "This comment was deleted successfuly.",
     "error": "Whoops! Something went wrong. Try once again later.",
     "info": "If you want to type comment, you will have to sign in.",

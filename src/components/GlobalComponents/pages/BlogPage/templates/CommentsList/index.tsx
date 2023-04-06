@@ -15,6 +15,7 @@ import { useRefetchStore } from '@stories/refetch';
 
 import { Dashed } from '@icons/index';
 
+import { useForm } from '@hooks/useForm';
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
 import { pageSize } from '@data/presets';
@@ -28,6 +29,7 @@ export const CommentsList = () => {
   const { commentFormTitle, commentFormAuthenticatedDescription, commentFormUnauthenticatedDescription } = useInternationalizedRouting('global');
   const { data: comments, isLoading } = useQuery({ queryKey: ['comments', query.slug, isRefetch], queryFn: () => fetchAllCommentsList(String(query.slug)) });
   const areComments = Array.isArray(comments) && comments.length > 0;
+  const form = useForm('create-comment');
 
   return (
     <DirectionColumn isTop>
@@ -35,7 +37,7 @@ export const CommentsList = () => {
         <h2>{commentFormTitle}</h2>
         <Paragraph style={{ marginTop: 6 }}>{status !== 'authenticated' ? commentFormAuthenticatedDescription : commentFormUnauthenticatedDescription}</Paragraph>
       </div>
-      <WriteToSomething />
+      <WriteToSomething form={form} />
       {isLoading || areComments ? <Dashed /> : null}
       {areComments && comments?.map(({ user, ...rest }, key) => <Comment key={key} props={{ ...user, ...rest }} />)}
       {isLoading ? loaders.map((_, i) => <LoadComment key={i} />) : null}

@@ -59,7 +59,7 @@ export const updateComment = async (req: NextApiRequest, res: NextApiResponse) =
     const comment = await prismaClient.comment.findFirst({ where: { id, userId } });
 
     if (user && comment) {
-      prismaClient.comment.update({ where: { id }, data: { content } });
+      await prismaClient.comment.update({ where: { id }, data: { content } });
       return res.status(200).end();
     }
 
