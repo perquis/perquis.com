@@ -20,27 +20,29 @@ export type UseFormResult =
   | {
       content: string;
       isDisabledCondition: boolean;
-      updateCommentKeywords: () => null;
+      updateKeywords: () => null;
       handleSubmit: undefined;
     }
   | {
       content: string;
       isDisabledCondition: boolean;
-      updateCommentKeywords: (keywords: string) => void;
+      updateKeywords: (keywords: string) => void;
       handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
     };
 
-const initialFormState = { content: '', isDisabledCondition: false, updateCommentKeywords: () => null, handleSubmit: undefined };
+const initialFormState = { content: '', isDisabledCondition: false, updateKeywords: () => null, handleSubmit: undefined };
 
 export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult => {
   const { data, status } = useSession();
   const isUser = status !== 'authenticated';
   const [postId] = usePostsListStore((state) => [state.postId]);
-  const [isDisabled, content, updateCommentKeywords, updateDisabledState] = useFormStore((state) => [
+  const [isDisabled, commentKeywords, updateCommentKeywords, updateDisabledState, modalKeywords, updateModalKeywords] = useFormStore((state) => [
     state.isDisabled,
     state.commentKeywords,
     state.updateCommentKeywords,
     state.updateDisabledState,
+    state.modalKeywords,
+    state.updateModalKeywords,
   ]);
   const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
 
@@ -53,7 +55,10 @@ export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult =
 
   const [updateComment] = useCommentStore((state) => [state.updateComment]);
 
-  useKey('Escape', () => updateCommentKeywords(''));
+  useKey('Escape', () => {
+    updateModalKeywords('');
+    updateCommentKeywords('');
+  });
 
   if (formStatus === 'create-comment') {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -66,7 +71,7 @@ export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult =
         const { email } = data.user;
 
         axios
-          .post('/api/comments', { email, postId, content })
+          .post('/api/comments', { email, postId, content: commentKeywords })
           .then(() => {
             updateDisabledState(false);
             updateIsRefetch(!isRefetch);
@@ -87,7 +92,7 @@ export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult =
       updateCommentKeywords('');
     };
 
-    return { content, isDisabledCondition, updateCommentKeywords, handleSubmit };
+    return { content: commentKeywords, isDisabledCondition, updateKeywords: updateCommentKeywords, handleSubmit };
   }
 
   if (formStatus === 'update-comment') {
@@ -100,7 +105,7 @@ export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult =
         const id = uuidv4();
 
         axios
-          .put('/api/comments', { id: body?.id, userId: data.user.id, content })
+          .put('/api/comments', { id: body?.id, userId: data.user.id, content: modalKeywords })
           .then(() => {
             updateDisabledState(false);
             updateIsRefetch(!isRefetch);
@@ -119,10 +124,10 @@ export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult =
           });
       }
 
-      updateCommentKeywords('');
+      updateModalKeywords('');
     };
 
-    return { content, isDisabledCondition, updateCommentKeywords, handleSubmit };
+    return { content: modalKeywords, isDisabledCondition, updateKeywords: updateModalKeywords, handleSubmit };
   }
 
   return initialFormState;

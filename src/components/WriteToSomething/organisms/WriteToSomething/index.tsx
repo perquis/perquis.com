@@ -9,15 +9,12 @@ import type { UseFormResult } from '@hooks/useForm';
 
 import styles from './WriteToSomething.module.scss';
 
-export const WriteToSomething: FC<Record<'form', UseFormResult> & { isModal?: boolean }> = ({
-  form: { content, handleSubmit, isDisabledCondition, updateCommentKeywords },
-  isModal,
-}) => {
+export const WriteToSomething: FC<Record<'form', UseFormResult> & { isModal?: boolean }> = ({ form: { content, handleSubmit, isDisabledCondition, updateKeywords }, isModal }) => {
   return (
     <form className={clsx(styles['comment-form-wrapper'], !isModal && styles['is-not-modal'], isDisabledCondition && styles.disabled)} onSubmit={handleSubmit}>
-      <TextArea disabled={isDisabledCondition} onChange={(e) => updateCommentKeywords(e.currentTarget.value)} value={content} />
+      <TextArea disabled={isDisabledCondition} onChange={(e) => updateKeywords(e.currentTarget.value)} value={content} />
       <div className={styles.actions}>
-        <Counter /> <Actions />
+        <Counter content={content} /> <Actions content={content} isDisabledCondition={isDisabledCondition} updateKeywords={updateKeywords} />
       </div>
     </form>
   );

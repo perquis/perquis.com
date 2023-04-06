@@ -38,9 +38,9 @@ export const CommentsList = () => {
         <Paragraph style={{ marginTop: 6 }}>{status !== 'authenticated' ? commentFormAuthenticatedDescription : commentFormUnauthenticatedDescription}</Paragraph>
       </div>
       <WriteToSomething form={form} />
-      {isLoading || areComments ? <Dashed /> : null}
+      {(isLoading || areComments) && <Dashed />}
       {areComments && comments?.map(({ user, ...rest }, key) => <Comment key={key} props={{ ...user, ...rest }} />)}
-      {isLoading ? loaders.map((_, i) => <LoadComment key={i} />) : null}
+      {isLoading && loaders.map((_, i) => <LoadComment key={i} />)}
     </DirectionColumn>
   );
 };

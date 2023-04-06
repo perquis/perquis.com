@@ -1,15 +1,15 @@
-import { useFormStore } from '@stories/forms';
+import type { FC } from 'react';
+
+import type { UseFormResult } from '@hooks/useForm';
 
 import { textAreaMaxLength } from '@data/validations';
 
 import styles from './Counter.module.scss';
 
-export const Counter = () => {
-  const [commentKeywords] = useFormStore((state) => [state.commentKeywords]);
-
+export const Counter: FC<Pick<UseFormResult, 'content'>> = ({ content: keywords }) => {
   return (
     <span className={styles.counter}>
-      {commentKeywords.length}/{textAreaMaxLength}
+      {keywords.length}/{textAreaMaxLength}
     </span>
   );
 };
