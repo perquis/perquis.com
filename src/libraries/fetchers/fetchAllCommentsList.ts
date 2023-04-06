@@ -1,7 +1,6 @@
-import type { Comment, User } from '@prisma/client';
 import axios from 'axios';
 
-type CommentList = Comment & { user: User };
+type CommentList = PrismaComment & { user: PrismaUser };
 
 export const fetchAllCommentsList = async (slug: string): Promise<CommentList[]> => {
   const { data } = await axios(`/api/comments/${slug}`);

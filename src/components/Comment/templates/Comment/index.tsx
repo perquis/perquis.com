@@ -1,4 +1,3 @@
-import type { Comment as CommentType, User } from '@prisma/client';
 import clsx from 'clsx';
 import type { FC } from 'react';
 
@@ -9,7 +8,7 @@ import { UserAction } from '@components/Comment/organisms/UserAction';
 
 import styles from './Comment.module.scss';
 
-export type CommentProps = CommentType & User;
+export type CommentProps = PrismaComment & PrismaUser;
 
 export const Comment: FC<Record<'props', CommentProps> & { isModal?: boolean }> = ({ props: { content, ...rest }, isModal }) => {
   return (

@@ -36,7 +36,7 @@
     translate: -50% -50%;
     scale: 0;
     rotate: 45deg;
-    transition: 0.15s ease-in-out;
+    transition: 0.3s cubic-bezier(1, 0, 0, 1);
   }
 
   &:checked {

@@ -18,7 +18,7 @@ export const NewsletterCheckbox = () => {
         className={styles.checkbox}
         required
         checked={isChecked}
-        onClick={handleOnChecked}
+        onChange={handleOnChecked}
         onKeyDown={(e) => e.key === 'Enter' && handleOnChecked()}
       />{' '}
       <span>{newsletterApprove}</span>

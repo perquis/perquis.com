@@ -10,8 +10,6 @@ import type { Articles, ArticlesEdge } from '@graphql/databases/client';
 import { Locale } from '@graphql/databases/client';
 import { getServerPageGetArticleSlugs, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
 
-import { prismaClient } from 'prisma/prismaClient';
-
 import { serializedContent } from '@utils/serializedContent';
 
 import { revalidate } from '@data/presets';
@@ -81,10 +79,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       node: { slug: negativeSlug },
     },
   ] = negativeEdges;
-
-  // If database doesn't have existed post, it'll add new post
-  const posts = await prismaClient.post.findMany({ where: { articleId: slug } });
-  if (posts.length === 0) await prismaClient.post.create({ data: { articleId: slug } });
 
   return {
     props: {

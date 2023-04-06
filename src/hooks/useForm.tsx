@@ -1,4 +1,3 @@
-import type { Comment } from '@prisma/client';
 import useKey from '@rooks/use-key';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
@@ -32,7 +31,7 @@ export type UseFormResult =
 
 const initialFormState = { content: '', isDisabledCondition: false, updateKeywords: () => null, handleSubmit: undefined };
 
-export const useForm = (formStatus: FormStatus, body?: Comment): UseFormResult => {
+export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormResult => {
   const { data, status } = useSession();
   const isUser = status !== 'authenticated';
   const [postId] = usePostsListStore((state) => [state.postId]);
