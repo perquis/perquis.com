@@ -113,6 +113,12 @@ exports.Prisma.CommentScalarFieldEnum = makeEnum({
   userId: 'userId'
 });
 
+exports.Prisma.NewsletterScalarFieldEnum = makeEnum({
+  id: 'id',
+  email: 'email',
+  status: 'status'
+});
+
 exports.Prisma.PostScalarFieldEnum = makeEnum({
   id: 'id',
   articleId: 'articleId'
@@ -149,7 +155,10 @@ exports.Prisma.VerificationTokenScalarFieldEnum = makeEnum({
   token: 'token',
   expires: 'expires'
 });
-
+exports.Status = makeEnum({
+  SUBSCRIBE: 'SUBSCRIBE',
+  UNSUBSCRIBE: 'UNSUBSCRIBE'
+});
 
 exports.Prisma.ModelName = makeEnum({
   Post: 'Post',
@@ -157,7 +166,8 @@ exports.Prisma.ModelName = makeEnum({
   User: 'User',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Account: 'Account'
+  Account: 'Account',
+  Newsletter: 'Newsletter'
 });
 
 /**

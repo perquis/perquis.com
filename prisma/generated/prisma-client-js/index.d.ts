@@ -87,6 +87,31 @@ export type Account = {
   session_state: string | null
 }
 
+/**
+ * Model Newsletter
+ * 
+ */
+export type Newsletter = {
+  id: string
+  email: string
+  status: Status
+}
+
+
+/**
+ * Enums
+ */
+
+// Based on
+// https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
+
+export const Status: {
+  SUBSCRIBE: 'SUBSCRIBE',
+  UNSUBSCRIBE: 'UNSUBSCRIBE'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -233,6 +258,16 @@ export class PrismaClient<
     * ```
     */
   get account(): Prisma.AccountDelegate<GlobalReject>;
+
+  /**
+   * `prisma.newsletter`: Exposes CRUD operations for the **Newsletter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Newsletters
+    * const newsletters = await prisma.newsletter.findMany()
+    * ```
+    */
+  get newsletter(): Prisma.NewsletterDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -707,7 +742,8 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
-    Account: 'Account'
+    Account: 'Account',
+    Newsletter: 'Newsletter'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -7004,6 +7040,928 @@ export namespace Prisma {
 
 
   /**
+   * Model Newsletter
+   */
+
+
+  export type AggregateNewsletter = {
+    _count: NewsletterCountAggregateOutputType | null
+    _min: NewsletterMinAggregateOutputType | null
+    _max: NewsletterMaxAggregateOutputType | null
+  }
+
+  export type NewsletterMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    status: Status | null
+  }
+
+  export type NewsletterMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    status: Status | null
+  }
+
+  export type NewsletterCountAggregateOutputType = {
+    id: number
+    email: number
+    status: number
+    _all: number
+  }
+
+
+  export type NewsletterMinAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+  }
+
+  export type NewsletterMaxAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+  }
+
+  export type NewsletterCountAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+    _all?: true
+  }
+
+  export type NewsletterAggregateArgs = {
+    /**
+     * Filter which Newsletter to aggregate.
+     */
+    where?: NewsletterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Newsletters to fetch.
+     */
+    orderBy?: Enumerable<NewsletterOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewsletterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Newsletters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Newsletters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Newsletters
+    **/
+    _count?: true | NewsletterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsletterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsletterMaxAggregateInputType
+  }
+
+  export type GetNewsletterAggregateType<T extends NewsletterAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsletter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsletter[P]>
+      : GetScalarType<T[P], AggregateNewsletter[P]>
+  }
+
+
+
+
+  export type NewsletterGroupByArgs = {
+    where?: NewsletterWhereInput
+    orderBy?: Enumerable<NewsletterOrderByWithAggregationInput>
+    by: NewsletterScalarFieldEnum[]
+    having?: NewsletterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsletterCountAggregateInputType | true
+    _min?: NewsletterMinAggregateInputType
+    _max?: NewsletterMaxAggregateInputType
+  }
+
+
+  export type NewsletterGroupByOutputType = {
+    id: string
+    email: string
+    status: Status
+    _count: NewsletterCountAggregateOutputType | null
+    _min: NewsletterMinAggregateOutputType | null
+    _max: NewsletterMaxAggregateOutputType | null
+  }
+
+  type GetNewsletterGroupByPayload<T extends NewsletterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickArray<NewsletterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsletterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsletterGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsletterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewsletterSelect = {
+    id?: boolean
+    email?: boolean
+    status?: boolean
+  }
+
+
+  export type NewsletterGetPayload<S extends boolean | null | undefined | NewsletterArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Newsletter :
+    S extends undefined ? never :
+    S extends { include: any } & (NewsletterArgs | NewsletterFindManyArgs)
+    ? Newsletter 
+    : S extends { select: any } & (NewsletterArgs | NewsletterFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof Newsletter ? Newsletter[P] : never
+  } 
+      : Newsletter
+
+
+  type NewsletterCountArgs = 
+    Omit<NewsletterFindManyArgs, 'select' | 'include'> & {
+      select?: NewsletterCountAggregateInputType | true
+    }
+
+  export interface NewsletterDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Newsletter that matches the filter.
+     * @param {NewsletterFindUniqueArgs} args - Arguments to find a Newsletter
+     * @example
+     * // Get one Newsletter
+     * const newsletter = await prisma.newsletter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends NewsletterFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, NewsletterFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Newsletter'> extends True ? Prisma__NewsletterClient<NewsletterGetPayload<T>> : Prisma__NewsletterClient<NewsletterGetPayload<T> | null, null>
+
+    /**
+     * Find one Newsletter that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {NewsletterFindUniqueOrThrowArgs} args - Arguments to find a Newsletter
+     * @example
+     * // Get one Newsletter
+     * const newsletter = await prisma.newsletter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends NewsletterFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, NewsletterFindUniqueOrThrowArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Find the first Newsletter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterFindFirstArgs} args - Arguments to find a Newsletter
+     * @example
+     * // Get one Newsletter
+     * const newsletter = await prisma.newsletter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends NewsletterFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, NewsletterFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Newsletter'> extends True ? Prisma__NewsletterClient<NewsletterGetPayload<T>> : Prisma__NewsletterClient<NewsletterGetPayload<T> | null, null>
+
+    /**
+     * Find the first Newsletter that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterFindFirstOrThrowArgs} args - Arguments to find a Newsletter
+     * @example
+     * // Get one Newsletter
+     * const newsletter = await prisma.newsletter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends NewsletterFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, NewsletterFindFirstOrThrowArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Find zero or more Newsletters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Newsletters
+     * const newsletters = await prisma.newsletter.findMany()
+     * 
+     * // Get first 10 Newsletters
+     * const newsletters = await prisma.newsletter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsletterWithIdOnly = await prisma.newsletter.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends NewsletterFindManyArgs>(
+      args?: SelectSubset<T, NewsletterFindManyArgs>
+    ): Prisma.PrismaPromise<Array<NewsletterGetPayload<T>>>
+
+    /**
+     * Create a Newsletter.
+     * @param {NewsletterCreateArgs} args - Arguments to create a Newsletter.
+     * @example
+     * // Create one Newsletter
+     * const Newsletter = await prisma.newsletter.create({
+     *   data: {
+     *     // ... data to create a Newsletter
+     *   }
+     * })
+     * 
+    **/
+    create<T extends NewsletterCreateArgs>(
+      args: SelectSubset<T, NewsletterCreateArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Create many Newsletters.
+     *     @param {NewsletterCreateManyArgs} args - Arguments to create many Newsletters.
+     *     @example
+     *     // Create many Newsletters
+     *     const newsletter = await prisma.newsletter.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends NewsletterCreateManyArgs>(
+      args?: SelectSubset<T, NewsletterCreateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Newsletter.
+     * @param {NewsletterDeleteArgs} args - Arguments to delete one Newsletter.
+     * @example
+     * // Delete one Newsletter
+     * const Newsletter = await prisma.newsletter.delete({
+     *   where: {
+     *     // ... filter to delete one Newsletter
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends NewsletterDeleteArgs>(
+      args: SelectSubset<T, NewsletterDeleteArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Update one Newsletter.
+     * @param {NewsletterUpdateArgs} args - Arguments to update one Newsletter.
+     * @example
+     * // Update one Newsletter
+     * const newsletter = await prisma.newsletter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends NewsletterUpdateArgs>(
+      args: SelectSubset<T, NewsletterUpdateArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Delete zero or more Newsletters.
+     * @param {NewsletterDeleteManyArgs} args - Arguments to filter Newsletters to delete.
+     * @example
+     * // Delete a few Newsletters
+     * const { count } = await prisma.newsletter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends NewsletterDeleteManyArgs>(
+      args?: SelectSubset<T, NewsletterDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Newsletters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Newsletters
+     * const newsletter = await prisma.newsletter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends NewsletterUpdateManyArgs>(
+      args: SelectSubset<T, NewsletterUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Newsletter.
+     * @param {NewsletterUpsertArgs} args - Arguments to update or create a Newsletter.
+     * @example
+     * // Update or create a Newsletter
+     * const newsletter = await prisma.newsletter.upsert({
+     *   create: {
+     *     // ... data to create a Newsletter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Newsletter we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends NewsletterUpsertArgs>(
+      args: SelectSubset<T, NewsletterUpsertArgs>
+    ): Prisma__NewsletterClient<NewsletterGetPayload<T>>
+
+    /**
+     * Find zero or more Newsletters that matches the filter.
+     * @param {NewsletterFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const newsletter = await prisma.newsletter.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+    **/
+    findRaw(
+      args?: NewsletterFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Newsletter.
+     * @param {NewsletterAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const newsletter = await prisma.newsletter.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+    **/
+    aggregateRaw(
+      args?: NewsletterAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Count the number of Newsletters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterCountArgs} args - Arguments to filter Newsletters to count.
+     * @example
+     * // Count the number of Newsletters
+     * const count = await prisma.newsletter.count({
+     *   where: {
+     *     // ... the filter for the Newsletters we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewsletterCountArgs>(
+      args?: Subset<T, NewsletterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsletterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Newsletter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsletterAggregateArgs>(args: Subset<T, NewsletterAggregateArgs>): Prisma.PrismaPromise<GetNewsletterAggregateType<T>>
+
+    /**
+     * Group by Newsletter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsletterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewsletterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewsletterGroupByArgs['orderBy'] }
+        : { orderBy?: NewsletterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewsletterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsletterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Newsletter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__NewsletterClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Newsletter base type for findUnique actions
+   */
+  export type NewsletterFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter, which Newsletter to fetch.
+     */
+    where: NewsletterWhereUniqueInput
+  }
+
+  /**
+   * Newsletter findUnique
+   */
+  export interface NewsletterFindUniqueArgs extends NewsletterFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Newsletter findUniqueOrThrow
+   */
+  export type NewsletterFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter, which Newsletter to fetch.
+     */
+    where: NewsletterWhereUniqueInput
+  }
+
+
+  /**
+   * Newsletter base type for findFirst actions
+   */
+  export type NewsletterFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter, which Newsletter to fetch.
+     */
+    where?: NewsletterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Newsletters to fetch.
+     */
+    orderBy?: Enumerable<NewsletterOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Newsletters.
+     */
+    cursor?: NewsletterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Newsletters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Newsletters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Newsletters.
+     */
+    distinct?: Enumerable<NewsletterScalarFieldEnum>
+  }
+
+  /**
+   * Newsletter findFirst
+   */
+  export interface NewsletterFindFirstArgs extends NewsletterFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Newsletter findFirstOrThrow
+   */
+  export type NewsletterFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter, which Newsletter to fetch.
+     */
+    where?: NewsletterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Newsletters to fetch.
+     */
+    orderBy?: Enumerable<NewsletterOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Newsletters.
+     */
+    cursor?: NewsletterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Newsletters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Newsletters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Newsletters.
+     */
+    distinct?: Enumerable<NewsletterScalarFieldEnum>
+  }
+
+
+  /**
+   * Newsletter findMany
+   */
+  export type NewsletterFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter, which Newsletters to fetch.
+     */
+    where?: NewsletterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Newsletters to fetch.
+     */
+    orderBy?: Enumerable<NewsletterOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Newsletters.
+     */
+    cursor?: NewsletterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Newsletters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Newsletters.
+     */
+    skip?: number
+    distinct?: Enumerable<NewsletterScalarFieldEnum>
+  }
+
+
+  /**
+   * Newsletter create
+   */
+  export type NewsletterCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * The data needed to create a Newsletter.
+     */
+    data: XOR<NewsletterCreateInput, NewsletterUncheckedCreateInput>
+  }
+
+
+  /**
+   * Newsletter createMany
+   */
+  export type NewsletterCreateManyArgs = {
+    /**
+     * The data used to create many Newsletters.
+     */
+    data: Enumerable<NewsletterCreateManyInput>
+  }
+
+
+  /**
+   * Newsletter update
+   */
+  export type NewsletterUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * The data needed to update a Newsletter.
+     */
+    data: XOR<NewsletterUpdateInput, NewsletterUncheckedUpdateInput>
+    /**
+     * Choose, which Newsletter to update.
+     */
+    where: NewsletterWhereUniqueInput
+  }
+
+
+  /**
+   * Newsletter updateMany
+   */
+  export type NewsletterUpdateManyArgs = {
+    /**
+     * The data used to update Newsletters.
+     */
+    data: XOR<NewsletterUpdateManyMutationInput, NewsletterUncheckedUpdateManyInput>
+    /**
+     * Filter which Newsletters to update
+     */
+    where?: NewsletterWhereInput
+  }
+
+
+  /**
+   * Newsletter upsert
+   */
+  export type NewsletterUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * The filter to search for the Newsletter to update in case it exists.
+     */
+    where: NewsletterWhereUniqueInput
+    /**
+     * In case the Newsletter found by the `where` argument doesn't exist, create a new Newsletter with this data.
+     */
+    create: XOR<NewsletterCreateInput, NewsletterUncheckedCreateInput>
+    /**
+     * In case the Newsletter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewsletterUpdateInput, NewsletterUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Newsletter delete
+   */
+  export type NewsletterDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+    /**
+     * Filter which Newsletter to delete.
+     */
+    where: NewsletterWhereUniqueInput
+  }
+
+
+  /**
+   * Newsletter deleteMany
+   */
+  export type NewsletterDeleteManyArgs = {
+    /**
+     * Filter which Newsletters to delete
+     */
+    where?: NewsletterWhereInput
+  }
+
+
+  /**
+   * Newsletter findRaw
+   */
+  export type NewsletterFindRawArgs = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * Newsletter aggregateRaw
+   */
+  export type NewsletterAggregateRawArgs = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+
+  /**
+   * Newsletter without action
+   */
+  export type NewsletterArgs = {
+    /**
+     * Select specific fields to fetch from the Newsletter
+     */
+    select?: NewsletterSelect | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -7038,6 +7996,15 @@ export namespace Prisma {
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const NewsletterScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    status: 'status'
+  };
+
+  export type NewsletterScalarFieldEnum = (typeof NewsletterScalarFieldEnum)[keyof typeof NewsletterScalarFieldEnum]
 
 
   export const PostScalarFieldEnum: {
@@ -7405,6 +8372,44 @@ export namespace Prisma {
     session_state?: StringNullableWithAggregatesFilter | string | null
   }
 
+  export type NewsletterWhereInput = {
+    AND?: Enumerable<NewsletterWhereInput>
+    OR?: Enumerable<NewsletterWhereInput>
+    NOT?: Enumerable<NewsletterWhereInput>
+    id?: StringFilter | string
+    email?: StringFilter | string
+    status?: EnumStatusFilter | Status
+  }
+
+  export type NewsletterOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+  }
+
+  export type NewsletterWhereUniqueInput = {
+    id?: string
+    email?: string
+  }
+
+  export type NewsletterOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    _count?: NewsletterCountOrderByAggregateInput
+    _max?: NewsletterMaxOrderByAggregateInput
+    _min?: NewsletterMinOrderByAggregateInput
+  }
+
+  export type NewsletterScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<NewsletterScalarWhereWithAggregatesInput>
+    OR?: Enumerable<NewsletterScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<NewsletterScalarWhereWithAggregatesInput>
+    id?: StringWithAggregatesFilter | string
+    email?: StringWithAggregatesFilter | string
+    status?: EnumStatusWithAggregatesFilter | Status
+  }
+
   export type PostCreateInput = {
     id?: string
     articleId: string
@@ -7748,6 +8753,44 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NewsletterCreateInput = {
+    id?: string
+    email: string
+    status?: Status
+  }
+
+  export type NewsletterUncheckedCreateInput = {
+    id?: string
+    email: string
+    status?: Status
+  }
+
+  export type NewsletterUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
+  }
+
+  export type NewsletterUncheckedUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
+  }
+
+  export type NewsletterCreateManyInput = {
+    id?: string
+    email: string
+    status?: Status
+  }
+
+  export type NewsletterUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
+  }
+
+  export type NewsletterUncheckedUpdateManyInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
   }
 
   export type StringFilter = {
@@ -8110,6 +9153,41 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type EnumStatusFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusFilter | Status
+  }
+
+  export type NewsletterCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+  }
+
+  export type NewsletterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+  }
+
+  export type NewsletterMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+  }
+
+  export type EnumStatusWithAggregatesFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusWithAggregatesFilter | Status
+    _count?: NestedIntFilter
+    _min?: NestedEnumStatusFilter
+    _max?: NestedEnumStatusFilter
+  }
+
   export type CommentCreateNestedManyWithoutPostInput = {
     create?: XOR<Enumerable<CommentCreateWithoutPostInput>, Enumerable<CommentUncheckedCreateWithoutPostInput>>
     connectOrCreate?: Enumerable<CommentCreateOrConnectWithoutPostInput>
@@ -8365,6 +9443,10 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
   }
 
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: Status
+  }
+
   export type NestedStringFilter = {
     equals?: string
     in?: Enumerable<string>
@@ -8531,6 +9613,23 @@ export namespace Prisma {
     gte?: number
     not?: NestedFloatNullableFilter | number | null
     isSet?: boolean
+  }
+
+  export type NestedEnumStatusFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusFilter | Status
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusWithAggregatesFilter | Status
+    _count?: NestedIntFilter
+    _min?: NestedEnumStatusFilter
+    _max?: NestedEnumStatusFilter
   }
 
   export type CommentCreateWithoutPostInput = {

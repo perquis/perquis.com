@@ -11,6 +11,8 @@ declare global {
       NEXTAUTH_SECRET?: string;
       MY_SECRET_TOKEN?: string;
       PERMANENT_AUTH_TOKEN?: string;
+      GMAIL_APP_PASSWORD?: string;
+      GMAIL_APP_EMAIL?: string;
     }
   }
 }

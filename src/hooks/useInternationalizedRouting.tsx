@@ -48,6 +48,7 @@ export const useInternationalizedRouting = (status: Status) => {
       modalUpdateComment = global('modal.update-comment');
 
     const notificationSuccess = global('notificaion.success'),
+      notificationSuccessSubscribeNewsletter = global('notificaion.success-subscribe-newsletter'),
       notificationSuccessDeleteComment = global('notificaion.success-delete-comment'),
       notificationSuccessUpdateComment = global('notificaion.success-update-comment'),
       notificaionError = global('notificaion.error'),
@@ -87,6 +88,7 @@ export const useInternationalizedRouting = (status: Status) => {
       notificationSuccess,
       notificationSuccessDeleteComment,
       notificationSuccessUpdateComment,
+      notificationSuccessSubscribeNewsletter,
       notificaionTextSuccess,
       notificaionTextError,
       notificaionTextWarn,

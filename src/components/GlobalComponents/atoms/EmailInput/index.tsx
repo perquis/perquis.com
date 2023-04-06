@@ -9,8 +9,8 @@ interface IEmailInputProps {
   isFullWidth?: boolean;
 }
 
-type Props = Omit<ReactHTMLElementProps<HTMLInputElement>, 'className' | 'children'> & IEmailInputProps;
+type Props = Omit<ReactHTMLElementProps<HTMLInputElement>, 'className' | 'children'> & IEmailInputProps & { value: string };
 
-export const EmailInput: FC<Props> = ({ isFullWidth, ...props }) => (
-  <input type="email" name="email" className={clsx(styles.input, isFullWidth && styles['full-width'])} maxLength={emailInputMaxLength} {...props} />
+export const EmailInput: FC<Props> = ({ isFullWidth, value, ...props }) => (
+  <input type="email" name="email" className={clsx(styles.input, isFullWidth && styles['full-width'])} maxLength={emailInputMaxLength} {...props} value={value} />
 );

@@ -39,6 +39,7 @@
   },
   "notificaion": {
     "success": "Dziękuję za komentarz!",
+    "success-subscribe-newsletter": "Zostałeś dodany do newslettera.",
     "success-update-comment": "Twój komentarz został pomyślnie zaktualizowany.",
     "success-delete-comment": "Komentarz został pomyślnie usunięty.",
     "error": "Ojej! Coś poszło nie tak, spróbuj ponownie później 😅.",
