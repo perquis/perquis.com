@@ -32,7 +32,7 @@ export const sendNewsletterToSubscribers = async (req: NextApiRequest, res: Next
 
 export const subscribeNewsletter = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.body;
-  if (!email && isValidatedEmail(email)) return res.status(400).send({ message: 'Bad request.' });
+  if (!email && !isValidatedEmail(email)) return res.status(400).send({ message: 'Bad request.' });
 
   try {
     const subscriber = await prismaClient.newsletter.findFirst({ where: { email } });
@@ -48,7 +48,7 @@ export const subscribeNewsletter = async (req: NextApiRequest, res: NextApiRespo
 
 export const unsubscribeNewsletter = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.body;
-  if (!email && isValidatedEmail(email)) return res.status(400).send({ message: 'Bad request.' });
+  if (!email && !isValidatedEmail(email)) return res.status(400).send({ message: 'Bad request.' });
 
   try {
     const subscriber = await prismaClient.newsletter.findFirst({ where: { email } });

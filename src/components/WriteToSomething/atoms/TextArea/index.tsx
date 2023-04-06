@@ -16,5 +16,7 @@ type ITextAreaProps = FC<ITextArea & Omit<ReactHTMLElementProps<HTMLTextAreaElem
 export const TextArea: ITextAreaProps = ({ disabled, value, ...props }) => {
   const { commentFormPlaceholder } = useInternationalizedRouting('global');
 
-  return <textarea className={styles.textarea} placeholder={commentFormPlaceholder} minLength={5} maxLength={textAreaMaxLength} disabled={disabled} {...props} value={value} />;
+  return (
+    <textarea className={styles.textarea} placeholder={commentFormPlaceholder} minLength={5} maxLength={textAreaMaxLength} disabled={disabled} {...props} value={value} required />
+  );
 };

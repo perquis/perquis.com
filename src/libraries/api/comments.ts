@@ -33,7 +33,6 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
 export const createComment = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, content, postId } = req.body;
   if (!content && !email && !postId) return res.status(400).send({ message: 'Bad request.' });
-  if (isValidatedUri(content.trim())) return res.status(400).send({ message: 'Bad request.' });
   if (content.length > textAreaMaxLength) return res.status(400).send({ message: 'Bad request.' });
 
   try {

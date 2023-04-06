@@ -12,6 +12,7 @@
   "newsletter": {
     "title": "Subscribe <span>to the newsletter</span>",
     "description": "Don't miss out on the news!",
+    "approve": "I consent to the processing of my personal data for marketing purposes.",
     "placeholder": "Enter your Email",
     "button": "Subscribe"
   },

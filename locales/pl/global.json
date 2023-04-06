@@ -12,6 +12,7 @@
   "newsletter": {
     "title": "Zapisz się <span>do newslettera</span>",
     "description": "Bądź na bieżąco z nowymi artykułami!",
+    "approve": "Wyrażam zgodę na przetwarzanie moich danych osobowych w celach marketingowych.",
     "placeholder": "Wpisz swojego emaila",
     "button": "Zapisz się"
   },

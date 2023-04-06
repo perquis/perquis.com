@@ -2,8 +2,12 @@
 
 .note {
   @include wrapper;
-  padding: 2.4rem 3.6rem;
+  padding: 3.6rem 2.4rem;
   position: relative;
+
+  * {
+    z-index: 2;
+  }
 
   @media screen and (max-width: $sm) {
     border-radius: none;
@@ -45,6 +49,7 @@
     height: 4.8rem;
     left: -21px;
     top: -20px;
+    z-index: 2;
 
     @media screen and (max-width: $sm) {
       display: none;
@@ -60,6 +65,7 @@
     top: -18px;
     background: var(--background);
     border-radius: 50%;
+    z-index: 2;
 
     @media screen and (max-width: $sm) {
       display: none;
@@ -78,18 +84,23 @@
   &::before {
     content: '';
     position: absolute;
-    top: -2.4rem;
-    left: -3.6rem;
-    width: calc(100% + 7.2rem);
-    height: calc(100% + 3.6rem);
+    top: 2.4rem;
+    left: -2.4rem;
+    width: calc(100% + calc(2.4rem * 2));
+    height: calc(100% - calc(2.4rem * 2));
     pointer-events: none;
     opacity: 0.05;
+    z-index: 1;
   }
 }
 
 .note-normal {
   background: var(--note-information-color);
   border-left: 3px solid var(--note-information-color-border);
+
+  p {
+    color: var(--info-paragraph) !important;
+  }
 
   h1,
   h2,
@@ -119,6 +130,10 @@
   background: var(--success-bg);
   border-left: 3px solid var(--success);
 
+  p {
+    color: var(--success-paragraph) !important;
+  }
+
   h1,
   h2,
   h3,
@@ -147,6 +162,10 @@
 .note-negative {
   background: var(--error-bg);
   border-left: 3px solid var(--error);
+
+  p {
+    color: var(--error-paragraph) !important;
+  }
 
   h1,
   h2,

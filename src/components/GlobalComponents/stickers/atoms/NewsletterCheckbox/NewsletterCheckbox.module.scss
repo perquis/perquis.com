@@ -1,0 +1,48 @@
+@import './src/styles/_mixins.scss';
+
+.label {
+  &::after {
+    content: '*';
+    color: var(--error);
+  }
+
+  font-size: 1.4rem;
+
+  @include user-select;
+}
+
+.checkbox {
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.6rem;
+  border-radius: var(--small-radius);
+  flex-shrink: 0;
+  border: 2px solid var(--locale-border-color);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: -0.4rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background: var(--heading);
+    border-radius: 0.2rem;
+    translate: -50% -50%;
+    scale: 0;
+    rotate: 45deg;
+    transition: 0.15s ease-in-out;
+  }
+
+  &:checked {
+    &::after {
+      scale: 1;
+      rotate: 0deg;
+    }
+  }
+}

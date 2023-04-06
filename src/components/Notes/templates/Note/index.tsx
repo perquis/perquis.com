@@ -25,18 +25,18 @@ export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = '
   return (
     <div
       className={clsx(
-        styles.note,
-        status === 'normal' && styles['note-normal'],
-        status === 'positive' && styles['note-positive'],
-        status === 'negative' && styles['note-negative']
+        styles['hero-pattern'],
+        status === 'normal' && styles['hero-pattern-normal'],
+        status === 'positive' && styles['hero-pattern-positive'],
+        status === 'negative' && styles['hero-pattern-negative']
       )}
     >
       <div
         className={clsx(
-          styles['hero-pattern'],
-          status === 'normal' && styles['hero-pattern-normal'],
-          status === 'positive' && styles['hero-pattern-positive'],
-          status === 'negative' && styles['hero-pattern-negative']
+          styles.note,
+          status === 'normal' && styles['note-normal'],
+          status === 'positive' && styles['note-positive'],
+          status === 'negative' && styles['note-negative']
         )}
       >
         <DirectionColumn ref={ref} className={styles['not-padding']}>

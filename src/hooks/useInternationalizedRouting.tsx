@@ -28,6 +28,7 @@ export const useInternationalizedRouting = (status: Status) => {
     const newsletterTitle = global('newsletter.title'),
       newsletterDescription = global('newsletter.description'),
       newsletterPlaceholder = global('newsletter.placeholder'),
+      newsletterApprove = global('newsletter.approve'),
       newsletterButton = global('newsletter.button');
 
     const joinOurCommunityTitle = global('join-our-community.title'),
@@ -71,6 +72,7 @@ export const useInternationalizedRouting = (status: Status) => {
       newsletterDescription,
       newsletterPlaceholder,
       newsletterButton,
+      newsletterApprove,
       joinOurCommunityTitle,
       joinOurCommunityDescription,
       joinOurCommunityButton,

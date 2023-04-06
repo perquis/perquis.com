@@ -1,24 +1,19 @@
-import useKey from '@rooks/use-key';
-
 import { EmailInput } from '@GlobalComponents/atoms/EmailInput';
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
+import { NewsletterCheckbox } from '@stickers/atoms/NewsletterCheckbox';
 import { StickerButton } from '@stickers/index';
 
-import { useFormStore } from '@stories/forms';
-
-import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
+import { useNewsletter } from '@hooks/useNewsletter';
 
 import styles from './NewsletterModalForm.module.scss';
 
 export const NewsletterModalForm = () => {
-  const { newsletterButton, newsletterPlaceholder } = useInternationalizedRouting('global');
-  const [email, updateEmailKeywords] = useFormStore((state) => [state.emailKeywords, state.updateEmailKeywords]);
-
-  useKey('Escape', () => updateEmailKeywords(''));
+  const { email, updateEmailKeywords, handleOnSubmit, newsletterButton, newsletterPlaceholder } = useNewsletter(true);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
+    <form onSubmit={handleOnSubmit} className={styles.form}>
+      <NewsletterCheckbox />
       <DirectionColumn>
         <EmailInput placeholder={newsletterPlaceholder} isFullWidth onChange={(e) => updateEmailKeywords(e.currentTarget.value)} value={email} />
         <StickerButton>{newsletterButton}</StickerButton>
