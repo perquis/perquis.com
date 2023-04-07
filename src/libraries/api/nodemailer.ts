@@ -21,6 +21,7 @@ export const sendNewsletterToSubscribers = async (req: NextApiRequest, res: Next
     const subscribers = await prismaClient.newsletter.findMany({ select: { email: true }, where: { status: 'SUBSCRIBE' } });
     if (subscribers.length === 0) return res.status(200).send({ message: 'The subscribers list is empty now.' });
 
+    // @ts-ignore
     const to = subscribers.map(({ email }) => email);
 
     await nodemailerTransporter.sendMail({ from: process.env.GMAIL_APP_EMAIL, to, text, html, subject });
