@@ -1,16 +1,20 @@
 import clsx from 'clsx';
 import type { FC, ReactHTMLElementProps } from 'react';
 
+import type { Status } from '@components/TableOfContents/molecules/TocItem';
+import { isReadStatus } from '@components/TableOfContents/molecules/TocItem';
+
 import styles from './NumberOfChapter.module.scss';
 
-export const NumberOfChapter: FC<ReactHTMLElementProps<HTMLSpanElement> & { status: string }> = ({ children, status }) => {
+export const NumberOfChapter: FC<ReactHTMLElementProps<HTMLSpanElement> & { status: Status; isCompletedChapter: boolean }> = ({ children, status, isCompletedChapter }) => {
   return (
     <span
       className={clsx(
         styles['number-of-chapter'],
-        status === 'hidden' && styles['number-of-chapter-hidden'],
-        status === 'visible' && styles['number-of-chapter-visible'],
-        status === 'read' && styles['number-of-chapter-read']
+        isReadStatus(status, 'hidden') && !isCompletedChapter && styles['number-of-chapter-hidden'],
+        isReadStatus(status, 'visible') && !isCompletedChapter && styles['number-of-chapter-visible'],
+        isReadStatus(status, 'read') && !isCompletedChapter && styles['number-of-chapter-read'],
+        isCompletedChapter && styles['number-of-chapter-read']
       )}
     >
       {children}

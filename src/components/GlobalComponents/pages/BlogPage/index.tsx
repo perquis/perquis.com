@@ -62,13 +62,13 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
         <ReadingTime content={content?.text ?? ''} />
       </DetailsWrapper>
       <FullWidthContainer>
-        <TableOfContents />
         <div ref={markdownContainerRef}>
           <MarkdownToHTML {...source} />
         </div>
         <ResourcesList resources={resources} />
         <Stickers />
         <CommentsList />
+        <TableOfContents />
       </FullWidthContainer>
     </>
   );

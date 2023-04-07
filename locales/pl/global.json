@@ -23,7 +23,7 @@
   },
   "comment": {
     "title": "Komentarze:",
-    "authenticated-description": "Zaloguj się albo zarejestruj jeśli chcesz skomentować ten artykuł!",
+    "authenticated-description": "Zaloguj się jeśli chcesz skomentować ten artykuł!",
     "unauthenticated-description": "Teraz możesz napisać komentarz 😎.",
     "form": {
       "placeholder": "Napisz coś...",

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
+import ReactFocusLock from 'react-focus-lock';
 
 import { TocItem } from '@components/TableOfContents/molecules/TocItem';
 
@@ -26,23 +27,30 @@ export const TableOfContents = () => {
       ref={ref}
       exit={{ x: 'calc(100% - 2.4rem)' }}
       initial={{ x: 'calc(100% - 2.4rem)' }}
-      animate={!toggleToc ? { x: 560 } : { x: 24 }}
+      animate={!toggleToc ? { x: 560 } : { x: 0 }}
       className={clsx(styles.toc, toggleToc && styles['toc-active'])}
       transition={{ duration: 0.15 }}
     >
-      <button className={clsx(styles.button, toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
-      <div className={styles['toc-list']}>
-        <h3>{tableOfContentsHeading}</h3>
-        <nav>
-          <ul>
-            {slugs.map(({ href, textContent, position, nextChapterPosition }, i) => (
-              <TocItem href={href} index={i} status={position <= 0 && nextChapterPosition >= 0 ? 'visible' : position <= 0 && nextChapterPosition <= 0 ? 'read' : 'hidden'} key={i}>
-                {textContent}
-              </TocItem>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <ReactFocusLock disabled={!toggleToc}>
+        <button className={clsx(styles.button, toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
+        <div className={styles['toc-list']}>
+          <h3>{tableOfContentsHeading}</h3>
+          <nav>
+            <ul>
+              {slugs.map(({ href, textContent, position, nextChapterPosition }, i) => (
+                <TocItem
+                  href={href}
+                  index={i}
+                  status={position <= 0 && nextChapterPosition >= 0 ? 'visible' : position <= 0 && nextChapterPosition <= 0 ? 'read' : 'hidden'}
+                  key={i}
+                >
+                  {textContent}
+                </TocItem>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </ReactFocusLock>
     </motion.aside>
   );
 };
