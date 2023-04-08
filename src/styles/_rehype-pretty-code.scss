@@ -4,7 +4,7 @@
 html[data-theme='dark'] {
   [data-rehype-pretty-code-fragment] {
     &:has(pre[data-theme='dark'], code[data-theme='dark']) {
-      .code-wrapper.light,
+      .code-container.light,
       pre[data-theme='light'],
       code[data-theme='light'] {
         display: none;
@@ -21,7 +21,7 @@ html[data-theme='dark'] {
 html[data-theme='light'] {
   [data-rehype-pretty-code-fragment] {
     &:has(pre[data-theme='light'], code[data-theme='light']) {
-      .code-wrapper.dark,
+      .code-container.dark,
       pre[data-theme='dark'],
       code[data-theme='dark'] {
         display: none;

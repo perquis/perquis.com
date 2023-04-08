@@ -8,6 +8,7 @@
   border-right: 2px solid var(--code-dots);
   border-bottom: 2px solid var(--code-dots);
   border-radius: 0 0 var(--radius) var(--radius);
+  max-height: 65vh;
 
   @media screen and (max-width: $sm) {
     border-left: 0;
@@ -15,12 +16,8 @@
     border-radius: 0;
   }
 
-  overflow-x: auto;
+  overflow: auto;
   @include scrollbar;
-
-  &::-webkit-scrollbar {
-    height: 1rem;
-  }
 
   &::-webkit-scrollbar-thumb {
     background: var(--code-scrollbar);

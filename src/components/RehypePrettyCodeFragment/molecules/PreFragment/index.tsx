@@ -1,10 +1,18 @@
 /* eslint-disable */
-import { forwardRef } from 'react';
-import type { ReactHTMLElementProps } from 'react';
+import { useEffect, useRef } from 'react';
+import type { Dispatch, FC, ReactHTMLElementProps, SetStateAction } from 'react';
 
 import styles from './PreFragment.module.scss';
 
-export const PreFragment = forwardRef<HTMLDivElement, ReactHTMLElementProps<HTMLPreElement>>(({ children, ...props }, ref) => {
+interface IPreFragment {
+  setCopiedCode: Dispatch<SetStateAction<string>>;
+}
+
+export const PreFragment: FC<ReactHTMLElementProps<HTMLPreElement> & IPreFragment> = ({ children, setCopiedCode, ...props }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => setCopiedCode(ref.current?.textContent ?? ''), []);
+
   return (
     <pre {...props} className={styles.pre}>
       <div ref={ref} className="code">
@@ -12,4 +20,4 @@ export const PreFragment = forwardRef<HTMLDivElement, ReactHTMLElementProps<HTML
       </div>
     </pre>
   );
-});
+};

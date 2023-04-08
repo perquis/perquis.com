@@ -5,7 +5,7 @@ import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
 
 import { Note } from '@components/Notes';
-import { RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
+import { CodeWrapper, RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
 import { CustomH1 } from '@components/RehypePrettyCodeFragment/atoms/CustomH1';
 import { Sandpack } from '@components/Sandpack';
 
@@ -24,6 +24,7 @@ export const components: MDXRemoteProps['components'] = {
 
   Note,
   Sandpack,
+  CodeWrapper,
   CodepenPlayer,
   YouTubePlayer,
 };
