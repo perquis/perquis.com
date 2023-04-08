@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 import { PickProgrammingLanguage } from '@components/RehypePrettyCodeFragment/atoms/PickProgrammingLanguage';
@@ -15,7 +16,8 @@ export const ProgrammingLanguagesList: FC<IProgrammingLanguagesList> = ({ langua
     <div className={styles['programming-languages-list']}>
       {languages.map((lng) => (
         <PickProgrammingLanguage key={lng} onClick={() => setCurrentLanguage(lng)} isActive={currentLanguage === lng}>
-          {lng}
+          <span className={styles.span}>{lng}</span>
+          {lng === currentLanguage ? <motion.div className={styles.tab} layoutId="tab" /> : null}
         </PickProgrammingLanguage>
       ))}
     </div>

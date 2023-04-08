@@ -4,3 +4,22 @@
   position: absolute;
   margin-top: -3.4rem;
 }
+
+.span {
+  z-index: 99;
+  position: relative;
+}
+
+.tab {
+  left: 0;
+  bottom: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: var(--code-heading-bg);
+  border-top: 2px solid var(--code-dots);
+  border-left: 2px solid var(--code-dots);
+  border-right: 2px solid var(--code-dots);
+  border-radius: var(--small-radius) var(--small-radius) 0 0;
+}
