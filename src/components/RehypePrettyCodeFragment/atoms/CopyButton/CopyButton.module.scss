@@ -3,6 +3,7 @@
   border: none;
   background: none;
   color: inherit;
+  transition: 0.15s cubic-bezier(1, 0, 0, 1);
 
   &:is(:hover, :focus) {
     color: var(--gray-400);

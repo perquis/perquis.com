@@ -5,10 +5,6 @@
   padding: 3.6rem 2.4rem;
   position: relative;
 
-  * {
-    z-index: 2;
-  }
-
   @media screen and (max-width: $sm) {
     border-radius: none;
     padding: 2.4rem;
@@ -73,24 +69,33 @@
   }
 }
 
-.not-padding {
-  gap: 2.1rem;
-  padding: 0 !important;
+.hero-pattern-active {
+  &::before {
+    height: calc(100% + calc(3.6rem * 2));
+  }
+}
+
+.hero-pattern-is-not-active {
+  &::before {
+    height: calc(100% + calc(5.6rem * 2));
+  }
 }
 
 .hero-pattern {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  gap: 2.1rem;
 
   &::before {
     content: '';
     position: absolute;
-    top: 2.4rem;
+    top: -3.6rem;
     left: -2.4rem;
     width: calc(100% + calc(2.4rem * 2));
-    height: calc(100% - calc(2.4rem * 2));
     pointer-events: none;
     opacity: 0.05;
-    z-index: 1;
+    z-index: 0;
   }
 }
 

@@ -1,0 +1,30 @@
+.pick-programming-language {
+  height: 3.6rem;
+  border-bottom: 0;
+  padding: 0 1.6rem;
+  position: relative;
+  color: var(--paragraph);
+  border-radius: var(--small-radius) var(--small-radius) 0 0;
+}
+
+.is-active {
+  z-index: 99;
+  pointer-events: none;
+  background: var(--code-heading-bg);
+  border-top: 2px solid var(--code-dots);
+  border-left: 2px solid var(--code-dots);
+  border-right: 2px solid var(--code-dots);
+}
+
+.is-not-active {
+  translate: 0 4px;
+  border: none;
+  color: var(--code-number-color);
+  background: var(--code-bg);
+  transition: 0.15s ease-in-out;
+
+  &:is(:focus, :hover) {
+    translate: 0 1px;
+    color: var(--paragraph);
+  }
+}

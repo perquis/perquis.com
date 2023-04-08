@@ -1,1 +1,1 @@
-export * from './molecules/pre';
+export * from './organisms/RehypePrettyCodeFragment';
