@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 import { PickProgrammingLanguage } from '@components/RehypePrettyCodeFragment/atoms/PickProgrammingLanguage';
@@ -15,8 +16,11 @@ export const ProgrammingLanguagesList: FC<IProgrammingLanguagesList> = ({ langua
   return (
     <div className={styles['programming-languages-list']}>
       {languages.map((lng) => (
-        <PickProgrammingLanguage key={lng} onClick={() => setCurrentLanguage(lng)} isActive={currentLanguage === lng}>
-          <span className={styles.span}>{lng}</span>
+        <PickProgrammingLanguage key={lng} onClick={() => setCurrentLanguage(lng)} isActive={currentLanguage === lng} data-lang={lng}>
+          <span className={styles.span}>
+            <Image src={`/assets/languages/${lng}.png`} alt={lng} width={20} height={20} />
+            {lng}
+          </span>
           {lng === currentLanguage ? <motion.div className={styles.tab} layoutId="tab" /> : null}
         </PickProgrammingLanguage>
       ))}

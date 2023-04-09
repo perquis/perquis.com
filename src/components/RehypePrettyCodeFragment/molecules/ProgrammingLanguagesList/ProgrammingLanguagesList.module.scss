@@ -2,11 +2,13 @@
   gap: 0.4rem;
   display: flex;
   position: absolute;
-  margin-top: -3.4rem;
+  margin-top: -4rem;
 }
 
 .span {
   z-index: 99;
+  display: flex;
+  gap: 1rem;
   position: relative;
 }
 

@@ -59,17 +59,6 @@ span[data-rehype-pretty-code-fragment] {
       left: 0;
       display: flex;
       justify-content: space-between;
-      background: var(--code-heading-bg);
-      color: var(--code-number-color);
-      border-top: 2px solid var(--code-dots);
-      border-left: 2px solid var(--code-dots);
-      border-right: 2px solid var(--code-dots);
-
-      @media screen and (max-width: $sm) {
-        border-left: 0;
-        border-right: 0;
-        border-radius: 0;
-      }
     }
   }
 

@@ -3,7 +3,7 @@
 
 .wrapper {
   position: relative;
-  margin-top: calc(3.4rem + 2.4rem);
+  margin-top: calc(4rem + 2.4rem);
 
   [data-rehype-pretty-code-fragment] {
     @include wrapper;

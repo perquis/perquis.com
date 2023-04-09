@@ -1,0 +1,6 @@
+@import './src/styles/_breakpoints.scss';
+
+.header {
+  background: var(--code-heading-bg);
+  color: var(--code-number-color);
+}

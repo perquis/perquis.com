@@ -10,7 +10,6 @@ interface IPreFragment {
 
 export const PreFragment: FC<ReactHTMLElementProps<HTMLPreElement> & IPreFragment> = ({ children, setCopiedCode, ...props }) => {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => setCopiedCode(ref.current?.textContent ?? ''), []);
 
   return (
