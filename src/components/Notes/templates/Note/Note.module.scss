@@ -121,13 +121,13 @@
   }
 
   &::after {
-    background: url(/assets/notebook-dynamic-color.png) no-repeat center / cover;
+    background: url(/assets/3d/notebook-dynamic-color.png) no-repeat center / cover;
   }
 }
 
 .hero-pattern-normal {
   &::before {
-    background: url(/assets/hero-pattern.png);
+    background: url(/assets/3d/hero-pattern.png);
   }
 }
 
@@ -154,13 +154,13 @@
 
   &::after {
     left: -27px;
-    background: url(/assets/thumb-up-dynamic-color.png) no-repeat center / cover;
+    background: url(/assets/3d/thumb-up-dynamic-color.png) no-repeat center / cover;
   }
 }
 
 .hero-pattern-positive {
   &::before {
-    background: url(/assets/hero-pattern-good-practice.png);
+    background: url(/assets/3d/hero-pattern-good-practice.png);
   }
 }
 
@@ -189,12 +189,12 @@
     left: -27px;
     top: -16px;
     rotate: 30deg;
-    background: url(/assets/thumb-down-dynamic-color.png) no-repeat center / cover;
+    background: url(/assets/3d/thumb-down-dynamic-color.png) no-repeat center / cover;
   }
 }
 
 .hero-pattern-negative {
   &::before {
-    background: url(/assets/hero-pattern-bad-practice.png);
+    background: url(/assets/3d/hero-pattern-bad-practice.png);
   }
 }

@@ -9,6 +9,10 @@
     @include wrapper;
     margin: 0 0 2.4rem -2.4rem;
 
+    [data-rehype-pretty-code-title] {
+      display: none;
+    }
+
     @media screen and (max-width: $sm) {
       width: calc(100% + calc(2rem * 2));
       margin: 0 0 2rem -2rem;

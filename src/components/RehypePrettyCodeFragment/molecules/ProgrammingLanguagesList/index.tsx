@@ -4,6 +4,8 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 
 import { PickProgrammingLanguage } from '@components/RehypePrettyCodeFragment/atoms/PickProgrammingLanguage';
 
+import { matchingTechnologyIcon } from '@utils/matchingTechnologyIcon';
+
 import styles from './ProgrammingLanguagesList.module.scss';
 
 interface IProgrammingLanguagesList {
@@ -18,7 +20,7 @@ export const ProgrammingLanguagesList: FC<IProgrammingLanguagesList> = ({ langua
       {languages.map((lng) => (
         <PickProgrammingLanguage key={lng} onClick={() => setCurrentLanguage(lng)} isActive={currentLanguage === lng} data-lang={lng}>
           <span className={styles.span}>
-            <Image src={`/assets/languages/${lng}.svg`} alt={lng} width={20} height={20} />
+            <Image src={`/assets/languages/${matchingTechnologyIcon(lng)}.svg`} alt={lng} width={20} height={20} />
             {lng}
           </span>
           {lng === currentLanguage && <motion.div className={styles.tab} layoutId="tab" />}

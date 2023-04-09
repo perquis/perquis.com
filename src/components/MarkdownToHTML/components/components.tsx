@@ -21,6 +21,7 @@ export const components: MDXRemoteProps['components'] = {
   h4: (props) => <h4 className={`${styles.heading} link`} {...props} />,
   h5: (props) => <h5 className={`${styles.heading} link`} {...props} />,
   h6: (props) => <h6 className={`${styles.heading} link`} {...props} />,
+  // @ts-ignore
   pre: (props: Omit<ReactHTMLElementProps<HTMLPreElement>, 'ref'> & MotionProps) => <RehypePrettyCodeFragment {...props} />,
   img: ({ src, alt }) => <Image src={src ?? ''} alt={alt ?? ''} />,
 
