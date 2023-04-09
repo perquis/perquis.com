@@ -18,10 +18,10 @@ export const ProgrammingLanguagesList: FC<IProgrammingLanguagesList> = ({ langua
       {languages.map((lng) => (
         <PickProgrammingLanguage key={lng} onClick={() => setCurrentLanguage(lng)} isActive={currentLanguage === lng} data-lang={lng}>
           <span className={styles.span}>
-            <Image src={`/assets/languages/${lng}.png`} alt={lng} width={20} height={20} />
+            <Image src={`/assets/languages/${lng}.svg`} alt={lng} width={20} height={20} />
             {lng}
           </span>
-          {lng === currentLanguage ? <motion.div className={styles.tab} layoutId="tab" /> : null}
+          {lng === currentLanguage && <motion.div className={styles.tab} layoutId="tab" />}
         </PickProgrammingLanguage>
       ))}
     </div>

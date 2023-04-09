@@ -14,13 +14,11 @@
 }
 
 .is-not-active {
-  translate: 0 4px;
   border: none;
   color: var(--code-number-color);
-  transition: 0.15s ease-in-out;
+  transition: color 0.3s ease-in-out;
 
   &:is(:focus, :hover) {
-    translate: 0 1px;
     color: var(--paragraph);
   }
 }

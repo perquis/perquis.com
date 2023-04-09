@@ -3,6 +3,8 @@ import { motion, MotionProps } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import type { Dispatch, FC, ReactHTMLElementProps, SetStateAction } from 'react';
 
+import { codeVars, preVars } from '@animations/code-motion';
+
 import styles from './PreFragment.module.scss';
 
 interface IPreFragment {
@@ -14,8 +16,8 @@ export const PreMotionFragment: FC<Omit<ReactHTMLElementProps<HTMLPreElement>, '
   useEffect(() => setCopiedCode(ref.current?.textContent ?? ''), []);
 
   return (
-    <motion.pre {...props} className={styles.pre} initial={{ height: 196 }} animate={{ height: 'auto' }} exit={{ height: 196 }}>
-      <motion.div ref={ref} className="code" initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 100, opacity: 0 }}>
+    <motion.pre {...props} className={styles.pre} variants={preVars} initial="initial" animate="animate" exit="exit">
+      <motion.div ref={ref} className="code" variants={codeVars} initial="initial" animate="animate" exit="exit">
         {children}
       </motion.div>
     </motion.pre>

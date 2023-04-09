@@ -1,6 +1,8 @@
 @import './src/styles/_breakpoints.scss';
 
 .header {
+  position: relative;
+  z-index: 100;
   background: var(--code-heading-bg);
   color: var(--code-number-color);
 }
