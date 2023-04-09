@@ -13,7 +13,6 @@ export const PickProgrammingLanguage: FC<Omit<ReactHTMLElementProps<HTMLButtonEl
   return (
     <motion.button
       className={clsx(styles['pick-programming-language'], isActive && styles['is-active'], !isActive && styles['is-not-active'], firaCode.className, 'pick-language')}
-      tabIndex={isActive ? -1 : 0}
       animate={animation(!isActive)}
       whileHover={animation(isActive)}
       whileFocus={animation(isActive)}

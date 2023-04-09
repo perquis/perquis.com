@@ -8,14 +8,14 @@ import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
 
 import { Note } from '@components/Notes';
 import { CodeWrapper, RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
-import { CustomH1 } from '@components/RehypePrettyCodeFragment/atoms/CustomH1';
+import { FirstHeadingOnTheBlogPage } from '@components/RehypePrettyCodeFragment/atoms/FirstHeadingOnTheBlogPage';
 import { Sandpack } from '@components/Sandpack';
 
 import styles from './components.module.scss';
 
 export const components: MDXRemoteProps['components'] = {
   p: (props) => <Paragraph {...props} />,
-  h1: (props) => <CustomH1 className={`${styles.heading} link`} {...props} />,
+  h1: (props) => <FirstHeadingOnTheBlogPage className={`${styles.heading} link`} {...props} />,
   h2: (props) => <h2 className={`${styles.heading} link`} {...props} />,
   h3: (props) => <h3 className={`${styles.heading} link`} {...props} />,
   h4: (props) => <h4 className={`${styles.heading} link`} {...props} />,

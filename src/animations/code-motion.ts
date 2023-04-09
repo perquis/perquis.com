@@ -1,9 +1,9 @@
 import type { Variants } from 'framer-motion';
 
 export const preVars: Variants = {
-  initial: { height: 196 },
+  initial: { height: 0 },
   animate: { height: 'auto' },
-  exit: { height: 196 },
+  exit: { height: 0 },
 };
 
 export const codeVars: Variants = {

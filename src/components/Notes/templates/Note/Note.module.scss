@@ -7,7 +7,6 @@
 
   @media screen and (max-width: $sm) {
     border-radius: none;
-    padding: 2.4rem;
   }
 
   [data-rehype-pretty-code-fragment] {
@@ -77,7 +76,7 @@
 
 .hero-pattern-is-not-active {
   &::before {
-    height: calc(100% + calc(5.6rem * 2));
+    height: calc(100% + calc(5.55rem * 2));
   }
 }
 

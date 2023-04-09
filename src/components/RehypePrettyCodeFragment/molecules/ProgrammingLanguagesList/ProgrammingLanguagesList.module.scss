@@ -1,10 +1,28 @@
 .programming-languages-list {
-  gap: 0.4rem;
-  display: flex;
-
   width: 100%;
   margin-top: -4rem;
   position: absolute;
+}
+
+.navigation {
+  width: 100%;
+  gap: 0.4rem;
+  display: flex;
+  position: absolute;
+}
+
+.container {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--small-radius) var(--small-radius) 0 0;
+  position: relative;
+  margin-bottom: -14px;
+}
+
+.languages-list {
+  gap: 0.4rem;
+  display: flex;
+  position: relative;
 }
 
 .span {

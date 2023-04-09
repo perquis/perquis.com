@@ -1,0 +1,11 @@
+.sticky {
+  top: 4rem;
+  width: fit-content;
+  position: sticky;
+  margin-left: -9.6rem;
+  pointer-events: all;
+
+  button {
+    margin-right: 0;
+  }
+}

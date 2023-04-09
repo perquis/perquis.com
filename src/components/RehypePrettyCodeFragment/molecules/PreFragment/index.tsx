@@ -1,5 +1,6 @@
-/* eslint-disable */
-import { motion, MotionProps } from 'framer-motion';
+/* eslint-disable react-hooks/exhaustive-deps */
+import type { MotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import type { Dispatch, FC, ReactHTMLElementProps, SetStateAction } from 'react';
 

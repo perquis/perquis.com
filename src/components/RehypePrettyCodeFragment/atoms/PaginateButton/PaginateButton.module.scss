@@ -1,0 +1,28 @@
+.paginate-button {
+  flex-shrink: 0;
+  border: none;
+  height: 3.6rem;
+  background: none;
+  padding: 0 1.6rem;
+  position: relative;
+  transition: color 0.3s ease-in-out, translate 0.3s ease-in-out;
+  color: var(--code-number-color);
+  background: var(--code-heading-bg);
+  border-radius: var(--small-radius);
+  border: 2px solid var(--code-dots);
+
+  display: flex;
+  align-items: center;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+    translate: 0 10px;
+  }
+
+  &:not(:disabled) {
+    &:is(:focus, :hover) {
+      color: var(--paragraph);
+    }
+  }
+}

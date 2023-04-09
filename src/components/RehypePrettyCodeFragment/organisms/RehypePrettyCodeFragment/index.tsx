@@ -17,9 +17,6 @@ export const RehypePrettyCodeFragment: FC<Omit<ReactHTMLElementProps<HTMLPreElem
   const theme = props['data-theme'] || 'default';
   const ref = useRef<HTMLDivElement>(null);
   const isAnimate = ref.current?.parentElement?.parentElement?.classList.contains('code-children') ?? false;
-  // const filename = ref.current?.parentElement?.querySelector('[data-rehype-pretty-code-title]')?.textContent ?? '';
-
-  // console.log(test);
 
   return (
     <div className={`code-container ${theme} ${styles.container}`} ref={ref}>

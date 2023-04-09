@@ -1,7 +1,8 @@
-.container {
+.layout {
   display: flex;
   padding-top: 2rem;
   flex-direction: column;
   max-width: 660px;
   margin: 0 auto;
+  position: relative;
 }

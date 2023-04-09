@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { useTOCStore } from '@stories/toc';
 
-export const CustomH1: FC<ReactHTMLElementProps<HTMLHeadingElement>> = ({ className = '', ...props }) => {
+export const FirstHeadingOnTheBlogPage: FC<ReactHTMLElementProps<HTMLHeadingElement>> = ({ className = '', ...props }) => {
   const { ref, inView } = useInView();
   const [isTocOpen, updateIsVisible] = useTOCStore((state) => [state.isTocOpen, state.updateIsVisible]);
   const isNotVisibleTocAndIsVisibleHeading = inView && !isTocOpen;

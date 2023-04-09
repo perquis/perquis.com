@@ -35,7 +35,7 @@ export const Layout: FC<Children> = ({ children }) => {
       <AnimatePresence>{condition && <Blur />}</AnimatePresence>
       <AnimatePresence>{isLoadingWhileSendingRequest && <LoadingMessage />}</AnimatePresence>
       <Navigation />
-      <div className={styles.container}>{children}</div>
+      <div className={styles.layout}>{children}</div>
       <Footer />
     </>
   );
