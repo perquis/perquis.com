@@ -1,4 +1,6 @@
+import type { MotionProps } from 'framer-motion';
 import type { MDXRemoteProps } from 'next-mdx-remote';
+import type { ReactHTMLElementProps } from 'react';
 
 import { Image } from '@GlobalComponents/atoms/Image';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
@@ -19,7 +21,7 @@ export const components: MDXRemoteProps['components'] = {
   h4: (props) => <h4 className={`${styles.heading} link`} {...props} />,
   h5: (props) => <h5 className={`${styles.heading} link`} {...props} />,
   h6: (props) => <h6 className={`${styles.heading} link`} {...props} />,
-  pre: (props) => <RehypePrettyCodeFragment {...props} />,
+  pre: (props: Omit<ReactHTMLElementProps<HTMLPreElement>, 'ref'> & MotionProps) => <RehypePrettyCodeFragment {...props} />,
   img: ({ src, alt }) => <Image src={src ?? ''} alt={alt ?? ''} />,
 
   Note,

@@ -1,9 +1,9 @@
-import { LayoutGroup } from 'framer-motion';
-import { useState } from 'react';
+import type { MotionProps } from 'framer-motion';
+import { useRef, useState } from 'react';
 import type { FC, ReactHTMLElementProps } from 'react';
 
 import { CodeHeader } from '@components/RehypePrettyCodeFragment/molecules/CodeHeader';
-import { PreFragment } from '@components/RehypePrettyCodeFragment/molecules/PreFragment';
+import { PreFragment, PreMotionFragment } from '@components/RehypePrettyCodeFragment/molecules/PreFragment';
 
 import styles from './RehypePrettyCodeFragment.module.scss';
 
@@ -12,16 +12,16 @@ interface IRehypePrettyCodeFragment {
   'data-language'?: string;
 }
 
-export const RehypePrettyCodeFragment: FC<ReactHTMLElementProps<HTMLPreElement> & IRehypePrettyCodeFragment> = ({ ...props }) => {
+export const RehypePrettyCodeFragment: FC<Omit<ReactHTMLElementProps<HTMLPreElement>, 'ref'> & IRehypePrettyCodeFragment & MotionProps> = ({ ...props }) => {
   const [copiedCode, setCopiedCode] = useState('');
   const theme = props['data-theme'] || 'default';
+  const ref = useRef<HTMLDivElement>(null);
+  const isAnimate = ref.current?.parentElement?.parentElement?.classList.contains('code-children') ?? false;
 
   return (
-    <div className={`code-container ${theme} ${styles.container}`}>
+    <div className={`code-container ${theme} ${styles.container}`} ref={ref}>
       <CodeHeader text={copiedCode} />
-      <LayoutGroup>
-        <PreFragment setCopiedCode={setCopiedCode} {...props} />
-      </LayoutGroup>
+      {isAnimate ? <PreMotionFragment setCopiedCode={setCopiedCode} {...props} /> : <PreFragment setCopiedCode={setCopiedCode} {...props} />}
     </div>
   );
 };

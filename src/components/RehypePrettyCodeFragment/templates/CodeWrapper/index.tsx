@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import { Children, isValidElement, useState } from 'react';
 import type { FC, ReactHTMLElementProps } from 'react';
 
@@ -16,7 +17,9 @@ export const CodeWrapper: FC<ReactHTMLElementProps<HTMLDivElement>> = ({ childre
   return (
     <div className={`code-wrapper ${styles.wrapper}`}>
       <ProgrammingLanguagesList languages={languages} currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />
-      <div className="code-children">{rehypePrettyCodeFragmentChildren}</div>
+      <div className="code-children">
+        <AnimatePresence mode="wait">{rehypePrettyCodeFragmentChildren}</AnimatePresence>
+      </div>
     </div>
   );
 };
