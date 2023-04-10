@@ -1,11 +1,9 @@
+@import './src/styles/_mixins.scss';
+
 .link {
   color: inherit;
 
   &:is(:hover, :focus) {
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-color: var(--heading);
-
-    text-underline-offset: 3px;
+    @include wavy-lines;
   }
 }

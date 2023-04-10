@@ -12,5 +12,5 @@ export const ToggleTheme = () => {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  return <button className={clsx(styles['theme-mode'], isActive && styles.active)} onClick={toggleTheme} aria-label="Toggle theme" />;
+  return <button className={clsx(styles['theme-mode'], !isActive && styles.active)} onClick={toggleTheme} aria-label="Toggle theme" />;
 };

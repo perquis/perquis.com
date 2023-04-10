@@ -138,6 +138,10 @@
 
   --delete-bg: hsl(335, 100%, 95%);
 
+  --sandpack-bg: hsl(210, 31%, 97%);
+  --sandpack-dots: var(--gray-100);
+  --sandpack-border: var(--code-dots);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;
@@ -226,4 +230,7 @@
   --delete-bg: hsl(335, 100%, 50%);
 
   --form-modal: hsl(212, 31%, 12%);
+  --sandpack-bg: hsl(208, 82%, 13%);
+  --sandpack-dots: hsl(208, 82%, 20%);
+  --sandpack-border: var(--sandpack-dots);
 }

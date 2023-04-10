@@ -59,3 +59,11 @@
     }
   }
 }
+
+@mixin wavy-lines {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--heading);
+
+  text-underline-offset: 3px;
+}

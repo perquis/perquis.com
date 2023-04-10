@@ -12,7 +12,7 @@
       "name": "Comment",
       "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
-        "foreground": "#7e8eda"
+        "foreground": "#466486"
       }
     },
     {
