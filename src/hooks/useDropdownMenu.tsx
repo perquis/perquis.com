@@ -1,6 +1,6 @@
+import { useWindowWidth } from '@react-hook/window-size';
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
-import useWindowSize from '@rooks/use-window-size';
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +10,7 @@ type Options = { ref: MutableRefObject<HTMLDivElement>; state: Partial<State> };
 type UseDropdownMenu = (cb: () => void, options: Options) => void | null;
 
 export const useDropdownMenu: UseDropdownMenu = (cb, { ref, state: { isActive, setActive } }) => {
-  const { innerWidth } = useWindowSize();
+  const innerWidth = useWindowWidth();
   const [mounted, setMounted] = useState(false);
 
   useKey('Escape', cb, { when: isActive });

@@ -1,5 +1,5 @@
+import { useWindowWidth } from '@react-hook/window-size';
 import useKey from '@rooks/use-key';
-import useWindowSize from '@rooks/use-window-size';
 import { useEffect, useRef, useState } from 'react';
 
 export const useProgrammingLanguagesList = () => {
@@ -25,7 +25,7 @@ export const useProgrammingLanguagesList = () => {
 
   const isArrowButtos = containerInnerWidth > navigationInnerWidth;
 
-  const { innerWidth } = useWindowSize();
+  const innerWidth = useWindowWidth();
   useKey('ArrowLeft', () => paginate(diff), { eventTypes: ['keyup'], target: container, when: !prevBtnCondition });
   useKey('ArrowRight', () => paginate(-diff), { eventTypes: ['keyup'], target: container, when: !nextBtnCondition });
 
