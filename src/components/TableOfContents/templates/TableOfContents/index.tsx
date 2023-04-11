@@ -17,7 +17,7 @@ import styles from './TableOfContents.module.scss';
 export const TableOfContents = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { tableOfContentsHeading } = useInternationalizedRouting('global');
-  const [slugs, toggleToc, updateToggleToc] = useTOCStore((state) => [state.slugs, state.toggleToc, state.updateToggleToc]);
+  const [items, toggleToc, updateToggleToc] = useTOCStore((state) => [state.items, state.toggleToc, state.updateToggleToc]);
 
   useKey('Escape', () => updateToggleToc(false), { when: toggleToc });
   useOutsideClick(ref as unknown as MutableRefObject<HTMLElement>, () => updateToggleToc(false), toggleToc);
@@ -37,10 +37,10 @@ export const TableOfContents = () => {
           <h3>{tableOfContentsHeading}</h3>
           <nav>
             <ul>
-              {slugs.map(({ href, textContent, position, nextChapterPosition }, i) => (
+              {items.map(({ chapter, href, textContent, position, nextChapterPosition }, i) => (
                 <TocItem
                   href={href}
-                  index={i}
+                  chapter={chapter}
                   status={position <= 0 && nextChapterPosition >= 0 ? 'visible' : position <= 0 && nextChapterPosition <= 0 ? 'read' : 'hidden'}
                   key={i}
                 >

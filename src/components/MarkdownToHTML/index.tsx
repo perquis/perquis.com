@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import type { Slug } from '@stories/toc';
+import type { Item } from '@stories/toc';
 import { useTOCStore } from '@stories/toc';
 
 import { useScrollPositionY } from '@hooks/useScrollPositionY';
@@ -17,27 +17,29 @@ import { components } from './components/components';
 
 export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [updateSlugs] = useTOCStore((state) => [state.updateSlugs]);
+  const [updateItems] = useTOCStore((state) => [state.updateItems]);
   const { scrollPostion } = useScrollPositionY();
   const { locale } = useRouter();
 
   useEffect(() => {
     const toc = ref.current?.querySelector('.toc');
-    const slugs: Slug[] = [];
+    const items: Item[] = [];
 
     toc?.querySelectorAll<HTMLAnchorElement>('a').forEach((link, i) => {
       const { hash, textContent } = link;
+      const heading = document?.querySelectorAll<HTMLAnchorElement>('.link')[i];
+      const chapter = heading?.parentElement?.getAttribute('data-chapter-number') ?? '';
 
       const position = getScrollToTopValue(i);
       const calcPosition = getScrollToTopValue(i + 1);
       const nextChapterPosition =
         (!isNaN(calcPosition) ? calcPosition : typeof document !== 'undefined' ? document.getElementById('resources')?.getBoundingClientRect().top : 0) ?? 0;
 
-      slugs.push({ href: decodeURI(hash), textContent: textContent ?? '', position, nextChapterPosition });
+      items.push({ chapter, href: decodeURI(hash), textContent: textContent ?? '', position, nextChapterPosition });
     });
 
-    updateSlugs(slugs);
-  }, [updateSlugs, locale, scrollPostion]);
+    updateItems(items);
+  }, [updateItems, locale, scrollPostion]);
 
   return (
     <DirectionColumn ref={ref}>

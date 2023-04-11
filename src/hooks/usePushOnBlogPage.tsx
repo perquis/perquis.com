@@ -9,9 +9,7 @@ export const useChangeLocalesOnBlogPage = () => {
   const locale = currentLocale === 'en' ? 'pl' : 'en';
   const pushOnBlogPage = pathname !== '/' ? `${pathname.replace('[slug]', '')}${negativeSlug}` : '/';
 
-  const handleChangeLocalesOnBlogPage = () => {
-    push(pushOnBlogPage, pushOnBlogPage, { locale });
-  };
+  const handleChangeLocalesOnBlogPage = () => push(pushOnBlogPage, pushOnBlogPage, { locale });
 
   return { handleChangeLocalesOnBlogPage };
 };

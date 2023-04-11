@@ -1,32 +1,33 @@
 import { create } from 'zustand';
 
-export interface Slug {
+export interface Item {
   href: string;
+  chapter: string;
   position: number;
   nextChapterPosition: number;
   textContent: string;
 }
 
 interface State {
-  slugs: Slug[];
+  items: Item[];
   toggleToc: boolean;
   isTocOpen: boolean;
   isVisible: boolean;
 }
 
 interface Action {
-  updateSlugs: (slugs: State['slugs']) => void;
+  updateItems: (slugs: State['items']) => void;
   updateTocOpen: (isOpen: State['isTocOpen']) => void;
   updateToggleToc: (slugs: State['toggleToc']) => void;
   updateIsVisible: (isOpen: State['isVisible']) => void;
 }
 
 export const useTOCStore = create<State & Action>((set) => ({
-  slugs: [],
+  items: [],
   toggleToc: true,
   isTocOpen: false,
   isVisible: false,
-  updateSlugs: (slugs) => set((state) => ({ ...state, slugs })),
+  updateItems: (items) => set((state) => ({ ...state, items })),
   updateTocOpen: (isTocOpen) => set((state) => ({ ...state, isTocOpen })),
   updateIsVisible: (isVisible) => set((state) => ({ ...state, isVisible })),
   updateToggleToc: (toggleToc) => set((state) => ({ ...state, toggleToc })),

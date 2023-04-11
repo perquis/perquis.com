@@ -11,7 +11,7 @@ import styles from './TocItem.module.scss';
 export type Status = 'hidden' | 'visible' | 'read';
 export const isReadStatus = (status: Status, compareStatus: Status) => status === compareStatus;
 
-export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: string; status: Status; index: number }> = ({ children, href, index, status, ...props }) => {
+export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: string; status: Status; chapter: string }> = ({ children, href, chapter, status, ...props }) => {
   const [isCompletedChapter, setCompletedChapter] = useState(false);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: stri
   }, [status]);
 
   return (
-    <li>
+    <li style={{ marginLeft: chapter.includes('.') ? 20 : 0 }}>
       <Link href={href} legacyBehavior passHref>
         <a
           className={clsx(
@@ -32,7 +32,7 @@ export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: stri
           {...props}
         >
           <NumberOfChapter status={status} isCompletedChapter={isCompletedChapter}>
-            {index + 1}
+            {chapter}
           </NumberOfChapter>
           <span className={clsx(styles.hidden, ((isReadStatus(status, 'read') && !isCompletedChapter) || isCompletedChapter) && styles['is-read'])}>{children}</span>
           {((isReadStatus(status, 'read') && !isCompletedChapter) || isCompletedChapter) && <BiCheck />}
