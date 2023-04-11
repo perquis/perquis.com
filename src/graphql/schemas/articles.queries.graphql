@@ -73,6 +73,7 @@ query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
         thumbnail {
           url
         }
+        metaDescription
         introduction
         tags
         id

@@ -25,7 +25,7 @@ export const CopyButton: FC<{ text: string }> = ({ text }) => {
     setTimeout(() => {
       setIsCopied(false);
       deleteNotification(id);
-    }, 10000);
+    }, 6000);
 
     await navigator.clipboard.writeText(text);
   };

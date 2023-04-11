@@ -17,9 +17,11 @@ import { components } from './components/components';
 
 export const MarkdownToHTML = (props: MDXRemoteProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [updateItems] = useTOCStore((state) => [state.updateItems]);
+  const [updateItems, updateTocHeight] = useTOCStore((state) => [state.updateItems, state.updateTocHeight]);
   const { scrollPostion } = useScrollPositionY();
   const { locale } = useRouter();
+
+  useEffect(() => updateTocHeight(Number(ref.current?.querySelector('.toc')?.clientHeight) + 120), [updateTocHeight]);
 
   useEffect(() => {
     const toc = ref.current?.querySelector('.toc');
@@ -35,7 +37,7 @@ export const MarkdownToHTML = (props: MDXRemoteProps) => {
       const nextChapterPosition =
         (!isNaN(calcPosition) ? calcPosition : typeof document !== 'undefined' ? document.getElementById('resources')?.getBoundingClientRect().top : 0) ?? 0;
 
-      items.push({ chapter, href: decodeURI(hash), textContent: textContent ?? '', position, nextChapterPosition });
+      items.push({ chapter: chapter.length === 0 ? `${i}` : chapter, href: decodeURI(hash), textContent: textContent ?? '', position, nextChapterPosition });
     });
 
     updateItems(items);

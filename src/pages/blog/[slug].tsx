@@ -1,7 +1,9 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import type { ParsedUrlQuery } from 'querystring';
 import type { FC } from 'react';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 import { BlogPage } from '@GlobalComponents/pages/BlogPage';
 
@@ -9,6 +11,8 @@ import { client } from '@graphql/apollo/apolloClient';
 import type { Articles, ArticlesEdge } from '@graphql/databases/client';
 import { Locale } from '@graphql/databases/client';
 import { getServerPageGetArticleSlugs, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
+
+import { shikiOptions } from '@themes/shikiOptions';
 
 import { serializedContent } from '@utils/serializedContent';
 
@@ -80,9 +84,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     },
   ] = negativeEdges;
 
+  const node = edges[0].node;
+  const introduction = await serialize(String(node.introduction), {
+    mdxOptions: {
+      rehypePlugins: [[rehypePrettyCode, shikiOptions]],
+    },
+  });
+
   return {
     props: {
-      node: edges[0].node,
+      node: { ...node, introduction },
       source,
       negativeSlug,
     },

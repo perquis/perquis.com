@@ -21,6 +21,10 @@
     border-radius: 2.4rem;
     padding: 2rem;
   }
+
+  span[data-rehype-pretty-code-fragment] {
+    background: var(--code-article-bg) !important;
+  }
 }
 
 .new-article {

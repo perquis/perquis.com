@@ -17,19 +17,19 @@ export const TableOfContents = () => {
   const { tableOfContentsHeading } = useInternationalizedRouting('global');
   const [items, toggleToc, updateToggleToc] = useTOCStore((state) => [state.items, state.toggleToc, state.updateToggleToc]);
 
-  useKey('Escape', () => updateToggleToc(false), { when: toggleToc });
+  useKey('Escape', () => updateToggleToc(true), { when: !toggleToc });
 
   return (
     <motion.aside
       ref={ref}
       exit={{ x: 'calc(100% - 2.4rem)' }}
       initial={{ x: 'calc(100% - 2.4rem)' }}
-      animate={!toggleToc ? { x: 560 } : { x: 0 }}
-      className={clsx(styles.toc, toggleToc && styles['toc-active'])}
+      animate={toggleToc ? { x: 560 } : { x: 0 }}
+      className={clsx(styles.toc, !toggleToc && styles['toc-active'])}
       transition={{ duration: 0.15 }}
     >
-      <ReactFocusLock disabled={!toggleToc}>
-        <button className={clsx(styles.button, toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
+      <ReactFocusLock disabled={toggleToc}>
+        <button className={clsx(styles.button, !toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
         <div className={styles['toc-list']}>
           <h3>{tableOfContentsHeading}</h3>
           <nav>

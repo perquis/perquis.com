@@ -1,16 +1,11 @@
 import axios from 'axios';
-import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import type { FC } from 'react';
-import { BsGithub } from 'react-icons/bs';
-import { TbWorldWww } from 'react-icons/tb';
 import { useInView } from 'react-intersection-observer';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
 
-import { SocialButton } from '@GlobalComponents/atoms/SocialButton';
-import { StickyContainer } from '@GlobalComponents/atoms/StickyContainer';
 import { NewsletterObserver } from '@GlobalComponents/observers/NewsletterObserver';
 import { DetailsWrapper } from '@GlobalComponents/wrappers/DetailsWrapper';
 import { FullWidthContainer } from '@GlobalComponents/wrappers/FullWidthContainer';
@@ -21,7 +16,6 @@ import { Details } from '@components/Article';
 import { ReadingTime } from '@components/Article/atoms/ReadingTime';
 import { Author } from '@components/Author';
 import { MarkdownToHTML } from '@components/MarkdownToHTML';
-import { ToggleTheme } from '@components/Navigation/atoms/ToggleTheme';
 import { TableOfContents } from '@components/TableOfContents';
 
 import { usePostsListStore } from '@stories/posts';
@@ -33,10 +27,10 @@ import { useObserver } from '@hooks/useObserver';
 
 import { CommentsList } from './templates/CommentsList';
 import { ResourcesList } from './templates/ResourcesList';
-import { StickyButtonsList } from './templates/StickyButtonsList';
+import { StickyHelpersList } from './templates/StickyHelpersList';
 
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node, source, negativeSlug } }) => {
-  const { slug, thumbnail, createdAt, tags, title, resources, introduction, content, socials } = node;
+  const { slug, thumbnail, createdAt, tags, title, resources, introduction, content, socials, metaDescription } = node;
 
   const [updatePostId] = usePostsListStore((state) => [state.updatePostId]);
   const { query } = useRouter();
@@ -56,29 +50,12 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
     updateTocOpen(inView);
   }, [inView, updateTocOpen, markdownContainerRef, ref]);
 
-  const [isVisible] = useTOCStore((state) => [state.isVisible]);
-
   return (
     <>
       <Head>
         <title>{title + ` | PerQuis's Blog`}</title>
-        <meta name="description" content={introduction ?? ''} />
+        <meta name="description" content={metaDescription ?? ''} />
       </Head>
-      <StickyContainer>
-        <AnimatePresence>
-          {isVisible && (
-            <StickyButtonsList>
-              <ToggleTheme />
-              <SocialButton href={socials?.repository ?? ''}>
-                <BsGithub size={18} />
-              </SocialButton>
-              <SocialButton href={socials?.liveDemo ?? ''}>
-                <TbWorldWww size={18} />
-              </SocialButton>
-            </StickyButtonsList>
-          )}
-        </AnimatePresence>
-      </StickyContainer>
       <NewsletterObserver />
       <Author src={String(thumbnail?.url)} alt={String(slug)} />
       <DetailsWrapper>
@@ -86,6 +63,7 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
         <ReadingTime content={content?.text ?? ''} />
       </DetailsWrapper>
       <FullWidthContainer>
+        <StickyHelpersList socials={socials} />
         <div ref={markdownContainerRef}>
           <MarkdownToHTML {...source} />
         </div>

@@ -1,0 +1,33 @@
+.li {
+  color: var(--paragraph);
+
+  &:not(:last-child) {
+    &::after {
+      content: ',';
+    }
+  }
+
+  &:last-child {
+    &::after {
+      content: '.';
+    }
+  }
+
+  span {
+    display: inline-flex;
+    --size: 24px;
+
+    width: var(--size);
+    height: calc(var(--size) / 2);
+    position: relative;
+    margin-right: 1.2rem;
+    color: var(--heading) !important;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

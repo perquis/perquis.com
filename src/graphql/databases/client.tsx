@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as Apollo from '@apollo/client';
 import { gql } from '@apollo/client';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -45,11 +46,12 @@ export type Articles = Node & {
   readonly history: ReadonlyArray<Version>;
   /** The unique identifier */
   readonly id: Scalars['ID'];
-  readonly introduction?: Maybe<Scalars['String']>;
+  readonly introduction: MDXRemoteSerializeResult;
   /** System Locale field */
   readonly locale: Locale;
   /** Get the other localizations for this document */
   readonly localizations: ReadonlyArray<Articles>;
+  readonly metaDescription: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -198,6 +200,8 @@ export type ArticlesCreateInput = {
   readonly introduction?: InputMaybe<Scalars['String']>;
   /** Inline mutations for managing document localizations excluding the default locale */
   readonly localizations?: InputMaybe<ArticlesCreateLocalizationsInput>;
+  /** metaDescription input for default locale (en) */
+  readonly metaDescription: Scalars['String'];
   readonly resources?: InputMaybe<LinksCreateManyInlineInput>;
   /** slug input for default locale (en) */
   readonly slug?: InputMaybe<Scalars['String']>;
@@ -213,6 +217,7 @@ export type ArticlesCreateLocalizationDataInput = {
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
+  readonly metaDescription: Scalars['String'];
   readonly slug?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -362,6 +367,8 @@ export enum ArticlesOrderByInput {
   IdDesc = 'id_DESC',
   IntroductionAsc = 'introduction_ASC',
   IntroductionDesc = 'introduction_DESC',
+  MetaDescriptionAsc = 'metaDescription_ASC',
+  MetaDescriptionDesc = 'metaDescription_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -382,6 +389,8 @@ export type ArticlesUpdateInput = {
   readonly introduction?: InputMaybe<Scalars['String']>;
   /** Manage document localizations */
   readonly localizations?: InputMaybe<ArticlesUpdateLocalizationsInput>;
+  /** metaDescription input for default locale (en) */
+  readonly metaDescription?: InputMaybe<Scalars['String']>;
   readonly resources?: InputMaybe<LinksUpdateManyInlineInput>;
   /** slug input for default locale (en) */
   readonly slug?: InputMaybe<Scalars['String']>;
@@ -395,6 +404,7 @@ export type ArticlesUpdateInput = {
 export type ArticlesUpdateLocalizationDataInput = {
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
+  readonly metaDescription?: InputMaybe<Scalars['String']>;
   readonly slug?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
 };
@@ -438,12 +448,15 @@ export type ArticlesUpdateManyInput = {
   readonly introduction?: InputMaybe<Scalars['String']>;
   /** Optional updates to localizations */
   readonly localizations?: InputMaybe<ArticlesUpdateManyLocalizationsInput>;
+  /** metaDescription input for default locale (en) */
+  readonly metaDescription?: InputMaybe<Scalars['String']>;
   readonly tags?: InputMaybe<ReadonlyArray<Tags>>;
 };
 
 export type ArticlesUpdateManyLocalizationDataInput = {
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly introduction?: InputMaybe<Scalars['String']>;
+  readonly metaDescription?: InputMaybe<Scalars['String']>;
 };
 
 export type ArticlesUpdateManyLocalizationInput = {
@@ -562,7 +575,7 @@ export type ArticlesWhereInput = {
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   readonly id_starts_with?: InputMaybe<Scalars['ID']>;
-  readonly introduction?: InputMaybe<Scalars['String']>;
+  readonly introduction?: MDXRemoteSerializeResult;
   /** All values containing the given string. */
   readonly introduction_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
@@ -581,6 +594,25 @@ export type ArticlesWhereInput = {
   readonly introduction_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly introduction_starts_with?: InputMaybe<Scalars['String']>;
+  readonly metaDescription?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly metaDescription_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly metaDescription_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly metaDescription_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  readonly metaDescription_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly metaDescription_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly metaDescription_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  readonly metaDescription_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  readonly metaDescription_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly metaDescription_starts_with?: InputMaybe<Scalars['String']>;
   readonly publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -7301,6 +7333,7 @@ export type GetStaticAriclePageQuery = {
         readonly id: string;
         readonly updatedAt: Date;
         readonly createdAt: Date;
+        readonly metaDescription: string;
         readonly introduction?: string | null;
         readonly tags: ReadonlyArray<Tags>;
         readonly slug?: string | null;
@@ -7618,6 +7651,7 @@ export const GetStaticAriclePageDocument = gql`
           thumbnail {
             url
           }
+          metaDescription
           introduction
           tags
           id

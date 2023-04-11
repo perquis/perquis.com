@@ -3,6 +3,7 @@ import type { MDXRemoteProps } from 'next-mdx-remote';
 import type { ReactHTMLElementProps } from 'react';
 
 import { Image } from '@GlobalComponents/atoms/Image';
+import { Item } from '@GlobalComponents/atoms/Item';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
 
@@ -21,9 +22,12 @@ export const components: MDXRemoteProps['components'] = {
   h4: (props) => <h4 className={`${styles.heading} link`} {...props} />,
   h5: (props) => <h5 className={`${styles.heading} link`} {...props} />,
   h6: (props) => <h6 className={`${styles.heading} link`} {...props} />,
+  img: ({ src, alt }) => <Image src={src ?? ''} alt={alt ?? ''} />,
+  ul: (props) => <ul className={styles.ul} {...props} />,
+  li: (props) => <Item {...props} />,
+
   // @ts-ignore
   pre: (props: Omit<ReactHTMLElementProps<HTMLPreElement>, 'ref'> & MotionProps) => <RehypePrettyCodeFragment {...props} />,
-  img: ({ src, alt }) => <Image src={src ?? ''} alt={alt ?? ''} />,
 
   Note,
   Sandpack,

@@ -1,3 +1,5 @@
+@import './mixins';
+
 [lang='pl'] {
   .toc {
     &::before {
@@ -24,6 +26,12 @@
     line-height: clamp(2rem, 5vw, 2.4rem);
   }
 
+  li {
+    &::after {
+      display: none;
+    }
+  }
+
   .toc-level-1 {
     margin-top: 1rem;
   }
@@ -42,11 +50,7 @@
     display: inline-block;
 
     &:is(:hover, :focus) {
-      text-decoration: underline;
-      text-decoration-style: wavy;
-      text-decoration-color: var(--status-color);
-
-      text-underline-offset: 3px;
+      @include wavy-lines;
     }
   }
 }

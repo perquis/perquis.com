@@ -6,9 +6,10 @@ import rehypeToc from 'rehype-toc';
 
 import { shikiOptions } from '@themes/shikiOptions';
 
-export const serializedContent = async (args: unknown) =>
-  await serialize(String(args), {
+export const serializedContent = async (args: unknown) => {
+  return await serialize(String(args), {
     mdxOptions: {
       rehypePlugins: [[rehypePrettyCode, shikiOptions], rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], rehypeToc],
     },
   });
+};

@@ -81,34 +81,10 @@
 
 .active {
   &::before {
-    animation: before 0.15s linear alternate both;
-  }
-  &::after {
-    animation: after 0.15s linear alternate both;
-  }
-}
-
-@keyframes before {
-  0% {
-    translate: 0 4px;
-  }
-  50% {
-    translate: 0 0;
-  }
-  100% {
     rotate: 45deg;
     translate: 0 0;
   }
-}
-
-@keyframes after {
-  0% {
-    translate: 0 -4px;
-  }
-  50% {
-    translate: 0 0;
-  }
-  100% {
+  &::after {
     rotate: -45deg;
     translate: 0 0;
   }
