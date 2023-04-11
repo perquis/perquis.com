@@ -78,6 +78,10 @@ query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
         id
         slug
         title
+        socials {
+          repository
+          liveDemo
+        }
         content {
           text
         }

@@ -1,0 +1,16 @@
+@import './src/styles/_mixins.scss';
+
+.social-button {
+  color: var(--socials);
+  border-radius: var(--small-radius);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.15s ease-in-out;
+
+  &:is(:hover, :focus) {
+    color: var(--socials-hover);
+  }
+}

@@ -1,8 +1,6 @@
 import useKey from '@rooks/use-key';
-import useOutsideClick from '@rooks/use-outside-click';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
@@ -20,7 +18,6 @@ export const TableOfContents = () => {
   const [items, toggleToc, updateToggleToc] = useTOCStore((state) => [state.items, state.toggleToc, state.updateToggleToc]);
 
   useKey('Escape', () => updateToggleToc(false), { when: toggleToc });
-  useOutsideClick(ref as unknown as MutableRefObject<HTMLElement>, () => updateToggleToc(false), toggleToc);
 
   return (
     <motion.aside

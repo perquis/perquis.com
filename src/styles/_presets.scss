@@ -142,6 +142,9 @@
   --sandpack-dots: var(--gray-100);
   --sandpack-border: var(--code-dots);
 
+  --socials: var(--gray-300);
+  --socials-hover: var(--gray-400);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;
@@ -233,4 +236,7 @@
   --sandpack-bg: hsl(208, 82%, 13%);
   --sandpack-dots: hsl(208, 82%, 20%);
   --sandpack-border: var(--sandpack-dots);
+
+  --socials: var(--gray-700);
+  --socials-hover: var(--gray-600);
 }

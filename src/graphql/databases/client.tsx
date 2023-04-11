@@ -57,6 +57,7 @@ export type Articles = Node & {
   readonly resources: ReadonlyArray<Links>;
   readonly scheduledIn: ReadonlyArray<ScheduledOperation>;
   readonly slug?: Maybe<Scalars['String']>;
+  readonly socials?: Maybe<ProjectLinks>;
   /** System stage field */
   readonly stage: Stage;
   readonly tags: ReadonlyArray<Tags>;
@@ -149,6 +150,12 @@ export type ArticlesScheduledInArgs = {
 };
 
 /** This schema represents all articles list. */
+export type ArticlesSocialsArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<ReadonlyArray<Locale>>;
+};
+
+/** This schema represents all articles list. */
 export type ArticlesThumbnailArgs = {
   forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
@@ -194,6 +201,7 @@ export type ArticlesCreateInput = {
   readonly resources?: InputMaybe<LinksCreateManyInlineInput>;
   /** slug input for default locale (en) */
   readonly slug?: InputMaybe<Scalars['String']>;
+  readonly socials?: InputMaybe<ProjectLinksCreateOneInlineInput>;
   readonly tags?: InputMaybe<ReadonlyArray<Tags>>;
   readonly thumbnail?: InputMaybe<AssetCreateOneInlineInput>;
   /** title input for default locale (en) */
@@ -317,6 +325,7 @@ export type ArticlesManyWhereInput = {
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly socials?: InputMaybe<ProjectLinksWhereInput>;
   /** Matches if the field array contains *all* items provided to the filter and order does match */
   readonly tags?: InputMaybe<ReadonlyArray<Tags>>;
   /** Matches if the field array contains *all* items provided to the filter */
@@ -376,6 +385,7 @@ export type ArticlesUpdateInput = {
   readonly resources?: InputMaybe<LinksUpdateManyInlineInput>;
   /** slug input for default locale (en) */
   readonly slug?: InputMaybe<Scalars['String']>;
+  readonly socials?: InputMaybe<ProjectLinksUpdateOneInlineInput>;
   readonly tags?: InputMaybe<ReadonlyArray<Tags>>;
   readonly thumbnail?: InputMaybe<AssetUpdateOneInlineInput>;
   /** title input for default locale (en) */
@@ -612,6 +622,7 @@ export type ArticlesWhereInput = {
   readonly slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly slug_starts_with?: InputMaybe<Scalars['String']>;
+  readonly socials?: InputMaybe<ProjectLinksWhereInput>;
   /** Matches if the field array contains *all* items provided to the filter and order does match */
   readonly tags?: InputMaybe<ReadonlyArray<Tags>>;
   /** Matches if the field array contains *all* items provided to the filter */
@@ -3901,13 +3912,15 @@ export enum ProjectLinksOrderByInput {
   RepositoryDesc = 'repository_DESC',
 }
 
-export type ProjectLinksParent = Projects;
+export type ProjectLinksParent = Articles | Projects;
 
 export type ProjectLinksParentConnectInput = {
+  readonly Articles?: InputMaybe<ArticlesConnectInput>;
   readonly Projects?: InputMaybe<ProjectsConnectInput>;
 };
 
 export type ProjectLinksParentCreateInput = {
+  readonly Articles?: InputMaybe<ArticlesCreateInput>;
   readonly Projects?: InputMaybe<ProjectsCreateInput>;
 };
 
@@ -3926,6 +3939,7 @@ export type ProjectLinksParentCreateOneInlineInput = {
 };
 
 export type ProjectLinksParentUpdateInput = {
+  readonly Articles?: InputMaybe<ArticlesUpdateInput>;
   readonly Projects?: InputMaybe<ProjectsUpdateInput>;
 };
 
@@ -3947,6 +3961,7 @@ export type ProjectLinksParentUpdateManyInlineInput = {
 };
 
 export type ProjectLinksParentUpdateManyWithNestedWhereInput = {
+  readonly Articles?: InputMaybe<ArticlesUpdateManyWithNestedWhereInput>;
   readonly Projects?: InputMaybe<ProjectsUpdateManyWithNestedWhereInput>;
 };
 
@@ -3966,18 +3981,22 @@ export type ProjectLinksParentUpdateOneInlineInput = {
 };
 
 export type ProjectLinksParentUpdateWithNestedWhereUniqueInput = {
+  readonly Articles?: InputMaybe<ArticlesUpdateWithNestedWhereUniqueInput>;
   readonly Projects?: InputMaybe<ProjectsUpdateWithNestedWhereUniqueInput>;
 };
 
 export type ProjectLinksParentUpsertWithNestedWhereUniqueInput = {
+  readonly Articles?: InputMaybe<ArticlesUpsertWithNestedWhereUniqueInput>;
   readonly Projects?: InputMaybe<ProjectsUpsertWithNestedWhereUniqueInput>;
 };
 
 export type ProjectLinksParentWhereInput = {
+  readonly Articles?: InputMaybe<ArticlesWhereInput>;
   readonly Projects?: InputMaybe<ProjectsWhereInput>;
 };
 
 export type ProjectLinksParentWhereUniqueInput = {
+  readonly Articles?: InputMaybe<ArticlesWhereUniqueInput>;
   readonly Projects?: InputMaybe<ProjectsWhereUniqueInput>;
 };
 
@@ -7287,6 +7306,7 @@ export type GetStaticAriclePageQuery = {
         readonly slug?: string | null;
         readonly title?: string | null;
         readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
+        readonly socials?: { readonly __typename?: 'ProjectLinks'; readonly repository?: string | null; readonly liveDemo?: string | null } | null;
         readonly content?: { readonly __typename?: 'RichText'; readonly text: string } | null;
         readonly resources: ReadonlyArray<{ readonly __typename?: 'Links'; readonly id: string; readonly name?: string | null; readonly link?: string | null }>;
       };
@@ -7603,6 +7623,10 @@ export const GetStaticAriclePageDocument = gql`
           id
           slug
           title
+          socials {
+            repository
+            liveDemo
+          }
           content {
             text
           }

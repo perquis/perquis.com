@@ -4,9 +4,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import type { FC } from 'react';
+import { BsGithub } from 'react-icons/bs';
+import { TbWorldWww } from 'react-icons/tb';
 import { useInView } from 'react-intersection-observer';
 import type { BlogPageProps } from 'src/pages/blog/[slug]';
 
+import { SocialButton } from '@GlobalComponents/atoms/SocialButton';
 import { StickyContainer } from '@GlobalComponents/atoms/StickyContainer';
 import { NewsletterObserver } from '@GlobalComponents/observers/NewsletterObserver';
 import { DetailsWrapper } from '@GlobalComponents/wrappers/DetailsWrapper';
@@ -33,7 +36,7 @@ import { ResourcesList } from './templates/ResourcesList';
 import { StickyButtonsList } from './templates/StickyButtonsList';
 
 export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node, source, negativeSlug } }) => {
-  const { slug, thumbnail, createdAt, tags, title, resources, introduction, content } = node;
+  const { slug, thumbnail, createdAt, tags, title, resources, introduction, content, socials } = node;
 
   const [updatePostId] = usePostsListStore((state) => [state.updatePostId]);
   const { query } = useRouter();
@@ -66,6 +69,12 @@ export const BlogPage: FC<Record<'stories', BlogPageProps>> = ({ stories: { node
           {isVisible && (
             <StickyButtonsList>
               <ToggleTheme />
+              <SocialButton href={socials?.repository ?? ''}>
+                <BsGithub size={18} />
+              </SocialButton>
+              <SocialButton href={socials?.liveDemo ?? ''}>
+                <TbWorldWww size={18} />
+              </SocialButton>
             </StickyButtonsList>
           )}
         </AnimatePresence>

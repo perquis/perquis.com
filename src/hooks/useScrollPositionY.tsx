@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export const useScrollPositionY = () => {
   const [scrollPostion, setScrollPosition] = useState(0);
-  useScrollPosition(({ currPos }) => setScrollPosition(currPos.y * -1), [], undefined, false, 250);
+  useScrollPosition(({ currPos }) => setScrollPosition(currPos.y * -1), [], undefined, false, 100);
 
   return { scrollPostion };
 };
