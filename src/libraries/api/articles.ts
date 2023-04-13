@@ -11,9 +11,11 @@ import { shikiOptions } from '@themes/shikiOptions';
 
 import { pageSize } from '@data/presets';
 
+const isUndefined = (arg: unknown): arg is undefined => typeof arg === 'undefined';
+
 export const searchForArticles = async (req: NextApiRequest, res: NextApiResponse) => {
   const { skip, locale, title, tags } = req.body;
-  if (!skip && !locale && !title && !tags) return res.status(400).send({ message: 'Bad request.' });
+  if (isUndefined(skip) || isUndefined(locale) || isUndefined(title) || isUndefined(tags)) return res.status(400).send({ message: 'Bad Request.' });
 
   try {
     const {
@@ -64,6 +66,6 @@ export const searchForArticles = async (req: NextApiRequest, res: NextApiRespons
 
     return res.json({ edges: serializedEdges, pageInfo: { hasNextPage: nextEdges.length > 0 ? intSkip : false, pageSize: nextEdges.length } });
   } catch (err) {
-    return res.status(500).send(err);
+    return res.json({ edges: [], pageInfo: { hasNextPage: false, pageSize: 0 } });
   }
 };
