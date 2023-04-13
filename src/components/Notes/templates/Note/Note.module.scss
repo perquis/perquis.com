@@ -1,10 +1,50 @@
 @import './src/styles/_breakpoints.scss';
 @import './src/styles/_mixins.scss';
 
-.note {
-  @include wrapper;
-  padding: 3.6rem 2.4rem;
+.note-wrapper {
   position: relative;
+  @include wrapper;
+
+  padding: 3.6rem 2.4rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 4.8rem;
+    height: 4.8rem;
+    left: -21px;
+    top: -20px;
+    z-index: 79;
+
+    @media screen and (max-width: $sm) {
+      display: none;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 4.8rem;
+    height: 4.8rem;
+    left: -21px;
+    top: -18px;
+    background: var(--background);
+    border-radius: 50%;
+    z-index: 79;
+
+    @media screen and (max-width: $sm) {
+      display: none;
+    }
+  }
+}
+
+.note {
+  position: relative;
+  z-index: 2;
+
+  gap: 2.1rem;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (max-width: $sm) {
     border-radius: none;
@@ -37,36 +77,6 @@
       }
     }
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 4.8rem;
-    height: 4.8rem;
-    left: -21px;
-    top: -20px;
-    z-index: 2;
-
-    @media screen and (max-width: $sm) {
-      display: none;
-    }
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 4.8rem;
-    height: 4.8rem;
-    left: -21px;
-    top: -18px;
-    background: var(--background);
-    border-radius: 50%;
-    z-index: 2;
-
-    @media screen and (max-width: $sm) {
-      display: none;
-    }
-  }
 }
 
 .hero-pattern-active {
@@ -82,20 +92,22 @@
 }
 
 .hero-pattern {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  gap: 2.1rem;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: absolute;
 
   &::before {
     content: '';
     position: absolute;
-    top: -3.6rem;
-    left: -2.4rem;
-    width: calc(100% + calc(2.4rem * 2));
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     opacity: 0.05;
-    z-index: 0;
   }
 }
 

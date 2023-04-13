@@ -1,24 +1,19 @@
 import { Article } from '@components/Article';
+import { LoadingArticlesList } from '@components/Loader/organisms/LoadingArticlesList';
 import { ArticlesList } from '@components/PostsList/molecules/ArticlesList';
-import { SearchedForArticlesList } from '@components/PostsList/molecules/SearchedForArticlesList';
-
-import { useArticlesStore } from '@stories/articles';
-import { useSearchBarStore } from '@stories/searchbar';
-import { useTechnologiesStore } from '@stories/technologies';
 
 import { useFilteringArticlesByDetails } from '@hooks/useFilteringArticlesByDetails';
 
 export const PullingArticlesList = () => {
-  const [isLoading, searchedForArticlesList] = useArticlesStore((state) => [state.isLoading, state.searchedForArticlesList]);
-  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
-  const [keywords] = useSearchBarStore((state) => [state.keywords]);
-  const { articles } = useFilteringArticlesByDetails();
-
-  const isFoundArticles = technologies.length > 0 || keywords.length > 0;
-  const isNotFoundArticles = isFoundArticles && !isLoading && searchedForArticlesList.length === 0;
+  const { articles, pageSize, isLoading, isFetching, isNotFoundArticles } = useFilteringArticlesByDetails();
 
   if (isNotFoundArticles) return <Article isNotFoundArticle />;
-  if (isFoundArticles) return <SearchedForArticlesList />;
+  if (isLoading) return <LoadingArticlesList pageSize={1} />;
 
-  return <ArticlesList articles={articles} />;
+  return (
+    <>
+      <ArticlesList articles={articles} />
+      {isFetching && <LoadingArticlesList pageSize={pageSize} />}
+    </>
+  );
 };

@@ -1,45 +1,38 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { useArticlesStore } from '@stories/articles';
+import { fetchAllArticlesListPagination } from '@libraries/fetchers/fetchAllArticlesListPagination';
 
-import type { ArticlesListWithPagesQuery } from '@graphql/databases/client';
+import { useSearchBarStore } from '@stories/searchbar';
+import { useTechnologiesStore } from '@stories/technologies';
 
 import { useProgressYScroll } from '@hooks/useProgressYScroll';
 
-import { pageSize } from '@data/presets';
-
-const fetchArticlesList = async (locale: string, skip: number): Promise<ArticlesListWithPagesQuery['page']> => {
-  const { data } = await axios(`/api/articles?locale=${locale}&skip=${skip}`);
-  return data;
-};
-
 export const useFilteringArticlesByDetails = () => {
-  const [updateIsLoading] = useArticlesStore((state) => [state.updateIsLoading]);
-  const [isPullData, setPullData] = useState(false);
+  const [title] = useSearchBarStore((state) => [state.keywords, state.status]);
+  const [tags] = useTechnologiesStore((state) => [state.technologies]);
   const { progressYScroll } = useProgressYScroll();
-  const [skipPage, setSkipPage] = useState(0);
   const { locale } = useRouter();
 
-  const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['articles', locale],
-    queryFn: ({ pageParam = 0 }) => fetchArticlesList(locale ?? '', pageParam),
-    getNextPageParam: ({ pageInfo }) => (pageInfo.hasNextPage ? skipPage : null),
+  const {
+    isLoading,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    data: articles,
+  } = useInfiniteQuery({
+    queryKey: ['articles', locale, title, tags],
+    queryFn: ({ pageParam = 0 }) => fetchAllArticlesListPagination({ locale: locale ?? '', skip: pageParam ?? 0, title, tags }),
+    getNextPageParam: ({ pageInfo }) => pageInfo?.hasNextPage ?? false,
   });
 
   useEffect(() => {
-    if (skipPage !== 0) fetchNextPage();
-  }, [fetchNextPage, skipPage]);
+    if (progressYScroll > 65 && hasNextPage) fetchNextPage();
+  }, [progressYScroll, hasNextPage, fetchNextPage]);
 
-  useEffect(() => {
-    if (isPullData && hasNextPage) setSkipPage((prev) => prev + pageSize);
-  }, [isPullData, hasNextPage]);
+  const isNotFoundArticles = articles?.pages[0].edges.length === 0;
+  const pageSize = articles?.pages[articles?.pages.length - 1].pageInfo.pageSize ?? 0;
 
-  useEffect(() => setSkipPage(0), [locale]);
-  useEffect(() => updateIsLoading(isLoading), [isLoading, updateIsLoading]);
-  useEffect(() => (progressYScroll > 80 && hasNextPage ? setPullData(true) : setPullData(false)), [progressYScroll, hasNextPage]);
-
-  return { articles: data, isLoading, hasNextPage, fetchNextPage };
+  return { articles, pageSize, isLoading, isFetching, isNotFoundArticles };
 };

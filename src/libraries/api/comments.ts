@@ -19,7 +19,6 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
       orderBy: { createdAt: 'desc' },
     });
     const nextComments = await prismaClient.comment.findMany({ where: { postId: String(postId) }, include: { user: true }, skip: Number(skip) + limit, take: limit });
-    if (!comments) return res.status(404).send({ message: 'Not Found.' });
 
     return res.send({
       comments: comments
@@ -34,9 +33,10 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
           return { ...rest };
         }),
       skipPage: nextComments.length > 0 ? Number(skip) + limit : false,
+      pageSize: nextComments.length,
     });
   } catch (err) {
-    return res.status(500).send({ message: 'Internal Server Error' });
+    return res.send({ comments: [], skipPage: false, pageSize: 0 });
   }
 };
 

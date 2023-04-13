@@ -34,7 +34,6 @@ export type Aggregate = {
 /** This schema represents all articles list. */
 export type Articles = Node & {
   readonly __typename?: 'Articles';
-  readonly comments: ReadonlyArray<CommentsSchema>;
   readonly content?: Maybe<RichText>;
   /** The time the document was created */
   readonly createdAt: Scalars['DateTime'];
@@ -69,19 +68,6 @@ export type Articles = Node & {
   readonly updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   readonly updatedBy?: Maybe<User>;
-};
-
-/** This schema represents all articles list. */
-export type ArticlesCommentsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-  orderBy?: InputMaybe<CommentsSchemaOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<CommentsSchemaWhereInput>;
 };
 
 /** This schema represents all articles list. */
@@ -192,7 +178,6 @@ export type ArticlesConnection = {
 };
 
 export type ArticlesCreateInput = {
-  readonly comments?: InputMaybe<CommentsSchemaCreateManyInlineInput>;
   /** content input for default locale (en) */
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
@@ -267,9 +252,6 @@ export type ArticlesManyWhereInput = {
   readonly OR?: InputMaybe<ReadonlyArray<ArticlesWhereInput>>;
   /** Contains search across all appropriate fields. */
   readonly _search?: InputMaybe<Scalars['String']>;
-  readonly comments_every?: InputMaybe<CommentsSchemaWhereInput>;
-  readonly comments_none?: InputMaybe<CommentsSchemaWhereInput>;
-  readonly comments_some?: InputMaybe<CommentsSchemaWhereInput>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -382,7 +364,6 @@ export enum ArticlesOrderByInput {
 }
 
 export type ArticlesUpdateInput = {
-  readonly comments?: InputMaybe<CommentsSchemaUpdateManyInlineInput>;
   /** content input for default locale (en) */
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
   /** introduction input for default locale (en) */
@@ -534,9 +515,6 @@ export type ArticlesWhereInput = {
   readonly OR?: InputMaybe<ReadonlyArray<ArticlesWhereInput>>;
   /** Contains search across all appropriate fields. */
   readonly _search?: InputMaybe<Scalars['String']>;
-  readonly comments_every?: InputMaybe<CommentsSchemaWhereInput>;
-  readonly comments_none?: InputMaybe<CommentsSchemaWhereInput>;
-  readonly comments_some?: InputMaybe<CommentsSchemaWhereInput>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -575,7 +553,7 @@ export type ArticlesWhereInput = {
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   readonly id_starts_with?: InputMaybe<Scalars['ID']>;
-  readonly introduction?: MDXRemoteSerializeResult;
+  readonly introduction: MDXRemoteSerializeResult;
   /** All values containing the given string. */
   readonly introduction_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
@@ -1703,7 +1681,6 @@ export type CommentsParentWhereUniqueInput = {
 
 export type CommentsSchema = Node & {
   readonly __typename?: 'CommentsSchema';
-  readonly articles?: Maybe<Articles>;
   readonly avatar: Scalars['String'];
   readonly content: Scalars['String'];
   /** The time the document was created */
@@ -1730,11 +1707,6 @@ export type CommentsSchema = Node & {
   readonly updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   readonly updatedBy?: Maybe<User>;
-};
-
-export type CommentsSchemaArticlesArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 export type CommentsSchemaCreatedByArgs = {
@@ -1805,7 +1777,6 @@ export type CommentsSchemaConnection = {
 };
 
 export type CommentsSchemaCreateInput = {
-  readonly articles?: InputMaybe<ArticlesCreateOneInlineInput>;
   readonly avatar: Scalars['String'];
   readonly content: Scalars['String'];
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
@@ -1848,7 +1819,6 @@ export type CommentsSchemaManyWhereInput = {
   readonly OR?: InputMaybe<ReadonlyArray<CommentsSchemaWhereInput>>;
   /** Contains search across all appropriate fields. */
   readonly _search?: InputMaybe<Scalars['String']>;
-  readonly articles?: InputMaybe<ArticlesWhereInput>;
   readonly avatar?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly avatar_contains?: InputMaybe<Scalars['String']>;
@@ -2011,7 +1981,6 @@ export enum CommentsSchemaOrderByInput {
 }
 
 export type CommentsSchemaUpdateInput = {
-  readonly articles?: InputMaybe<ArticlesUpdateOneInlineInput>;
   readonly avatar?: InputMaybe<Scalars['String']>;
   readonly content?: InputMaybe<Scalars['String']>;
   readonly edges?: InputMaybe<CommentsUpdateManyInlineInput>;
@@ -2102,7 +2071,6 @@ export type CommentsSchemaWhereInput = {
   readonly OR?: InputMaybe<ReadonlyArray<CommentsSchemaWhereInput>>;
   /** Contains search across all appropriate fields. */
   readonly _search?: InputMaybe<Scalars['String']>;
-  readonly articles?: InputMaybe<ArticlesWhereInput>;
   readonly avatar?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly avatar_contains?: InputMaybe<Scalars['String']>;
@@ -7228,75 +7196,16 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization',
 }
 
-export type SearchForArticlesListQueryVariables = Exact<{
-  search?: InputMaybe<Scalars['String']>;
+export type ArticlesListPaginationQueryVariables = Exact<{
   locales: ReadonlyArray<Locale> | Locale;
-  orderBy?: InputMaybe<ArticlesOrderByInput>;
+  first: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy: ArticlesOrderByInput;
+  title: Scalars['String'];
+  tags?: InputMaybe<ReadonlyArray<Tags> | Tags>;
 }>;
 
-export type SearchForArticlesListQuery = {
-  readonly __typename?: 'Query';
-  readonly schemaArticles: ReadonlyArray<{
-    readonly __typename?: 'Articles';
-    readonly id: string;
-    readonly slug?: string | null;
-    readonly tags: ReadonlyArray<Tags>;
-    readonly title?: string | null;
-    readonly createdAt: Date;
-    readonly introduction?: string | null;
-    readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
-  }>;
-};
-
-export type SearchForArticlesListByTagsQueryVariables = Exact<{
-  locales: ReadonlyArray<Locale> | Locale;
-  orderBy?: InputMaybe<ArticlesOrderByInput>;
-  tagsContainsSome?: InputMaybe<ReadonlyArray<Tags> | Tags>;
-}>;
-
-export type SearchForArticlesListByTagsQuery = {
-  readonly __typename?: 'Query';
-  readonly schemaArticles: ReadonlyArray<{
-    readonly __typename?: 'Articles';
-    readonly id: string;
-    readonly slug?: string | null;
-    readonly tags: ReadonlyArray<Tags>;
-    readonly title?: string | null;
-    readonly createdAt: Date;
-    readonly introduction?: string | null;
-    readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
-  }>;
-};
-
-export type SearchForArticlesListWithTagsQueryVariables = Exact<{
-  search?: InputMaybe<Scalars['String']>;
-  locales: ReadonlyArray<Locale> | Locale;
-  orderBy?: InputMaybe<ArticlesOrderByInput>;
-  tagsContainsSome?: InputMaybe<ReadonlyArray<Tags> | Tags>;
-}>;
-
-export type SearchForArticlesListWithTagsQuery = {
-  readonly __typename?: 'Query';
-  readonly schemaArticles: ReadonlyArray<{
-    readonly __typename?: 'Articles';
-    readonly id: string;
-    readonly slug?: string | null;
-    readonly tags: ReadonlyArray<Tags>;
-    readonly title?: string | null;
-    readonly createdAt: Date;
-    readonly introduction?: string | null;
-    readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
-  }>;
-};
-
-export type ArticlesListWithPagesQueryVariables = Exact<{
-  locales: ReadonlyArray<Locale> | Locale;
-  first?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<ArticlesOrderByInput>;
-}>;
-
-export type ArticlesListWithPagesQuery = {
+export type ArticlesListPaginationQuery = {
   readonly __typename?: 'Query';
   readonly page: {
     readonly __typename?: 'ArticlesConnection';
@@ -7369,14 +7278,6 @@ export type ArticlesListQuery = {
         readonly title?: string | null;
         readonly thumbnail?: { readonly __typename?: 'Asset'; readonly url: string } | null;
         readonly content?: { readonly __typename?: 'RichText'; readonly text: string } | null;
-        readonly comments: ReadonlyArray<{
-          readonly __typename?: 'CommentsSchema';
-          readonly id: string;
-          readonly nickname: string;
-          readonly avatar: string;
-          readonly content: string;
-          readonly edges: ReadonlyArray<{ readonly __typename?: 'Comments'; readonly id: string; readonly nickname: string; readonly avatar: string; readonly content: string }>;
-        }>;
         readonly resources: ReadonlyArray<{ readonly __typename?: 'Links'; readonly id: string; readonly name?: string | null; readonly link?: string | null }>;
       };
     }>;
@@ -7411,183 +7312,9 @@ export type GetArticleSlugsQuery = {
   };
 };
 
-export type GetAllCommentsListQueryVariables = Exact<{
-  locales: ReadonlyArray<Locale> | Locale;
-  slug?: InputMaybe<Scalars['String']>;
-  languages?: InputMaybe<Languages>;
-}>;
-
-export type GetAllCommentsListQuery = {
-  readonly __typename?: 'Query';
-  readonly page: {
-    readonly __typename?: 'ArticlesConnection';
-    readonly edges: ReadonlyArray<{
-      readonly __typename?: 'ArticlesEdge';
-      readonly node: {
-        readonly __typename?: 'Articles';
-        readonly comments: ReadonlyArray<{
-          readonly __typename?: 'CommentsSchema';
-          readonly id: string;
-          readonly createdAt: Date;
-          readonly languages: Languages;
-          readonly avatar: string;
-          readonly nickname: string;
-          readonly content: string;
-          readonly edges: ReadonlyArray<{
-            readonly __typename?: 'Comments';
-            readonly id: string;
-            readonly nickname: string;
-            readonly avatar: string;
-            readonly content: string;
-            readonly createdCommentAt: Date;
-          }>;
-        }>;
-      };
-    }>;
-  };
-};
-
-export const SearchForArticlesListDocument = gql`
-  query SearchForArticlesList($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput) {
-    schemaArticles(where: { _search: $search }, locales: $locales, orderBy: $orderBy) {
-      id
-      slug
-      tags
-      title
-      createdAt
-      introduction
-      thumbnail {
-        url
-      }
-    }
-  }
-`;
-
-/**
- * __useSearchForArticlesListQuery__
- *
- * To run a query within a React component, call `useSearchForArticlesListQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchForArticlesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchForArticlesListQuery({
- *   variables: {
- *      search: // value for 'search'
- *      locales: // value for 'locales'
- *      orderBy: // value for 'orderBy'
- *   },
- * });
- */
-export function useSearchForArticlesListQuery(baseOptions: Apollo.QueryHookOptions<SearchForArticlesListQuery, SearchForArticlesListQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchForArticlesListQuery, SearchForArticlesListQueryVariables>(SearchForArticlesListDocument, options);
-}
-export function useSearchForArticlesListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchForArticlesListQuery, SearchForArticlesListQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchForArticlesListQuery, SearchForArticlesListQueryVariables>(SearchForArticlesListDocument, options);
-}
-export type SearchForArticlesListQueryHookResult = ReturnType<typeof useSearchForArticlesListQuery>;
-export type SearchForArticlesListLazyQueryHookResult = ReturnType<typeof useSearchForArticlesListLazyQuery>;
-export type SearchForArticlesListQueryResult = Apollo.QueryResult<SearchForArticlesListQuery, SearchForArticlesListQueryVariables>;
-export const SearchForArticlesListByTagsDocument = gql`
-  query SearchForArticlesListByTags($locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
-    schemaArticles(where: { tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
-      id
-      slug
-      tags
-      title
-      createdAt
-      introduction
-      thumbnail {
-        url
-      }
-    }
-  }
-`;
-
-/**
- * __useSearchForArticlesListByTagsQuery__
- *
- * To run a query within a React component, call `useSearchForArticlesListByTagsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchForArticlesListByTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchForArticlesListByTagsQuery({
- *   variables: {
- *      locales: // value for 'locales'
- *      orderBy: // value for 'orderBy'
- *      tagsContainsSome: // value for 'tagsContainsSome'
- *   },
- * });
- */
-export function useSearchForArticlesListByTagsQuery(baseOptions: Apollo.QueryHookOptions<SearchForArticlesListByTagsQuery, SearchForArticlesListByTagsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchForArticlesListByTagsQuery, SearchForArticlesListByTagsQueryVariables>(SearchForArticlesListByTagsDocument, options);
-}
-export function useSearchForArticlesListByTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchForArticlesListByTagsQuery, SearchForArticlesListByTagsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchForArticlesListByTagsQuery, SearchForArticlesListByTagsQueryVariables>(SearchForArticlesListByTagsDocument, options);
-}
-export type SearchForArticlesListByTagsQueryHookResult = ReturnType<typeof useSearchForArticlesListByTagsQuery>;
-export type SearchForArticlesListByTagsLazyQueryHookResult = ReturnType<typeof useSearchForArticlesListByTagsLazyQuery>;
-export type SearchForArticlesListByTagsQueryResult = Apollo.QueryResult<SearchForArticlesListByTagsQuery, SearchForArticlesListByTagsQueryVariables>;
-export const SearchForArticlesListWithTagsDocument = gql`
-  query SearchForArticlesListWithTags($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
-    schemaArticles(where: { _search: $search, tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
-      id
-      slug
-      tags
-      title
-      createdAt
-      introduction
-      thumbnail {
-        url
-      }
-    }
-  }
-`;
-
-/**
- * __useSearchForArticlesListWithTagsQuery__
- *
- * To run a query within a React component, call `useSearchForArticlesListWithTagsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchForArticlesListWithTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchForArticlesListWithTagsQuery({
- *   variables: {
- *      search: // value for 'search'
- *      locales: // value for 'locales'
- *      orderBy: // value for 'orderBy'
- *      tagsContainsSome: // value for 'tagsContainsSome'
- *   },
- * });
- */
-export function useSearchForArticlesListWithTagsQuery(baseOptions: Apollo.QueryHookOptions<SearchForArticlesListWithTagsQuery, SearchForArticlesListWithTagsQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchForArticlesListWithTagsQuery, SearchForArticlesListWithTagsQueryVariables>(SearchForArticlesListWithTagsDocument, options);
-}
-export function useSearchForArticlesListWithTagsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SearchForArticlesListWithTagsQuery, SearchForArticlesListWithTagsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchForArticlesListWithTagsQuery, SearchForArticlesListWithTagsQueryVariables>(SearchForArticlesListWithTagsDocument, options);
-}
-export type SearchForArticlesListWithTagsQueryHookResult = ReturnType<typeof useSearchForArticlesListWithTagsQuery>;
-export type SearchForArticlesListWithTagsLazyQueryHookResult = ReturnType<typeof useSearchForArticlesListWithTagsLazyQuery>;
-export type SearchForArticlesListWithTagsQueryResult = Apollo.QueryResult<SearchForArticlesListWithTagsQuery, SearchForArticlesListWithTagsQueryVariables>;
-export const ArticlesListWithPagesDocument = gql`
-  query ArticlesListWithPages($locales: [Locale!]!, $first: Int, $skip: Int, $orderBy: ArticlesOrderByInput) {
-    page: schemaArticlesConnection(locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
+export const ArticlesListPaginationDocument = gql`
+  query ArticlesListPagination($locales: [Locale!]!, $first: Int!, $skip: Int!, $orderBy: ArticlesOrderByInput!, $title: String!, $tags: [Tags!]) {
+    page: schemaArticlesConnection(where: { title_contains: $title, tags_contains_all: $tags }, locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
       edges {
         node {
           id
@@ -7611,35 +7338,37 @@ export const ArticlesListWithPagesDocument = gql`
 `;
 
 /**
- * __useArticlesListWithPagesQuery__
+ * __useArticlesListPaginationQuery__
  *
- * To run a query within a React component, call `useArticlesListWithPagesQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticlesListWithPagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useArticlesListPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlesListPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useArticlesListWithPagesQuery({
+ * const { data, loading, error } = useArticlesListPaginationQuery({
  *   variables: {
  *      locales: // value for 'locales'
  *      first: // value for 'first'
  *      skip: // value for 'skip'
  *      orderBy: // value for 'orderBy'
+ *      title: // value for 'title'
+ *      tags: // value for 'tags'
  *   },
  * });
  */
-export function useArticlesListWithPagesQuery(baseOptions: Apollo.QueryHookOptions<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>) {
+export function useArticlesListPaginationQuery(baseOptions: Apollo.QueryHookOptions<ArticlesListPaginationQuery, ArticlesListPaginationQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>(ArticlesListWithPagesDocument, options);
+  return Apollo.useQuery<ArticlesListPaginationQuery, ArticlesListPaginationQueryVariables>(ArticlesListPaginationDocument, options);
 }
-export function useArticlesListWithPagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>) {
+export function useArticlesListPaginationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesListPaginationQuery, ArticlesListPaginationQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>(ArticlesListWithPagesDocument, options);
+  return Apollo.useLazyQuery<ArticlesListPaginationQuery, ArticlesListPaginationQueryVariables>(ArticlesListPaginationDocument, options);
 }
-export type ArticlesListWithPagesQueryHookResult = ReturnType<typeof useArticlesListWithPagesQuery>;
-export type ArticlesListWithPagesLazyQueryHookResult = ReturnType<typeof useArticlesListWithPagesLazyQuery>;
-export type ArticlesListWithPagesQueryResult = Apollo.QueryResult<ArticlesListWithPagesQuery, ArticlesListWithPagesQueryVariables>;
+export type ArticlesListPaginationQueryHookResult = ReturnType<typeof useArticlesListPaginationQuery>;
+export type ArticlesListPaginationLazyQueryHookResult = ReturnType<typeof useArticlesListPaginationLazyQuery>;
+export type ArticlesListPaginationQueryResult = Apollo.QueryResult<ArticlesListPaginationQuery, ArticlesListPaginationQueryVariables>;
 export const GetStaticAriclePageDocument = gql`
   query GetStaticAriclePage($locales: [Locale!]!, $slug: String) {
     page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
@@ -7721,18 +7450,6 @@ export const ArticlesListDocument = gql`
           title
           content {
             text
-          }
-          comments(where: { languages: $lng }) {
-            id
-            nickname
-            avatar
-            content
-            edges {
-              id
-              nickname
-              avatar
-              content
-            }
           }
           resources {
             id
@@ -7853,58 +7570,3 @@ export function useGetArticleSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetArticleSlugsQueryHookResult = ReturnType<typeof useGetArticleSlugsQuery>;
 export type GetArticleSlugsLazyQueryHookResult = ReturnType<typeof useGetArticleSlugsLazyQuery>;
 export type GetArticleSlugsQueryResult = Apollo.QueryResult<GetArticleSlugsQuery, GetArticleSlugsQueryVariables>;
-export const GetAllCommentsListDocument = gql`
-  query GetAllCommentsList($locales: [Locale!]!, $slug: String, $languages: Languages) {
-    page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
-      edges {
-        node {
-          comments(where: { languages: $languages }) {
-            id
-            createdAt
-            languages
-            avatar
-            nickname
-            content
-            edges {
-              id
-              nickname
-              avatar
-              content
-              createdCommentAt
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-/**
- * __useGetAllCommentsListQuery__
- *
- * To run a query within a React component, call `useGetAllCommentsListQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllCommentsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetAllCommentsListQuery({
- *   variables: {
- *      locales: // value for 'locales'
- *      slug: // value for 'slug'
- *      languages: // value for 'languages'
- *   },
- * });
- */
-export function useGetAllCommentsListQuery(baseOptions: Apollo.QueryHookOptions<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>(GetAllCommentsListDocument, options);
-}
-export function useGetAllCommentsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>(GetAllCommentsListDocument, options);
-}
-export type GetAllCommentsListQueryHookResult = ReturnType<typeof useGetAllCommentsListQuery>;
-export type GetAllCommentsListLazyQueryHookResult = ReturnType<typeof useGetAllCommentsListLazyQuery>;
-export type GetAllCommentsListQueryResult = Apollo.QueryResult<GetAllCommentsListQuery, GetAllCommentsListQueryVariables>;

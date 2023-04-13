@@ -10,24 +10,23 @@ import type { FC } from 'react';
 import { HomePage } from '@GlobalComponents/pages/HomePage';
 
 import { Locale } from '@graphql/databases/client';
-import { fetchArticlesListWithPages } from '@graphql/libraries/getArticlesListWithPages';
+import { fetchArticlesListPagination } from '@graphql/libraries/getArticlesListWithPages';
 import { fetchTechnologiesList } from '@graphql/libraries/getTechnologiesListValues';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const isEnglish = locale === 'en' ? [Locale.En] : [Locale.Pl];
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery({ queryKey: ['articles', locale], queryFn: () => fetchArticlesListWithPages({ isEnglish }) });
+  await queryClient.prefetchInfiniteQuery({ queryKey: ['articles', locale, '', []], queryFn: () => fetchArticlesListPagination({ isEnglish }) });
 
   const technologies = await fetchTechnologiesList();
-  const articles = await fetchArticlesListWithPages({ isEnglish });
 
   return {
-    props: { technologies, dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))), articles },
+    props: { technologies, dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))) },
   };
 };
 
-const Home: FC<IHomePageProps> = ({ articles, technologies }) => {
+const Home: FC<IHomePageProps> = ({ technologies }) => {
   const { t } = useTranslation('home');
   const title = t('meta-title'),
     description = t('meta-description');
@@ -38,7 +37,7 @@ const Home: FC<IHomePageProps> = ({ articles, technologies }) => {
         <title>{title + ` | PerQuis's Blog`}</title>
         <meta name="description" content={description} />
       </Head>
-      <HomePage stories={{ articles, technologies }} />
+      <HomePage stories={{ technologies }} />
     </>
   );
 };

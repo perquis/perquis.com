@@ -15,10 +15,6 @@ import { Dashed } from '@icons/Dashed';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
 
-import { pageSize } from '@data/presets';
-
-const loaders = new Array(pageSize).fill(null).map((_, i) => i);
-
 export const CommentsWrapper = () => {
   const [isRefetch] = useRefetchStore((state) => [state.isRefetch]);
   const [postId] = usePostsListStore((state) => [state.postId]);
@@ -26,7 +22,7 @@ export const CommentsWrapper = () => {
 
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ['comments', postId, locale, isRefetch],
-    queryFn: ({ pageParam = 0 }) => fetchAllCommentsList(postId, pageParam),
+    queryFn: ({ pageParam = 0 }) => fetchAllCommentsList(postId.length > 0 ? postId : 'default', pageParam),
     getNextPageParam: ({ skipPage }) => skipPage,
   });
 
@@ -35,6 +31,7 @@ export const CommentsWrapper = () => {
   if (!data) return null;
 
   const isDashed = data.pages[0].comments.length > 0 || isLoading;
+  const loaders = new Array(data.pages[data.pages.length - 1].pageSize).fill(null).map((_, i) => i);
 
   return (
     <>

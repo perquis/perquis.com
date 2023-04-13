@@ -1,6 +1,5 @@
 import { DirectionColumn } from '@GlobalComponents/wrappers/DirectionColumn';
 
-import { LoadingArticlesList } from '@components/Loader/organisms/LoadingArticlesList';
 import { ChosenTags } from '@components/PostsList/molecules/ChosenTags';
 import { Heading } from '@components/PostsList/molecules/Heading';
 import { PullingArticlesList } from '@components/PostsList/organisms/PullingArticlesList';
@@ -13,7 +12,6 @@ export const PostsList = () => {
       <SearchBar />
       <ChosenTags />
       <PullingArticlesList />
-      <LoadingArticlesList />
     </DirectionColumn>
   );
 };

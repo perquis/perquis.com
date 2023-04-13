@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApolloProvider } from '@apollo/client';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { useState } from 'react';
@@ -24,6 +25,7 @@ export const Provider: FC<Children & { session: any; pageProps: any }> = ({ chil
               <GlobalLayout>
                 <WaviesLayout>
                   <Layout>{children}</Layout>
+                  <ReactQueryDevtools />
                 </WaviesLayout>
               </GlobalLayout>
             </ThemeProvider>

@@ -17,7 +17,6 @@ interface INote {
 export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = 'normal' }) => {
   const container = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
   const elements = Children.toArray(children).splice(0, size);
   const count = Children.count(children);
@@ -27,16 +26,20 @@ export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = '
   return (
     <LayoutGroup>
       <motion.div
-        layout
         className={clsx(
-          styles.note,
+          styles['note-wrapper'],
           status === 'normal' && styles['note-normal'],
           status === 'positive' && styles['note-positive'],
           status === 'negative' && styles['note-negative']
         )}
-        ref={container}
+        layout
         animate={{ height: isOpen ? 'auto' : height }}
+        ref={container}
       >
+        <div className={clsx(styles.note)}>
+          {isOpen ? <>{children}</> : elements.map((child, i) => <Fragment key={i}>{child}</Fragment>)}
+          {count > 3 && !isOpen ? <ShowMoreButton onClick={() => setOpen(true)} /> : null}
+        </div>
         <div
           className={clsx(
             styles['hero-pattern'],
@@ -45,11 +48,7 @@ export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = '
             status === 'negative' && styles['hero-pattern-negative'],
             isOpen ? styles['hero-pattern-active'] : styles['hero-pattern-is-not-active']
           )}
-          ref={ref}
-        >
-          {isOpen ? <>{children}</> : elements.map((child, i) => <Fragment key={i}>{child}</Fragment>)}
-        </div>
-        {count > 3 && !isOpen ? <ShowMoreButton onClick={() => setOpen(true)} /> : null}
+        />
       </motion.div>
     </LayoutGroup>
   );

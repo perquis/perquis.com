@@ -22,12 +22,16 @@ export const StickyHelpersList = ({ socials }: Record<'socials', Articles['socia
         {isVisible && (
           <StickyButtonsList>
             <ToggleTheme />
-            <SocialButton href={socials?.repository ?? ''}>
-              <BsGithub size={18} />
-            </SocialButton>
-            <SocialButton href={socials?.liveDemo ?? ''}>
-              <TbWorldWww size={18} />
-            </SocialButton>
+            {socials?.repository && (
+              <SocialButton href={socials.repository}>
+                <BsGithub size={18} />
+              </SocialButton>
+            )}
+            {socials?.liveDemo && (
+              <SocialButton href={socials.liveDemo}>
+                <TbWorldWww size={18} />
+              </SocialButton>
+            )}
           </StickyButtonsList>
         )}
       </AnimatePresence>

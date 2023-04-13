@@ -1,47 +1,5 @@
-query SearchForArticlesList($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput) {
-  schemaArticles(where: { _search: $search }, locales: $locales, orderBy: $orderBy) {
-    id
-    slug
-    tags
-    title
-    createdAt
-    introduction
-    thumbnail {
-      url
-    }
-  }
-}
-
-query SearchForArticlesListByTags($locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
-  schemaArticles(where: { tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
-    id
-    slug
-    tags
-    title
-    createdAt
-    introduction
-    thumbnail {
-      url
-    }
-  }
-}
-
-query SearchForArticlesListWithTags($search: String, $locales: [Locale!]!, $orderBy: ArticlesOrderByInput, $tagsContainsSome: [Tags!]) {
-  schemaArticles(where: { _search: $search, tags_contains_some: $tagsContainsSome }, locales: $locales, orderBy: $orderBy) {
-    id
-    slug
-    tags
-    title
-    createdAt
-    introduction
-    thumbnail {
-      url
-    }
-  }
-}
-
-query ArticlesListWithPages($locales: [Locale!]!, $first: Int, $skip: Int, $orderBy: ArticlesOrderByInput) {
-  page: schemaArticlesConnection(locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
+query ArticlesListPagination($locales: [Locale!]!, $first: Int!, $skip: Int!, $orderBy: ArticlesOrderByInput!, $title: String!, $tags: [Tags!]) {
+  page: schemaArticlesConnection(where: { title_contains: $title, tags_contains_all: $tags }, locales: $locales, first: $first, skip: $skip, orderBy: $orderBy) {
     edges {
       node {
         id
@@ -114,18 +72,6 @@ query ArticlesList($locales: [Locale!]!, $lng: Languages) {
         content {
           text
         }
-        comments(where: { languages: $lng }) {
-          id
-          nickname
-          avatar
-          content
-          edges {
-            id
-            nickname
-            avatar
-            content
-          }
-        }
         resources {
           id
           name
@@ -152,30 +98,6 @@ query GetArticleSlugs($locales: [Locale!]!) {
     edges {
       node {
         slug
-      }
-    }
-  }
-}
-
-query GetAllCommentsList($locales: [Locale!]!, $slug: String, $languages: Languages) {
-  page: schemaArticlesConnection(where: { slug_contains: $slug }, locales: $locales) {
-    edges {
-      node {
-        comments(where: { languages: $languages }) {
-          id
-          createdAt
-          languages
-          avatar
-          nickname
-          content
-          edges {
-            id
-            nickname
-            avatar
-            content
-            createdCommentAt
-          }
-        }
       }
     }
   }

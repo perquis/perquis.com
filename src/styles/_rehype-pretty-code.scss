@@ -115,15 +115,19 @@ span[data-rehype-pretty-code-fragment] {
 code[data-line-numbers] {
   counter-reset: line;
 
-  > .line::before {
-    counter-increment: line;
-    content: counter(line);
+  > .line {
+    padding-right: 2.4rem;
 
-    display: inline-block;
-    width: 2rem;
-    margin: 0 1.6rem 0 2.4rem;
-    text-align: left;
-    color: var(--code-line-numbers);
+    &::before {
+      counter-increment: line;
+      content: counter(line);
+
+      display: inline-block;
+      width: 2rem;
+      margin: 0 1.6rem 0 2.4rem;
+      text-align: left;
+      color: var(--code-line-numbers);
+    }
   }
 
   [data-line-numbers-max-digits='2'] > .line::before {

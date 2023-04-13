@@ -13,6 +13,8 @@ type ResourcesListProps = FC<Record<'resources', GetStaticAriclePageQuery['page'
 export const ResourcesList: ResourcesListProps = ({ resources }) => {
   const { resourcesListsTitle } = useInternationalizedRouting('global');
 
+  if (resources.length === 0) return null;
+
   return (
     <DirectionColumn isTop style={{ marginBottom: 48 }}>
       <h2 id="resources">{resourcesListsTitle}</h2>
