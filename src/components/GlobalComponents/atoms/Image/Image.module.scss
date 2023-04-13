@@ -3,4 +3,6 @@
 
 .image {
   @include wrapper;
+
+  border-radius: var(--radius);
 }

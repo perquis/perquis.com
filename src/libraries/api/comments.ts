@@ -5,14 +5,24 @@ import { prismaClient } from 'prisma/prismaClient';
 
 import { textAreaMaxLength } from '@data/validations';
 
-export const getAllCommentsList = async (req: NextApiRequest, res: NextApiResponse, slug: string) => {
-  try {
-    const posts = await prismaClient.post.findMany({ where: { articleId: slug }, include: { comments: { include: { user: true } } } });
-    if (posts.length === 0) return res.status(404).send({ message: 'Not Found.' });
+export const getAllCommentsList = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { postId, skip } = req.query;
+  if (!skip && !postId) return res.status(400).send({ message: 'Bad request.' });
 
-    const [post] = posts;
-    return res.send(
-      post.comments
+  try {
+    const limit = 6;
+    const comments = await prismaClient.comment.findMany({
+      where: { postId: String(postId) },
+      include: { user: true },
+      skip: Number(skip),
+      take: limit,
+      orderBy: { createdAt: 'desc' },
+    });
+    const nextComments = await prismaClient.comment.findMany({ where: { postId: String(postId) }, include: { user: true }, skip: Number(skip) + limit, take: limit });
+    if (!comments) return res.status(404).send({ message: 'Not Found.' });
+
+    return res.send({
+      comments: comments
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .map(({ user, ...rest }) => {
           if (user) {
@@ -22,8 +32,9 @@ export const getAllCommentsList = async (req: NextApiRequest, res: NextApiRespon
           }
 
           return { ...rest };
-        })
-    );
+        }),
+      skipPage: nextComments.length > 0 ? Number(skip) + limit : false,
+    });
   } catch (err) {
     return res.status(500).send({ message: 'Internal Server Error' });
   }

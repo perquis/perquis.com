@@ -53,5 +53,6 @@
       "info": "Informacja!"
     }
   },
-  "loading": "Wysyłanie..."
+  "loading": "Wysyłanie...",
+  "has-next-page": "Pokaż więcej komentarzy."
 }

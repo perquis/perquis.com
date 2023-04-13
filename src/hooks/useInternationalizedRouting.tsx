@@ -60,6 +60,8 @@ export const useInternationalizedRouting = (status: Status) => {
       notificaionTextInfo = global('notificaion.status.info'),
       notificaionInfoCopyToClipboard = global('notificaion.info-copy-to-clipboard');
 
+    const hasNextPageButton = global('has-next-page');
+
     return {
       loadingMessage,
       modalUpdateComment,
@@ -96,6 +98,7 @@ export const useInternationalizedRouting = (status: Status) => {
       notificaionTextWarn,
       notificaionTextInfo,
       notificaionInfoCopyToClipboard,
+      hasNextPageButton,
     };
   }
 

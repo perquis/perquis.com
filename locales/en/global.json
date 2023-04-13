@@ -53,5 +53,6 @@
       "info": "Info!"
     }
   },
-  "loading": "Sending..."
+  "loading": "Sending...",
+  "has-next-page": "Show more comments."
 }
