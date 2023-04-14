@@ -10,6 +10,6 @@ interface FetchAllArticlesListPagination {
 }
 
 export const fetchAllArticlesListPagination = async ({ skip, locale, title, tags }: FetchAllArticlesListPagination): Promise<ArticlesListPaginationQuery['page']> => {
-  const { data } = await axios.post(`/api/articles`, { skip, locale, title, tags });
+  const { data } = await axios.get(`/api/articles?skip=${skip}&locale=${locale}&title=${title}&tags=${tags}`);
   return data;
 };

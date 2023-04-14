@@ -4,18 +4,23 @@ import { serialize } from 'next-mdx-remote/serialize';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 import { client } from '@graphql/apollo/apolloClient';
-import { ArticlesOrderByInput, Locale } from '@graphql/databases/client';
+import { ArticlesOrderByInput, Locale, Tags } from '@graphql/databases/client';
 import { getServerPageArticlesListPagination } from '@graphql/databases/server';
 
 import { shikiOptions } from '@themes/shikiOptions';
 
 import { pageSize } from '@data/presets';
 
+import { splittedTags } from './../../utils/splittedTags';
+
 const isUndefined = (arg: unknown): arg is undefined => typeof arg === 'undefined';
 
 export const searchForArticles = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { skip, locale, title, tags } = req.body;
+  const { skip, locale, title, tags } = req.query;
   if (isUndefined(skip) || isUndefined(locale) || isUndefined(title) || isUndefined(tags)) return res.status(400).send({ message: 'Bad Request.' });
+
+  // @ts-ignore
+  const isTags = tags.length !== 0 ? splittedTags(tags) : [];
 
   try {
     const {
@@ -25,7 +30,16 @@ export const searchForArticles = async (req: NextApiRequest, res: NextApiRespons
         },
       },
     } = await getServerPageArticlesListPagination(
-      { variables: { locales: locale === 'en' ? [Locale.En] : [Locale.Pl], orderBy: ArticlesOrderByInput.CreatedAtDesc, first: pageSize, skip: Number(skip), title, tags } },
+      {
+        variables: {
+          locales: locale === 'en' ? [Locale.En] : [Locale.Pl],
+          orderBy: ArticlesOrderByInput.CreatedAtDesc,
+          first: pageSize,
+          skip: Number(skip),
+          title: String(title),
+          tags: isTags,
+        },
+      },
       client
     );
 
@@ -42,8 +56,8 @@ export const searchForArticles = async (req: NextApiRequest, res: NextApiRespons
           orderBy: ArticlesOrderByInput.CreatedAtDesc,
           first: pageSize,
           skip: Number(skip) + pageSize,
-          title,
-          tags,
+          title: String(title),
+          tags: isTags,
         },
       },
       client

@@ -2,7 +2,7 @@ const nextTranslate = require('next-translate-plugin');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = () => {
-  const ESLintPlugin = require('eslint-webpack-plugin');
+  // const ESLintPlugin = require('eslint-webpack-plugin');
 
   return nextTranslate({
     reactStrictMode: true,
@@ -27,10 +27,10 @@ const nextConfig = () => {
         },
       ];
     },
-    webpack: (config) => {
-      config.plugins.push(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
-      return config;
-    },
+    // webpack: (config) => {
+    //   config.plugins.push(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
+    //   return config;
+    // },
   });
 };
 
