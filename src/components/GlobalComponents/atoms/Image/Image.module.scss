@@ -5,4 +5,8 @@
   @include wrapper;
 
   border-radius: var(--radius);
+
+  @media screen and (max-width: $sm) {
+    border-radius: 0;
+  }
 }
