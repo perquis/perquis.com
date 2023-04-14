@@ -1,21 +1,13 @@
 /* eslint-disable */
-import fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
-import rehypePrettyCode from 'rehype-pretty-code';
 
 import { client } from '@graphql/apollo/apolloClient';
 import { ArticlesOrderByInput, Locale } from '@graphql/databases/client';
 import { getServerPageArticlesListPagination } from '@graphql/databases/server';
 
-import { shikiOptions } from '@themes/shikiOptions';
-
 import { pageSize } from '@data/presets';
 
 const isUndefined = (arg: unknown): arg is undefined => typeof arg === 'undefined';
-
-const dark = JSON.parse(fs.readFileSync('./src/themes/dark.json', 'utf-8'));
-const light = JSON.parse(fs.readFileSync('./src/themes/light.json', 'utf-8'));
 
 export const searchForArticles = async (req: NextApiRequest, res: NextApiResponse) => {
   const { skip, locale, title, tags } = req.body;
@@ -54,21 +46,21 @@ export const searchForArticles = async (req: NextApiRequest, res: NextApiRespons
     );
 
     const mappedEdges = edges.map(({ node }) => node);
-    const serializedEdges = await Promise.all(
-      mappedEdges.map(async (node) => {
-        const introduction = await serialize(String(node.introduction), {
-          mdxOptions: {
-            rehypePlugins: [[rehypePrettyCode, { ...shikiOptions, theme: { light, dark } }]],
-          },
-        });
+    // const serializedEdges = await Promise.all(
+    //   mappedEdges.map(async (node) => {
+    //     const introduction = await serialize(String(node.introduction), {
+    //       mdxOptions: {
+    //         rehypePlugins: [[rehypePrettyCode, { ...shikiOptions, theme: { light, dark } }]],
+    //       },
+    //     });
 
-        return { ...node, introduction };
-      })
-    );
+    //     return { ...node, introduction };
+    //   })
+    // );
 
     const intSkip = Number(skip) + pageSize;
 
-    return res.json({ edges: serializedEdges, pageInfo: { hasNextPage: nextEdges.length > 0 ? intSkip : false, pageSize: nextEdges.length } });
+    return res.json({ edges: mappedEdges, pageInfo: { hasNextPage: nextEdges.length > 0 ? intSkip : false, pageSize: nextEdges.length } });
   } catch (err) {
     return res.json({ edges: [], pageInfo: { hasNextPage: false, pageSize: 0 } });
   }
