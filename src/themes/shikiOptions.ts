@@ -2,12 +2,13 @@
 import type { Options } from 'rehype-pretty-code';
 import { BUNDLED_LANGUAGES, getHighlighter } from 'shiki';
 
-import { dark, light } from './themes';
+import dark from './dark.json';
+import light from './light.json';
 
 export const shikiOptions: Options = {
   keepBackground: false,
   // @ts-ignore
-  theme: { light: JSON.parse(JSON.stringify(light)), dark: JSON.parse(JSON.stringify(dark)) },
+  theme: { light, dark },
   tokensMap: {
     fn: 'entity.name.function',
     class: 'entity.other.attribute-name.class',

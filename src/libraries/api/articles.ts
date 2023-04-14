@@ -1,4 +1,5 @@
 /* eslint-disable */
+import fs from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -12,6 +13,9 @@ import { shikiOptions } from '@themes/shikiOptions';
 import { pageSize } from '@data/presets';
 
 const isUndefined = (arg: unknown): arg is undefined => typeof arg === 'undefined';
+
+const dark = JSON.parse(fs.readFileSync('./src/themes/dark.json', 'utf-8'));
+const light = JSON.parse(fs.readFileSync('./src/themes/light.json', 'utf-8'));
 
 export const searchForArticles = async (req: NextApiRequest, res: NextApiResponse) => {
   const { skip, locale, title, tags } = req.body;
@@ -54,7 +58,7 @@ export const searchForArticles = async (req: NextApiRequest, res: NextApiRespons
       mappedEdges.map(async (node) => {
         const introduction = await serialize(String(node.introduction), {
           mdxOptions: {
-            rehypePlugins: [[rehypePrettyCode, shikiOptions]],
+            rehypePlugins: [[rehypePrettyCode, { ...shikiOptions, theme: { light, dark } }]],
           },
         });
 
