@@ -1,6 +1,12 @@
+@import './src/styles/_breakpoints.scss';
+
 .stickers-list {
   display: flex;
   flex-direction: column;
   margin: 3.6rem 0;
   gap: 3.6rem;
+
+  @media screen and (max-width: $sm) {
+    gap: clamp(1.2rem, 3vw, 3.6rem);
+  }
 }

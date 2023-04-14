@@ -30,7 +30,8 @@ export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = '
           styles['note-wrapper'],
           status === 'normal' && styles['note-normal'],
           status === 'positive' && styles['note-positive'],
-          status === 'negative' && styles['note-negative']
+          status === 'negative' && styles['note-negative'],
+          'note'
         )}
         layout
         animate={{ height: isOpen ? 'auto' : height }}
