@@ -1,7 +1,6 @@
 /* eslint-disable */
 import * as Apollo from '@apollo/client';
 import { gql } from '@apollo/client';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -45,7 +44,7 @@ export type Articles = Node & {
   readonly history: ReadonlyArray<Version>;
   /** The unique identifier */
   readonly id: Scalars['ID'];
-  readonly introduction: MDXRemoteSerializeResult;
+  readonly introduction: Scalars['String'];
   /** System Locale field */
   readonly locale: Locale;
   /** Get the other localizations for this document */
@@ -553,7 +552,7 @@ export type ArticlesWhereInput = {
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   readonly id_starts_with?: InputMaybe<Scalars['ID']>;
-  readonly introduction: MDXRemoteSerializeResult;
+  readonly introduction: Scalars['String'];
   /** All values containing the given string. */
   readonly introduction_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
