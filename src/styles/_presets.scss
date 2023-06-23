@@ -77,7 +77,7 @@
 
   --blur-background: hsl(212, 29%, 90%, 50%);
 
-  --paragraph: var(--gray-700);
+  --paragraph: var(--gray-950);
   --toc-item: var(--gray-700);
   --span: var(--gray-500);
 
@@ -146,6 +146,10 @@
   --socials: var(--gray-300);
   --socials-hover: var(--gray-400);
 
+  --underline-link-sky: hsl(199, 89%, 70%);
+  --underline-link-pink: hsl(330, 81%, 70%);
+  --underline-link-indigo: hsl(239, 84%, 70%);
+
   // Sizes
   --radius: 1.2rem;
   --small-radius: 0.6rem;
@@ -180,7 +184,7 @@
 
   --blur-background: hsl(212, 33%, 10%, 75%);
 
-  --paragraph: var(--gray-200);
+  --paragraph: var(--gray-50);
   --toc-item: var(--gray-200);
   --span: var(--gray-400);
 
@@ -241,4 +245,8 @@
 
   --socials: var(--gray-700);
   --socials-hover: var(--gray-600);
+
+  --underline-link-sky: hsl(199, 89%, 48%);
+  --underline-link-pink: hsl(330, 81%, 60%);
+  --underline-link-indigo: hsl(239, 84%, 67%);
 }

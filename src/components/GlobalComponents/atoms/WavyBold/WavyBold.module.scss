@@ -1,0 +1,5 @@
+@import './src/styles/_mixins.scss';
+
+.wavy-bold {
+  @include wavy-lines;
+}

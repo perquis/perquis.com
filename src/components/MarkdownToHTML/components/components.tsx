@@ -4,7 +4,10 @@ import type { ReactHTMLElementProps } from 'react';
 
 import { Image } from '@GlobalComponents/atoms/Image';
 import { Item } from '@GlobalComponents/atoms/Item';
+import { Marker } from '@GlobalComponents/atoms/Marker';
+import { NofollowLink } from '@GlobalComponents/atoms/NofollowLink';
 import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
+import { WavyBold } from '@GlobalComponents/atoms/WavyBold';
 import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
 
 import { Note } from '@components/Notes';
@@ -30,8 +33,11 @@ export const components: MDXRemoteProps['components'] = {
   pre: (props: Omit<ReactHTMLElementProps<HTMLPreElement>, 'ref'> & MotionProps) => <RehypePrettyCodeFragment {...props} />,
 
   Note,
+  Marker,
+  WavyBold,
   Sandpack,
   CodeWrapper,
+  NofollowLink,
   CodepenPlayer,
   YouTubePlayer,
 };

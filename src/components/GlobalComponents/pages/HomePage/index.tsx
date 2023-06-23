@@ -1,8 +1,8 @@
 // @ts-ignore
 import type { IHomePageProps } from '@types/pages';
 
-import { useEffect } from 'react';
 import type { FC } from 'react';
+import { useEffect } from 'react';
 
 import { WavyLines } from '@GlobalComponents/atoms/WavyLines';
 

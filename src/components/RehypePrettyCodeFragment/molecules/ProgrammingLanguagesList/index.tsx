@@ -1,10 +1,10 @@
+import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { HiArrowLongLeft, HiArrowLongRight } from 'react-icons/hi2';
 
-import PrevButton from '@components/RehypePrettyCodeFragment/atoms/PaginateButton';
-import NextButton from '@components/RehypePrettyCodeFragment/atoms/PaginateButton';
+import { default as NextButton, default as PrevButton } from '@components/RehypePrettyCodeFragment/atoms/PaginateButton';
 import { PickProgrammingLanguage } from '@components/RehypePrettyCodeFragment/atoms/PickProgrammingLanguage';
 
 import { useProgrammingLanguagesList } from '@hooks/useProgrammingLanguagesList';
@@ -31,7 +31,7 @@ export const ProgrammingLanguagesList: FC<IProgrammingLanguagesList> = ({ langua
 
   return (
     <div className={styles['programming-languages-list']}>
-      <div className={styles.navigation} ref={navigation}>
+      <div className={clsx(styles.navigation, 'code-wrapper-navigation')} ref={navigation}>
         {isArrowButtos && (
           <PrevButton onClick={handlePrevButton} disabled={isDisabledPrevButton}>
             <HiArrowLongLeft size={21} />

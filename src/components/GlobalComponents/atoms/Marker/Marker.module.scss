@@ -1,0 +1,10 @@
+.marker {
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  font-weight: 500;
+  background-image: linear-gradient(to right, rgba(dodgerblue, 0.1), rgba(dodgerblue, 0.7) 4%, rgba(dodgerblue, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

@@ -1,3 +1,4 @@
+import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
 import { SmallTitle } from '@GlobalComponents/atoms/SmallTitle';
 
 import { useInternationalizedRouting } from '@hooks/useInternationalizedRouting';
@@ -10,7 +11,7 @@ export const Heading = () => {
   return (
     <div className={styles.heading}>
       <SmallTitle>{postsListTitle}</SmallTitle>
-      <p>{postsListDescription}</p>
+      <Paragraph>{postsListDescription}</Paragraph>
     </div>
   );
 };

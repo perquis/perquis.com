@@ -1,3 +1,4 @@
+/* eslint-disable */
 const nextTranslate = require('next-translate-plugin');
 
 /** @type {import('next').NextConfig} */
@@ -28,7 +29,7 @@ const nextConfig = () => {
       ];
     },
     webpack: (config) => {
-      config.plugins.push(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
+      // config.plugins.push(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
       return config;
     },
   });

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import { Children, Fragment, useState } from 'react';
-import type { Children as ChildrenProps, FC } from 'react';
+import { Children, type Children as ChildrenProps, type FC, useState } from 'react';
 
 import { ShowMoreButton } from '@components/Notes/atoms/ShowMoreButton';
 
@@ -9,20 +8,19 @@ import styles from './Note.module.scss';
 type Status = 'positive' | 'negative' | 'normal';
 
 interface INote {
-  size?: number;
   status: Status;
 }
 
-export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = 'normal' }) => {
+export const Note: FC<ChildrenProps & INote> = ({ children, status = 'normal' }) => {
   const [isOpen, setOpen] = useState(false);
 
-  const elements = Children.toArray(children).splice(0, size);
-  const count = Children.count(children);
+  const childrenLength = Children.count(children);
 
   return (
     <div
       className={clsx(
         styles['note-wrapper'],
+        !isOpen && styles['is-hide'],
         status === 'normal' && styles['note-normal'],
         status === 'positive' && styles['note-positive'],
         status === 'negative' && styles['note-negative'],
@@ -30,8 +28,8 @@ export const Note: FC<ChildrenProps & INote> = ({ children, size = 3, status = '
       )}
     >
       <div className={clsx(styles.note)}>
-        {isOpen ? <>{children}</> : elements.map((child, i) => <Fragment key={i}>{child}</Fragment>)}
-        {count > 3 && !isOpen ? <ShowMoreButton onClick={() => setOpen(true)} /> : null}
+        {children}
+        {childrenLength > 3 && !isOpen ? <ShowMoreButton onClick={() => setOpen(true)} /> : null}
       </div>
       <div
         className={clsx(
