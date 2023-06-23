@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { createComment, deleteComment, updateComment } from '@libraries/api/comments';
+import { createComment, deleteComment, updateComment } from '@libraries';
 
 import { authOptions } from '../auth/[...nextauth]';
 

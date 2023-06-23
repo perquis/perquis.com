@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAllCommentsList } from '@libraries/api/comments';
+import { getAllCommentsList } from '@libraries';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

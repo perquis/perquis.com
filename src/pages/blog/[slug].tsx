@@ -3,18 +3,15 @@ import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { ParsedUrlQuery } from 'querystring';
 import type { FC } from 'react';
 
-import { BlogPage } from '@GlobalComponents/pages/BlogPage';
-
-import { client } from '@graphql/apollo/apolloClient';
+import { client } from '@apollo';
+import { BlogPageView } from '@components/globals/views';
+import { revalidate } from '@data';
 import type { Articles, ArticlesEdge } from '@graphql/databases/client';
 import { Locale } from '@graphql/databases/client';
 import { getServerPageGetArticleSlugs, getServerPageGetSlugFromNegativeLocale, getServerPageGetStaticAricle } from '@graphql/databases/server';
+import { serializedContent } from '@utils';
 
-import { serializedContent } from '@utils/serializedContent';
-
-import { revalidate } from '@data/presets';
-
-export type BlogPageProps = Record<'node', ArticlesEdge['node']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
+export type BlogPageViewProps = Record<'node', ArticlesEdge['node']> & { source: MDXRemoteSerializeResult } & { negativeSlug?: string | null };
 type TypeArticles = Articles & { locale: string };
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -92,6 +89,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   };
 };
 
-const Blog: FC<BlogPageProps> = (stories) => <BlogPage stories={stories} />;
+const Blog: FC<BlogPageViewProps> = (stories) => <BlogPageView stories={stories} />;
 
 export default Blog;

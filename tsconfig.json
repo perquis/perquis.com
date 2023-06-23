@@ -17,26 +17,7 @@
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "./@types"],
     "paths": {
-      "@pages/*": ["./src/components/global/pages/*"],
-      "@modals/*": ["./src/components/GlobalComponents/modals/*"],
-      "@stickers/*": ["./src/components/GlobalComponents/stickers/*"],
-      "@GlobalComponents/*": ["./src/components/GlobalComponents/*"],
-      "@components/*": ["./src/components/*"],
-      "@animations/*": ["./src/animations/*"],
-      "@providers/*": ["./src/providers/*"],
-      "@libraries/*": ["./src/libraries/*"],
-      "@graphql/*": ["./src/graphql/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@queries/*": ["./src/queries/*"],
-      "@helpers/*": ["./src/helpers/*"],
-      "@stories/*": ["./src/stories/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@themes/*": ["./src/themes/*"],
-      "@fonts/*": ["./src/fonts/*"],
-      "@icons/*": ["./src/icons/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@data/*": ["./src/data/*"]
+      "@*": ["./src/*"]
     },
     "verbatimModuleSyntax": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

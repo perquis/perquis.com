@@ -1,9 +1,8 @@
-import { client } from '@graphql/apollo/apolloClient';
-import { ArticlesOrderByInput } from '@graphql/databases/client';
+import { client } from '@apollo';
+import { pageSize } from '@data';
 import type { Articles, Locale, PageInfo } from '@graphql/databases/client';
+import { ArticlesOrderByInput } from '@graphql/databases/client';
 import { getServerPageArticlesListPagination } from '@graphql/databases/server';
-
-import { pageSize } from '@data/presets';
 
 interface Props {
   isEnglish: Locale[];

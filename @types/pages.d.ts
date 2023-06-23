@@ -1,3 +1,3 @@
-interface IHomePageProps {
+interface HomePageViewProps {
   technologies: string[];
 }

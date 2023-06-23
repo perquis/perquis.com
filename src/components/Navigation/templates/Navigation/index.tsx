@@ -1,5 +1,5 @@
-import { Logo } from '@components/Navigation/molecules/Logo';
-import { Actions } from '@components/Navigation/templates/Actions';
+import { Logo } from '@components/Navigation/molecules';
+import { Actions } from '@components/Navigation/templates';
 
 import styles from './Navigation.module.scss';
 

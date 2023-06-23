@@ -47,32 +47,7 @@
         "importOrderSortSpecifiers": true,
         "importOrderCaseInsensitive": true,
         "importOrderGroupNamespaceSpecifiers": true,
-        "importOrder": [
-          "^@types/(.*)$",
-          "<THIRD_PARTY_MODULES>",
-          "^@pages/(.*)$",
-          "^@GlobalComponents/(.*)$",
-          "^@stickers/(.*)$",
-          "^@modals/(.*)$",
-          "^@components/(.*)$",
-          "^@animations/(.*)$",
-          "^@libraries/(.*)$",
-          "^@providers/(.*)$",
-          "^@stories/(.*)$",
-          "^@graphql/(.*)$",
-          "^@layouts/(.*)$",
-          "^@queries/(.*)$",
-          "^@helpers/(.*)$",
-          "^@styles/(.*)$",
-          "^@themes/(.*)$",
-          "^prisma/(.*)$",
-          "^@fonts/(.*)$",
-          "^@icons/(.*)$",
-          "^@hooks/(.*)$",
-          "^@utils/(.*)$",
-          "^@data/(.*)$",
-          "^[./]"
-        ]
+        "importOrder": ["^@types/(.*)$", "<THIRD_PARTY_MODULES>", "^@", "^[./]"]
       }
     ]
   }

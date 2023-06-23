@@ -1,1 +1,3 @@
-export * from './templates/PostsList';
+export * from './molecules';
+export * from './organisms';
+export * from './templates';

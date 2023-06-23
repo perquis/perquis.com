@@ -1,17 +1,16 @@
 // @ts-ignore
-import type { IHomePageProps } from '@types/pages';
+import type { HomePageViewProps } from '@types/pages';
 
-import { dehydrate, QueryClient } from '@tanstack/react-query';
 import type { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import type { FC } from 'react';
 
-import { HomePage } from '@GlobalComponents/pages/HomePage';
-
+import { HomePageView } from '@components/globals/views';
 import { Locale } from '@graphql/databases/client';
 import { fetchArticlesListPagination } from '@graphql/libraries/getArticlesListWithPages';
 import { fetchTechnologiesList } from '@graphql/libraries/getTechnologiesListValues';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const isEnglish = locale === 'en' ? [Locale.En] : [Locale.Pl];
@@ -26,7 +25,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-const Home: FC<IHomePageProps> = ({ technologies }) => {
+const Home: FC<HomePageViewProps> = ({ technologies }) => {
   const { t } = useTranslation('home');
   const title = t('meta-title'),
     description = t('meta-description');
@@ -37,7 +36,7 @@ const Home: FC<IHomePageProps> = ({ technologies }) => {
         <title>{title + ` | PerQuis's Blog`}</title>
         <meta name="description" content={description} />
       </Head>
-      <HomePage stories={{ technologies }} />
+      <HomePageView stories={{ technologies }} />
     </>
   );
 };

@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "prisma": "prisma generate",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",

@@ -1,8 +1,7 @@
 import type { AppProps } from 'next/app';
 
 import { Provider } from '@providers/Provider';
-
-import '@styles/globals.scss';
+import '@styles/main.scss';
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (

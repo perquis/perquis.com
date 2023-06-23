@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { subscribeNewsletter } from '@libraries/api/nodemailer';
+import { subscribeNewsletter } from '@libraries';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

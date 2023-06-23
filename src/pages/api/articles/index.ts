@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { searchForArticles } from '@libraries/api/articles';
+import { searchForArticles } from '@libraries';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

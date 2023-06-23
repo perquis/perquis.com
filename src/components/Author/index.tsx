@@ -1,2 +1,4 @@
-export * from './templates/Author';
-export * from './molecules/AboutMe';
+export * from './atoms';
+export * from './molecules';
+export * from './organisms';
+export * from './templates';

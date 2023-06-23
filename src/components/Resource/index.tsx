@@ -1,1 +1,2 @@
-export * from './molecules/Resource';
+export * from './atoms';
+export * from './templates';

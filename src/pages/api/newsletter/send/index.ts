@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { sendNewsletterToSubscribers } from '@libraries/api/nodemailer';
+import { sendNewsletterToSubscribers } from '@libraries';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.headers['api-key']) return res.status(401).send({ message: 'Unauthorized.' });

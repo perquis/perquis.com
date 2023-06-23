@@ -2,17 +2,10 @@ import type { MotionProps } from 'framer-motion';
 import type { MDXRemoteProps } from 'next-mdx-remote';
 import type { ReactHTMLElementProps } from 'react';
 
-import { Image } from '@GlobalComponents/atoms/Image';
-import { Item } from '@GlobalComponents/atoms/Item';
-import { Marker } from '@GlobalComponents/atoms/Marker';
-import { NofollowLink } from '@GlobalComponents/atoms/NofollowLink';
-import { Paragraph } from '@GlobalComponents/atoms/Paragraph';
-import { WavyBold } from '@GlobalComponents/atoms/WavyBold';
-import { CodepenPlayer, YouTubePlayer } from '@GlobalComponents/players';
-
+import { Image, Item, Marker, NofollowLink, Paragraph, WavyBold } from '@components/globals/atoms';
+import { CodepenPlayer, YouTubePlayer } from '@components/globals/players';
 import { Note } from '@components/Notes';
-import { CodeWrapper, RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
-import { FirstHeadingOnTheBlogPage } from '@components/RehypePrettyCodeFragment/atoms/FirstHeadingOnTheBlogPage';
+import { CodeWrapper, FirstHeadingOnTheBlogPage, RehypePrettyCodeFragment } from '@components/RehypePrettyCodeFragment';
 import { Sandpack } from '@components/Sandpack';
 
 import styles from './components.module.scss';

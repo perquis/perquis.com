@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAllPosts } from '@libraries/api/posts';
+import { getAllPosts } from '@libraries';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;

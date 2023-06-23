@@ -1,6 +1,5 @@
+import { client } from '@apollo';
 import { gql } from '@apollo/client';
-
-import { client } from '@graphql/apollo/apolloClient';
 
 const query = gql`
   query {

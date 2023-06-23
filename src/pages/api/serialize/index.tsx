@@ -4,7 +4,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
-import { shikiOptions } from '@themes/shikiOptions';
+import { shikiOptions } from '@themes';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { content } = req.body;
