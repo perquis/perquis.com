@@ -6,7 +6,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import { TfiTrash } from 'react-icons/tfi';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { CommentProps } from '@components/Comment';
+import type { CommentProps } from '@components/locals/Comment';
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
 import { useCommentStore, useLoadingStore, useNotificationStore, useRefetchStore } from '@stories';

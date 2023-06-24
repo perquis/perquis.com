@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { Comment, LoadComment } from '@components/Comment';
 import { Button } from '@components/globals/atoms';
+import { Comment, LoadComment } from '@components/locals/Comment';
 import { useInternationalizedRouting } from '@hooks';
 import { Dashed } from '@icons/Dashed';
 import { fetchAllCommentsList } from '@libraries/fetchers';

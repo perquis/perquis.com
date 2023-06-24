@@ -3,7 +3,7 @@ import { BsGithub } from 'react-icons/bs';
 import { TbWorldWww } from 'react-icons/tb';
 
 import { SocialButton, StickyContainer } from '@components/globals/atoms';
-import { ToggleTheme } from '@components/Navigation/atoms';
+import { ToggleTheme } from '@components/locals/Navigation/atoms';
 import type { Articles } from '@graphql/databases/client';
 import { useTOCStore } from '@stories';
 

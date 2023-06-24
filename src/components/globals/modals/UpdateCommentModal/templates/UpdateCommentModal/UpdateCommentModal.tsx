@@ -1,9 +1,9 @@
 import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
 
-import { Comment } from '@components/Comment';
-import { Modal } from '@components/Modal';
-import { WriteToSomething } from '@components/WriteToSomething';
+import { Comment } from '@components/locals/Comment';
+import { Modal } from '@components/locals/Modal';
+import { WriteToSomething } from '@components/locals/WriteToSomething';
 import { useForm, useInternationalizedRouting } from '@hooks';
 import { Dashed } from '@icons/Dashed';
 import useKey from '@rooks/use-key';

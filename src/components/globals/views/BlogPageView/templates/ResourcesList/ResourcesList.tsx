@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { DirectionColumn } from '@components/globals/wrappers/DirectionColumn/DirectionColumn';
-import { Resource } from '@components/Resource';
+import { Resource } from '@components/locals/Resource';
 import type { GetStaticAriclePageQuery } from '@graphql/databases/client';
 import { useInternationalizedRouting } from '@hooks';
 

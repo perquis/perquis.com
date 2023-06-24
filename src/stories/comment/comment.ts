@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { CommentProps } from '@components/Comment';
+import type { CommentProps } from '@components/locals/Comment';
 
 interface State {
   isOpenUpdateCommentModal: boolean;

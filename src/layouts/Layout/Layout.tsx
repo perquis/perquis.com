@@ -4,8 +4,8 @@ import type { Children, FC } from 'react';
 
 import { Blur, Footer, NotificationsList } from '@components/globals/atoms';
 import { UpdateCommentModal } from '@components/globals/modals/UpdateCommentModal';
-import { LoadingMessage } from '@components/Loader';
-import { Navigation } from '@components/Navigation';
+import { LoadingMessage } from '@components/locals/Loader';
+import { Navigation } from '@components/locals/Navigation';
 import { useBlurStore, useCommentStore, useLoadingStore, useModalStore } from '@stories';
 
 import styles from './Layout.module.scss';

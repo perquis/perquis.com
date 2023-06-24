@@ -1,11 +1,11 @@
 /* eslint-disable */
 import type { NextPage } from 'next';
-import { NextRouter, useRouter } from 'next/router';
+import { type NextRouter, useRouter } from 'next/router';
 import type React from 'react';
 
 import type * as Apollo from '@apollo/client';
-import { QueryHookOptions, useQuery } from '@apollo/client';
 import type { NormalizedCacheObject } from '@apollo/client';
+import { type QueryHookOptions, useQuery } from '@apollo/client';
 
 import * as Operations from './client';
 

@@ -4,9 +4,9 @@ import type { IHomePageProps } from '@types/pages';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 
-import { AboutMe, Author } from '@components/Author';
 import { WavyLines } from '@components/globals/atoms';
-import { PostsList } from '@components/PostsList';
+import { AboutMe, Author } from '@components/locals/Author';
+import { PostsList } from '@components/locals/PostsList';
 import { useTechnologiesStore } from '@stories';
 
 export const HomePageView: FC<Record<'stories', IHomePageProps>> = ({ stories: { technologies } }) => {

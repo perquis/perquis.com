@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { SalyImage } from '@components/globals/modals/NewsletterModal/atoms/SalyImage/SalyImage';
 import { NewsletterModalForm } from '@components/globals/modals/NewsletterModal/molecules/NewsletterModalForm/NewsletterModalForm';
 import { TitleAndSubtitle } from '@components/globals/modals/NewsletterModal/molecules/TitleAndSubtitle/TitleAndSubtitle';
-import { Modal } from '@components/Modal';
+import { Modal } from '@components/locals/Modal';
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
 import { useModalStore } from '@stories';

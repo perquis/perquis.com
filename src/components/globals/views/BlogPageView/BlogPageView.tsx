@@ -6,13 +6,13 @@ import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import type { BlogPageViewProps } from 'src/pages/blog/[slug]';
 
-import { Details, ReadingTime } from '@components/Article';
-import { Author } from '@components/Author';
 import { NewsletterObserver } from '@components/globals/observers';
 import { Stickers } from '@components/globals/stickers/index';
 import { DetailsWrapper, FullWidthContainer } from '@components/globals/wrappers';
-import { MarkdownToHTML } from '@components/MarkdownToHTML';
-import { TableOfContents } from '@components/TableOfContents';
+import { Details, ReadingTime } from '@components/locals/Article';
+import { Author } from '@components/locals/Author';
+import { MarkdownToHTML } from '@components/locals/MarkdownToHTML';
+import { TableOfContents } from '@components/locals/TableOfContents';
 import type { Articles } from '@graphql/databases/client';
 import { useObserver } from '@hooks';
 import { usePostsListStore, useTOCStore } from '@stories';

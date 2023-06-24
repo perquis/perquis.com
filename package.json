@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "prisma": "prisma generate",
+    "type:check": "tsc --noEmit",
     "generate": "graphql-codegen",
     "format": "prettier --write ./src"
   },

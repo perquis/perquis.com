@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 
 import { Paragraph } from '@components/globals/atoms';
 import { DirectionColumn } from '@components/globals/wrappers/DirectionColumn/DirectionColumn';
-import { WriteToSomething } from '@components/WriteToSomething';
+import { WriteToSomething } from '@components/locals/WriteToSomething';
 import { useForm, useInternationalizedRouting } from '@hooks';
 
 import { CommentsWrapper } from '../../organisms';

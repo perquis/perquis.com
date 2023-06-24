@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 
-import { Notification } from '@components/Notification';
+import { Notification } from '@components/locals/Notification';
 import { useNotificationStore } from '@stories';
 
 import styles from './NotificationsList.module.scss';
