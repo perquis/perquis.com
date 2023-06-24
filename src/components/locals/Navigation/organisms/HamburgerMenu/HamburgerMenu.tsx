@@ -1,29 +1,24 @@
-import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
-import { useRef } from 'react';
+import { type MutableRefObject, useMemo, useRef } from 'react';
 
 import { DropDownMenu } from '@components/locals/Navigation/molecules';
 import { useDropdownMenu } from '@hooks';
-import { useBlurStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './HamburgerMenu.module.scss';
 
 export const HamburgerMenu = () => {
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
-  const [isBlur, updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);
-  const toggleActive = () => updateIsBlur(!isBlur);
+  const [open, updateOpen] = useGlobalStore(({ open, updateOpen }) => [open, updateOpen]);
+  const toggleActive = () => updateOpen(null);
 
-  useDropdownMenu(toggleActive, { ref, state: { isActive: isBlur, setActive: updateIsBlur as Dispatch<SetStateAction<boolean>> } });
+  const isActive = useMemo(() => open === 'blur', [open]);
+
+  useDropdownMenu(toggleActive, { ref, state: { isActive } });
 
   return (
     <div className={styles.wrapper} ref={ref}>
-      <button
-        className={`${styles['hamburger-menu']} ${isBlur ? styles.active : ''}`}
-        onClick={() => {
-          updateIsBlur(true);
-          toggleActive();
-        }}
-      />
-      <DropDownMenu isActive={isBlur} />
+      <button className={`${styles['hamburger-menu']} ${isActive ? styles.active : ''}`} onClick={() => updateOpen('blur')} />
+      <DropDownMenu isActive={isActive} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type { CommentProps } from '@components/locals/Comment';
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
-import { useCommentStore, useGlobalStore, useLoadingStore, useRefetchStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import { useInternationalizedRouting } from '../useInternationalizedRouting/useInternationalizedRouting';
 
@@ -19,30 +19,35 @@ export const useCommentOptions = ({ commentId, userId, ...rest }: CommentProps &
   const [isOpen, toggleOpen] = useState(false);
   const { commentOptionsEdit, commentOptionsDelete, notificaionError, notificationSuccessDeleteComment, notificaionTextSuccess, notificaionTextError } =
     useInternationalizedRouting('global');
-  const [updateNotification, deleteNotification] = useGlobalStore(({ updateNotification, deleteNotification }) => [updateNotification, deleteNotification]);
-  const [isRefetch, updateIsRefetch] = useRefetchStore((state) => [state.isRefetch, state.updateIsRefetch]);
+  const [updateNotification, deleteNotification, updateLoadingStatus, updateOpen, updateComment] = useGlobalStore(
+    ({ updateNotification, deleteNotification, updateLoadingStatus, updateOpen, updateComment }) => [
+      updateNotification,
+      deleteNotification,
+      updateLoadingStatus,
+      updateOpen,
+      updateComment,
+    ]
+  );
 
-  const [updateIsLoadingWhileSendingRequest] = useLoadingStore((state) => [state.updateIsLoadingWhileSendingRequest]);
-
-  const [updateComment] = useCommentStore((state) => [state.updateComment]);
-
-  const handleUpdateComment = () => updateComment({ ...rest, userId }, true);
+  const handleUpdateComment = () => {
+    updateOpen('comment');
+    updateComment({ ...rest, userId });
+  };
 
   const handleDeleteComment = () => {
     const id = uuidv4();
-    updateIsLoadingWhileSendingRequest(true);
+    updateLoadingStatus('comment');
 
     axios
       .delete('/api/comments', { data: { id: commentId, userId: session?.user.id } })
       .then(() => {
-        updateIsRefetch(!isRefetch);
-        updateIsLoadingWhileSendingRequest(false);
+        updateLoadingStatus(null);
         updateNotification({ id, status: 'success', title: notificaionTextSuccess ?? '', msg: notificationSuccessDeleteComment ?? '' });
 
         setTimeout(() => deleteNotification(id), 6000);
       })
       .catch(() => {
-        updateIsLoadingWhileSendingRequest(false);
+        updateLoadingStatus(null);
         updateNotification({ id, status: 'error', title: notificaionTextError ?? '', msg: notificaionError ?? '' });
 
         setTimeout(() => deleteNotification(id), 6000);

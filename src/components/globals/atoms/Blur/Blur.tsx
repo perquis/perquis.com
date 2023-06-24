@@ -2,15 +2,15 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 
 import useKey from '@rooks/use-key';
-import { useBlurStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './Blur.module.scss';
 
 export const Blur = () => {
-  const [isBlur, updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);
-  const closeBlur = () => updateIsBlur(false);
+  const [open, updateOpen] = useGlobalStore(({ open, updateOpen }) => [open, updateOpen]);
+  const closeBlur = () => updateOpen(null);
 
-  useKey('Escape', closeBlur, { when: isBlur });
+  useKey('Escape', closeBlur, { when: open === 'blur' });
   useEffect(() => {
     document.body.dataset.scroll = 'block';
 

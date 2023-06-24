@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 
-import { useObserverStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 export const usePushOnBlogPage = () => {
   const { push, pathname, locale: currentLocale } = useRouter();
-  const [negativeSlug] = useObserverStore((state) => [state.negativeSlug]);
+  const [postTitleInAlternateLanguage] = useGlobalStore(({ postTitleInAlternateLanguage }) => [postTitleInAlternateLanguage]);
 
   const locale = currentLocale === 'en' ? 'pl' : 'en';
-  const pushOnBlogPage = pathname !== '/' ? `${pathname.replace('[slug]', '')}${negativeSlug}` : '/';
+  const pushOnBlogPage = pathname !== '/' ? `${pathname.replace('[slug]', '')}${postTitleInAlternateLanguage}` : '/';
 
   const handleChangeLocalesOnBlogPage = () => push(pushOnBlogPage, pushOnBlogPage, { locale });
 

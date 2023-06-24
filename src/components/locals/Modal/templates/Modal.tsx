@@ -6,14 +6,12 @@ import { createPortal } from 'react-dom';
 import FocusLock from 'react-focus-lock';
 
 import { vars } from '@animations';
-import { useBlurStore } from '@stories';
 
 import styles from './Modal.module.scss';
 
 export const Modal: FC<{ id: ModalId } & Omit<ReactHTMLElementProps<HTMLDivElement>, 'ref'> & MotionProps> = ({ children, id, ...props }) => {
   const [mounted, setMounted] = useState(false);
   const ref = useRef<Element | null>(null);
-  const [_isBlur, _updateIsBlur] = useBlurStore((state) => [state.isBlur, state.updateIsBlur]);
 
   useEffect(() => {
     ref.current = document.querySelector<HTMLElement>(id);

@@ -20,7 +20,7 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
   const [isActive, setActive] = useState(false);
   const toggleOptions = () => setActive(!isActive);
-  useDropdownMenu(toggleOptions, { ref, state: { isActive, setActive } });
+  useDropdownMenu(toggleOptions, { ref, state: { isActive } });
 
   return (
     <div className={styles.wrapper}>

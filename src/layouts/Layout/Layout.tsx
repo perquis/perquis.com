@@ -1,21 +1,19 @@
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
-import type { Children, FC } from 'react';
+import { type Children, type FC, useMemo } from 'react';
 
 import { Blur, Footer, NotificationsList } from '@components/globals/atoms';
 import { UpdateCommentModal } from '@components/globals/modals/UpdateCommentModal';
 import { LoadingMessage } from '@components/locals/Loader';
 import { Navigation } from '@components/locals/Navigation';
-import { useBlurStore, useCommentStore, useLoadingStore, useModalStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './Layout.module.scss';
 
 export const Layout: FC<Children> = ({ children }) => {
-  const [isLoadingWhileSendingRequest] = useLoadingStore((state) => [state.isLoadingWhileSendingRequest]);
-  const [isOpenUpdateCommentModal] = useCommentStore((state) => [state.isOpenUpdateCommentModal]);
-  const [isNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen]);
-  const [isBlur] = useBlurStore((state) => [state.isBlur]);
-  const condition = isBlur || isNewsletterModalOpen || isOpenUpdateCommentModal;
+  const [loadingStatus, open] = useGlobalStore(({ loadingStatus, open }) => [loadingStatus, open]);
+  const condition = useMemo(() => open === 'blur' || open === 'newsletter' || open === 'comment', [open]);
+  const isCommentModal = useMemo(() => open === 'comment', [open]);
 
   return (
     <>
@@ -23,9 +21,9 @@ export const Layout: FC<Children> = ({ children }) => {
         <link rel="shortcut icon" href="/images/Logo.svg" />
       </Head>
       <NotificationsList />
-      <AnimatePresence>{isOpenUpdateCommentModal && <UpdateCommentModal />}</AnimatePresence>
+      <AnimatePresence>{isCommentModal && <UpdateCommentModal />}</AnimatePresence>
       <AnimatePresence>{condition && <Blur />}</AnimatePresence>
-      <AnimatePresence>{isLoadingWhileSendingRequest && <LoadingMessage />}</AnimatePresence>
+      <AnimatePresence>{loadingStatus && <LoadingMessage />}</AnimatePresence>
       <Navigation />
       <div className={styles.layout}>{children}</div>
       <Footer />

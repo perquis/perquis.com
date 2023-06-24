@@ -11,12 +11,14 @@ interface State {
   postId: string;
   isLoading: boolean;
   posts: RequiredArticle[];
+  postTitleInAlternateLanguage: string;
 }
 
 interface Action {
   updatePosts: (posts: State['posts']) => void;
   updatePostId: (postId: State['postId']) => void;
   updateIsLoading: (isLoading: State['isLoading']) => void;
+  updatePostTitleInAlternateLanguage: (postTitleInAlternateLanguage: State['postTitleInAlternateLanguage']) => void;
 }
 
 export type ArticleSlice = State & Action;
@@ -26,6 +28,7 @@ export const createArticleSlice: StateCreator<ArticleSlice, [], [], ArticleSlice
   postId: '',
   foundPosts: [],
   isLoading: false,
+  postTitleInAlternateLanguage: '',
   updatePostId: (postId) =>
     set(() => ({
       ...get(),
@@ -40,5 +43,10 @@ export const createArticleSlice: StateCreator<ArticleSlice, [], [], ArticleSlice
     set(() => ({
       ...get(),
       posts,
+    })),
+  updatePostTitleInAlternateLanguage: (postTitleInAlternateLanguage) =>
+    set(() => ({
+      ...get(),
+      postTitleInAlternateLanguage,
     })),
 });

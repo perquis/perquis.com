@@ -8,17 +8,22 @@ import { useForm, useInternationalizedRouting } from '@hooks';
 import { Dashed } from '@icons/Dashed';
 import useKey from '@rooks/use-key';
 import useOutsideClick from '@rooks/use-outside-click';
-import { useCommentStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './UpdateCommentModal.module.scss';
 
 export const UpdateCommentModal = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [comment, updateComment] = useCommentStore((state) => [state.comment, state.updateComment]);
+  const [comment, updateComment, updateOpen] = useGlobalStore(({ comment, updateComment, updateOpen }) => [comment, updateComment, updateOpen]);
   const { modalUpdateComment } = useInternationalizedRouting('global');
 
-  useKey('Escape', () => updateComment(undefined, false));
-  useOutsideClick(ref as MutableRefObject<HTMLDivElement>, () => updateComment(undefined, false));
+  const clearComment = () => {
+    updateOpen(null);
+    updateComment(null);
+  };
+
+  useKey('Escape', clearComment);
+  useOutsideClick(ref as MutableRefObject<HTMLDivElement>, clearComment);
 
   const form = useForm('update-comment', comment);
 

@@ -5,16 +5,15 @@ import { Comment, LoadComment } from '@components/locals/Comment';
 import { useInternationalizedRouting } from '@hooks';
 import { Dashed } from '@icons/Dashed';
 import { fetchAllCommentsList } from '@libraries/fetchers';
-import { useGlobalStore, useRefetchStore } from '@stories';
+import { useGlobalStore } from '@stories';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const CommentsWrapper = () => {
-  const [isRefetch] = useRefetchStore((state) => [state.isRefetch]);
-  const [postId] = useGlobalStore(({ postId }) => [postId]);
+  const [postId, loadingStatus] = useGlobalStore(({ postId, loadingStatus }) => [postId, loadingStatus]);
   const { locale } = useRouter();
 
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['comments', postId, locale, isRefetch],
+    queryKey: ['comments', postId, locale, loadingStatus],
     queryFn: ({ pageParam = 0 }) => fetchAllCommentsList(postId.length > 0 ? postId : 'default', pageParam),
     getNextPageParam: ({ skipPage }) => skipPage,
   });

@@ -4,7 +4,7 @@ import type { FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useKey from '@rooks/use-key';
-import { useCommentStore, useFormStore, useGlobalStore, useLoadingStore, useRefetchStore } from '@stories';
+import { useFormStore, useGlobalStore } from '@stories';
 
 import { useInternationalizedRouting } from '../useInternationalizedRouting/useInternationalizedRouting';
 
@@ -26,10 +26,10 @@ export type UseFormResult =
 
 const initialFormState = { content: '', isDisabledCondition: false, updateKeywords: () => null, handleSubmit: undefined };
 
-export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormResult => {
+export const useForm = (formStatus: FormStatus, body?: PrismaComment | null): UseFormResult => {
   const { data, status } = useSession();
   const isUser = status !== 'authenticated';
-  const [postId] = useGlobalStore(({ postId }) => [postId]);
+  const [postId, updateLoadingStatus] = useGlobalStore(({ postId, updateLoadingStatus }) => [postId, updateLoadingStatus]);
   const [isDisabled, commentKeywords, updateCommentKeywords, updateDisabledState, modalKeywords, updateModalKeywords] = useFormStore((state) => [
     state.isDisabled,
     state.commentKeywords,
@@ -38,16 +38,15 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
     state.modalKeywords,
     state.updateModalKeywords,
   ]);
-  const [updateNotification, deleteNotification] = useGlobalStore(({ updateNotification, deleteNotification }) => [updateNotification, deleteNotification]);
-
-  const [isRefetch, updateIsRefetch] = useRefetchStore((state) => [state.isRefetch, state.updateIsRefetch]);
+  const [updateNotification, deleteNotification, updateOpen, updateComment] = useGlobalStore(({ updateNotification, deleteNotification, updateOpen, updateComment }) => [
+    updateNotification,
+    deleteNotification,
+    updateOpen,
+    updateComment,
+  ]);
 
   const { notificationSuccess, notificaionError, notificaionTextSuccess, notificaionTextError, notificationSuccessUpdateComment } = useInternationalizedRouting('global');
   const isDisabledCondition = isDisabled || isUser;
-
-  const [updateIsLoadingWhileSendingRequest] = useLoadingStore((state) => [state.updateIsLoadingWhileSendingRequest]);
-
-  const [updateComment] = useCommentStore((state) => [state.updateComment]);
 
   useKey('Escape', () => {
     updateModalKeywords('');
@@ -58,7 +57,7 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       updateDisabledState(true);
-      updateIsLoadingWhileSendingRequest(true);
+      updateLoadingStatus('comment');
 
       if (data?.user?.email) {
         const id = uuidv4();
@@ -68,15 +67,14 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
           .post('/api/comments', { email, postId, content: commentKeywords })
           .then(() => {
             updateDisabledState(false);
-            updateIsRefetch(!isRefetch);
-            updateIsLoadingWhileSendingRequest(false);
+            updateLoadingStatus(null);
             updateNotification({ id, status: 'success', title: notificaionTextSuccess ?? '', msg: notificationSuccess ?? '' });
 
             setTimeout(() => deleteNotification(id), 6000);
           })
           .catch(() => {
             updateDisabledState(false);
-            updateIsLoadingWhileSendingRequest(false);
+            updateLoadingStatus(null);
             updateNotification({ id, status: 'error', title: notificaionTextError ?? '', msg: notificaionError ?? '' });
 
             setTimeout(() => deleteNotification(id), 6000);
@@ -93,7 +91,7 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       updateDisabledState(true);
-      updateIsLoadingWhileSendingRequest(true);
+      updateLoadingStatus('comment');
 
       if (data?.user.id) {
         const id = uuidv4();
@@ -102,16 +100,16 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
           .put('/api/comments', { id: body?.id, userId: data.user.id, content: modalKeywords })
           .then(() => {
             updateDisabledState(false);
-            updateIsRefetch(!isRefetch);
-            updateIsLoadingWhileSendingRequest(false);
             updateNotification({ id, status: 'success', title: notificaionTextSuccess ?? '', msg: notificationSuccessUpdateComment ?? '' });
-            updateComment(undefined, false);
+            updateOpen(null);
+            updateComment(null);
+            updateLoadingStatus(null);
 
             setTimeout(() => deleteNotification(id), 6000);
           })
           .catch(() => {
             updateDisabledState(false);
-            updateIsLoadingWhileSendingRequest(false);
+            updateLoadingStatus(null);
             updateNotification({ id, status: 'error', title: notificaionTextError ?? '', msg: notificaionError ?? '' });
 
             setTimeout(() => deleteNotification(id), 6000);

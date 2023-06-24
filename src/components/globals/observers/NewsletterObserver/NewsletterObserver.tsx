@@ -4,16 +4,16 @@ import { useEffect } from 'react';
 import { NewsletterModal } from '@components/globals/modals/NewsletterModal';
 import { newsletterModalPattern } from '@data';
 import { useProgressYScroll } from '@hooks';
-import { useModalStore } from '@stories';
+import { useGlobalStore } from '@stories';
 import { hasCookie } from '@utils';
 
 export const NewsletterObserver = () => {
   const { progressYScroll } = useProgressYScroll();
-  const [isNewsletterModalOpen, updateNewsletterModalOpen] = useModalStore((state) => [state.isNewsletterModalOpen, state.updateNewsletterModalOpen]);
+  const [open, updateOpen] = useGlobalStore(({ open, updateOpen }) => [open, updateOpen]);
 
   useEffect(() => {
-    if (progressYScroll > 50 && !hasCookie(newsletterModalPattern) && window.innerWidth > 1024) updateNewsletterModalOpen(true);
-  }, [progressYScroll, updateNewsletterModalOpen]);
+    if (progressYScroll > 50 && !hasCookie(newsletterModalPattern) && window.innerWidth > 1024) updateOpen('newsletter');
+  }, [progressYScroll, updateOpen]);
 
-  return <AnimatePresence>{isNewsletterModalOpen && <NewsletterModal />}</AnimatePresence>;
+  return <AnimatePresence>{open === 'newsletter' && <NewsletterModal />}</AnimatePresence>;
 };
