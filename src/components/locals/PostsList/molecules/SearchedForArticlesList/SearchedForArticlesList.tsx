@@ -1,14 +1,14 @@
 import { Article } from '@components/locals/Article';
 import type { Articles } from '@graphql/databases/client';
-import { useArticlesStore } from '@stories';
+import { useGlobalStore } from '@stories';
 import { isNotFourteenDaysAgo } from '@utils';
 
 export const SearchedForArticlesList = () => {
-  const [searchedForArticlesList] = useArticlesStore((state) => [state.searchedForArticlesList]);
+  const [posts] = useGlobalStore(({ posts }) => [posts]);
 
-  return searchedForArticlesList.length > 0 ? (
+  return posts.length > 0 ? (
     <>
-      {searchedForArticlesList.map((article, i) => (
+      {posts.map((article, i) => (
         <Article key={i} article={article as Articles} isNewArticle={isNotFourteenDaysAgo(article.createdAt)} />
       ))}
     </>

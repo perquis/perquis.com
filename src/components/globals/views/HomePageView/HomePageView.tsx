@@ -7,14 +7,14 @@ import { useEffect } from 'react';
 import { WavyLines } from '@components/globals/atoms';
 import { AboutMe, Author } from '@components/locals/Author';
 import { PostsList } from '@components/locals/PostsList';
-import { useTechnologiesStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 export const HomePageView: FC<Record<'stories', IHomePageProps>> = ({ stories: { technologies } }) => {
-  const [updateTechnologiesList] = useTechnologiesStore((state) => [state.updateTechnologiesList]);
+  const [updateAllItems] = useGlobalStore(({ updateAllItems }) => [updateAllItems]);
 
   useEffect(() => {
-    updateTechnologiesList(technologies);
-  }, [technologies, updateTechnologiesList]);
+    updateAllItems(technologies);
+  }, [technologies, updateAllItems]);
 
   return (
     <>

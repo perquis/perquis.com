@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import { vars } from '@animations';
 import { Dot } from '@components/globals/atoms';
 import type { CommentProps } from '@components/locals/Comment/templates';
-import { pageSize } from '@data/presets/presets';
+import { pageSize } from '@data';
 import { useCommentOptions } from '@hooks';
 
 import styles from './Options.module.scss';

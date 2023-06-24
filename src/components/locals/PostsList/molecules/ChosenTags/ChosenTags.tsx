@@ -1,9 +1,9 @@
 import { TagsList } from '@components/globals/molecules';
 import { DeleteTechnology } from '@components/locals/SearchBar/atoms';
-import { useTechnologiesStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 export const ChosenTags = () => {
-  const [technologies] = useTechnologiesStore((state) => [state.technologies]);
+  const [technologies] = useGlobalStore(({ selected }) => [selected]);
 
   return technologies.length > 0 ? (
     <TagsList>

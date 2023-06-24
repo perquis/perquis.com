@@ -15,14 +15,14 @@ import { MarkdownToHTML } from '@components/locals/MarkdownToHTML';
 import { TableOfContents } from '@components/locals/TableOfContents';
 import type { Articles } from '@graphql/databases/client';
 import { useObserver } from '@hooks';
-import { usePostsListStore, useTOCStore } from '@stories';
+import { useGlobalStore, useTOCStore } from '@stories';
 
 import { CommentsList, ResourcesList, StickyHelpersList } from './templates';
 
 export const BlogPageView: FC<Record<'stories', BlogPageViewProps>> = ({ stories: { node, source, negativeSlug } }) => {
   const { slug, thumbnail, createdAt, tags, title, resources, introduction, content, socials, metaDescription } = node;
 
-  const [updatePostId] = usePostsListStore((state) => [state.updatePostId]);
+  const [updatePostId] = useGlobalStore(({ updatePostId }) => [updatePostId]);
   const { query } = useRouter();
 
   useObserver({ negativeSlug });

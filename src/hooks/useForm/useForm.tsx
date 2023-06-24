@@ -4,7 +4,7 @@ import type { FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useKey from '@rooks/use-key';
-import { useCommentStore, useFormStore, useLoadingStore, useNotificationStore, usePostsListStore, useRefetchStore } from '@stories';
+import { useCommentStore, useFormStore, useGlobalStore, useLoadingStore, useNotificationStore, useRefetchStore } from '@stories';
 
 import { useInternationalizedRouting } from '../useInternationalizedRouting/useInternationalizedRouting';
 
@@ -29,7 +29,7 @@ const initialFormState = { content: '', isDisabledCondition: false, updateKeywor
 export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormResult => {
   const { data, status } = useSession();
   const isUser = status !== 'authenticated';
-  const [postId] = usePostsListStore((state) => [state.postId]);
+  const [postId] = useGlobalStore(({ postId }) => [postId]);
   const [isDisabled, commentKeywords, updateCommentKeywords, updateDisabledState, modalKeywords, updateModalKeywords] = useFormStore((state) => [
     state.isDisabled,
     state.commentKeywords,

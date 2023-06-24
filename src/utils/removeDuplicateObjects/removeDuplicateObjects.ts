@@ -1,4 +1,4 @@
-import type { PickedArticleProps } from '@stories';
+import type { PickedArticleProps } from '@stories/global/slices';
 
 export const removeDuplicateObjects = <T extends PickedArticleProps>(array: T[], key: keyof PickedArticleProps) =>
   array.reduce((uniqueArray, currentObject) => {

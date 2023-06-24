@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useProgressYScroll } from '@hooks';
 import { fetchAllArticlesListPagination } from '@libraries/fetchers';
-import { useSearchBarStore, useTechnologiesStore } from '@stories';
+import { useGlobalStore } from '@stories';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const useFilteringArticlesByDetails = () => {
-  const [title] = useSearchBarStore((state) => [state.keywords, state.status]);
-  const [tags] = useTechnologiesStore((state) => [state.technologies]);
+  const [tags, title] = useGlobalStore(({ selected, keywords }) => [selected, keywords]);
   const { progressYScroll } = useProgressYScroll();
   const { locale } = useRouter();
 
@@ -28,8 +27,8 @@ export const useFilteringArticlesByDetails = () => {
     if (progressYScroll > 65 && hasNextPage) fetchNextPage();
   }, [progressYScroll, hasNextPage, fetchNextPage]);
 
-  const isNotFoundArticles = articles?.pages[0].edges.length === 0;
-  const pageSize = articles?.pages[articles?.pages.length - 1].pageInfo.pageSize ?? 0;
+  const isNotFoundArticles = useMemo(() => articles?.pages[0].edges.length === 0, [articles?.pages]);
+  const pageSize = useMemo(() => articles?.pages[articles?.pages.length - 1].pageInfo.pageSize ?? 0, [articles?.pages]);
 
   return { articles, pageSize, isLoading, isFetching, isNotFoundArticles };
 };

@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import type { FC, HTMLProps } from 'react';
+import { type FC, type HTMLProps, useMemo } from 'react';
 import FocusLock from 'react-focus-lock';
 
 import { vars } from '@animations';
 import { Technology } from '@components/locals/SearchBar/atoms';
 import type { ExtendedRefs, ReferenceType } from '@floating-ui/react';
-import { useTechnologiesStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './SelectOptions.module.scss';
 
@@ -16,9 +16,9 @@ interface ISelectOptions {
 }
 
 export const SelectOptions: FC<Record<'options', ISelectOptions>> = ({ options: { y, refs, getFloatingProps } }) => {
-  const top = y ?? 0;
-  const positionCond = top > 0;
-  const [compareTechnologies, technologies] = useTechnologiesStore((state) => [state.technologies, state.getAllTechnologiesList]);
+  const top = useMemo(() => y ?? 0, [y]);
+  const positionCond = useMemo(() => top > 0, [top]);
+  const [selected, allItems] = useGlobalStore(({ selected, allItems }) => [selected, allItems]);
 
   return (
     <FocusLock>
@@ -32,8 +32,8 @@ export const SelectOptions: FC<Record<'options', ISelectOptions>> = ({ options: 
         exit={positionCond ? 'exit' : 'mirror'}
         initial={positionCond ? 'initial' : 'mirror'}
       >
-        {technologies.map((technology) => (
-          <Technology key={technology} isSelected={compareTechnologies.includes(technology)}>
+        {allItems.map((technology) => (
+          <Technology key={technology} isSelected={selected.includes(technology)}>
             {technology}
           </Technology>
         ))}
