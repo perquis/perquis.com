@@ -19,7 +19,7 @@ export const SearchBar = () => {
     else if (keywords.length > 0 && technologies.length === 0) updateStatus('search');
     else if (keywords.length > 0 && technologies.length > 0) updateStatus('search-tags');
     else {
-      updateStatus('');
+      updateStatus(null);
       updatePosts([]);
     }
   }, [keywords, technologies, updateStatus, updatePosts]);

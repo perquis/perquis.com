@@ -3,12 +3,12 @@ import type { FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useKey from '@rooks/use-key';
-import { useFormStore, useLoadingStore, useModalStore, useNotificationStore } from '@stories';
+import { useFormStore, useGlobalStore, useLoadingStore, useModalStore } from '@stories';
 
 import { useInternationalizedRouting } from '../useInternationalizedRouting/useInternationalizedRouting';
 
 export const useNewsletter = (isModal?: boolean) => {
-  const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
+  const [updateNotification, deleteNotification] = useGlobalStore(({ updateNotification, deleteNotification }) => [updateNotification, deleteNotification]);
   const [email, updateEmailKeywords] = useFormStore((state) => [state.emailKeywords, state.updateEmailKeywords]);
   const [updateNewsletterModalOpen] = useModalStore((state) => [state.updateNewsletterModalOpen]);
 

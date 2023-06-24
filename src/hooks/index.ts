@@ -9,6 +9,7 @@ export * from './useInternationalizedRouting/useInternationalizedRouting';
 export * from './useLoadColors/useLoadColors';
 export * from './useNewsletter/useNewsletter';
 export * from './useObserver/useObserver';
+export * from './usePersistLocaleCookie/usePersistLocaleCookie';
 export * from './useProgrammingLanguagesList/useProgrammingLanguagesList';
 export * from './useProgressYScroll/useProgressYScroll';
 export * from './usePushOnBlogPage/usePushOnBlogPage';

@@ -1,10 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { ArticleSlice, SearchSlice, TechnologiesSlice } from './slices';
-import { createArticleSlice, createSearchSlice, createTechnologiesSlice } from './slices';
+import {
+  type ArticleSlice,
+  createArticleSlice,
+  createNotificationsSlice,
+  createSearchSlice,
+  createTechnologiesSlice,
+  type NotificationsSlice,
+  type SearchSlice,
+  type TechnologiesSlice,
+} from './slices';
 
-type Store = ArticleSlice & SearchSlice & TechnologiesSlice;
+type Store = ArticleSlice & SearchSlice & TechnologiesSlice & NotificationsSlice;
 
 export const useGlobalStore = create<Store>()(
   persist(
@@ -12,6 +20,7 @@ export const useGlobalStore = create<Store>()(
       ...createSearchSlice(...set),
       ...createArticleSlice(...set),
       ...createTechnologiesSlice(...set),
+      ...createNotificationsSlice(...set),
     }),
     {
       name: 'global-storage',

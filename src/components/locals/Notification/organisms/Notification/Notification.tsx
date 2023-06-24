@@ -7,7 +7,7 @@ import { DirectionColumn } from '@components/globals/wrappers';
 import { FeaturedWarning } from '@components/locals/Notification/atoms/FeaturedWarning/FeaturedWarning';
 import { Message } from '@components/locals/Notification/atoms/Message/Message';
 import { NotificationStatusIcon } from '@components/locals/Notification/molecules/NotificationStatusIcon/NotificationStatusIcon';
-import type { Notification as NotificationType } from '@stories';
+import type { Notification as NotificationType } from '@stories/global/slices/notificationsSlice/notificationsSlice';
 
 import styles from './Notification.module.scss';
 

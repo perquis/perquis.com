@@ -4,7 +4,7 @@ import { BiCheck } from 'react-icons/bi';
 import { IoCloseSharp, IoInformation } from 'react-icons/io5';
 import { WiStormWarning } from 'react-icons/wi';
 
-import type { Notification } from '@stories';
+import type { Notification } from '@stories/global/slices/notificationsSlice/notificationsSlice';
 
 import styles from './NotificationStatusIcon.module.scss';
 

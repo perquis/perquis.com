@@ -6,12 +6,14 @@ import { useState } from 'react';
 
 import { client } from '@apollo';
 import { ApolloProvider } from '@apollo/client';
+import { usePersistLocaleCookie } from '@hooks';
 import { GlobalLayout, Layout, WaviesLayout } from '@layouts';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const Provider: FC<Children & { session: any; pageProps: any }> = ({ children, session, pageProps }) => {
   const [queryClient] = useState(() => new QueryClient());
+  usePersistLocaleCookie();
 
   return (
     <QueryClientProvider client={queryClient}>

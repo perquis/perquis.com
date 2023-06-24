@@ -1,12 +1,12 @@
 import { AnimatePresence } from 'framer-motion';
 
 import { Notification } from '@components/locals/Notification';
-import { useNotificationStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './NotificationsList.module.scss';
 
 export const NotificationsList = () => {
-  const [notifications] = useNotificationStore((state) => [state.notifications]);
+  const [notifications] = useGlobalStore(({ notifications }) => [notifications]);
 
   return (
     <div className={styles['notifications-list']}>

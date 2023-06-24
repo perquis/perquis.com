@@ -5,12 +5,12 @@ import { BsClipboard, BsClipboardCheck } from 'react-icons/bs';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useInternationalizedRouting } from '@hooks';
-import { useNotificationStore } from '@stories';
+import { useGlobalStore } from '@stories';
 
 import styles from './CopyButton.module.scss';
 
 export const CopyButton: FC<{ text: string }> = ({ text }) => {
-  const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
+  const [updateNotification, deleteNotification] = useGlobalStore(({ updateNotification, deleteNotification }) => [updateNotification, deleteNotification]);
   const { notificaionInfoCopyToClipboard, notificaionTextInfo } = useInternationalizedRouting('global');
   const [isCopied, setIsCopied] = useState(false);
   const size = 18;

@@ -1,7 +1,7 @@
 import type { StateCreator } from 'zustand';
 
 interface State {
-  status: '' | 'tags' | 'search' | 'search-tags';
+  status: null | 'tags' | 'search' | 'search-tags';
   keywords: string;
 }
 
@@ -13,7 +13,7 @@ interface Action {
 export type SearchSlice = State & Action;
 
 export const createSearchSlice: StateCreator<SearchSlice, [], [], SearchSlice> = (set, get) => ({
-  status: '',
+  status: null,
   keywords: '',
   updateStatus: (status) =>
     set(() => ({

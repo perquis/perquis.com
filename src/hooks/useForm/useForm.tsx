@@ -4,7 +4,7 @@ import type { FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import useKey from '@rooks/use-key';
-import { useCommentStore, useFormStore, useGlobalStore, useLoadingStore, useNotificationStore, useRefetchStore } from '@stories';
+import { useCommentStore, useFormStore, useGlobalStore, useLoadingStore, useRefetchStore } from '@stories';
 
 import { useInternationalizedRouting } from '../useInternationalizedRouting/useInternationalizedRouting';
 
@@ -38,7 +38,7 @@ export const useForm = (formStatus: FormStatus, body?: PrismaComment): UseFormRe
     state.modalKeywords,
     state.updateModalKeywords,
   ]);
-  const [updateNotification, deleteNotification] = useNotificationStore((state) => [state.updateNotification, state.deleteNotification]);
+  const [updateNotification, deleteNotification] = useGlobalStore(({ updateNotification, deleteNotification }) => [updateNotification, deleteNotification]);
 
   const [isRefetch, updateIsRefetch] = useRefetchStore((state) => [state.isRefetch, state.updateIsRefetch]);
 

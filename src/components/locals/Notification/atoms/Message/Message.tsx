@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { FC, ReactHTMLElementProps } from 'react';
 
-import type { Notification } from '@stories';
+import type { Notification } from '@stories/global/slices/notificationsSlice/notificationsSlice';
 
 import styles from './Message.module.scss';
 
