@@ -6,7 +6,7 @@ import FocusLock from 'react-focus-lock';
 import { vars } from '@animations';
 import { Button, SmallAvatar } from '@components/globals/atoms';
 import { languages } from '@data/languages/languages';
-import { useInternationalizedRouting, usePushOnBlogPage } from '@hooks';
+import { useInternationalizedRouting, useRedirectToAlternatePage } from '@hooks';
 
 import styles from './DropDownMenu.module.scss';
 
@@ -16,7 +16,7 @@ interface IDropDownMenu {
 
 export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
   const { userProfileSignIn, userProfileSignOut, userProfileChangeLocation } = useInternationalizedRouting('global');
-  const { handleChangeLocalesOnBlogPage } = usePushOnBlogPage();
+  const { redirectToAlternatePage } = useRedirectToAlternatePage();
   const { data: session } = useSession();
   const { locale } = useRouter();
 
@@ -31,7 +31,7 @@ export const DropDownMenu = ({ isActive }: IDropDownMenu) => {
                 <b>{session?.user?.name}</b>
               </div>
             ) : null}
-            <Button isSecondary onClick={handleChangeLocalesOnBlogPage}>
+            <Button isSecondary onClick={redirectToAlternatePage}>
               {userProfileChangeLocation}{' '}
               {languages
                 .filter((lng) => lng !== locale)

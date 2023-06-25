@@ -13,7 +13,7 @@ import styles from './TableOfContents.module.scss';
 export const TableOfContents = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { tableOfContentsHeading } = useInternationalizedRouting('global');
-  const [items, toggleToc, updateToggleToc] = useTOCStore((state) => [state.items, state.toggleToc, state.updateToggleToc]);
+  const [items, toggleToc, updateToggleToc] = useTOCStore(({ items, toggleToc, updateToggleToc }) => [items, toggleToc, updateToggleToc]);
 
   useKey('Escape', () => updateToggleToc(true), { when: !toggleToc });
 

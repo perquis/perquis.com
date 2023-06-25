@@ -1,8 +1,9 @@
-import type { FC, HTMLProps } from 'react';
+import { type FC, type HTMLProps, useMemo } from 'react';
 import { TiFilter } from 'react-icons/ti';
 
 import type { ExtendedRefs, ReferenceType } from '@floating-ui/react';
-import { useInternationalizedRouting, useSearchingForArticles } from '@hooks';
+import { useInternationalizedRouting } from '@hooks';
+import { useGlobalStore } from '@stories';
 
 import styles from './Select.module.scss';
 
@@ -12,12 +13,13 @@ interface ISelect {
 }
 
 export const Select: FC<ISelect> = ({ refs, getReferenceProps }) => {
-  const { postsListTechnologies } = useInternationalizedRouting('home');
-  const { isTechnologies } = useSearchingForArticles();
+  const t = useInternationalizedRouting('home');
+  const [technologies] = useGlobalStore(({ selected }) => [selected]);
+  const isTechnologies = useMemo(() => technologies.length > 0, [technologies]);
 
   return (
     <button className={styles.select} role="option" aria-selected ref={refs.setReference} {...getReferenceProps()} style={{ paddingLeft: isTechnologies ? '1rem' : '2rem' }}>
-      {isTechnologies ? null : <span>{postsListTechnologies}</span>}
+      {isTechnologies ? null : <span>{t.postsListTechnologies}</span>}
       <TiFilter size={19} />
     </button>
   );

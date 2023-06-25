@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
+import CodeHighlighter from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
 import { shikiOptions } from '@themes';
@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send(
         await serialize(content, {
           mdxOptions: {
-            rehypePlugins: [[rehypePrettyCode, shikiOptions], rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+            rehypePlugins: [[CodeHighlighter, shikiOptions], rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
           },
         })
       );

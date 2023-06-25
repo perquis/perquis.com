@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 
 import { NewsletterModal } from '@components/globals/modals/NewsletterModal';
 import { newsletterModalPattern } from '@data';
-import { useProgressYScroll } from '@hooks';
+import { useScroll } from '@hooks';
 import { useGlobalStore } from '@stories';
 import { hasCookie } from '@utils';
 
 export const NewsletterObserver = () => {
-  const { progressYScroll } = useProgressYScroll();
+  const { progressYScroll } = useScroll();
   const [open, updateOpen] = useGlobalStore(({ open, updateOpen }) => [open, updateOpen]);
 
   useEffect(() => {

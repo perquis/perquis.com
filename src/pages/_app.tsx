@@ -1,13 +1,13 @@
 import type { AppProps } from 'next/app';
 
-import { Provider } from '@providers/Provider';
+import { GlobalProvider } from '@providers';
 import '@styles/main.scss';
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
-    <Provider session={session} pageProps={pageProps}>
+    <GlobalProvider session={session} pageProps={pageProps}>
       <Component {...pageProps} />
-    </Provider>
+    </GlobalProvider>
   );
 };
 

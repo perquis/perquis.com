@@ -1,4 +1,5 @@
 /* eslint-disable */
+import clsx from 'clsx';
 import { motion, type MotionProps } from 'framer-motion';
 import type { ReactHTMLElementProps } from 'react';
 import { forwardRef } from 'react';
@@ -12,7 +13,7 @@ interface DirectionColumnProps extends Omit<ReactHTMLElementProps<HTMLDivElement
 
 export const DirectionColumn = forwardRef<HTMLDivElement, DirectionColumnProps & MotionProps>(({ children, isTop, className = '', ...props }, ref) => {
   return (
-    <motion.div className={`${styles.container} ${isTop ? styles.top : ''} ${className}`} {...props} ref={ref}>
+    <motion.div className={clsx(styles.container, isTop && styles.top, className)} {...props} ref={ref}>
       {children}
     </motion.div>
   );

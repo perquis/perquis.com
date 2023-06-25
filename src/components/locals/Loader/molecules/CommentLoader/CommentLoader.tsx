@@ -1,13 +1,13 @@
 import ContentLoader from 'react-content-loader';
 
-import { useLoadColors } from '@hooks';
+import { useThemeService } from '@providers';
 
 export const CommentLoader = () => {
-  const colors = useLoadColors();
+  const colors = useThemeService();
 
   return (
     <>
-      <ContentLoader {...colors} width="100%" height={206}>
+      <ContentLoader width="100%" height={206} {...colors}>
         <rect x="0" y="0" rx="4" ry="4" width="52" height="52" />
         <rect x="70" y="0" rx="4" ry="4" width="36%" height="21" />
         <rect x="70" y="31" rx="4" ry="4" width="21%" height="21" />

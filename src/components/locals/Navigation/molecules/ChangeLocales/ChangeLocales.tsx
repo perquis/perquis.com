@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { IoMdArrowDropleft } from 'react-icons/io';
 
 import { LocalesList } from '@components/locals/Navigation/atoms';
-import { usePushOnBlogPage } from '@hooks';
+import { useRedirectToAlternatePage } from '@hooks';
 
 import styles from './ChangeLocales.module.scss';
 
@@ -14,11 +14,11 @@ export const ChangeLocales = () => {
   const [isActive, setActive] = useState(false);
   const toggleLocales = () => setActive(!isActive);
 
-  const { handleChangeLocalesOnBlogPage } = usePushOnBlogPage();
+  const { redirectToAlternatePage } = useRedirectToAlternatePage();
 
   return (
     <div className={styles.locales}>
-      <button className={styles.button} onClick={toggleLocales} onKeyDown={(e) => e.key === 'ArrowUp' && handleChangeLocalesOnBlogPage()}>
+      <button className={styles.button} onClick={toggleLocales} onKeyDown={(e) => e.key === 'ArrowUp' && redirectToAlternatePage()}>
         {locale}{' '}
         <motion.div animate={isActive ? { rotate: -90 } : { rotate: 0 }}>
           <IoMdArrowDropleft size={19} />

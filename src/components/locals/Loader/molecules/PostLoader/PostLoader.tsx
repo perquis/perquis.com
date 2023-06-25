@@ -1,10 +1,10 @@
 import ContentLoader from 'react-content-loader';
 
 import { LoaderWrapper } from '@components/locals/Loader/atoms';
-import { useLoadColors } from '@hooks';
+import { useThemeService } from '@providers';
 
 export const PostLoader = () => {
-  const colors = useLoadColors();
+  const { colors } = useThemeService();
 
   return (
     <>

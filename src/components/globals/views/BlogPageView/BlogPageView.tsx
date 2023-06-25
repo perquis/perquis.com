@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -11,11 +12,12 @@ import { Stickers } from '@components/globals/stickers/index';
 import { DetailsWrapper, FullWidthContainer } from '@components/globals/wrappers';
 import { Details, ReadingTime } from '@components/locals/Article';
 import { Author } from '@components/locals/Author';
-import { MarkdownToHTML } from '@components/locals/MarkdownToHTML';
+import { components, MarkdownRenderer } from '@components/locals/MarkdownRenderer';
 import { TableOfContents } from '@components/locals/TableOfContents';
+import { newsletterModalPattern } from '@data';
 import type { Articles } from '@graphql/databases/client';
-import { useObserver } from '@hooks';
 import { useGlobalStore, useTOCStore } from '@stories';
+import { hasCookie } from '@utils';
 
 import { CommentsList, ResourcesList, StickyHelpersList } from './templates';
 
@@ -25,7 +27,13 @@ export const BlogPageView: FC<Record<'stories', BlogPageViewProps>> = ({ stories
   const [updatePostId] = useGlobalStore(({ updatePostId }) => [updatePostId]);
   const { query } = useRouter();
 
-  useObserver({ negativeSlug });
+  const [updatePostTitleInAlternateLanguage] = useGlobalStore(({ updatePostTitleInAlternateLanguage }) => [updatePostTitleInAlternateLanguage]);
+
+  useEffect(() => {
+    if (hasCookie(newsletterModalPattern)) document.cookie = `newsletter-modal=true;max-age=2592000;`;
+  }, []);
+
+  useEffect(() => updatePostTitleInAlternateLanguage(negativeSlug ?? ''), [negativeSlug, updatePostTitleInAlternateLanguage]);
 
   useEffect(() => {
     axios.get<PrismaPost>(`/api/posts/${query.slug}`).then(({ data }) => updatePostId(data.id));
@@ -55,7 +63,9 @@ export const BlogPageView: FC<Record<'stories', BlogPageViewProps>> = ({ stories
       <FullWidthContainer>
         <StickyHelpersList socials={socials} />
         <div ref={markdownContainerRef}>
-          <MarkdownToHTML {...source} />
+          <MarkdownRenderer>
+            <MDXRemote {...source} components={components} />
+          </MarkdownRenderer>
         </div>
         <ResourcesList resources={resources} />
         <Stickers />

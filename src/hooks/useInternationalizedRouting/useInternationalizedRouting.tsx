@@ -14,7 +14,13 @@ export const useInternationalizedRouting = (status: Status) => {
       postsListPlaceholder = home('posts-list.search-placeholder'),
       postsListTechnologies = home('posts-list.technologies');
 
-    return { aboutMeTitle, postsListTitle, postsListDescription, postsListPlaceholder, postsListTechnologies };
+    return {
+      aboutMeTitle,
+      postsListTitle,
+      postsListDescription,
+      postsListPlaceholder,
+      postsListTechnologies,
+    };
   }
   if (status === 'global') {
     const userProfileSignIn = global('user-profile.sign-in'),

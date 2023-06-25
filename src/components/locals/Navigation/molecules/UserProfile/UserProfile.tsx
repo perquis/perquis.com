@@ -7,7 +7,9 @@ import { IoMdArrowDropleft } from 'react-icons/io';
 
 import { vars } from '@animations';
 import { SmallAvatar } from '@components/globals/atoms';
-import { useDropdownMenu, useInternationalizedRouting } from '@hooks';
+import { useInternationalizedRouting } from '@hooks';
+import useKey from '@rooks/use-key';
+import useOutsideClick from '@rooks/use-outside-click';
 
 import styles from './UserProfile.module.scss';
 
@@ -20,7 +22,9 @@ export const UserProfile: FC<IUserProfile> = ({ session }) => {
   const ref = useRef(null) as unknown as MutableRefObject<HTMLDivElement>;
   const [isActive, setActive] = useState(false);
   const toggleOptions = () => setActive(!isActive);
-  useDropdownMenu(toggleOptions, { ref, state: { isActive } });
+
+  useKey('Escape', toggleOptions, { when: isActive });
+  useOutsideClick(ref, toggleOptions, isActive);
 
   return (
     <div className={styles.wrapper}>

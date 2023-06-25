@@ -1,7 +1,8 @@
 import { type MutableRefObject, useMemo, useRef } from 'react';
 
 import { DropDownMenu } from '@components/locals/Navigation/molecules';
-import { useDropdownMenu } from '@hooks';
+import useKey from '@rooks/use-key';
+import useOutsideClick from '@rooks/use-outside-click';
 import { useGlobalStore } from '@stories';
 
 import styles from './HamburgerMenu.module.scss';
@@ -13,7 +14,8 @@ export const HamburgerMenu = () => {
 
   const isActive = useMemo(() => open === 'blur', [open]);
 
-  useDropdownMenu(toggleActive, { ref, state: { isActive } });
+  useKey('Escape', toggleActive, { when: isActive });
+  useOutsideClick(ref, toggleActive, isActive);
 
   return (
     <div className={styles.wrapper} ref={ref}>

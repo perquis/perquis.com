@@ -39,7 +39,7 @@
 }
 
 .is-hide {
-  *:nth-child(n + 4):not([data-rehype-pretty-code-fragment] *) {
+  *:nth-child(n + 4):not([data-rehype-pretty-code-fragment] *, p *) {
     display: none;
 
     &:is(button) {
@@ -63,7 +63,15 @@
   [data-rehype-pretty-code-fragment] {
     width: 100% !important;
     margin: 0 !important;
-    margin-bottom: 2.4rem !important;
+  }
+
+  [data-code-wrapper] {
+    margin-top: 4.2rem;
+  }
+
+  [data-code-container] {
+    width: calc(100% - 4.8rem);
+    margin-left: 2.4rem;
   }
 
   h1,

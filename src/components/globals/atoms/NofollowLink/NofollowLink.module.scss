@@ -1,18 +1,24 @@
 .link {
   font-weight: 500;
   color: var(--color);
-  text-decoration-thickness: 3px;
-  text-decoration-line: underline;
+  background-repeat: no-repeat;
+  background-size: 100% 250%;
+  background-position: 0% 50%;
+  transition: background-position 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:is(:hover, :focus) {
+    background-position: 0% 70%;
+  }
 }
 
 .sky {
-  text-decoration-color: var(--underline-link-sky);
+  background-image: linear-gradient(transparent 65%, var(--underline-link-sky) 0%);
 }
 
 .pink {
-  text-decoration-color: var(--underline-link-pink);
+  background-image: linear-gradient(transparent 65%, var(--underline-link-pink) 0%);
 }
 
 .indigo {
-  text-decoration-color: var(--underline-link-indigo);
+  background-image: linear-gradient(transparent 65%, var(--underline-link-indigo) 0%);
 }

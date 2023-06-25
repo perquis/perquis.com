@@ -18,11 +18,11 @@
       }
     }
 
-    opacity: 0.3;
+    opacity: 0.5;
     transition: 0.3s ease-in-out;
 
     &:is(:hover, :focus) {
-      opacity: 0.5;
+      opacity: 0.75;
     }
   }
 }
