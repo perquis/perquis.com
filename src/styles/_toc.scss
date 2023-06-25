@@ -47,7 +47,6 @@
     color: var(--toc-item);
     overflow-wrap: break-word;
     text-decoration: none;
-    display: inline-block;
 
     &:is(:hover, :focus) {
       @include wavy-lines;

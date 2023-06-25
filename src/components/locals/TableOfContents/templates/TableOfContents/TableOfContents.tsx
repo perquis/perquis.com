@@ -30,7 +30,7 @@ export const TableOfContents = () => {
         <button className={clsx(styles.button, !toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
         <div className={styles['toc-list']}>
           <h3>{tableOfContentsHeading}</h3>
-          <nav>
+          <nav className={styles.nav}>
             <ul>
               {items.map(({ chapter, href, textContent, position, nextChapterPosition }, i) => (
                 <TocItem

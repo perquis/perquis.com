@@ -34,7 +34,9 @@ export const TocItem: FC<ReactHTMLElementProps<HTMLAnchorElement> & { href: stri
           <NumberOfChapter status={status} isCompletedChapter={isCompletedChapter}>
             {chapter}
           </NumberOfChapter>
-          <span className={clsx(styles.hidden, ((isReadStatus(status, 'read') && !isCompletedChapter) || isCompletedChapter) && styles['is-read'])}>{children}</span>
+          <div>
+            <span className={clsx(styles.default, ((isReadStatus(status, 'read') && !isCompletedChapter) || isCompletedChapter) && styles.active)}>{children}</span>
+          </div>
           {((isReadStatus(status, 'read') && !isCompletedChapter) || isCompletedChapter) && <BiCheck />}
         </a>
       </Link>

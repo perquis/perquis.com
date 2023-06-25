@@ -26,13 +26,13 @@ export const GlobalProvider: FC<Children & { session: any; pageProps: any }> = (
                 <GlobalLayout>
                   <WaviesLayout>
                     <Layout>{children}</Layout>
-                    <ReactQueryDevtools />
                   </WaviesLayout>
                 </GlobalLayout>
               </ThemeServiceProvider>
             </ThemeProvider>
           </SessionProvider>
         </ApolloProvider>
+        <ReactQueryDevtools />
       </Hydrate>
     </QueryClientProvider>
   );
