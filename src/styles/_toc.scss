@@ -20,6 +20,10 @@
   margin-top: 4.8rem;
   font-size: 1.8rem;
 
+  @media screen and (min-width: $sm) {
+    display: none !important;
+  }
+
   &::before {
     font-weight: 700;
     font-size: clamp(2rem, 5vw, 2.4rem);

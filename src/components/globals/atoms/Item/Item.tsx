@@ -7,9 +7,9 @@ import styles from './Item.module.scss';
 export const Item: FC<ReactHTMLElementProps<HTMLLIElement>> = ({ children, className, ...props }) => {
   return (
     <li className={clsx(styles.li, className)} {...props}>
-      <span>
+      <div>
         <CgArrowLongRightC size={24} />
-      </span>
+      </div>
       {children}
     </li>
   );

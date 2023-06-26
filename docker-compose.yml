@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   frontend:
-    container_name: 'code-journey'
+    container_name: 'perquis-com'
     ports:
       - '3000:3000'
     tty: true

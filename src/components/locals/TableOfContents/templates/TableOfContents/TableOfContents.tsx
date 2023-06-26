@@ -13,37 +13,30 @@ import styles from './TableOfContents.module.scss';
 export const TableOfContents = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { tableOfContentsHeading } = useInternationalizedRouting('global');
-  const [items, toggleToc, updateToggleToc] = useTOCStore(({ items, toggleToc, updateToggleToc }) => [items, toggleToc, updateToggleToc]);
+  const [items, isOpen, toggleOpen] = useTOCStore(({ items, isOpen, toggleOpen }) => [items, isOpen, toggleOpen]);
 
-  useKey('Escape', () => updateToggleToc(true), { when: !toggleToc });
+  useKey('Escape', () => toggleOpen(true), { when: !isOpen });
 
   return (
     <motion.aside
       ref={ref}
-      exit={{ x: 'calc(100% - 2.4rem)' }}
-      initial={{ x: 'calc(100% - 2.4rem)' }}
-      animate={toggleToc ? { x: 560 } : { x: 0 }}
-      className={clsx(styles.toc, !toggleToc && styles['toc-active'])}
+      exit={{ x: '100%' }}
+      initial={{ x: '100%' }}
+      animate={isOpen ? { x: 560 } : { x: 0 }}
+      className={clsx(styles.toc, !isOpen && styles['toc-active'])}
       transition={{ duration: 0.15 }}
     >
-      <ReactFocusLock disabled={toggleToc}>
-        <button className={clsx(styles.button, !toggleToc && styles.active)} onClick={() => updateToggleToc(!toggleToc)} />
+      <ReactFocusLock disabled={isOpen}>
+        <button className={clsx(styles.button, !isOpen && styles.active)} onClick={() => toggleOpen(!isOpen)} />
         <div className={styles['toc-list']}>
           <h3>{tableOfContentsHeading}</h3>
-          <nav className={styles.nav}>
-            <ul>
-              {items.map(({ chapter, href, textContent, position, nextChapterPosition }, i) => (
-                <TocItem
-                  href={href}
-                  chapter={chapter}
-                  status={position <= 0 && nextChapterPosition >= 0 ? 'visible' : position <= 0 && nextChapterPosition <= 0 ? 'read' : 'hidden'}
-                  key={i}
-                >
-                  {textContent}
-                </TocItem>
-              ))}
-            </ul>
-          </nav>
+          <menu className={styles.nav}>
+            {items.map(({ href, textContent, status }, i) => (
+              <TocItem href={href} status={status} chapter={i} key={i}>
+                {textContent}
+              </TocItem>
+            ))}
+          </menu>
         </div>
       </ReactFocusLock>
     </motion.aside>

@@ -22,6 +22,7 @@ export const ShowMoreButton = (props: DetailedHTMLProps<HTMLAttributes<HTMLButto
       onFocus={handleSetFocusOnTrue}
       onBlur={handleSetFocusOnFalse}
       {...props}
+      data-show-more
     >
       {gotchaButton}{' '}
       <motion.div className={styles.icon} animate={isFocus ? { x: -6 } : { x: 0 }}>

@@ -2,11 +2,20 @@
   width: fit-content;
   border: none;
   background: none;
-  padding: 1rem 0;
+  padding: 1rem 2.1rem;
   font-weight: 500;
   display: flex;
   gap: 1rem;
   align-items: center;
+
+  background-size: 100% 250%;
+  background-position: 0% 160%;
+  background-repeat: no-repeat;
+  transition: background-position 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:is(:hover, :focus) {
+    background-position: 0% 48%;
+  }
 }
 
 .icon {

@@ -16,7 +16,7 @@ import { components, MarkdownRenderer } from '@components/locals/MarkdownRendere
 import { TableOfContents } from '@components/locals/TableOfContents';
 import { newsletterModalPattern } from '@data';
 import type { Articles } from '@graphql/databases/client';
-import { useGlobalStore, useTOCStore } from '@stories';
+import { useGlobalStore } from '@stories';
 import { hasCookie } from '@utils';
 
 import { CommentsList, ResourcesList, StickyHelpersList } from './templates';
@@ -39,14 +39,12 @@ export const BlogPageView: FC<Record<'stories', BlogPageViewProps>> = ({ stories
     axios.get<PrismaPost>(`/api/posts/${query.slug}`).then(({ data }) => updatePostId(data.id));
   }, [updatePostId, query.slug]);
 
-  const markdownContainerRef = useRef<HTMLDivElement>(null);
   const { ref, inView } = useInView();
-  const [updateTocOpen] = useTOCStore((state) => [state.updateTocOpen]);
+  const markdownContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     ref(markdownContainerRef?.current?.querySelector('.toc'));
-    updateTocOpen(inView);
-  }, [inView, updateTocOpen, markdownContainerRef, ref]);
+  }, [inView, markdownContainerRef, ref]);
 
   return (
     <>

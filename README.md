@@ -1,24 +1,9 @@
-<img src="./assets/thumbnail.png" alt="perquis-blog" width="100%" />
+# Hello there! 🤟
 
-## About me ✨
+This project is a blog created **to share my acquired knowledge with all of you**. It focuses on programming, mainly frontend and backend development, but in the future, it will also cover more "general" languages like Python.
 
-Damian is a young man of 23 years old **who loves learning new things**. He is very curious and passionate about **discovering new frameworks and libraries** created by different programming languages. Certainly, his interests in the field of computer science keep him **up to date with new technologies and solutions in this field**.
+## 1. 📂 Project Description
 
-## Technologies I used 🛠
+Currently, the project is in the construction and development phase. Some features and functionalities are **still being tested and validated**. Therefore, the newsletter and commenting system are not yet operational.
 
-- clsx
-- Shiki,
-- NextJS,
-- Zustand,
-- Typescript,
-- next-themes,
-- SCSS Modules,
-- framer-motion,
-- Hygraph (CMS),
-- next-mdx-remote,
-- @floating-ui/react,
-- rehype-pretty-code,
-
-## Live 🪁
-
-<a href="https://perquis-com.vercel.app/">perquis.com</a>
+The immediate plan is to update Next.js to version > 13.4 in order to utilize **the "App Router"**. Why? Because certain features I want to implement pose significant challenges with the "Pages Router" model. Transitioning to the new version will allow me to harness the new potential of Next.js while increasing the efficiency of my work and the implementation of new features.

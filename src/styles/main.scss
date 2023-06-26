@@ -29,8 +29,8 @@
 
 html {
   font-size: 62.5%;
-  scroll-behavior: smooth;
   scroll-padding-top: 36px;
+  scroll-behavior: smooth !important;
 }
 
 body {
@@ -113,7 +113,8 @@ img {
 }
 
 ol,
-ul {
+ul,
+menu {
   list-style-type: none;
   padding-left: 2.4rem;
 
