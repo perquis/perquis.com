@@ -2,8 +2,6 @@
 
 This project is a blog created **to share my acquired knowledge with all of you**. It focuses on programming, mainly frontend and backend development, but in the future, it will also cover more "general" languages like Python.
 
-![blog-1](https://github.com/perquis/perquis.com/assets/71089523/33138146-c0e8-42c4-b6d8-4657f5f07272)
-
 ## 1. 📂 Project Description
 
 Currently, the project is in the construction and development phase. Some features and functionalities are **still being tested and validated**. Therefore, the newsletter and commenting system are not yet operational.
